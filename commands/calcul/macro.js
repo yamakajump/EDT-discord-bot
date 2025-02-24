@@ -1,7 +1,17 @@
+const { EmbedBuilder } = require('discord.js');
+
 module.exports = {
     async execute(interaction) {
         const calories = interaction.options.getNumber('calories');
         const objectif = interaction.options.getString('objectif');
+
+        // Vérification de la valeur des calories
+        if (!calories || calories <= 0) {
+            return interaction.reply({
+                content: "Oups ! Le nombre de calories doit être un nombre positif. Essayez avec un nombre réel (et énergisant) !",
+                ephemeral: true,
+            });
+        }
 
         // Déterminer les pourcentages pour chaque macronutriment
         let proteinesPct, lipidesPct, glucidesPct;
@@ -25,23 +35,32 @@ module.exports = {
         }
 
         // Calcul des grammes pour chaque macronutriment
-        const proteinesGr = ((calories * proteinesPct) / 100 / 4).toFixed(2); // 1 g de protéine = 4 kcal
-        const lipidesGr = ((calories * lipidesPct) / 100 / 9).toFixed(2);    // 1 g de lipide = 9 kcal
-        const glucidesGr = ((calories * glucidesPct) / 100 / 4).toFixed(2);  // 1 g de glucide = 4 kcal
+        // (en supposant 4 kcal par gramme pour les protéines et les glucides et 9 kcal par gramme pour les lipides)
+        const proteinesGr = ((calories * proteinesPct) / 100 / 4).toFixed(2);
+        const lipidesGr = ((calories * lipidesPct) / 100 / 9).toFixed(2);
+        const glucidesGr = ((calories * glucidesPct) / 100 / 4).toFixed(2);
 
-        // Réponse
-        const objectifTexte = objectif === 'perte' ? 'Perte de poids' :
-                              objectif === 'maintien' ? 'Maintien' :
-                              objectif === 'prise' ? 'Prise de masse' : 'Recomposition corporelle';
+        // Détermination du texte d'objectif en fonction de l'option saisie
+        const objectifTexte = 
+            objectif === 'perte'   ? 'Perte de poids' :
+            objectif === 'maintien'? 'Maintien' :
+            objectif === 'prise'   ? 'Prise de masse' :
+                                     'Recomposition corporelle';
 
-        await interaction.reply({
-            content: `\<:coin_info:1321862685578756167>  **Répartition des macronutriments** :\n\n` +
-                     `- **Objectif** : ${objectifTexte}\n` +
-                     `- **Calories totales** : ${calories} kcal\n\n` +
-                     `\<:cookie:1321862688095080548> **Macronutriments** :\n` +
-                     `- **Protéines** : ${proteinesGr} g (${proteinesPct}%)\n` +
-                     `- **Lipides** : ${lipidesGr} g (${lipidesPct}%)\n` +
-                     `- **Glucides** : ${glucidesGr} g (${glucidesPct}%)`,
-        });
+        // Création de l'embed avec les informations formatées
+        const embed = new EmbedBuilder()
+            .setColor('#FFA500')
+            .setTitle('<:coin_info:1343575919608074322> Répartition des macronutriments')
+            .setDescription(`**<:trophe_or:1343578100642086953> Objectif** : ${objectifTexte}
+**<:cookie:1343575844047687771> Calories totales** : ${calories} kcal`)
+            .addFields(
+                { name: 'Protéines', value: `${proteinesGr} g (${proteinesPct}%)`, inline: true },
+                { name: 'Lipides', value: `${lipidesGr} g (${lipidesPct}%)`, inline: true },
+                { name: 'Glucides', value: `${glucidesGr} g (${glucidesPct}%)`, inline: true }
+            )
+            .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
+            .setFooter({ text: 'Répartition estimée' });
+
+        await interaction.reply({ embeds: [embed] });
     },
 };
