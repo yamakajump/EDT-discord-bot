@@ -1,3 +1,5 @@
+<img  src="https://i.ibb.co/Y795qQQd/logo-EDT.png"  align="right" width="40%"  />
+
 # Bot Discord pour l'École du Tigre
 
 Bienvenue sur le dépôt du bot Discord pour l'École du Tigre ! Ce bot est conçu pour améliorer l'expérience utilisateur sur le serveur Discord de l'École du Tigre.

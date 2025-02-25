@@ -11,8 +11,17 @@ module.exports = {
         const temps = interaction.options.getNumber('temps'); // en minutes
         const tefInput = interaction.options.getNumber('tef');
         const pourcentageInput = interaction.options.getNumber('pourcentage');
+        const ajustementInput = interaction.options.getNumber('ajustement');
         let objectif = interaction.options.getString('objectif'); // 'seche', 'maintien', 'pdm'
         
+        // Vérifier que l'utilisateur n'a pas renseigné les deux options simultanément
+        if (pourcentageInput !== null && ajustementInput !== null) {
+            return interaction.reply({
+                content: "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
+                ephemeral: true,
+            });
+        }
+
         // Si aucun objectif n'est sélectionné, on définit "maintien" par défaut.
         if (!objectif) {
             objectif = 'maintien';
@@ -83,12 +92,44 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
             .setColor('#ffa600');
-
+        
         // Arrondi du TMB pour affichage
         const TMBrounded = Math.round(TMB);
 
-        // Si un pourcentage personnalisé est renseigné, on ignore l'option "objectif"
-        if (pourcentageInput !== null) {
+        // Utilisation de l'option "ajustement" si renseignée
+        if (ajustementInput !== null) {
+            const adjustedCalories = DEJ + ajustementInput;
+            let title, description;
+            if (ajustementInput < 0) {
+                title = '<:pomme:1343576949133676636> Besoins caloriques ajustés pour une **sèche**';
+                description = `<:cookie:1343575844047687771> **Ajustement direct :**
+- Calories de maintien : **${DEJ}** kcal
+- Réduction directe de : **${Math.abs(ajustementInput)}** kcal
+- Total ajusté : **${adjustedCalories}** kcal
+
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
+            } else if (ajustementInput > 0) {
+                title = '<:frite:1343577110434021416> Besoins caloriques ajustés pour une **prise de masse**';
+                description = `<:cookie:1343575844047687771> **Ajustement direct :**
+- Calories de maintien : **${DEJ}** kcal
+- Ajout direct de : **${ajustementInput}** kcal
+- Total ajusté : **${adjustedCalories}** kcal
+
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
+            } else {
+                title = '<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**';
+                description = `<:cookie:1343575844047687771> **Maintien :**
+- Calories : **${DEJ}** kcal
+
+Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.
+                
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
+            }
+            embed.setTitle(title)
+                .setDescription(description);
+        }
+        // Si l'option "pourcentage" est renseignée alors on personnalise via un pourcentage
+        else if (pourcentageInput !== null) {
             if (pourcentageInput < 100) {
                 // Affichage pour une sèche personnalisée
                 const customSeche = Math.round(DEJ * (pourcentageInput / 100));
@@ -123,7 +164,10 @@ module.exports = {
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`
                     );
             }
-        } else { // Aucune valeur de pourcentage n'est renseignée, on se base sur l'objectif choisi.
+        }
+        // Si aucune option de pourcentage ou d'ajustement n'est renseignée,
+        // on se base sur l'objectif nutritionnel choisi.
+        else {
             if (objectif === 'seche') {
                 const ratiosSeche = {
                     "5%": 0.95,

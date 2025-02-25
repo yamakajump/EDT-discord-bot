@@ -68,9 +68,14 @@ module.exports = {
                 )
                 .addNumberOption(option =>
                     option.setName('pourcentage')
-                        .setDescription("ourcentage personnalisé (ex: 80 pour 80%). Pour maintien, 100 ou rien.")
+                        .setDescription("Pourcentage personnalisé (ex : 80 pour 80%). Pour maintien, 100 ou rien.")
                         .setRequired(false)
-                )  
+                )
+                .addNumberOption(option =>
+                    option.setName('ajustement')
+                        .setDescription("Ajoutez ou retirez directement un nombre de calories (ex : 200 pour +200, -200 pour -200).")
+                        .setRequired(false)
+                )
         )
         // Sous-commande : imc
         .addSubcommand(subcommand =>
