@@ -5,7 +5,8 @@
     "dotenv": "^16.4.7",
     "gomuscu-discord-bot": "file:",
     "node-schedule": "^2.1.1",
-    "pdfkit": "^0.16.0"
+    "pdfkit": "^0.16.0",
+    "sqlite3": "^5.1.7"
   },
   "name": "gomuscu-discord-bot",
   "version": "1.0.0",

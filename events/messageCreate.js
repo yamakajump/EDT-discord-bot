@@ -1,4 +1,5 @@
 const config = require('../config/config.json');
+const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO'); // Ajout de l'importation du DAO
 
 module.exports = {
   name: 'messageCreate',
@@ -9,7 +10,10 @@ module.exports = {
     // Vérifier que le message est envoyé dans un thread d'un forum
     if (message.channel.isThread() && config.forums.includes(message.channel.parentId)) {
       // Vérifier si l'auteur du message est bien l'auteur du fil ou possède le rôle Coach
-      if (message.channel.ownerId !== message.author.id && !message.member.roles.cache.has(config.coachRole)) {
+      if (
+        message.channel.ownerId !== message.author.id &&
+        !message.member.roles.cache.has(config.coachRole)
+      ) {
         try {
           // Supprime le message non autorisé
           await message.delete();
@@ -27,11 +31,17 @@ module.exports = {
               console.error("Erreur lors de la suppression du message de notification :", err);
             }
           }, 60000);
-
         } catch (err) {
           console.error("Erreur lors de la suppression ou de la gestion du message :", err);
         }
       }
+    }
+
+    // Pour tous les messages en général, on incrémente le compteur du Nouveau Guerrier
+    try {
+      await nouveauGuerrierDAO.incrementCount(message.author.id, message.author.username);
+    } catch (err) {
+      console.error("Erreur lors de la mise à jour du compteur du Nouveau Guerrier :", err);
     }
   },
 };

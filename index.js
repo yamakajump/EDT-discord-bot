@@ -3,6 +3,9 @@ const path = require('path');
 const { Client, GatewayIntentBits, Collection, REST, Routes } = require('discord.js');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
+// Initialisation de la base de données via le fichier utilitaire
+require('./utils/dbInit');
+
 // Créez une instance du bot
 const client = new Client({
     intents: [
