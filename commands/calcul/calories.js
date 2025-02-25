@@ -10,7 +10,13 @@ module.exports = {
         const nap = interaction.options.getString('nap');
         const temps = interaction.options.getNumber('temps'); // en minutes
         const tefInput = interaction.options.getNumber('tef');
-        const objectif = interaction.options.getString('objectif'); // 'seche', 'maintien', 'pdm'
+        const pourcentageInput = interaction.options.getNumber('pourcentage');
+        let objectif = interaction.options.getString('objectif'); // 'seche', 'maintien', 'pdm'
+        
+        // Si aucun objectif n'est sélectionné, on définit "maintien" par défaut.
+        if (!objectif) {
+            objectif = 'maintien';
+        }
         
         // Vérifications et validations
         if (!poids || poids <= 0) {
@@ -73,67 +79,103 @@ module.exports = {
         // Calcul de la dépense énergétique journalière (DEJ)
         const DEJ = Math.round(((TMB * NAP) + RTEE) * TEF);
         
-        // Création de l'embed
+        // Création de l'embed de réponse
         const embed = new EmbedBuilder()
             .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
             .setColor('#ffa600');
 
-        if (objectif === 'seche') {
+        // Arrondi du TMB pour affichage
+        const TMBrounded = Math.round(TMB);
 
-            // Calculs pour la sèche avec différents pourcentages de réduction
-            const ratiosSeche = {
-                "5%": 0.95,
-                "10%": 0.90,
-                "15%": 0.85,
-                "20%": 0.80,
-            };
+        // Si un pourcentage personnalisé est renseigné, on ignore l'option "objectif"
+        if (pourcentageInput !== null) {
+            if (pourcentageInput < 100) {
+                // Affichage pour une sèche personnalisée
+                const customSeche = Math.round(DEJ * (pourcentageInput / 100));
+                embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
+                    .setDescription(
+`<:cookie:1343575844047687771> **Sèche personnalisée :**
+- Pourcentage choisi : **${pourcentageInput}%**
+- Calories calculées : **${customSeche}** kcal
 
-            let secheCalculs = "";
-            for (const [pourcentage, ratio] of Object.entries(ratiosSeche)) {
-                secheCalculs += `- Réduction de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+**Maintien (100%)** : **${DEJ}** kcal  
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+                    );
+            } else if (pourcentageInput > 100) {
+                // Affichage pour une prise de masse personnalisée
+                const customPdm = Math.round(DEJ * (pourcentageInput / 100));
+                embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
+                    .setDescription(
+`<:cookie:1343575844047687771> **Prise de masse personnalisée :**
+- Pourcentage choisi : **${pourcentageInput}%**
+- Calories calculées : **${customPdm}** kcal
+
+**Maintien (100%)** : **${DEJ}** kcal  
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+                    );
+            } else {
+                // Pourcentage exact de 100% -> affichage de maintien
+                embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
+                    .setDescription(
+`<:cookie:1343575844047687771> **Maintien :**
+- Calories : **${DEJ}** kcal
+
+Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`
+                    );
             }
+        } else { // Aucune valeur de pourcentage n'est renseignée, on se base sur l'objectif choisi.
+            if (objectif === 'seche') {
+                const ratiosSeche = {
+                    "5%": 0.95,
+                    "10%": 0.90,
+                    "15%": 0.85,
+                    "20%": 0.80,
+                };
 
-            // Conversion du TMB en arrondi
-            const TMBrounded = Math.round(TMB);
+                let secheCalculs = "";
+                for (const [pourcentage, ratio] of Object.entries(ratiosSeche)) {
+                    secheCalculs += `- Réduction de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+                }
 
-            embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
-                .setDescription(
+                embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
+                    .setDescription(
 `<:cookie:1343575844047687771> **Estimations pour une sèche :**
 ${secheCalculs}
 - Maintien : **${DEJ}** kcal
 
-**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal  
-Le métabolisme basal est la dépense énergétique au repos nécessaire au maintien des fonctions vitales.`);
-                
-        } else if (objectif === 'maintien') {
-            embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
-                .setDescription(
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+                    );
+
+            } else if (objectif === 'maintien') {
+                embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
+                    .setDescription(
 `<:cookie:1343575844047687771> **Maintien :**
 - Calories : **${DEJ}** kcal
 
-Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`);
-        } else if (objectif === 'pdm') {
+Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`
+                    );
+            } else if (objectif === 'pdm') {
+                const ratiosPdm = {
+                    "5%": 1.05,
+                    "10%": 1.10,
+                    "15%": 1.15,
+                    "20%": 1.20,
+                };
 
-            // Calculs pour la prise de masse avec différents surplus
-            const ratiosPdm = {
-                "5%": 1.05,
-                "10%": 1.10,
-                "15%": 1.15,
-                "20%": 1.20,
-            };
+                let pdmCalculs = "";
+                for (const [pourcentage, ratio] of Object.entries(ratiosPdm)) {
+                    pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+                }
 
-            let pdmCalculs = "";
-            for (const [pourcentage, ratio] of Object.entries(ratiosPdm)) {
-                pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
-            }
-
-            embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
-                .setDescription(
+                embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
+                    .setDescription(
 `<:cookie:1343575844047687771> **Estimations pour une prise de masse :**
 ${pdmCalculs}
 - Maintien : **${DEJ}** kcal
 
-La prise de masse consiste à fournir un surplus calorique pour favoriser la création de masse musculaire.`);
+Le but est d'ajouter un surplus calorique pour favoriser la prise de masse.`
+                    );
+            }
         }
         
         await interaction.reply({ embeds: [embed] });

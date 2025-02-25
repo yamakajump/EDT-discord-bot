@@ -55,7 +55,7 @@ module.exports = {
                     option.setName('tef')
                         .setDescription("Votre TEF : 10 pour des aliments ultra-transformés, 25 pour des aliments non-transformés.")
                         .setRequired(true)
-                )
+                )      
                 .addStringOption(option =>
                     option.setName('objectif')
                         .setDescription("Votre objectif nutritionnel.")
@@ -64,8 +64,13 @@ module.exports = {
                             { name: 'Maintien', value: 'maintien' },
                             { name: 'Prise de masse', value: 'pdm' }
                         )
-                        .setRequired(true)
+                        .setRequired(false)
                 )
+                .addNumberOption(option =>
+                    option.setName('pourcentage')
+                        .setDescription("ourcentage personnalisé (ex: 80 pour 80%). Pour maintien, 100 ou rien.")
+                        .setRequired(false)
+                )  
         )
         // Sous-commande : imc
         .addSubcommand(subcommand =>
