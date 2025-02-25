@@ -1,4 +1,3 @@
-// commands/calcul/calories.js
 const { EmbedBuilder } = require('discord.js');
 
 module.exports = {
@@ -80,23 +79,33 @@ module.exports = {
             .setColor('#ffa600');
 
         if (objectif === 'seche') {
+            // Calcul des besoins pour la sèche
+            const minKcal = Math.round(DEJ * 0.8);
+            const maxKcal = Math.round(DEJ * 0.95);
+
             embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
                 .setDescription(`<:cookie:1343575844047687771> **Estimations pour une sèche :**
-- **Min** : **${Math.round(DEJ * 0.8)}** kcal  
-- **Max** : **${Math.round(DEJ * 0.95)}** kcal  
+- **Min** : **${minKcal}** kcal (80%)
+- **Max** : **${maxKcal}** kcal (95%)
+- **Besoins normaux** : **${DEJ}** kcal
 
 La sèche consiste à réduire l'apport calorique afin de créer un déficit (généralement sur 5 à 20%).`);
         } else if (objectif === 'maintien') {
             embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
-                .setDescription(`<:cookie:1343575844047687771> **Maintien :**  
-- **Calories** : **${DEJ}** kcal  
+                .setDescription(`<:cookie:1343575844047687771> **Maintien :**
+- **Calories** : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`);
         } else if (objectif === 'pdm') {
+            // Calcul des besoins pour la prise de masse
+            const minKcal = Math.round(DEJ * 1.05);
+            const maxKcal = Math.round(DEJ * 1.15);
+
             embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
                 .setDescription(`<:cookie:1343575844047687771> **Estimations pour une prise de masse :**
-- **Min** : **${Math.round(DEJ * 1.05)}** kcal  
-- **Max** : **${Math.round(DEJ * 1.15)}** kcal  
+- **Besoins normaux** : **${DEJ}** kcal
+- **Min** : **${minKcal}** kcal (105%)
+- **Max** : **${maxKcal}** kcal (115%)
 
 La prise de masse consiste à fournir un léger surplus calorique pour favoriser la création de masse musculaire.`);
         }

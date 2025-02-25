@@ -1,6 +1,3 @@
-const { loadJson } = require('../utils/fileManager');
-const path = require('path');
-
 module.exports = {
     name: 'ready',
     once: true,
