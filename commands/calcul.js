@@ -114,6 +114,39 @@ module.exports = {
                             { name: 'Recomposition corporelle', value: 'recomp' }
                         )
                 )
+                .addStringOption(option =>
+                    option.setName('sexe')
+                        .setDescription("Votre sexe.")
+                        .addChoices(
+                            { name: 'Homme', value: 'H' },
+                            { name: 'Femme', value: 'F' }
+                        )
+                        .setRequired(false)
+                )
+                .addStringOption(option =>
+                    option.setName('etat')
+                        .setDescription("Indiquez si vous vous considérez comme maigre ou grasse.")
+                        .addChoices(
+                            { name: 'Maigre', value: 'maigre' },
+                            { name: 'Grasse', value: 'grasse' }
+                        )
+                        .setRequired(false)
+                )
+                .addNumberOption(option =>
+                    option.setName('proteines')
+                        .setDescription("Pourcentage de protéines personnalisé.")
+                        .setRequired(false)
+                )
+                .addNumberOption(option =>
+                    option.setName('glucides')
+                        .setDescription("Pourcentage de glucides personnalisé.")
+                        .setRequired(false)
+                )
+                .addNumberOption(option =>
+                    option.setName('lipides')
+                        .setDescription("Pourcentage de lipides personnalisé.")
+                        .setRequired(false)
+                )
         )
         // Sous-commande : maxrep
         .addSubcommand(subcommand =>
