@@ -64,7 +64,7 @@ module.exports = {
     const ctx = canvas.getContext("2d");
 
     // Fond blanc
-    ctx.fillStyle = "#FFFFFF";
+    ctx.fillStyle = "#2B2D31";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
     // Chargement et dessin de l'image IMC
@@ -89,7 +89,6 @@ module.exports = {
         // Ainsi, pour un IMC très faible, la flèche pointera vers la gauche (–135°),
         // tandis que pour un IMC élevé, elle pointera vers la droite (–45°).
         const gaugeAngleOriginal = getGaugeAngle(imc); // de 0 à 180°
-        console.log("Angle de la jauge :", gaugeAngleOriginal);
         // Transformation linéaire :
         // Si gaugeAngleOriginal = 0   => final = -135° (flèche vers la gauche et vers le haut)
         // Si gaugeAngleOriginal = 180 => final = -45°  (flèche vers la droite et vers le haut)
@@ -138,21 +137,21 @@ module.exports = {
         ctx.restore();
     }
     
-    // Chargement et dessin du logo (superposé en haut à gauche)
-    let logo;
-    try {
-      logo = await loadImage(path.join(__dirname, "..", "..", "images", "logo-EDT.png"));
-    } catch (error) {
-      console.error("Erreur lors du chargement du logo :", error);
-    }
+    // // Chargement et dessin du logo (superposé en haut à gauche)
+    // let logo;
+    // try {
+    //   logo = await loadImage(path.join(__dirname, "..", "..", "images", "logo-EDT.png"));
+    // } catch (error) {
+    //   console.error("Erreur lors du chargement du logo :", error);
+    // }
     
-    const logoWidth = 100;
-    const logoHeight = 100;
-    const logoX = 10;
-    const logoY = 10;
-    if (logo) {
-      ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
-    }
+    // const logoWidth = 100;
+    // const logoHeight = 100;
+    // const logoX = 10;
+    // const logoY = 10;
+    // if (logo) {
+    //   ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
+    // }
 
     // Exporter l'image en buffer pour Discord
     const buffer = canvas.toBuffer();
