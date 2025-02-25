@@ -47,7 +47,7 @@ module.exports = {
         // Conversion de la taille en mètres
         const tailleMeters = taille / 100;
         
-        // Calcul du TMB (métabolisme de base)
+        // Calcul du TMB (métabolisme basal)
         let TMB = 0;
         if (sexe === 'H') {
             TMB = (13.707 * poids) + (492.3 * tailleMeters) - (6.673 * age) + 77.0607;
@@ -73,41 +73,67 @@ module.exports = {
         // Calcul de la dépense énergétique journalière (DEJ)
         const DEJ = Math.round(((TMB * NAP) + RTEE) * TEF);
         
-        // Création de l'embed en fonction de l'objectif choisi
+        // Création de l'embed
         const embed = new EmbedBuilder()
             .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
             .setColor('#ffa600');
 
         if (objectif === 'seche') {
-            // Calcul des besoins pour la sèche
-            const minKcal = Math.round(DEJ * 0.8);
-            const maxKcal = Math.round(DEJ * 0.95);
+
+            // Calculs pour la sèche avec différents pourcentages de réduction
+            const ratiosSeche = {
+                "5%": 0.95,
+                "10%": 0.90,
+                "15%": 0.85,
+                "20%": 0.80,
+            };
+
+            let secheCalculs = "";
+            for (const [pourcentage, ratio] of Object.entries(ratiosSeche)) {
+                secheCalculs += `- Réduction de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+            }
+
+            // Conversion du TMB en arrondi
+            const TMBrounded = Math.round(TMB);
 
             embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
-                .setDescription(`<:cookie:1343575844047687771> **Estimations pour une sèche :**
-- **Min** : **${minKcal}** kcal (80%)
-- **Max** : **${maxKcal}** kcal (95%)
-- **Besoins normaux** : **${DEJ}** kcal
+                .setDescription(
+`<:cookie:1343575844047687771> **Estimations pour une sèche :**
+${secheCalculs}
+- Maintien : **${DEJ}** kcal
 
-La sèche consiste à réduire l'apport calorique afin de créer un déficit (généralement sur 5 à 20%).`);
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal  
+Le métabolisme basal est la dépense énergétique au repos nécessaire au maintien des fonctions vitales.`);
+                
         } else if (objectif === 'maintien') {
             embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
-                .setDescription(`<:cookie:1343575844047687771> **Maintien :**
-- **Calories** : **${DEJ}** kcal
+                .setDescription(
+`<:cookie:1343575844047687771> **Maintien :**
+- Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`);
         } else if (objectif === 'pdm') {
-            // Calcul des besoins pour la prise de masse
-            const minKcal = Math.round(DEJ * 1.05);
-            const maxKcal = Math.round(DEJ * 1.15);
+
+            // Calculs pour la prise de masse avec différents surplus
+            const ratiosPdm = {
+                "5%": 1.05,
+                "10%": 1.10,
+                "15%": 1.15,
+                "20%": 1.20,
+            };
+
+            let pdmCalculs = "";
+            for (const [pourcentage, ratio] of Object.entries(ratiosPdm)) {
+                pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+            }
 
             embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
-                .setDescription(`<:cookie:1343575844047687771> **Estimations pour une prise de masse :**
-- **Besoins normaux** : **${DEJ}** kcal
-- **Min** : **${minKcal}** kcal (105%)
-- **Max** : **${maxKcal}** kcal (115%)
+                .setDescription(
+`<:cookie:1343575844047687771> **Estimations pour une prise de masse :**
+${pdmCalculs}
+- Maintien : **${DEJ}** kcal
 
-La prise de masse consiste à fournir un léger surplus calorique pour favoriser la création de masse musculaire.`);
+La prise de masse consiste à fournir un surplus calorique pour favoriser la création de masse musculaire.`);
         }
         
         await interaction.reply({ embeds: [embed] });
