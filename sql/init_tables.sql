@@ -1,7 +1,7 @@
 -- sql/init_tables.sql
 CREATE TABLE IF NOT EXISTS nouveau_guerrier (
-  id TEXT PRIMARY KEY,
-  username TEXT,
-  count INTEGER DEFAULT 0,
-  date TEXT
+  id VARCHAR(255) PRIMARY KEY,
+  username VARCHAR(255) NOT NULL,
+  count INT NOT NULL DEFAULT 1,
+  date DATETIME NOT NULL
 );

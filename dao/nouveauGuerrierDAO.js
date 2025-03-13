@@ -1,28 +1,18 @@
 // dao/nouveauGuerrierDAO.js
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-
-const dbPath = path.join(__dirname, '..', 'database.db');
-// Ouverture de la DB – vous pouvez choisir d'avoir un singleton ou d'ouvrir/fermer selon vos besoins.
-const db = new sqlite3.Database(dbPath);
+const { promisePool } = require('../utils/dbInit');
 
 module.exports = {
   /**
    * Récupère les informations d'un Nouveau Guerrier par son ID.
    * @param {string} id L'ID du membre.
-   * @returns {Promise<Object>} La ligne correspondante ou undefined.
+   * @returns {Promise<Object|undefined>} La ligne correspondante ou undefined.
    */
-  getById: (id) => {
-    return new Promise((resolve, reject) => {
-      db.get(
-        `SELECT id, username, count, date FROM nouveau_guerrier WHERE id = ?`,
-        [id],
-        (err, row) => {
-          if (err) return reject(err);
-          resolve(row);
-        }
-      );
-    });
+  getById: async (id) => {
+    const [rows] = await promisePool.query(
+      `SELECT id, username, count, date FROM nouveau_guerrier WHERE id = ?`,
+      [id]
+    );
+    return rows[0];
   },
 
   /**
@@ -30,19 +20,14 @@ module.exports = {
    * @param {string} id L'ID du membre.
    * @param {string} username Le nom d'utilisateur.
    * @param {string} date La date (au format ISO) du premier message.
-   * @returns {Promise<number>} L'ID inséré (selon sqlite).
+   * @returns {Promise<number>} L'ID inséré (selon MySQL).
    */
-  create: (id, username, date) => {
-    return new Promise((resolve, reject) => {
-      const query = `
-        INSERT INTO nouveau_guerrier (id, username, count, date)
-        VALUES (?, ?, ?, ?)
-      `;
-      db.run(query, [id, username, 1, date], function (err) {
-        if (err) return reject(err);
-        resolve(this.lastID);
-      });
-    });
+  create: async (id, username, date) => {
+    const [result] = await promisePool.query(
+      `INSERT INTO nouveau_guerrier (id, username, count, date) VALUES (?, ?, ?, ?)`,
+      [id, username, 1, date]
+    );
+    return result.insertId;
   },
 
   /**
@@ -51,13 +36,11 @@ module.exports = {
    * @param {number} count Le nouveau compteur.
    * @returns {Promise<void>}
    */
-  updateCount: (id, count) => {
-    return new Promise((resolve, reject) => {
-      db.run(`UPDATE nouveau_guerrier SET count = ? WHERE id = ?`, [count, id], function (err) {
-        if (err) return reject(err);
-        resolve();
-      });
-    });
+  updateCount: async (id, count) => {
+    await promisePool.query(
+      `UPDATE nouveau_guerrier SET count = ? WHERE id = ?`,
+      [count, id]
+    );
   },
 
   /**
@@ -73,9 +56,9 @@ module.exports = {
       const newCount = row.count + 1;
       return module.exports.updateCount(id, newCount);
     } else {
-      // Lors de la première entrée, on enregistre la date actuelle au format ISO.
-      const now = new Date().toISOString();
+      // Lors de la première entrée, on enregistre la date actuelle au format MySQL DATETIME.
+      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       return module.exports.create(id, username, now);
     }
-  }
+  },  
 };

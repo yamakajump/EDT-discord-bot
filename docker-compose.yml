@@ -1,0 +1,27 @@
+services:
+  edt-discord-bot:
+    build: .
+    container_name: edt-discord-bot
+    environment:
+      - MYSQL_HOST=edt-mysql
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=password
+      - MYSQL_DATABASE=edt_db
+    depends_on:
+      - edt-mysql
+    restart: always
+
+  edt-mysql:
+    image: mysql:8
+    container_name: edt-mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=edt_db
+    ports:
+      - "3307:3306"  # Mappe le port 3307 de la machine hôte vers le 3306 dans le conteneur
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:
