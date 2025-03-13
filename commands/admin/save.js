@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const PDFDocument = require('pdfkit');
 const fs = require('fs');
 const path = require('path');
@@ -42,7 +42,7 @@ module.exports = {
     // Récupération du channel passé en option (nommé "salon" dans la commande slash)
     const channel = interaction.options.getChannel('salon');
     if (!channel) {
-      return interaction.reply({ content: 'Channel non trouvé', ephemeral: true });
+      return interaction.reply({ content: 'Channel non trouvé', flags: MessageFlags.Ephemeral });
     }
 
     // Vérifier que le channel est bien un journal via son parentId (les IDs sont chargés via le fichier de configuration)
@@ -52,7 +52,7 @@ module.exports = {
         .setColor('#BC1F1A')
         .setTitle('Sauvegarde Journal')
         .setDescription("*Ce channel n'est pas un journal*");
-      return interaction.reply({ embeds: [embed], ephemeral: true });
+      return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
 
     // Création du document PDF et définition du chemin de sortie dans le dossier data
@@ -133,10 +133,10 @@ module.exports = {
           attachment: outputPath
         }]
       });
-      await interaction.reply({ content: 'Journal sauvegardé', ephemeral: true });
+      await interaction.reply({ content: 'Journal sauvegardé', flags: MessageFlags.Ephemeral });
     } catch (error) {
       console.error('Erreur lors de l\'envoi du PDF :', error);
-      await interaction.reply({ content: 'Erreur lors de la sauvegarde.', ephemeral: true });
+      await interaction.reply({ content: 'Erreur lors de la sauvegarde.', flags: MessageFlags.Ephemeral });
     }
   }
 };

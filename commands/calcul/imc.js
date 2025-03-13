@@ -1,4 +1,4 @@
-const { EmbedBuilder, AttachmentBuilder } = require('discord.js');
+const { EmbedBuilder, AttachmentBuilder, MessageFlags } = require('discord.js');
 const { createCanvas, loadImage } = require('canvas');
 const path = require('path');
 
@@ -11,13 +11,13 @@ module.exports = {
     if (!poids || poids <= 0) {
       return interaction.reply({
         content: "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral
       });
     }
     if (!tailleCm || tailleCm <= 0) {
       return interaction.reply({
         content: "Hé, ta taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral
       });
     }
 

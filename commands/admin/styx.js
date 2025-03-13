@@ -1,5 +1,5 @@
 const path = require('path');
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fileManager = require('../../utils/fileManager.js');
 
 // Chargement de la configuration

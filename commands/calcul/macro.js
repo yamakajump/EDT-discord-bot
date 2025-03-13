@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     async execute(interaction) {
@@ -17,7 +17,7 @@ module.exports = {
         if (!calories || calories <= 0) {
             return interaction.reply({
                 content: "Oups ! Le nombre de calories doit être un nombre positif. Essayez avec un nombre réel (et énergisant) !",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
 
@@ -27,7 +27,7 @@ module.exports = {
         ) {
             return interaction.reply({
                 content: "Veuillez renseigner les trois pourcentages personnalisés (protéines, glucides, lipides) ou aucun.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
 
@@ -85,7 +85,7 @@ module.exports = {
             if (protCustom + glucCustom + lipCustom !== 100) {
                 return interaction.reply({
                     content: "La somme des pourcentages personnalisés doit être égale à 100%.",
-                    ephemeral: true,
+                    flags: MessageFlags.Ephemeral
                 });
             }
             proteinesPct = protCustom;

@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const config = require("../config/config.json");
 
@@ -28,7 +29,7 @@ module.exports = {
     if (!channel) {
       return interaction.reply({
         content: "Le salon de suggestions est introuvable.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral
       });
     }
 
@@ -54,7 +55,7 @@ module.exports = {
 
     await interaction.reply({
       content: "Merci, ta suggestion a bien été envoyée.",
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral
     });
   },
 };

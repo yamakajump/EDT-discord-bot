@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     async execute(interaction) {
@@ -9,13 +9,13 @@ module.exports = {
         if (!poids || poids <= 0) {
             return interaction.reply({
                 content: "Oups ! Le poids doit être un nombre positif. Réessaie en entrant un poids qui te donnera de la force (et pas juste du vent) !",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         if (!reps || reps <= 0) {
             return interaction.reply({
                 content: "Attention ! Le nombre de répétitions doit être au moins 1. Ne compte pas tes doigts et réessaie, on croit en toi !",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
 

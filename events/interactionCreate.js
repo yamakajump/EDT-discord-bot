@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
@@ -17,7 +18,7 @@ module.exports = {
                 console.error(`Erreur lors de l'exécution de la commande ${interaction.commandName}:`, error);
                 await interaction.reply({
                     content: 'Une erreur s\'est produite lors de l\'exécution de cette commande.',
-                    ephemeral: true,
+                    flags: MessageFlags.Ephemeral
                 });
             }
         }

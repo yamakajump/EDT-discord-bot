@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 
 module.exports = {
     async execute(interaction) {
@@ -18,7 +18,7 @@ module.exports = {
         if (pourcentageInput !== null && ajustementInput !== null) {
             return interaction.reply({
                 content: "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
 
@@ -31,31 +31,31 @@ module.exports = {
         if (!poids || poids <= 0) {
             return interaction.reply({
                 content: "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         if (!taille || taille <= 0) {
             return interaction.reply({
                 content: "La taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         if (!age || age <= 0) {
             return interaction.reply({
                 content: "L'âge doit être un nombre positif. Vérifie ton âge s'il te plaît.",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         if (temps === null || temps < 0) {
             return interaction.reply({
                 content: "Le temps d'entraînement doit être positif (en minutes). Merci de vérifier !",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         if (tefInput === null || tefInput < 10 || tefInput > 25) {
             return interaction.reply({
                 content: "Le TEF doit être compris entre 10 et 25. Merci de vérifier ta saisie !",
-                ephemeral: true,
+                flags: MessageFlags.Ephemeral
             });
         }
         

@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO');
 
 module.exports = {
@@ -73,7 +73,10 @@ module.exports = {
       await interaction.reply({ embeds: [embed], allowedMentions: { users: [user.id] } });
     } catch (err) {
       console.error("Erreur lors de l'exécution de la commande ng :", err);
-      await interaction.reply({ content: "Une erreur est survenue lors de la récupération des statistiques.", ephemeral: true });
+      await interaction.reply({ 
+        content: "Une erreur est survenue lors de la récupération des statistiques.", 
+        flags: MessageFlags.Ephemeral
+      });
     }
   }
 };
