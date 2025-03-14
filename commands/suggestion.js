@@ -1,61 +1,43 @@
-const { MessageFlags } = require('discord.js');
-const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
-const config = require("../config/config.json");
+const { 
+  SlashCommandBuilder, 
+  ModalBuilder, 
+  TextInputBuilder, 
+  TextInputStyle, 
+  ActionRowBuilder 
+} = require('discord.js');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("suggest")
-    .setDescription("Soumet une suggestion et la poste dans le salon dédié")
-    .addStringOption((option) =>
-      option
-        .setName("titre")
-        .setDescription("Le titre de ta suggestion")
-        .setRequired(true)
-    )
-    .addStringOption((option) =>
-      option
-        .setName("contenu")
-        .setDescription("Décris ta suggestion en détails")
-        .setRequired(true)
-    ),
-
+    .setDescription("Soumet une suggestion via un modal"),
+    
   async execute(interaction) {
-    const titre = interaction.options.getString("titre");
-    const contenu = interaction.options.getString("contenu");
-    const suggestionChannelId = config.suggestionChannel;
+    // Création du modal
+    const modal = new ModalBuilder()
+      .setCustomId('suggestionModal')
+      .setTitle('📢 Ta Suggestion');
 
-    // Récupère le salon à partir du client
-    const channel = interaction.client.channels.cache.get(suggestionChannelId);
-    if (!channel) {
-      return interaction.reply({
-        content: "Le salon de suggestions est introuvable.",
-        flags: MessageFlags.Ephemeral
-      });
-    }
+    // Création du champ pour le titre
+    const titleInput = new TextInputBuilder()
+      .setCustomId('titre')
+      .setLabel("Le titre de ta suggestion")
+      .setStyle(TextInputStyle.Short)
+      .setRequired(true);
 
-    const embed = new EmbedBuilder()
-      .setColor("#FFA500")
-      .setTitle(`${interaction.user.username} : ${titre}`)
-      .setDescription(contenu)
-      .setTimestamp()
-      .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
+    // Création du champ pour le contenu
+    const contentInput = new TextInputBuilder()
+      .setCustomId('contenu')
+      .setLabel("Décris ta suggestion en détails")
+      .setStyle(TextInputStyle.Paragraph)
+      .setRequired(true);
 
-    // Envoie l'embed dans le salon de suggestions et ajoute auto les réactions
-    channel
-      .send({ embeds: [embed] })
-      .then((msg) => {
-        msg.react("👍");
-        msg.react("👎");
-        const customEmoji = msg.guild.emojis.cache.get("688499012206460999");
-        if (customEmoji) msg.react(customEmoji);
-      })
-      .catch((err) =>
-        console.error("Erreur lors de l'envoi de la suggestion :", err)
-      );
+    // Ajout des champs dans des ActionRows
+    const firstActionRow = new ActionRowBuilder().addComponents(titleInput);
+    const secondActionRow = new ActionRowBuilder().addComponents(contentInput);
 
-    await interaction.reply({
-      content: "Merci, ta suggestion a bien été envoyée.",
-      flags: MessageFlags.Ephemeral
-    });
+    modal.addComponents(firstActionRow, secondActionRow);
+
+    // Affiche le modal à l'utilisateur
+    await interaction.showModal(modal);
   },
 };
