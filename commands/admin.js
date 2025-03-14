@@ -26,6 +26,27 @@ module.exports = {
             .setDescription('Le salon où sauvegarder')
             .setRequired(true)
         )
+    )
+    // Nouvelle sous-commande : journal
+    .addSubcommand(subcommand =>
+      subcommand
+        .setName('journal')
+        .setDescription('Crée un journal pour un membre')
+        .addUserOption(option =>
+          option.setName('membre')
+            .setDescription("Le membre pour lequel créer le journal")
+            .setRequired(true)
+        )
+        .addStringOption(option =>
+          option.setName('accessibilite')
+            .setDescription("Détermine qui peut voir le journal : Tout le monde, Donateur ou Staff")
+            .setRequired(true)
+            .addChoices(
+              { name: 'Tout le monde', value: 'public' },
+              { name: 'Donateur', value: 'donateur' },
+              { name: 'Staff', value: 'staff' }
+            )
+        )
     ),
   async execute(interaction) {
     const subCmd = interaction.options.getSubcommand();

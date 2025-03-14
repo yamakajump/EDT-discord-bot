@@ -13,5 +13,7 @@
   "pingWelcomeChannelIds": ["1016673662788698213"],
   "forums": ["1343874484670693396"],
   "coachRole": "1343874353850351708",
-  "suggestionChannel": "1349752412734492672"
+  "suggestionChannel": "1349752412734492672",
+  "staffRole": "1350061695011127296",
+  "donateurRole": "1350061766490591363"
 }
