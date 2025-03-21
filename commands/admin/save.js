@@ -148,7 +148,7 @@ module.exports = {
       return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
     }
 
-    await interaction.deferReply({ ephemeral: true });
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
     const startTime = Date.now();
     let currentStep = 'Initialisation';
     const updateProgress = async () => {

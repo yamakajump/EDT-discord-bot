@@ -17,6 +17,7 @@
  */
 
 const { getGuideEmbed, getGuideButtons } = require('../utils/guide');
+const { MessageFlags } = require('discord.js');
 
 module.exports = {
   async execute(interaction, params) {
@@ -24,7 +25,7 @@ module.exports = {
     let currentPage = parseInt(page, 10);
 
     if (interaction.user.id !== memberId) {
-      return interaction.reply({ content: "❌ Ce guide ne vous est pas destiné.", ephemeral: true });
+      return interaction.reply({ content: "❌ Ce guide ne vous est pas destiné.", flags: MessageFlags.Ephemeral });
     }
 
     let newPage;

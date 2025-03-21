@@ -13,7 +13,7 @@
  */
 
 const path = require('path');
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fileManager = require('../../utils/fileManager.js');
 
 const configPath = path.join(__dirname, '../../config/config.json');
@@ -42,7 +42,7 @@ module.exports = {
       console.error('Le rôle Styx n’a pas été trouvé sur ce serveur.', config.styxRole);
       return interaction.reply({
         content: 'Erreur: Le rôle Styx n’a pas été trouvé sur ce serveur.',
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -58,7 +58,7 @@ module.exports = {
           .setTitle('<:info:1343582548353089537> Styx Enlevé')
           .setDescription(`*Vous venez d'enlever* **${member.user.username}** *du Styx*`)
           .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
-        await interaction.reply({ embeds: [embed], ephemeral: true });
+        await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
         if (styxRole.editable) await member.roles.remove(styxRole);
         else console.log(`Le rôle Styx (${styxRole.id}) n'est pas modifiable pour ${member.user.username}.`);
         styxjson.splice(indice, 1);
@@ -83,12 +83,12 @@ module.exports = {
           .setTitle('<:info:1343582548353089537> Styx Ajouté')
           .setDescription(`*Vous venez d'envoyer* **${member.user.username}** *au Styx*`)
           .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
-        await interaction.reply({ embeds: [embed], ephemeral: true });
+        await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
         fileManager.saveJson(jsonPath, styxjson);
       }
     } catch (error) {
       console.error(error);
-      return interaction.reply({ content: 'Erreur lors de la modification des rôles.', ephemeral: true });
+      return interaction.reply({ content: 'Erreur lors de la modification des rôles.', flags: MessageFlags.Ephemeral });
     }
   }
 };
