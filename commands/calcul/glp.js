@@ -23,7 +23,7 @@
  *   - bodyweight (bw) : le poids de l'athlète
  *   - total : le total des charges soulevées
  *
- * Finalement, un embed est envoyé en réponse, affichant l'indice GLP calculé.
+ * Finalement, un embed est envoyé en réponse, affichant l'indice GLP et les Dots calculés.
  */
 
 const { EmbedBuilder } = require('discord.js');
@@ -56,7 +56,7 @@ function dots_poly(a, b, c, d, e, x) {
  * Puis, la fonction dots_poly est appelée avec les coefficients spécifiques aux hommes.
  *
  * @param {number} bw Poids de l'athlète en kg
- * @returns {number} Valeur calculée des dots pour hommes
+ * @returns {number} Coefficient calculé pour les dots (hors multiplication par le total)
  */
 function dots_men(bw) {
     bw = Math.min(Math.max(bw, 40.0), 210.0);
@@ -70,7 +70,7 @@ function dots_men(bw) {
  * Puis, la fonction dots_poly est appelée avec les coefficients spécifiques aux femmes.
  *
  * @param {number} bw Poids de l'athlète en kg
- * @returns {number} Valeur calculée des dots pour femmes
+ * @returns {number} Coefficient calculé pour les dots (hors multiplication par le total)
  */
 function dots_women(bw) {
     bw = Math.min(Math.max(bw, 40.0), 150.0);
@@ -110,33 +110,35 @@ const PARAMETERS = {
 module.exports = {
     async execute(interaction) {
         // Récupération des options fournies par l'utilisateur
-        const sexe = interaction.options.getString('sexe'); // "M" ou "F"
+        const sexe = interaction.options.getString('sexe');             // "M" ou "F"
         const equipement = interaction.options.getString('equipement'); // "Raw" ou "Single-ply"
         const mouvements = interaction.options.getString('mouvements'); // "SBD" ou "B"
-        const bw = interaction.options.getNumber('bodyweight'); // poids de l'athlète
-        const total = interaction.options.getNumber('total'); // total des charges soulevées
+        const bw = interaction.options.getNumber('bodyweight');         // poids de l'athlète
+        const total = interaction.options.getNumber('total');           // total des charges soulevées
 
-        // Calcul de la valeur de "dots" en fonction du sexe et du poids
-        let dots = (sexe === "M") ? dots_men(bw) : dots_women(bw);
+        // Calcul de la valeur "dots" en multipliant le total par le coefficient adapté au sexe
+        let dots = total * ((sexe === "M") ? dots_men(bw) : dots_women(bw));
 
-        // Récupération des coefficients adaptés à l'athlète
+        // Récupération des coefficients adaptés à l'athlète selon le sexe, l'équipement et le mouvement
         const params = PARAMETERS[sexe][equipement][mouvements];
-        // Calcul du dénominateur de la formule GLP
+
+        // Calcul du dénominateur de la formule GLP à partir des coefficients
         const denom = params[0] - (params[1] * Math.exp(-params[2] * bw));
+
         // Calcul du score GLP en ajustant le total par rapport au dénominateur
-        let glp = (denom === 0) ? 0 : Math.max(0, total * dots * 100.0 / denom);
+        let glp = (denom === 0) ? 0 : Math.max(0, total * 100.0 / denom);
 
         // Si le score n'est pas valide ou que le poids est trop faible (bw < 35), on force le score à 0
         if (isNaN(glp) || bw < 35) {
             glp = 0;
         }
 
-        // Création de l'embed de réponse contenant l'indice GLP calculé
+        // Création de l'embed de réponse contenant l'indice GLP et les Dots calculés
         const embed = new EmbedBuilder()
             .setColor('#FFA500')
             .setTitle('Indice GLP en Force Athlétique')
             .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
-            .setDescription(`Votre indice GLP est de **${glp.toFixed(2)} Points**`)
+            .setDescription(`Votre indice GLP : **${glp.toFixed(2)} Points**\nVos Dots : **${dots.toFixed(2)}**`)
             .setFooter({ text: 'Calculé selon la formule GLP adaptée' });
 
         // Réponse de l'interaction avec l'embed
