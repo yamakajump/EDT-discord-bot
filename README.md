@@ -1,15 +1,21 @@
+
+![Contributors](https://img.shields.io/github/contributors/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
+![Forks](https://img.shields.io/github/forks/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
+![Stargazers](https://img.shields.io/github/stars/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
+![Issues](https://img.shields.io/github/issues/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
+![License](https://img.shields.io/github/license/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
+
+![JS](https://img.shields.io/badge/JS-20232A?style=for-the-badge&logo=javascript&logoColor=f1c513)
+![Docker](https://img.shields.io/badge/Docker-20232A?style=for-the-badge&logo=docker&logoColor=1D63ED)
+![MySQL](https://img.shields.io/badge/MySQL-20232A?style=for-the-badge&logo=mysql&logoColor=00758f)
+
+
 <img src="https://i.ibb.co/Y795qQQd/logo-EDT.png" align="right" width="40%" />
 
 # Bot Discord pour l'École du Tigre
 
 Bienvenue sur le dépôt du bot Discord pour l'École du Tigre ! Ce bot est conçu pour améliorer l'expérience utilisateur sur le serveur Discord de l'École du Tigre.
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 > [!NOTE]
 > Prenez le temps de lire chaque section afin de bien comprendre la structure, la configuration et la philosophie de développement du projet.
@@ -190,10 +196,3 @@ Pour plus de détails, consultez directement le fichier [LICENSE](./LICENSE).
 ---
 
 <p align="right">(<a href="#bot-discord-pour-l-école-du-tigre">back to top</a>)</p>
-
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[forks-shield]: https://img.shields.io/github/forks/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[stars-shield]: https://img.shields.io/github/stars/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[issues-shield]: https://img.shields.io/github/issues/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/yamakajump/EDT-discord-bot.svg?style=for-the-badge
