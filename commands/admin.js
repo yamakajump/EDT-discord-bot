@@ -16,7 +16,7 @@ module.exports = {
             .setRequired(true)
         )
     )
-    // Sous-commande : save
+    // Exemple dans le builder de commandes
     .addSubcommand(subcommand =>
       subcommand
         .setName('save')
@@ -25,6 +25,15 @@ module.exports = {
           option.setName('salon')
             .setDescription('Le salon où sauvegarder')
             .setRequired(true)
+        )
+        .addStringOption(option =>
+          option.setName('format')
+            .setDescription('Format de sortie : "pdf" ou "html" (par défaut: pdf)')
+            .addChoices(
+              { name: 'PDF', value: 'pdf' },
+              { name: 'HTML', value: 'html' }
+            )
+            .setRequired(false)
         )
     )
     // Nouvelle sous-commande : journal
