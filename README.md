@@ -1,10 +1,3 @@
-<!-- MARKDOWN LINKS & IMAGES -->
-[contributors-shield]: https://img.shields.io/github/contributors/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[forks-shield]: https://img.shields.io/github/forks/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[stars-shield]: https://img.shields.io/github/stars/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[issues-shield]: https://img.shields.io/github/issues/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-[license-shield]: https://img.shields.io/github/license/yamakajump/EDT-discord-bot.svg?style=for-the-badge
-
 <img src="https://i.ibb.co/Y795qQQd/logo-EDT.png" align="right" width="40%" />
 
 # Bot Discord pour l'École du Tigre
@@ -197,3 +190,10 @@ Pour plus de détails, consultez directement le fichier [LICENSE](./LICENSE).
 ---
 
 <p align="right">(<a href="#bot-discord-pour-l-école-du-tigre">back to top</a>)</p>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+[contributors-shield]: https://img.shields.io/github/contributors/yamakajump/EDT-discord-bot.svg?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/yamakajump/EDT-discord-bot.svg?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/yamakajump/EDT-discord-bot.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/yamakajump/EDT-discord-bot.svg?style=for-the-badge
+[license-shield]: https://img.shields.io/github/license/yamakajump/EDT-discord-bot.svg?style=for-the-badge
