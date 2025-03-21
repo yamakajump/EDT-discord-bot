@@ -1,11 +1,15 @@
-const {
-  EmbedBuilder,
-  ActionRowBuilder,
-  ButtonBuilder,
-  ButtonStyle,
-} = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
-// 📖 Générer l'embed du guide selon la page
+/**
+ * Génère un embed de guide personnalisé pour une page donnée.
+ *
+ * Chaque page correspond à un embed différent décrivant diverses informations sur le serveur.
+ * Si la page demandée n'existe pas, la fonction retourne l'embed de la page 1 par défaut.
+ *
+ * @param {number} page - Numéro de la page à afficher.
+ * @param {string} user - Identifiant de l'utilisateur (pour personnalisation éventuelle).
+ * @returns {EmbedBuilder} L'embed correspondant à la page demandée.
+ */
 function getGuideEmbed(page, user) {
   const pages = {
     1: new EmbedBuilder()
@@ -75,28 +79,41 @@ function getGuideEmbed(page, user) {
       .setColor("#fb7819"),
   };
 
-  return pages[page] || pages[1]; // Retour à la page 1 par défaut si la page demandée n'existe pas
+  // Retourne l'embed correspondant à la page demandée, ou la page 1 par défaut
+  return pages[page] || pages[1];
 }
 
-// 🎮 Générer les boutons de navigation
+/**
+ * Génère une rangée de boutons pour la navigation dans le guide.
+ *
+ * Les boutons permettent de passer à la page précédente, à la page suivante ou de revenir à l'accueil.
+ * Le bouton "Précédent" est désactivé sur la première page et le bouton "Suivant" sur la dernière page.
+ *
+ * @param {number} page - Numéro de la page actuelle.
+ * @param {string} userId - Identifiant de l'utilisateur (pour vérifier l'autorisation d'interagir avec les boutons).
+ * @returns {ActionRowBuilder} La rangée d'action contenant les boutons.
+ */
 function getGuideButtons(page, userId) {
   return new ActionRowBuilder().addComponents(
     new ButtonBuilder()
       .setCustomId(`guide:previous:${page}:${userId}`)
       .setLabel("⬅ Précédent")
       .setStyle(ButtonStyle.Primary)
-      .setDisabled(page === 1),
+      .setDisabled(page === 1), // Désactive si on est sur la première page
+
     new ButtonBuilder()
       .setCustomId(`guide:next:${page}:${userId}`)
       .setLabel("➡ Suivant")
       .setStyle(ButtonStyle.Primary)
-      .setDisabled(page === 4),
+      .setDisabled(page === 4), // Désactive si on est sur la dernière page (page 4)
+    
     new ButtonBuilder()
       .setCustomId(`guide:home:${page}:${userId}`)
       .setLabel("🏠 Accueil")
       .setStyle(ButtonStyle.Success)
-      .setDisabled(page === 1)
+      .setDisabled(page === 1) // Désactive si déjà sur l'accueil (page 1)
   );
 }
 
+// Exportation des fonctions pour qu'elles puissent être utilisées dans d'autres modules.
 module.exports = { getGuideEmbed, getGuideButtons };

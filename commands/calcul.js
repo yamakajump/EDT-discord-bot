@@ -1,3 +1,22 @@
+/**
+ * Module de commande "calcul"
+ *
+ * Cette commande slash est conçue pour effectuer différents calculs liés à la nutrition
+ * et à la performance sportive. Elle comporte plusieurs sous-commandes :
+ *
+ * - calories : Estime les besoins caloriques quotidiens en fonction de divers paramètres.
+ * - imc      : Calcule l'indice de masse corporelle (IMC).
+ * - macro    : Détermine la répartition des macronutriments en fonction des besoins caloriques.
+ * - maxrep   : Calcule le poids maximum pour une répétition (1RM).
+ * - glp      : Calcule l'indice GLP en Force Athlétique.
+ *
+ * La logique d'exécution consiste à charger dynamiquement le fichier relatif à la sous-commande
+ * sélectionnée par l'utilisateur (dans le dossier "calcul/") et à exécuter sa fonction "execute".
+ *
+ * Pour ajouter une nouvelle sous-commande, il suffit de compléter le builder et de créer le fichier
+ * correspondant dans le dossier "calcul".
+ */
+
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const path = require('path');
 
@@ -54,7 +73,7 @@ module.exports = {
                     option.setName('tef')
                         .setDescription("Votre TEF : 10 pour des aliments ultra-transformés, 25 pour des aliments non-transformés.")
                         .setRequired(true)
-                )      
+                )
                 .addStringOption(option =>
                     option.setName('objectif')
                         .setDescription("Votre objectif nutritionnel.")
@@ -207,10 +226,11 @@ module.exports = {
                 )
         ),
     async execute(interaction) {
+        // Récupération de la sous-commande sélectionnée par l'utilisateur
         const subcommand = interaction.options.getSubcommand();
 
         try {
-            // Chargement dynamique de la sous-commande correspondante
+            // Chargement dynamique du fichier correspondant à la sous-commande
             const subcommandFile = require(path.join(__dirname, 'calcul', `${subcommand}.js`));
             await subcommandFile.execute(interaction);
         } catch (error) {

@@ -1,3 +1,18 @@
+/**
+ * Module de commande "admin"
+ *
+ * Cette commande slash "admin" regroupe plusieurs sous-commandes administratives :
+ *   - styx : Permet d'ajouter ou d'enlever un utilisateur du Styx.
+ *   - save : Sauvegarde des informations dans un salon spécifié.
+ *   - journal : Crée un journal pour un membre.
+ *
+ * La logique d'exécution consiste à importer et exécuter le module correspondant
+ * à la sous-commande utilisée par l'utilisateur.
+ *
+ * Pour ajouter ou modifier une sous-commande, il suffit d'ajouter un nouveau builder
+ * et de créer le fichier correspondant dans le dossier "admin".
+ */
+
 const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const path = require('path');
 
@@ -16,7 +31,7 @@ module.exports = {
             .setRequired(true)
         )
     )
-    // Exemple dans le builder de commandes
+    // Sous-commande : save
     .addSubcommand(subcommand =>
       subcommand
         .setName('save')
@@ -36,11 +51,11 @@ module.exports = {
             .setRequired(false)
         )
     )
-    // Nouvelle sous-commande : journal
+    // Sous-commande : journal
     .addSubcommand(subcommand =>
       subcommand
         .setName('journal')
-        .setDescription('Crée un journal pour un membre')
+        .setDescription('Crée un journal pour un membre.')
         .addUserOption(option =>
           option.setName('membre')
             .setDescription("Le membre pour lequel créer le journal")

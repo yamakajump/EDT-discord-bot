@@ -1,11 +1,24 @@
 // dao/nouveauGuerrierDAO.js
+
+/**
+ * Ce module gère les opérations CRUD concernant la table "nouveau_guerrier".
+ * Il utilise un pool de connexions MySQL promisifié (promisePool) pour effectuer des requêtes.
+ *
+ * Fonctions proposées :
+ *   - getById(id) : Récupère les données d'un nouveau guerrier par son identifiant.
+ *   - create(id, username, date) : Crée un enregistrement pour un nouveau guerrier avec un compteur initialisé à 1.
+ *   - updateCount(id, count) : Met à jour le compteur de messages pour un membre.
+ *   - incrementCount(id, username) : Incrémente le compteur de messages ou crée l'enregistrement s'il n'existe pas.
+ */
+
 const { promisePool } = require('../utils/dbInit');
 
 module.exports = {
   /**
-   * Récupère les informations d'un Nouveau Guerrier par son ID.
-   * @param {string} id L'ID du membre.
-   * @returns {Promise<Object|undefined>} La ligne correspondante ou undefined.
+   * Récupère les informations d'un nouveau guerrier par son identifiant.
+   *
+   * @param {string} id - L'ID du membre.
+   * @returns {Promise<Object|undefined>} Un objet représentant la ligne correspondant à l'ID ou undefined s'il n'existe pas.
    */
   getById: async (id) => {
     const [rows] = await promisePool.query(
@@ -16,11 +29,18 @@ module.exports = {
   },
 
   /**
-   * Crée une nouvelle fiche Nouveau Guerrier.
-   * @param {string} id L'ID du membre.
-   * @param {string} username Le nom d'utilisateur.
-   * @param {string} date La date (au format ISO) du premier message.
-   * @returns {Promise<number>} L'ID inséré (selon MySQL).
+   * Crée une nouvelle fiche pour un nouveau guerrier.
+   *
+   * L'enregistrement est créé avec les informations suivantes :
+   *   - id : L'identifiant du membre.
+   *   - username : Le nom d'utilisateur.
+   *   - count : Initialisé à 1 (premier message).
+   *   - date : La date du premier message sous forme de chaîne de caractères (format ISO / MySQL DATETIME).
+   *
+   * @param {string} id - L'ID du membre.
+   * @param {string} username - Le nom d'utilisateur.
+   * @param {string} date - La date du premier message (format ISO ou DATETIME MySQL).
+   * @returns {Promise<number>} L'identifiant de l'insertion (insertId) retourné par MySQL.
    */
   create: async (id, username, date) => {
     const [result] = await promisePool.query(
@@ -31,9 +51,10 @@ module.exports = {
   },
 
   /**
-   * Met à jour le compteur de messages pour un Nouveau Guerrier.
-   * @param {string} id L'ID du membre.
-   * @param {number} count Le nouveau compteur.
+   * Met à jour le compteur de messages d'un nouveau guerrier existant.
+   *
+   * @param {string} id - L'ID du membre.
+   * @param {number} count - La nouvelle valeur du compteur.
    * @returns {Promise<void>}
    */
   updateCount: async (id, count) => {
@@ -44,10 +65,13 @@ module.exports = {
   },
 
   /**
-   * Incrémente le compteur de messages. Si la fiche n'existe pas,
-   * elle est créée avec la date du premier message.
-   * @param {string} id L'ID du membre.
-   * @param {string} username Le nom d'utilisateur.
+   * Incrémente le compteur de messages pour un membre.
+   *
+   * Si le membre existe déjà, le compteur est incrémenté de 1. Sinon, une nouvelle fiche est créée
+   * avec le compteur initialisé à 1 et la date du premier message enregistrée (date actuelle).
+   *
+   * @param {string} id - L'ID du membre.
+   * @param {string} username - Le nom d'utilisateur.
    * @returns {Promise<void>}
    */
   incrementCount: async (id, username) => {
@@ -56,7 +80,7 @@ module.exports = {
       const newCount = row.count + 1;
       return module.exports.updateCount(id, newCount);
     } else {
-      // Lors de la première entrée, on enregistre la date actuelle au format MySQL DATETIME.
+      // Lorsqu'un nouveau guerrier est détecté, on enregistre la date actuelle sous le format MySQL DATETIME.
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       return module.exports.create(id, username, now);
     }

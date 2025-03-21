@@ -1,29 +1,47 @@
+/**
+ * Gestionnaire de l'événement "messageCreate".
+ *
+ * Ce module effectue deux opérations principales :
+ *  1. Il contrôle les messages envoyés dans des threads (issus d'un forum) pour s'assurer que seuls
+ *     l'auteur du fil ou un membre avec le rôle "Coach" peuvent y répondre.
+ *     En cas de non-respect, le message est supprimé et une notification temporaire est envoyée.
+ *
+ *  2. Pour tous les messages (non-bot), il incrémente un compteur associé à chaque auteur via le DAO Nouveau Guerrier.
+ *
+ * La configuration (IDs de forum, rôle "Coach", etc.) est chargée depuis le fichier de configuration (config.json).
+ */
+
 const config = require('../config/config.json');
-const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO'); // Ajout de l'importation du DAO
+const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO'); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
 
 module.exports = {
   name: 'messageCreate',
+  /**
+   * Exécute le gestionnaire lors de la création d'un message.
+   *
+   * @param {Message} message - Le message envoyé sur le serveur.
+   */
   async execute(message) {
-    // On ignore les messages des bots
+    // Ignorer les messages des bots
     if (message.author.bot) return;
 
-    // Vérifier que le message est envoyé dans un thread d'un forum
+    // Contrôle pour les messages envoyés dans un thread rattaché à un forum spécifique
     if (message.channel.isThread() && config.forums.includes(message.channel.parentId)) {
-      // Vérifier si l'auteur du message est bien l'auteur du fil ou possède le rôle Coach
+      // Vérification : Seul l'auteur du fil (message.channel.ownerId) ou les membres ayant le rôle Coach peuvent répondre
       if (
         message.channel.ownerId !== message.author.id &&
         !message.member.roles.cache.has(config.coachRole)
       ) {
         try {
-          // Supprime le message non autorisé
+          // Suppression du message non autorisé
           await message.delete();
 
-          // Envoie un message de notification dans le thread
+          // Envoi d'une notification dans le thread pour informer l'auteur (et éventuellement les autres)
           const warning = await message.channel.send({
             content: `<@${message.author.id}> Seuls l'auteur du post et les personnes ayant le rôle Coach peuvent répondre dans ce forum.`
           });
 
-          // Supprime le message de notification après 1 minute (60000 ms)
+          // Suppression de la notification après 1 minute (60000 ms)
           setTimeout(async () => {
             try {
               await warning.delete();
@@ -37,7 +55,7 @@ module.exports = {
       }
     }
 
-    // Pour tous les messages en général, on incrémente le compteur du Nouveau Guerrier
+    // Incrémentation du compteur associé au Nouveau Guerrier pour chaque message (pour toutes les discussions)
     try {
       await nouveauGuerrierDAO.incrementCount(message.author.id, message.author.username);
     } catch (err) {

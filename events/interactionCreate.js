@@ -1,10 +1,25 @@
+/**
+ * Gestionnaire de l'événement "interactionCreate".
+ *
+ * Ce module gère les interactions reçues par le bot, que ce soit des commandes, des soumissions de modal ou des clics de bouton.
+ *
+ * Pour chaque type d'interaction, il recherche dynamiquement le gestionnaire approprié et exécute la logique correspondante.
+ */
+
 const { MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
 
 module.exports = {
     name: 'interactionCreate',
+    /**
+     * Exécute le gestionnaire d'interaction.
+     * 
+     * @param {Interaction} interaction - L'interaction reçue.
+     * @param {Client} client - Le client Discord.
+     */
     execute: async (interaction, client) => {
+        // Gestion des commandes slash
         if (interaction.isCommand()) {
             const command = client.commands.get(interaction.commandName);
             if (!command) {
@@ -23,7 +38,9 @@ module.exports = {
             }
         }
 
+        // Gestion des soumissions de modal (formulaire)
         if (interaction.isModalSubmit()) {
+            // Construit le chemin vers le gestionnaire de modal en se basant sur l'ID personnalisé
             const modalHandlerPath = path.join(__dirname, '../modals', `${interaction.customId}.js`);
             if (fs.existsSync(modalHandlerPath)) {
                 const modalHandler = require(modalHandlerPath);
@@ -37,8 +54,9 @@ module.exports = {
             }
         }
 
+        // Gestion des clics sur les boutons
         if (interaction.isButton()) {
-            // Diviser le customId pour extraire le nom et les paramètres
+            // On divise le customId pour extraire le nom et les paramètres éventuels
             const [buttonName, ...params] = interaction.customId.split(':');
             const buttonHandlerPath = path.join(__dirname, '../buttons', `${buttonName}.js`);
 

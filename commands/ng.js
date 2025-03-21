@@ -1,3 +1,17 @@
+/**
+ * Module de commande "ng"
+ *
+ * Cette commande slash affiche les statistiques de messages d'un utilisateur :
+ * - La date du premier message enregistré.
+ * - Le nombre de messages enregistrés (comparé à un total fixé).
+ * - Le temps restant (en jours) sur une période donnée.
+ *
+ * On peut spécifier un utilisateur via l'option "utilisateur". Si aucun utilisateur n'est
+ * précisé, les statistiques sont affichées pour l'utilisateur qui exécute la commande.
+ *
+ * Les données statistiques sont récupérées via "nouveauGuerrierDAO".
+ */
+
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO');
 
@@ -12,22 +26,23 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    // Récupération de l'utilisateur spécifié ou, par défaut, l'utilisateur qui exécute la commande.
+    // Récupération de l'utilisateur ciblé ou, par défaut, l'utilisateur de la commande
     const userOption = interaction.options.getUser('utilisateur');
     const user = userOption || interaction.user;
     const id = user.id;
 
     const embed = new EmbedBuilder();
-    const totalMessages = 300;
+    const totalMessages = 300; // Nombre de messages requis pour valider la cible
     const emojiValid = "<:oui:1343603794818109440>";
     const emojiInvalid = "<:non:1343603803580010678>";
-    const totalDays = 14; // Période d'exemple pour le temps restant
+    const totalDays = 14; // Durée de la période de suivi en jours
 
     try {
+      // Récupération des données de l'utilisateur via le DAO
       const data = await nouveauGuerrierDAO.getById(id);
 
       if (!data) {
-        // Aucun message enregistré pour cet utilisateur.
+        // Aucun message enregistré pour cet utilisateur
         embed.setColor('#FFA500')
           .setTitle("Statistiques de messages")
           .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
@@ -47,15 +62,14 @@ module.exports = {
           day: 'numeric'
         });
 
-        // Calcul du temps restant en jours (sur une période de 14 jours)
+        // Calcul du temps restant sur une période de "totalDays"
         const now = new Date();
         const diffTime = Math.abs(now.getTime() - firstMsgDate.getTime());
         let diffDays = Math.round(totalDays - (diffTime / (1000 * 3600 * 24)));
         if (diffDays < 0) diffDays = 0;
-        // Emoji pour le temps restant : validé s'il reste 0 jours
+        // Choix de l'emoji selon que la période soit écoulée ou non
         const timeEmoji = diffDays === 0 ? emojiValid : emojiInvalid;
-
-        // Emoji pour le nombre de messages
+        // Choix de l'emoji selon si le nombre de messages atteint le seuil requis
         const countEmoji = data.count >= totalMessages ? emojiValid : emojiInvalid;
 
         embed.setColor('#FFA500')
@@ -69,7 +83,7 @@ module.exports = {
           );
       }
 
-      // On se garantit que le mention de l'utilisateur est autorisée en spécifiant allowedMentions
+      // Envoi de la réponse tout en autorisant la mention de l'utilisateur
       await interaction.reply({ embeds: [embed], allowedMentions: { users: [user.id] } });
     } catch (err) {
       console.error("Erreur lors de l'exécution de la commande ng :", err);
