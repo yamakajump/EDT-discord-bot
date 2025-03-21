@@ -15,7 +15,7 @@ function getGuideEmbed(page, user) {
     1: new EmbedBuilder()
       .setTitle("📖 Guide du Serveur L'École du Tigre")
       .setDescription(
-        "🌟 **Bienvenue sur le Discord de L'École du Tigre !**\n\n" +
+        `🌟 **Bienvenue ${user} sur le Discord de L'École du Tigre !**\n\n` +
           "👑 L'EDT, c'est un gros projet, marque déposée, en place depuis plus de 5 ans, et la commu N°1 dans le sport francophone. Bref, c'est une belle aventure !\n\n" +
           "🎉 Ici, nous organisons des événements uniques, comme la maison dans **Harry Pother** 🏰\n\n" +
           "💬 Partage ta passion, échange des conseils et profite de discussions enrichissantes !\n\n" +

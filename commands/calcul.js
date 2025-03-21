@@ -2,7 +2,7 @@
  * Module de commande "calcul"
  *
  * Cette commande slash est conçue pour effectuer différents calculs liés à la nutrition
- * et à la performance sportive. Elle comporte plusieurs sous-commandes :
+ * et à la performance sportive. Elle comporte plusieurs sous-commandes :
  *
  * - calories : Estime les besoins caloriques quotidiens en fonction de divers paramètres.
  * - imc      : Calcule l'indice de masse corporelle (IMC).

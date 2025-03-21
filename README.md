@@ -25,6 +25,14 @@ Bienvenue sur le dépôt du bot Discord pour l'École du Tigre ! Ce bot est con�
 
 ---
 
+## Rejoignez-nous
+
+Pour rejoindre le serveur Discord et participer à la communauté de l'École du Tigre, cliquez sur le lien suivant :
+
+[Rejoindre le Discord](https://discord.gg/ecoledutigre)
+
+---
+
 ## Table des matières
 
 - [Prérequis](#prérequis)
@@ -46,7 +54,6 @@ Bienvenue sur le dépôt du bot Discord pour l'École du Tigre ! Ce bot est con�
   - [Reconstruire les images et redémarrer](#reconstruire-les-images-et-redémarrer)
   - [Construire uniquement les images](#construire-uniquement-les-images)
   - [Arrêter et supprimer les containers](#arrêter-et-supprimer-les-containers)
-- [Rejoignez-nous](#rejoignez-nous)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -154,11 +161,19 @@ docker-compose down --rmi all
 
 ---
 
-## Rejoignez-nous
+## Vérification du Code avec ESLint
 
-Pour rejoindre le serveur Discord et participer à la communauté de l'École du Tigre, cliquez sur le lien suivant :
+Ce projet intègre [ESLint](https://eslint.org/) afin de vous aider à maintenir une qualité de code optimale et uniforme. Pour utiliser ESLint, suivez ces étapes :
 
-[Rejoindre le Discord](https://discord.gg/ecoledutigre)
+**Lancer la vérification du code**
+
+   Une fois l’installation terminée, vous pouvez lancer ESLint sur l’ensemble du projet avec la commande suivante :
+
+   ```bash
+   npm run lint
+   ```
+
+   Cette commande utilise la configuration définie par défaut dans votre projet (voir le fichier de configuration ESLint si présent ou les options par défaut) pour analyser vos fichiers JavaScript et vous signaler d’éventuelles erreurs ou incohérences.
 
 ---
 

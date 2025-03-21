@@ -124,7 +124,7 @@ module.exports = {
         // Calcul du dénominateur de la formule GLP
         const denom = params[0] - (params[1] * Math.exp(-params[2] * bw));
         // Calcul du score GLP en ajustant le total par rapport au dénominateur
-        let glp = (denom === 0) ? 0 : Math.max(0, total * 100.0 / denom);
+        let glp = (denom === 0) ? 0 : Math.max(0, total * dots * 100.0 / denom);
 
         // Si le score n'est pas valide ou que le poids est trop faible (bw < 35), on force le score à 0
         if (isNaN(glp) || bw < 35) {

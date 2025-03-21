@@ -13,7 +13,7 @@
  */
 
 const path = require('path');
-const { EmbedBuilder, MessageFlags } = require('discord.js');
+const { EmbedBuilder } = require('discord.js');
 const fileManager = require('../../utils/fileManager.js');
 
 const configPath = path.join(__dirname, '../../config/config.json');
