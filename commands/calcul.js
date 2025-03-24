@@ -358,9 +358,43 @@ module.exports = {
           subcommand
             .setName("info")
             .setDescription("Affiche les explications des standards de force."),
+        )
+        .addSubcommand((subcommand) =>
+          subcommand
+            .setName("tableau")
+            .setDescription(
+              "Affiche le tableau des seuils pour un exercice en fonction du sexe et du critère choisi.",
+            )
+            .addStringOption((option) =>
+              option
+                .setName("exercise")
+                .setDescription("Nom de l'exercice.")
+                .setRequired(true),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("sex")
+                .setDescription("Sélectionnez votre sexe.")
+                .setRequired(true)
+                .addChoices(
+                  { name: "Homme", value: "Homme" },
+                  { name: "Femme", value: "Femme" },
+                ),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("source")
+                .setDescription(
+                  "Choisissez entre l'affichage des seuils basés sur l'âge ou sur le poids.",
+                )
+                .setRequired(true)
+                .addChoices(
+                  { name: "Âge", value: "age" },
+                  { name: "Poids", value: "bodyweight" },
+                ),
+            ),
         ),
     ),
-
   async execute(interaction) {
     // On récupère le groupe de sous-commande s'il existe
     const subcommandGroup = interaction.options.getSubcommandGroup(false);

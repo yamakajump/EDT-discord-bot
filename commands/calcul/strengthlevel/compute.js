@@ -8,7 +8,7 @@ module.exports = {
     // Récupération des options fournies par l'utilisateur
     const bodyWeight = interaction.options.getNumber("bodyweight");
     const liftWeight = interaction.options.getNumber("liftweight");
-    const age = interaction.options.getInteger("age"); // sert seulement pour sélectionner le palier
+    const age = interaction.options.getInteger("age");
     const exerciseName = interaction.options.getString("exercise");
     const sexOption = interaction.options.getString("sex");
 
@@ -59,7 +59,7 @@ module.exports = {
         .setColor("#FF0000")
         .setTitle("Erreur")
         .setDescription(
-          "Une erreur est survenue lors de la récupération des données d'exercices."
+          "Une erreur est survenue lors de la récupération des données d'exercices.",
         );
       return interaction.reply({
         embeds: [errorEmbed],
@@ -69,7 +69,7 @@ module.exports = {
 
     // Recherche de l'exercice (non sensible à la casse)
     const exerciseObj = exercisesData.find(
-      (ex) => ex.exercise.toLowerCase() === exerciseName.toLowerCase()
+      (ex) => ex.exercise.toLowerCase() === exerciseName.toLowerCase(),
     );
     if (!exerciseObj) {
       return interaction.reply({
@@ -128,15 +128,16 @@ module.exports = {
 
     // Mapping des niveaux aux emojis
     const emojiMapping = {
-      "Débutant": getEmoji("globe"),
-      "Novice": getEmoji("troisieme"),
-      "Intermédiaire": getEmoji("deuxieme"),
-      "Avancé": getEmoji("premier"),
-      "Elite": getEmoji("trophe")
+      Débutant: getEmoji("globe"),
+      Novice: getEmoji("troisieme"),
+      Intermédiaire: getEmoji("deuxieme"),
+      Avancé: getEmoji("premier"),
+      Elite: getEmoji("trophe"),
     };
 
     // Récupération dynamique d'emojis généraux
-    const sexEmoji = sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
+    const sexEmoji =
+      sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
     const emojiBody = getEmoji("cookie");
     const emojiAge = getEmoji("cd");
     const cibleEmoji = getEmoji("cible");
@@ -178,7 +179,9 @@ module.exports = {
     // Création de l'embed principal combinant informations, statistiques et affichage des paliers
     const embed = new EmbedBuilder()
       .setColor("#FFA500")
-      .setTitle(`${cibleEmoji} Calcul du Strength Level pour ${exerciseObj.exercise}`)
+      .setTitle(
+        `${cibleEmoji} Calcul du Strength Level pour ${exerciseObj.exercise}`,
+      )
       .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
       .setDescription(description + thresholdsDescription)
       .setFooter({
