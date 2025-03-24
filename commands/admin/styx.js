@@ -15,6 +15,7 @@
 const path = require('path');
 const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fileManager = require('../../utils/fileManager.js');
+const { getEmoji } = require('../../utils/emoji');
 
 const configPath = path.join(__dirname, '../../config/config.json');
 const config = fileManager.loadJson(configPath, {});
@@ -48,6 +49,9 @@ module.exports = {
 
     try {
       const member = await interaction.guild.members.fetch(id);
+      
+      const infoEmoji = getEmoji("info");
+
       if (userIsInStyx) {
         for (const roleId of styxjson[indice].role) {
           const role = interaction.guild.roles.cache.get(roleId);
@@ -55,7 +59,7 @@ module.exports = {
           else console.log(`Impossible d’ajouter le rôle ${roleId} à ${member.user.username} (non trouvable ou non editable).`);
         }
         embed
-          .setTitle('<:info:1343582548353089537> Styx Enlevé')
+          .setTitle(`${infoEmoji} Styx Enlevé`)
           .setDescription(`*Vous venez d'enlever* **${member.user.username}** *du Styx*`)
           .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
         await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
@@ -80,7 +84,7 @@ module.exports = {
           role: rolesToRemove,
         });
         embed
-          .setTitle('<:info:1343582548353089537> Styx Ajouté')
+          .setTitle(`${infoEmoji} Styx Ajouté`)
           .setDescription(`*Vous venez d'envoyer* **${member.user.username}** *au Styx*`)
           .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
         await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });

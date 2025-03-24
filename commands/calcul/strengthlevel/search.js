@@ -1,6 +1,7 @@
 const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { getEmoji } = require('../../../utils/emoji');
 
 /**
  * Module de recherche et de filtrage des exercices de force.
@@ -54,11 +55,13 @@ module.exports = {
     const filtersApplied = `Catégorie: ${ (categoryOption && categoryOption !== "none") ? categoryOption : "Tous" }
 Partie du corps: ${ (bodyPartOption && bodyPartOption !== "none") ? bodyPartOption : "Toutes" }`;
 
+    const nonEmoji = getEmoji("non");
+
     // S'il n'y a aucun résultat, on informe l'utilisateur via un embed
     if (filteredExercises.length === 0) {
       const noResultEmbed = new EmbedBuilder()
         .setColor('#FFA500')
-        .setTitle('Aucun exercice trouvé <:non:1343603803580010678>')
+        .setTitle(`Aucun exercice trouvé ${nonEmoji}`)
         .setDescription("Aucun exercice ne correspond aux critères de recherche spécifiés.")
         .addFields({ name: "Filtres appliqués", value: filtersApplied });
       return interaction.reply({ embeds: [noResultEmbed], flags: MessageFlags.Ephemeral });
@@ -74,7 +77,7 @@ Partie du corps: ${ (bodyPartOption && bodyPartOption !== "none") ? bodyPartOpti
     if (description.length > 4096) {
       const limitEmbed = new EmbedBuilder()
         .setColor('#FFA500')
-        .setTitle('Recherche trop large <:non:1343603803580010678>')
+        .setTitle(`Recherche trop large ${nonEmoji}`)
         .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
         .setDescription("Il y a trop d'exercices correspondant à votre recherche. Veuillez affiner votre recherche en utilisant des paramètres supplémentaires.")
         .addFields({ name: "Filtres appliqués", value: filtersApplied });

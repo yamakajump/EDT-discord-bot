@@ -1,16 +1,17 @@
 const { EmbedBuilder, MessageFlags } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+const { getEmoji } = require('../../../utils/emoji');
 
 /**
  * Module de calcul du Strength Level pour un exercice spécifique.
  *
  * Ce module récupère les informations suivantes :
- *   - Poids du corps (bodyweight) avec emoji <:cookie:1343575844047687771>
- *   - Poids soulevé (liftweight) avec emoji <a:muscle:1343579279279132795>
- *   - Âge (age) avec emoji <a:cd:1343582302323867750>
- *   - Exercice (exercise) avec emoji <a:cible:1343582335349559358>
- *   - Sexe (sex) avec emoji <:homme:1353728079704363089> ou <:femme:1353728054601580596>
+ *   - Poids du corps (bodyweight) avec emoji récupéré dynamiquement
+ *   - Poids soulevé (liftweight) avec l'emoji correspondant
+ *   - Âge (age) avec l'emoji associé
+ *   - Exercice (exercise) avec l'emoji spécifique
+ *   - Sexe (sex) avec l'emoji pour Homme ou Femme
  *
  * Pour l'exercice sélectionné, le fichier JSON fournit deux tableaux de seuils pour chacun
  * des sexes ("Homme" et "Femme") avec :
@@ -31,7 +32,7 @@ module.exports = {
     const liftWeight = interaction.options.getNumber('liftweight');
     const age = interaction.options.getInteger('age');
     const exerciseName = interaction.options.getString('exercise');
-    const sexOption = interaction.options.getString('sex'); // "Homme" ou "Femme"
+    const sexOption = interaction.options.getString('sex');
 
     // Vérifications simples
     if (!bodyWeight || bodyWeight <= 0) {
@@ -140,16 +141,11 @@ module.exports = {
     const levelByBody = computeLevel(bodyRow, liftWeight);
     const levelByAge  = computeLevel(ageRow, liftWeight);
 
-    // Choisir l'emoji pour le sexe
-    const sexEmoji = sexOption === "Homme"
-      ? "<:homme:1353728079704363089>"
-      : "<:femme:1353728054601580596>";
-
-    // Autres emojis
-    const emojiBody = "<:cookie:1343575844047687771>";
-    const emojiAge  = "<a:cd:1343582302323867750>";
-    const emojiEx   = "<a:cible:1343582335349559358>";
-    const emojiLift = "<a:muscle:1343579279279132795>";
+    const sexEmoji   = sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
+    const emojiBody  = getEmoji("cookie");
+    const emojiAge   = getEmoji("cd");
+    const emojiEx    = getEmoji("cible");
+    const emojiLift  = getEmoji("muscle");
 
     // Construction de l'embed sans afficher les lignes du JSON
     const description =

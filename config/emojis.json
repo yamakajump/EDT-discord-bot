@@ -1,0 +1,82 @@
+{
+    "settings": {
+      "customEmojisEnabled": true
+    },
+    "oui": {
+      "id": "<:oui:1343603794818109440>",
+      "fallback": "✅"
+    },
+    "non": {
+      "id": "<:non:1343603803580010678>",
+      "fallback": "❌"
+    },
+    "info": {
+      "id": "<:info:1343582548353089537>",
+      "fallback": "ℹ️"
+    },
+    "pomme": {
+      "id": "<:pomme:1343576949133676636>",
+      "fallback": "🍎"
+    },
+    "cookie": {
+      "id": "<:cookie:1343575844047687771>",
+      "fallback": "🍪"
+    },
+    "frite": {
+      "id": "<:frite:1343577110434021416>",
+      "fallback": "🍟"
+    },
+    "brioche": {
+      "id": "<:brioche:1343577047053635585>",
+      "fallback": "🍞"
+    },
+    "coin_info": {
+      "id": "<:coin_info:1343575919608074322>",
+      "fallback": "🪙"
+    },
+    "trophe_or": {
+      "id": "<:trophe_or:1343578100642086953>",
+      "fallback": "🏆"
+    },
+    "homme": {
+      "id": "<:homme:1353728079704363089>",
+      "fallback": "👨"
+    },
+    "femme": {
+      "id": "<:femme:1353728054601580596>",
+      "fallback": "👩"
+    },
+    "cd": {
+      "id": "<a:cd:1343582302323867750>",
+      "fallback": "💿"
+    },
+    "cible": {
+      "id": "<a:cible:1343582335349559358>",
+      "fallback": "🎯"
+    },
+    "muscle": {
+      "id": "<a:muscle:1343579279279132795>",
+      "fallback": "💪"
+    },
+    "globe": {
+      "id": "<:globe:1343603858089316453>",
+      "fallback": "🌐"
+    },
+    "troisieme": {
+      "id": "<a:troisieme:1343582367478190091>",
+      "fallback": "🥉"
+    },
+    "deuxieme": {
+      "id": "<a:deuxieme:1343582357805989976>",
+      "fallback": "🥈"
+    },
+    "premier": {
+      "id": "<a:premier:1343582386507612171>",
+      "fallback": "🥇"
+    },
+    "trophe": {
+      "id": "<a:trophe:1343582450344788019>",
+      "fallback": "🏆"
+    }
+  }
+  

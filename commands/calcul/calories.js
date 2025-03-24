@@ -16,6 +16,7 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require('discord.js');
+const { getEmoji } = require('../../utils/emoji');
 
 module.exports = {
     async execute(interaction) {
@@ -112,6 +113,11 @@ module.exports = {
         
         const TMBrounded = Math.round(TMB);
 
+        const emojiPomme = getEmoji("pomme");
+        const emojiCookie = getEmoji("cookie");
+        const emojiFrite = getEmoji("frite");
+        const emojiBrioche = getEmoji("brioche");
+
         // Cas 1 : Option "ajustement" renseignée (ajustement direct de calories)
         if (ajustementInput !== null) {
             const adjustedCalories = DEJ + ajustementInput;
@@ -119,8 +125,8 @@ module.exports = {
             
             if (ajustementInput < 0) {
                 // Cas d'une réduction de calories pour une sèche
-                title = '<:pomme:1343576949133676636> Besoins caloriques ajustés pour une **sèche**';
-                description = `<:cookie:1343575844047687771> **Ajustement direct :**
+                title = `${emojiPomme} Besoins caloriques ajustés pour une **sèche**`;
+                description = `${emojiCookie} **Ajustement direct :**
 - Calories de maintien : **${DEJ}** kcal
 - Réduction directe de : **${Math.abs(ajustementInput)}** kcal
 - Total ajusté : **${adjustedCalories}** kcal
@@ -128,8 +134,8 @@ module.exports = {
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
             } else if (ajustementInput > 0) {
                 // Cas d'un ajout calorique pour une prise de masse
-                title = '<:frite:1343577110434021416> Besoins caloriques ajustés pour une **prise de masse**';
-                description = `<:cookie:1343575844047687771> **Ajustement direct :**
+                title = `${emojiFrite} Besoins caloriques ajustés pour une **prise de masse**`;
+                description = `${emojiCookie} **Ajustement direct :**
 - Calories de maintien : **${DEJ}** kcal
 - Ajout direct de : **${ajustementInput}** kcal
 - Total ajusté : **${adjustedCalories}** kcal
@@ -137,8 +143,8 @@ module.exports = {
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
             } else {
                 // Cas où l'ajustement est nul : affichage pour le maintien
-                title = '<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**';
-                description = `<:cookie:1343575844047687771> **Maintien :**
+                title = `${emojiBrioche} Besoins caloriques pour le **maintien**`;
+                description = `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.
@@ -154,9 +160,9 @@ Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni p
             if (pourcentageInput < 100) {
                 // Pourcentage inférieur à 100% pour une sèche personnalisée
                 const customSeche = Math.round(DEJ * (pourcentageInput / 100));
-                embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
+                embed.setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Sèche personnalisée :**
+`${emojiCookie} **Sèche personnalisée :**
 - Pourcentage choisi : **${pourcentageInput}%**
 - Calories calculées : **${customSeche}** kcal
 
@@ -166,9 +172,9 @@ Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni p
             } else if (pourcentageInput > 100) {
                 // Pourcentage supérieur à 100% pour une prise de masse personnalisée
                 const customPdm = Math.round(DEJ * (pourcentageInput / 100));
-                embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
+                embed.setTitle(`${emojiFrite} Besoins caloriques pour une **prise de masse**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Prise de masse personnalisée :**
+`${emojiCookie} **Prise de masse personnalisée :**
 - Pourcentage choisi : **${pourcentageInput}%**
 - Calories calculées : **${customPdm}** kcal
 
@@ -177,9 +183,9 @@ Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni p
                     );
             } else {
                 // Pourcentage exactement à 100% => calculs de maintien
-                embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
+                embed.setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Maintien :**
+`${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`
@@ -202,9 +208,9 @@ Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni p
                     secheCalculs += `- Réduction de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
                 }
 
-                embed.setTitle('<:pomme:1343576949133676636> Besoins caloriques pour une **sèche**')
+                embed.setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Estimations pour une sèche :**
+`${emojiCookie} **Estimations pour une sèche :**
 ${secheCalculs}
 - Maintien : **${DEJ}** kcal
 
@@ -213,9 +219,9 @@ ${secheCalculs}
 
             } else if (objectif === 'maintien') {
                 // Affichage pour le maintien
-                embed.setTitle('<:brioche:1343577047053635585> Besoins caloriques pour le **maintien**')
+                embed.setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Maintien :**
+`${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni perdre de poids.`
@@ -234,9 +240,9 @@ Le maintien vise à conserver l'équilibre énergétique pour ne ni prendre ni p
                     pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
                 }
 
-                embed.setTitle('<:frite:1343577110434021416> Besoins caloriques pour une **prise de masse**')
+                embed.setTitle(`${emojiFrite} Besoins caloriques pour une **prise de masse**`)
                     .setDescription(
-`<:cookie:1343575844047687771> **Estimations pour une prise de masse :**
+`${emojiCookie} **Estimations pour une prise de masse :**
 ${pdmCalculs}
 - Maintien : **${DEJ}** kcal
 

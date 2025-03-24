@@ -14,6 +14,7 @@
 
 const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
 const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO');
+const { getEmoji } = require('../utils/emoji');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -33,8 +34,10 @@ module.exports = {
 
     const embed = new EmbedBuilder();
     const totalMessages = 300; // Nombre de messages requis pour valider la cible
-    const emojiValid = "<:oui:1343603794818109440>";
-    const emojiInvalid = "<:non:1343603803580010678>";
+
+    const emojiValid = getEmoji("oui");
+    const emojiInvalid = getEmoji("non");
+
     const totalDays = 14; // Durée de la période de suivi en jours
 
     try {

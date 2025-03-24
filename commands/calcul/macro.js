@@ -34,6 +34,7 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require('discord.js');
+const { getEmoji } = require('../../utils/emoji');
 
 module.exports = {
   async execute(interaction) {
@@ -139,12 +140,16 @@ module.exports = {
         objectif === 'prise'    ? 'Prise de masse' :
                                   'Recomposition corporelle';
 
+    const coinInfoEmoji = getEmoji("coin_info");
+    const tropheEmoji = getEmoji("trophe_or");
+    const cookieEmoji = getEmoji("cookie");
+
     // Création de l'embed Discord de récapitulatif
     const embed = new EmbedBuilder()
       .setColor('#FFA500')
-      .setTitle('<:coin_info:1343575919608074322> Répartition des macronutriments')
-      .setDescription(`**<:trophe_or:1343578100642086953> Objectif** : ${objectifTexte}
-**<:cookie:1343575844047687771> Calories totales** : ${calories} kcal`)
+      .setTitle(`${coinInfoEmoji} Répartition des macronutriments`)
+      .setDescription(`**${tropheEmoji} Objectif** : ${objectifTexte}
+**${cookieEmoji} Calories totales** : ${calories} kcal`)
       .addFields(
           { name: 'Protéines', value: `${proteinesGr} g (${proteinesPct}%)`, inline: true },
           { name: 'Lipides', value: `${lipidesGr} g (${lipidesPct}%)`, inline: true },
