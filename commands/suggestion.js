@@ -10,30 +10,36 @@
  * recueillir ces informations.
  */
 
-const { SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, ActionRowBuilder } = require('discord.js');
+const {
+  SlashCommandBuilder,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
+  ActionRowBuilder,
+} = require("discord.js");
 
 module.exports = {
   // Définition de la commande avec son nom et sa description.
   data: new SlashCommandBuilder()
     .setName("suggest")
     .setDescription("Soumet une suggestion via un modal"),
-    
+
   async execute(interaction) {
     // Création du modal avec un identifiant personnalisé et un titre.
     const modal = new ModalBuilder()
-      .setCustomId('suggestionModal')
-      .setTitle('📢 Ta Suggestion');
+      .setCustomId("suggestionModal")
+      .setTitle("📢 Ta Suggestion");
 
     // Création du champ de saisie pour le titre de la suggestion.
     const titleInput = new TextInputBuilder()
-      .setCustomId('titre')
+      .setCustomId("titre")
       .setLabel("Le titre de ta suggestion")
       .setStyle(TextInputStyle.Short) // Utilisation d'un champ court pour le titre.
       .setRequired(true);
 
     // Création du champ de saisie pour le contenu de la suggestion.
     const contentInput = new TextInputBuilder()
-      .setCustomId('contenu')
+      .setCustomId("contenu")
       .setLabel("Décris ta suggestion en détails")
       .setStyle(TextInputStyle.Paragraph) // Champ de saisie multiple lignes pour le contenu.
       .setRequired(true);

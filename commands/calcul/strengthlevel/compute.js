@@ -1,7 +1,7 @@
-const { EmbedBuilder, MessageFlags } = require('discord.js');
-const fs = require('fs');
-const path = require('path');
-const { getEmoji } = require('../../../utils/emoji');
+const { EmbedBuilder, MessageFlags } = require("discord.js");
+const fs = require("fs");
+const path = require("path");
+const { getEmoji } = require("../../../utils/emoji");
 
 /**
  * Module de calcul du Strength Level pour un exercice spécifique.
@@ -28,28 +28,31 @@ const { getEmoji } = require('../../../utils/emoji');
 module.exports = {
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur
-    const bodyWeight = interaction.options.getNumber('bodyweight');
-    const liftWeight = interaction.options.getNumber('liftweight');
-    const age = interaction.options.getInteger('age');
-    const exerciseName = interaction.options.getString('exercise');
-    const sexOption = interaction.options.getString('sex');
+    const bodyWeight = interaction.options.getNumber("bodyweight");
+    const liftWeight = interaction.options.getNumber("liftweight");
+    const age = interaction.options.getInteger("age");
+    const exerciseName = interaction.options.getString("exercise");
+    const sexOption = interaction.options.getString("sex");
 
     // Vérifications simples
     if (!bodyWeight || bodyWeight <= 0) {
       return interaction.reply({
-        content: "Erreur : le poids du corps doit être un nombre positif. Merci de vérifier et réessayer.",
+        content:
+          "Erreur : le poids du corps doit être un nombre positif. Merci de vérifier et réessayer.",
         flags: MessageFlags.Ephemeral,
       });
     }
     if (!liftWeight || liftWeight <= 0) {
       return interaction.reply({
-        content: "Erreur : le poids soulevé doit être un nombre positif. Merci de vérifier et réessayer.",
+        content:
+          "Erreur : le poids soulevé doit être un nombre positif. Merci de vérifier et réessayer.",
         flags: MessageFlags.Ephemeral,
       });
     }
     if (!age || age <= 0) {
       return interaction.reply({
-        content: "Erreur : l'âge doit être un nombre positif. Merci de vérifier et réessayer.",
+        content:
+          "Erreur : l'âge doit être un nombre positif. Merci de vérifier et réessayer.",
         flags: MessageFlags.Ephemeral,
       });
     }
@@ -67,23 +70,28 @@ module.exports = {
     }
 
     // Chargement du fichier JSON
-    const dataPath = path.join(__dirname, '../../../data/strengthlevel.json');
+    const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
     let exercisesData;
     try {
-      const rawData = fs.readFileSync(dataPath, 'utf8');
+      const rawData = fs.readFileSync(dataPath, "utf8");
       exercisesData = JSON.parse(rawData);
     } catch (error) {
       console.error("Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
-        .setColor('#FF0000')
+        .setColor("#FF0000")
         .setTitle("Erreur")
-        .setDescription("Une erreur est survenue lors de la récupération des données d'exercices.");
-      return interaction.reply({ embeds: [errorEmbed], flags: MessageFlags.Ephemeral });
+        .setDescription(
+          "Une erreur est survenue lors de la récupération des données d'exercices.",
+        );
+      return interaction.reply({
+        embeds: [errorEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     // Recherche de l'exercice (non sensible à la casse)
     const exerciseObj = exercisesData.find(
-      (ex) => ex.exercise.toLowerCase() === exerciseName.toLowerCase()
+      (ex) => ex.exercise.toLowerCase() === exerciseName.toLowerCase(),
     );
     if (!exerciseObj) {
       return interaction.reply({
@@ -101,7 +109,7 @@ module.exports = {
       });
     }
     const bodyTable = thresholds.bodyweight; // Tableau des seuils pour le poids du corps
-    const ageTable  = thresholds.age;          // Tableau des seuils pour l'âge
+    const ageTable = thresholds.age; // Tableau des seuils pour l'âge
 
     // Fonction utilitaire pour sélectionner la ligne du tableau dont la référence est la plus proche (sans dépasser la valeur utilisateur)
     function findRow(table, inputValue) {
@@ -118,7 +126,7 @@ module.exports = {
     }
 
     const bodyRow = findRow(bodyTable, bodyWeight);
-    const ageRow  = findRow(ageTable, age);
+    const ageRow = findRow(ageTable, age);
 
     // Définition des niveaux
     const levels = ["Beginner", "Novice", "Intermediate", "Advanced", "Elite"];
@@ -139,13 +147,14 @@ module.exports = {
     }
 
     const levelByBody = computeLevel(bodyRow, liftWeight);
-    const levelByAge  = computeLevel(ageRow, liftWeight);
+    const levelByAge = computeLevel(ageRow, liftWeight);
 
-    const sexEmoji   = sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
-    const emojiBody  = getEmoji("cookie");
-    const emojiAge   = getEmoji("cd");
-    const emojiEx    = getEmoji("cible");
-    const emojiLift  = getEmoji("muscle");
+    const sexEmoji =
+      sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
+    const emojiBody = getEmoji("cookie");
+    const emojiAge = getEmoji("cd");
+    const emojiEx = getEmoji("cible");
+    const emojiLift = getEmoji("muscle");
 
     // Construction de l'embed sans afficher les lignes du JSON
     const description =
@@ -160,11 +169,13 @@ module.exports = {
       `• Selon l'Âge          : **${levelByAge}**`;
 
     const embed = new EmbedBuilder()
-      .setColor('#FFA500')
+      .setColor("#FFA500")
       .setTitle(`Calcul du Strength Level pour ${exerciseObj.exercise}`)
-      .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
+      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
       .setDescription(description)
-      .setFooter({ text: 'Calcul effectué à partir de vos données personnelles et des seuils de https://strengthlevel.com/' });
+      .setFooter({
+        text: "Calcul effectué à partir de vos données personnelles et des seuils de https://strengthlevel.com/",
+      });
 
     await interaction.reply({ embeds: [embed] });
   },

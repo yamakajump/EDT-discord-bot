@@ -1,5 +1,5 @@
-const { EmbedBuilder } = require('discord.js');
-const { getEmoji } = require('../../../utils/emoji');
+const { EmbedBuilder } = require("discord.js");
+const { getEmoji } = require("../../../utils/emoji");
 
 /**
  * Module d'affichage des explications relatives aux normes de force.
@@ -11,7 +11,6 @@ const { getEmoji } = require('../../../utils/emoji');
  */
 module.exports = {
   async execute(interaction) {
-    
     const cibleEmoji = getEmoji("cible");
     const globeEmoji = getEmoji("globe");
     const troisiemeEmoji = getEmoji("troisieme");
@@ -20,17 +19,17 @@ module.exports = {
     const tropheEmoji = getEmoji("trophe");
 
     const embed = new EmbedBuilder()
-      .setColor('#FFA500')
+      .setColor("#FFA500")
       .setTitle(`${cibleEmoji} Que signifient les normes de force ?`)
       .setDescription(
         `${globeEmoji} **__Débutant__** : Plus fort que **__5%__** des athlètes. Un athlète débutant est capable d'exécuter correctement le mouvement et s'entraîne depuis au moins **__un mois__**.\n\n` +
-        `${troisiemeEmoji} **__Novice__** : Plus fort que **__20%__** des athlètes. Un athlète novice s'entraîne régulièrement à la technique depuis au moins **__six mois__**.\n\n` +
-        `${deuxiemeEmoji} **__Intermédiaire__** : Plus fort que **__50%__** des athlètes. Un athlète intermédiaire s'entraîne régulièrement à la technique depuis au moins **__deux ans__**.\n\n` +
-        `${premierEmoji} **__Avancé__** : Plus fort que **__80%__** des athlètes. Un athlète avancé progresse depuis plus de **__cinq ans__**.\n\n` +
-        `${tropheEmoji} **__Elite__** : Plus fort que **__95%__** des athlètes. Un athlète elite se consacre depuis plus de **__cinq ans__** pour devenir compétitif dans les sports de force.`
+          `${troisiemeEmoji} **__Novice__** : Plus fort que **__20%__** des athlètes. Un athlète novice s'entraîne régulièrement à la technique depuis au moins **__six mois__**.\n\n` +
+          `${deuxiemeEmoji} **__Intermédiaire__** : Plus fort que **__50%__** des athlètes. Un athlète intermédiaire s'entraîne régulièrement à la technique depuis au moins **__deux ans__**.\n\n` +
+          `${premierEmoji} **__Avancé__** : Plus fort que **__80%__** des athlètes. Un athlète avancé progresse depuis plus de **__cinq ans__**.\n\n` +
+          `${tropheEmoji} **__Elite__** : Plus fort que **__95%__** des athlètes. Un athlète elite se consacre depuis plus de **__cinq ans__** pour devenir compétitif dans les sports de force.`,
       )
-      .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
-      .setFooter({ text: 'Informations sur les normes de force' });
+      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setFooter({ text: "Informations sur les normes de force" });
 
     await interaction.reply({ embeds: [embed] });
   },

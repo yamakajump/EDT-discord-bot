@@ -12,19 +12,19 @@
  * les valeurs dans la configuration ou dans le code selon vos besoins.
  */
 
-const path = require('path');
-const { EmbedBuilder, MessageFlags } = require('discord.js');
-const fileManager = require('../../utils/fileManager.js');
-const { getEmoji } = require('../../utils/emoji');
+const path = require("path");
+const { EmbedBuilder, MessageFlags } = require("discord.js");
+const fileManager = require("../../utils/fileManager.js");
+const { getEmoji } = require("../../utils/emoji");
 
-const configPath = path.join(__dirname, '../../config/config.json');
+const configPath = path.join(__dirname, "../../config/config.json");
 const config = fileManager.loadJson(configPath, {});
-const jsonPath = path.join(__dirname, '../../data/styx.json');
+const jsonPath = path.join(__dirname, "../../data/styx.json");
 let styxjson = fileManager.loadJson(jsonPath, []);
 
 module.exports = {
   async execute(interaction) {
-    const userOption = interaction.options.getUser('membre');
+    const userOption = interaction.options.getUser("membre");
     const id = userOption.id;
     let userIsInStyx = false;
     let indice;
@@ -37,40 +37,57 @@ module.exports = {
       }
     }
 
-    const embed = new EmbedBuilder().setColor('#FFA500');
+    const embed = new EmbedBuilder().setColor("#FFA500");
     const styxRole = interaction.guild.roles.cache.get(config.styxRole);
     if (!styxRole) {
-      console.error('Le rôle Styx n’a pas été trouvé sur ce serveur.', config.styxRole);
+      console.error(
+        "Le rôle Styx n’a pas été trouvé sur ce serveur.",
+        config.styxRole,
+      );
       return interaction.reply({
-        content: 'Erreur: Le rôle Styx n’a pas été trouvé sur ce serveur.',
+        content: "Erreur: Le rôle Styx n’a pas été trouvé sur ce serveur.",
         flags: MessageFlags.Ephemeral,
       });
     }
 
     try {
       const member = await interaction.guild.members.fetch(id);
-      
+
       const infoEmoji = getEmoji("info");
 
       if (userIsInStyx) {
         for (const roleId of styxjson[indice].role) {
           const role = interaction.guild.roles.cache.get(roleId);
           if (role && role.editable) await member.roles.add(role);
-          else console.log(`Impossible d’ajouter le rôle ${roleId} à ${member.user.username} (non trouvable ou non editable).`);
+          else
+            console.log(
+              `Impossible d’ajouter le rôle ${roleId} à ${member.user.username} (non trouvable ou non editable).`,
+            );
         }
         embed
           .setTitle(`${infoEmoji} Styx Enlevé`)
-          .setDescription(`*Vous venez d'enlever* **${member.user.username}** *du Styx*`)
-          .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
-        await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+          .setDescription(
+            `*Vous venez d'enlever* **${member.user.username}** *du Styx*`,
+          )
+          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
+        await interaction.reply({
+          embeds: [embed],
+          flags: MessageFlags.Ephemeral,
+        });
         if (styxRole.editable) await member.roles.remove(styxRole);
-        else console.log(`Le rôle Styx (${styxRole.id}) n'est pas modifiable pour ${member.user.username}.`);
+        else
+          console.log(
+            `Le rôle Styx (${styxRole.id}) n'est pas modifiable pour ${member.user.username}.`,
+          );
         styxjson.splice(indice, 1);
         fileManager.saveJson(jsonPath, styxjson);
       } else {
         let rolesToRemove = [];
-        member.roles.cache.forEach(role => {
-          if (role.id !== config.protectedRole && role.id !== interaction.guild.id) {
+        member.roles.cache.forEach((role) => {
+          if (
+            role.id !== config.protectedRole &&
+            role.id !== interaction.guild.id
+          ) {
             rolesToRemove.push(role.id);
           }
         });
@@ -85,14 +102,22 @@ module.exports = {
         });
         embed
           .setTitle(`${infoEmoji} Styx Ajouté`)
-          .setDescription(`*Vous venez d'envoyer* **${member.user.username}** *au Styx*`)
-          .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
-        await interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+          .setDescription(
+            `*Vous venez d'envoyer* **${member.user.username}** *au Styx*`,
+          )
+          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
+        await interaction.reply({
+          embeds: [embed],
+          flags: MessageFlags.Ephemeral,
+        });
         fileManager.saveJson(jsonPath, styxjson);
       }
     } catch (error) {
       console.error(error);
-      return interaction.reply({ content: 'Erreur lors de la modification des rôles.', flags: MessageFlags.Ephemeral });
+      return interaction.reply({
+        content: "Erreur lors de la modification des rôles.",
+        flags: MessageFlags.Ephemeral,
+      });
     }
-  }
+  },
 };

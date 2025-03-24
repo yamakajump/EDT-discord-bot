@@ -18,7 +18,11 @@
  * directement dans le code si nécessaire.
  */
 
-const { MessageFlags, ChannelType, PermissionFlagsBits } = require('discord.js');
+const {
+  MessageFlags,
+  ChannelType,
+  PermissionFlagsBits,
+} = require("discord.js");
 const config = require("../../config/config.json");
 
 // PIN_MESSAGES est soit la permission native ou une valeur par défaut
@@ -26,8 +30,8 @@ const PIN_MESSAGES = PermissionFlagsBits.PinMessages || 16384n;
 
 module.exports = {
   async execute(interaction) {
-    const membre = interaction.options.getUser('membre');
-    const accessibilite = interaction.options.getString('accessibilite');
+    const membre = interaction.options.getUser("membre");
+    const accessibilite = interaction.options.getString("accessibilite");
     const staffRole = config.staffRole;
     const donorRole = config.donateurRole;
     const categories = config.journalCategories;
@@ -41,8 +45,8 @@ module.exports = {
       allow: [
         PermissionFlagsBits.ViewChannel,
         PermissionFlagsBits.SendMessages,
-        PIN_MESSAGES
-      ]
+        PIN_MESSAGES,
+      ],
     });
 
     // Permissions pour le staff
@@ -52,8 +56,8 @@ module.exports = {
         PermissionFlagsBits.ViewChannel,
         PermissionFlagsBits.SendMessages,
         PIN_MESSAGES,
-        PermissionFlagsBits.ManageMessages
-      ]
+        PermissionFlagsBits.ManageMessages,
+      ],
     });
 
     // Permissions en fonction du type d'accessibilité
@@ -61,27 +65,27 @@ module.exports = {
       overwrites.push({
         id: interaction.guild.roles.everyone.id,
         allow: [PermissionFlagsBits.ViewChannel],
-        deny: [PermissionFlagsBits.SendMessages]
+        deny: [PermissionFlagsBits.SendMessages],
       });
     } else if (accessibilite === "donateur" && donorRole) {
       overwrites.push({
         id: interaction.guild.roles.everyone.id,
-        deny: [PermissionFlagsBits.ViewChannel]
+        deny: [PermissionFlagsBits.ViewChannel],
       });
       overwrites.push({
         id: donorRole,
         allow: [PermissionFlagsBits.ViewChannel],
-        deny: [PermissionFlagsBits.SendMessages]
+        deny: [PermissionFlagsBits.SendMessages],
       });
     } else if (accessibilite === "staff") {
       overwrites.push({
         id: interaction.guild.roles.everyone.id,
-        deny: [PermissionFlagsBits.ViewChannel]
+        deny: [PermissionFlagsBits.ViewChannel],
       });
     } else {
       overwrites.push({
         id: interaction.guild.roles.everyone.id,
-        deny: [PermissionFlagsBits.ViewChannel]
+        deny: [PermissionFlagsBits.ViewChannel],
       });
     }
 
@@ -93,18 +97,18 @@ module.exports = {
         type: ChannelType.GuildText,
         parent: categoryId,
         permissionOverwrites: overwrites,
-        topic: `Journal personnel de ${membre.tag}`
+        topic: `Journal personnel de ${membre.tag}`,
       });
       await interaction.reply({
         content: `Le journal de ${membre} a été créé : ${channel}`,
-        flags: MessageFlags.Ephemeral
+        flags: MessageFlags.Ephemeral,
       });
     } catch (error) {
       console.error("Erreur lors de la création du journal :", error);
       await interaction.reply({
         content: "Une erreur est survenue lors de la création du journal.",
-        flags: MessageFlags.Ephemeral
+        flags: MessageFlags.Ephemeral,
       });
     }
-  }
+  },
 };

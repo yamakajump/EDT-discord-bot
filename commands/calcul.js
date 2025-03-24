@@ -33,16 +33,16 @@ module.exports = {
           option
             .setName("poids")
             .setDescription("Votre poids en kg.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("taille")
             .setDescription("Votre taille en cm.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addIntegerOption((option) =>
-          option.setName("age").setDescription("Votre âge.").setRequired(true)
+          option.setName("age").setDescription("Votre âge.").setRequired(true),
         )
         .addStringOption((option) =>
           option
@@ -50,15 +50,15 @@ module.exports = {
             .setDescription("Votre sexe.")
             .addChoices(
               { name: "Homme", value: "H" },
-              { name: "Femme", value: "F" }
+              { name: "Femme", value: "F" },
             )
-            .setRequired(true)
+            .setRequired(true),
         )
         .addStringOption((option) =>
           option
             .setName("nap")
             .setDescription(
-              "Votre niveau d'activité physique en dehors du sport."
+              "Votre niveau d'activité physique en dehors du sport.",
             )
             .addChoices(
               { name: "Sédentaire (peu ou pas d'exercice)", value: "S" },
@@ -73,23 +73,23 @@ module.exports = {
               {
                 name: "Très actif (exercice intense ou sport 6-7 jours par semaine)",
                 value: "T",
-              }
+              },
             )
-            .setRequired(true)
+            .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("temps")
             .setDescription("Votre temps d'entraînement journalier en minutes.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("tef")
             .setDescription(
-              "Votre TEF : 10 pour des aliments ultra-transformés, 25 pour des aliments non-transformés."
+              "Votre TEF : 10 pour des aliments ultra-transformés, 25 pour des aliments non-transformés.",
             )
-            .setRequired(true)
+            .setRequired(true),
         )
         .addStringOption((option) =>
           option
@@ -98,26 +98,26 @@ module.exports = {
             .addChoices(
               { name: "Sèche", value: "seche" },
               { name: "Maintien", value: "maintien" },
-              { name: "Prise de masse", value: "pdm" }
+              { name: "Prise de masse", value: "pdm" },
             )
-            .setRequired(false)
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("pourcentage")
             .setDescription(
-              "Pourcentage personnalisé (ex : 80 pour 80%). Pour maintien, 100 ou rien."
+              "Pourcentage personnalisé (ex : 80 pour 80%). Pour maintien, 100 ou rien.",
             )
-            .setRequired(false)
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("ajustement")
             .setDescription(
-              "Ajoutez ou retirez directement un nombre de calories (ex : 200 pour +200, -200 pour -200)."
+              "Ajoutez ou retirez directement un nombre de calories (ex : 200 pour +200, -200 pour -200).",
             )
-            .setRequired(false)
-        )
+            .setRequired(false),
+        ),
     )
     // Sous-commande : imc
     .addSubcommand((subcommand) =>
@@ -128,27 +128,27 @@ module.exports = {
           option
             .setName("poids")
             .setDescription("Votre poids en kg.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("taille")
             .setDescription("Votre taille en cm.")
-            .setRequired(true)
-        )
+            .setRequired(true),
+        ),
     )
     // Sous-commande : macro
     .addSubcommand((subcommand) =>
       subcommand
         .setName("macro")
         .setDescription(
-          "Calcule la répartition des macronutriments en fonction de vos besoins caloriques."
+          "Calcule la répartition des macronutriments en fonction de vos besoins caloriques.",
         )
         .addNumberOption((option) =>
           option
             .setName("calories")
             .setDescription("Vos besoins caloriques journaliers en kcal.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addStringOption((option) =>
           option
@@ -159,8 +159,8 @@ module.exports = {
               { name: "Perte de poids", value: "perte" },
               { name: "Maintien", value: "maintien" },
               { name: "Prise de masse", value: "prise" },
-              { name: "Recomposition corporelle", value: "recomp" }
-            )
+              { name: "Recomposition corporelle", value: "recomp" },
+            ),
         )
         .addStringOption((option) =>
           option
@@ -168,60 +168,60 @@ module.exports = {
             .setDescription("Votre sexe.")
             .addChoices(
               { name: "Homme", value: "H" },
-              { name: "Femme", value: "F" }
+              { name: "Femme", value: "F" },
             )
-            .setRequired(false)
+            .setRequired(false),
         )
         .addStringOption((option) =>
           option
             .setName("etat")
             .setDescription(
-              "Indiquez si vous vous considérez comme maigre ou grasse."
+              "Indiquez si vous vous considérez comme maigre ou grasse.",
             )
             .addChoices(
               { name: "Maigre", value: "maigre" },
-              { name: "Grasse", value: "grasse" }
+              { name: "Grasse", value: "grasse" },
             )
-            .setRequired(false)
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("proteines")
             .setDescription("Pourcentage de protéines personnalisé.")
-            .setRequired(false)
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("glucides")
             .setDescription("Pourcentage de glucides personnalisé.")
-            .setRequired(false)
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("lipides")
             .setDescription("Pourcentage de lipides personnalisé.")
-            .setRequired(false)
-        )
+            .setRequired(false),
+        ),
     )
     // Sous-commande : maxrep
     .addSubcommand((subcommand) =>
       subcommand
         .setName("maxrep")
         .setDescription(
-          "Calcule votre poids maximum pour une répétition (1RM)."
+          "Calcule votre poids maximum pour une répétition (1RM).",
         )
         .addNumberOption((option) =>
           option
             .setName("poids")
             .setDescription("Le poids utilisé en kg.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addIntegerOption((option) =>
           option
             .setName("reps")
             .setDescription("Le nombre de répétitions effectuées.")
-            .setRequired(true)
-        )
+            .setRequired(true),
+        ),
     )
     // Sous-commande : glp
     .addSubcommand((subcommand) =>
@@ -235,8 +235,8 @@ module.exports = {
             .setRequired(true)
             .addChoices(
               { name: "Homme", value: "M" },
-              { name: "Femme", value: "F" }
-            )
+              { name: "Femme", value: "F" },
+            ),
         )
         .addStringOption((option) =>
           option
@@ -245,8 +245,8 @@ module.exports = {
             .setRequired(true)
             .addChoices(
               { name: "Raw", value: "Raw" },
-              { name: "Single-ply", value: "Single-ply" }
-            )
+              { name: "Single-ply", value: "Single-ply" },
+            ),
         )
         .addStringOption((option) =>
           option
@@ -255,21 +255,21 @@ module.exports = {
             .setRequired(true)
             .addChoices(
               { name: "SBD", value: "SBD" },
-              { name: "Bench Only", value: "B" }
-            )
+              { name: "Bench Only", value: "B" },
+            ),
         )
         .addNumberOption((option) =>
           option
             .setName("bodyweight")
             .setDescription("Votre poids en kg.")
-            .setRequired(true)
+            .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("total")
             .setDescription("Votre total en kg.")
-            .setRequired(true)
-        )
+            .setRequired(true),
+        ),
     )
     // Groupe de sous-commandes pour strengthlevel
     .addSubcommandGroup((group) =>
@@ -291,8 +291,8 @@ module.exports = {
                   { name: "Bodyweight", value: "Bodyweight" },
                   { name: "Dumbbell", value: "Dumbbell" },
                   { name: "Machine", value: "Machine" },
-                  { name: "Cable", value: "Cable" }
-                )
+                  { name: "Cable", value: "Cable" },
+                ),
             )
             .addStringOption((option) =>
               option
@@ -309,33 +309,33 @@ module.exports = {
                   { name: "Biceps", value: "Biceps" },
                   { name: "Triceps", value: "Triceps" },
                   { name: "Core", value: "Core" },
-                  { name: "Forearms", value: "Forearms" }
-                )
-            )
+                  { name: "Forearms", value: "Forearms" },
+                ),
+            ),
         )
         .addSubcommand((subcommand) =>
           subcommand
             .setName("compute")
             .setDescription(
-              "Calcule le strength level avec le poids, le poids soulevé, l'âge et le nom de l'exercice."
+              "Calcule le strength level avec le poids, le poids soulevé, l'âge et le nom de l'exercice.",
             )
             .addNumberOption((option) =>
               option
                 .setName("bodyweight")
                 .setDescription("Votre poids en kg.")
-                .setRequired(true)
+                .setRequired(true),
             )
             .addNumberOption((option) =>
               option
                 .setName("liftweight")
                 .setDescription("Le poids soulevé en kg.")
-                .setRequired(true)
+                .setRequired(true),
             )
             .addIntegerOption((option) =>
               option
                 .setName("age")
                 .setDescription("Votre âge.")
-                .setRequired(true)
+                .setRequired(true),
             )
             .addStringOption((option) =>
               option
@@ -344,21 +344,21 @@ module.exports = {
                 .setRequired(true)
                 .addChoices(
                   { name: "Homme", value: "Homme" },
-                  { name: "Femme", value: "Femme" }
-                )
+                  { name: "Femme", value: "Femme" },
+                ),
             )
             .addStringOption((option) =>
               option
                 .setName("exercise")
                 .setDescription("Le nom de l'exercice.")
-                .setRequired(true)
-            )
+                .setRequired(true),
+            ),
         )
         .addSubcommand((subcommand) =>
           subcommand
             .setName("info")
-            .setDescription("Affiche les explications des standards de force.")
-        )
+            .setDescription("Affiche les explications des standards de force."),
+        ),
     ),
 
   async execute(interaction) {
@@ -372,19 +372,14 @@ module.exports = {
       // Si on est dans un groupe, on charge depuis le dossier correspondant
       if (subcommandGroup) {
         // par exemple : /calcul strengthlevel search -> dossier strengthlevel/ et fichier search.js
-        subcommandFile = require(path.join(
-          __dirname,
-          "calcul",
-          subcommandGroup,
-          `${subcommand}.js`
-        ));
+        subcommandFile = require(
+          path.join(__dirname, "calcul", subcommandGroup, `${subcommand}.js`),
+        );
       } else {
         // Sinon, fichier directement dans /calcul/
-        subcommandFile = require(path.join(
-          __dirname,
-          "calcul",
-          `${subcommand}.js`
-        ));
+        subcommandFile = require(
+          path.join(__dirname, "calcul", `${subcommand}.js`),
+        );
       }
       await subcommandFile.execute(interaction);
     } catch (error) {
@@ -392,7 +387,7 @@ module.exports = {
         `Erreur lors de l'exécution de la commande ${subcommand}${
           subcommandGroup ? ` du groupe ${subcommandGroup}` : ""
         }:`,
-        error
+        error,
       );
       await interaction.reply({
         content: `Une erreur est survenue lors de l'exécution de la commande.`,

@@ -12,23 +12,30 @@
  * Les données statistiques sont récupérées via "nouveauGuerrierDAO".
  */
 
-const { SlashCommandBuilder, EmbedBuilder, MessageFlags } = require('discord.js');
-const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO');
-const { getEmoji } = require('../utils/emoji');
+const {
+  SlashCommandBuilder,
+  EmbedBuilder,
+  MessageFlags,
+} = require("discord.js");
+const nouveauGuerrierDAO = require("../dao/nouveauGuerrierDAO");
+const { getEmoji } = require("../utils/emoji");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('ng')
-    .setDescription("Voir le nombre de messages enregistrés et d'autres statistiques")
-    .addUserOption(option =>
-      option.setName('utilisateur')
+    .setName("ng")
+    .setDescription(
+      "Voir le nombre de messages enregistrés et d'autres statistiques",
+    )
+    .addUserOption((option) =>
+      option
+        .setName("utilisateur")
         .setDescription("Choisissez un utilisateur (optionnel)")
-        .setRequired(false)
+        .setRequired(false),
     ),
 
   async execute(interaction) {
     // Récupération de l'utilisateur ciblé ou, par défaut, l'utilisateur de la commande
-    const userOption = interaction.options.getUser('utilisateur');
+    const userOption = interaction.options.getUser("utilisateur");
     const user = userOption || interaction.user;
     const id = user.id;
 
@@ -46,54 +53,61 @@ module.exports = {
 
       if (!data) {
         // Aucun message enregistré pour cet utilisateur
-        embed.setColor('#FFA500')
+        embed
+          .setColor("#FFA500")
           .setTitle("Statistiques de messages")
-          .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
+          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
           .setDescription(
             `<@${user.id}>\n` +
-            (user.id === interaction.user.id
-              ? "Vous n'avez encore envoyé aucun message enregistré."
-              : "Cet utilisateur n'a encore envoyé aucun message enregistré.")
+              (user.id === interaction.user.id
+                ? "Vous n'avez encore envoyé aucun message enregistré."
+                : "Cet utilisateur n'a encore envoyé aucun message enregistré."),
           );
       } else {
         // Formatage de la date du premier message
         const firstMsgDate = new Date(data.date);
-        const formattedDate = firstMsgDate.toLocaleDateString('fr-FR', {
-          weekday: 'long',
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric'
+        const formattedDate = firstMsgDate.toLocaleDateString("fr-FR", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
         });
 
         // Calcul du temps restant sur une période de "totalDays"
         const now = new Date();
         const diffTime = Math.abs(now.getTime() - firstMsgDate.getTime());
-        let diffDays = Math.round(totalDays - (diffTime / (1000 * 3600 * 24)));
+        let diffDays = Math.round(totalDays - diffTime / (1000 * 3600 * 24));
         if (diffDays < 0) diffDays = 0;
         // Choix de l'emoji selon que la période soit écoulée ou non
         const timeEmoji = diffDays === 0 ? emojiValid : emojiInvalid;
         // Choix de l'emoji selon si le nombre de messages atteint le seuil requis
-        const countEmoji = data.count >= totalMessages ? emojiValid : emojiInvalid;
+        const countEmoji =
+          data.count >= totalMessages ? emojiValid : emojiInvalid;
 
-        embed.setColor('#FFA500')
+        embed
+          .setColor("#FFA500")
           .setTitle("Statistiques de messages")
-          .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
+          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
           .setDescription(
             `**Utilisateur** : <@${user.id}>\n` +
-            `**Date du premier message** : ${formattedDate}\n` +
-            `**Nombre de messages** : ${data.count}/${totalMessages} ${countEmoji}\n` +
-            `**Temps restant** : ${diffDays} jour${diffDays > 1 ? 's' : ''} ${timeEmoji}`
+              `**Date du premier message** : ${formattedDate}\n` +
+              `**Nombre de messages** : ${data.count}/${totalMessages} ${countEmoji}\n` +
+              `**Temps restant** : ${diffDays} jour${diffDays > 1 ? "s" : ""} ${timeEmoji}`,
           );
       }
 
       // Envoi de la réponse tout en autorisant la mention de l'utilisateur
-      await interaction.reply({ embeds: [embed], allowedMentions: { users: [user.id] } });
+      await interaction.reply({
+        embeds: [embed],
+        allowedMentions: { users: [user.id] },
+      });
     } catch (err) {
       console.error("Erreur lors de l'exécution de la commande ng :", err);
-      await interaction.reply({ 
-        content: "Une erreur est survenue lors de la récupération des statistiques.", 
-        flags: MessageFlags.Ephemeral
+      await interaction.reply({
+        content:
+          "Une erreur est survenue lors de la récupération des statistiques.",
+        flags: MessageFlags.Ephemeral,
       });
     }
-  }
+  },
 };

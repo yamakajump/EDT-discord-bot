@@ -1,4 +1,4 @@
-const emojiConfig = require('../config/emojis.json');
+const emojiConfig = require("../config/emojis.json");
 
 /**
  * Récupère l'emoji configuré pour la clé donnée.

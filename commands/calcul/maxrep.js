@@ -1,5 +1,5 @@
 /**
- * Module de calcul de l'estimation de la 1RM (une répétition maximale) 
+ * Module de calcul de l'estimation de la 1RM (une répétition maximale)
  * à partir du poids soulevé et du nombre de répétitions effectuées.
  *
  * Pour ce faire, plusieurs formules sont utilisées :
@@ -28,13 +28,13 @@
  *   - reps  : nombre de répétitions réalisées
  */
 
-const { EmbedBuilder, MessageFlags } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require("discord.js");
 
 module.exports = {
   async execute(interaction) {
     // Récupération des options : poids (kg) et nombre de répétitions (reps)
-    const poids = interaction.options.getNumber('poids');
-    const reps = interaction.options.getInteger('reps');
+    const poids = interaction.options.getNumber("poids");
+    const reps = interaction.options.getInteger("reps");
 
     // Vérifications et validations des entrées utilisateur
     if (!poids || poids <= 0) {
@@ -65,68 +65,72 @@ module.exports = {
      * Adams : w * 1/(1 - 0.02*r)
      *    => Considère une réduction de 2% de la charge estimée par répétition.
      */
-    results['Adams'] = w * (1 / (1 - 0.02 * r));
+    results["Adams"] = w * (1 / (1 - 0.02 * r));
 
     /**
      * Baechele : w * (1 + 0.033*r)
      *    => Augmentation linéaire de la charge de 3,3% par répétition.
      */
-    results['Baechele'] = w * (1 + 0.033 * r);
+    results["Baechele"] = w * (1 + 0.033 * r);
 
     /**
      * Berger : w * 1/(1.0261 * Math.exp(-0.0262*r))
      *    => Formule faisant intervenir une composante exponentielle.
      */
-    results['Berger'] = w / (1.0261 * Math.exp(-0.0262 * r));
+    results["Berger"] = w / (1.0261 * Math.exp(-0.0262 * r));
 
     /**
      * Brown : w * (0.9849 + 0.0328*r)
      *    => Formule linéaire ajustant la charge de base.
      */
-    results['Brown'] = w * (0.9849 + 0.0328 * r);
+    results["Brown"] = w * (0.9849 + 0.0328 * r);
 
     /**
      * Brzycki : w * (36/(37 - r))
      *    => Une des formules les plus utilisées pour l'estimation de la 1RM.
      */
-    results['Brzycki'] = w * (36 / (37 - r));
+    results["Brzycki"] = w * (36 / (37 - r));
 
     /**
      * Epley : w * (1 + r/30)
      *    => Formule classique incrémentée d'une fraction proportionnelle au nombre de répétitions.
      */
-    results['Epley'] = w * (1 + r / 30);
+    results["Epley"] = w * (1 + r / 30);
 
     /**
      * Kemmler et al. : w * (0.988 + 0.0104*r + 0.00190*r² - 0.0000584*r³)
      *    => Formule plus détaillée intégrant des termes quadratiques et cubiques.
      */
-    results['Kemmler et al.'] =
-      w * (0.988 + 0.0104 * r + 0.00190 * Math.pow(r, 2) - 0.0000584 * Math.pow(r, 3));
+    results["Kemmler et al."] =
+      w *
+      (0.988 +
+        0.0104 * r +
+        0.0019 * Math.pow(r, 2) -
+        0.0000584 * Math.pow(r, 3));
 
     /**
      * Landers : w * 1/(1.013 - 0.0267123*r)
      *    => Surface une relation inverse linéairement proportionnelle.
      */
-    results['Landers'] = w / (1.013 - 0.0267123 * r);
+    results["Landers"] = w / (1.013 - 0.0267123 * r);
 
     /**
      * Lombardi : w * (r^0.10)
      *    => Légère augmentation avec le nombre de répétitions sous forme de puissance.
      */
-    results['Lombardi'] = w * Math.pow(r, 0.10);
+    results["Lombardi"] = w * Math.pow(r, 0.1);
 
     /**
      * Mayhew et al. : w * 1/(0.522 + 0.419*Math.exp(-0.055*r))
      *    => Formule utilisant une composante exponentielle pour moduler l'estimation.
      */
-    results['Mayhew et al.'] = w / (0.522 + 0.419 * Math.exp(-0.055 * r));
+    results["Mayhew et al."] = w / (0.522 + 0.419 * Math.exp(-0.055 * r));
 
     /**
      * Naclerio et al. : w * 1/(0.951*Math.exp(-0.021*r))
      *    => Formule basée sur une relation exponentielle inverse.
      */
-    results['Naclerio et al.'] = w / (0.951 * Math.exp(-0.021 * r));
+    results["Naclerio et al."] = w / (0.951 * Math.exp(-0.021 * r));
 
     /**
      * O'Conner et al. : w * (1 + 0.025*r)
@@ -138,7 +142,7 @@ module.exports = {
      * Wathen : w * 1/(0.4880 + 0.538*Math.exp(-0.075*r))
      *    => Intègre une composante exponentielle pour estimer la charge maximale.
      */
-    results['Wathen'] = w / (0.4880 + 0.538 * Math.exp(-0.075 * r));
+    results["Wathen"] = w / (0.488 + 0.538 * Math.exp(-0.075 * r));
 
     // Calcul de la moyenne de toutes les estimations de la 1RM
     const formuleNames = Object.keys(results);
@@ -146,7 +150,7 @@ module.exports = {
     const average = total / formuleNames.length;
 
     // Mise en forme des résultats pour l'embed Discord
-    let resultsText = '';
+    let resultsText = "";
     formuleNames.forEach((key) => {
       resultsText += `**${key}** : ${results[key].toFixed(2)} kg\n`;
     });
@@ -154,11 +158,11 @@ module.exports = {
 
     // Construction de l'embed avec le résultat final
     const embed = new EmbedBuilder()
-      .setColor('#FFA500')
-      .setTitle('<a:muscle:1343579279279132795> Résultat de votre 1RM')
+      .setColor("#FFA500")
+      .setTitle("<a:muscle:1343579279279132795> Résultat de votre 1RM")
       .setDescription(resultsText)
-      .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png')
-      .setFooter({ text: 'Calculé à partir de 13 méthodes différentes' });
+      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setFooter({ text: "Calculé à partir de 13 méthodes différentes" });
 
     // Réponse de l'interaction avec l'embed final
     await interaction.reply({ embeds: [embed] });

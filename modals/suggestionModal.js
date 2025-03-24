@@ -7,7 +7,7 @@
  * Le message contient également des réactions pour faciliter le vote.
  */
 
-const { MessageFlags, EmbedBuilder } = require('discord.js');
+const { MessageFlags, EmbedBuilder } = require("discord.js");
 const config = require("../config/config.json");
 
 module.exports = {
@@ -29,7 +29,7 @@ module.exports = {
     if (!channel) {
       return interaction.reply({
         content: "Le salon de suggestions est introuvable.",
-        flags: MessageFlags.Ephemeral
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -39,10 +39,11 @@ module.exports = {
       .setTitle(`${interaction.user.username} : ${titre}`)
       .setDescription(contenu)
       .setTimestamp()
-      .setThumbnail('https://i.ibb.co/Y795qQQd/logo-EDT.png');
+      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
 
     // Envoi de l'embed dans le salon, puis ajout de réactions pour le vote
-    channel.send({ embeds: [embed] })
+    channel
+      .send({ embeds: [embed] })
       .then((msg) => {
         // Réactions standards de vote
         msg.react("👍");
@@ -59,7 +60,7 @@ module.exports = {
     // Réponse éphémère pour confirmer à l'utilisateur que sa suggestion a été envoyée
     await interaction.reply({
       content: "Merci, ta suggestion a bien été envoyée.",
-      flags: MessageFlags.Ephemeral
+      flags: MessageFlags.Ephemeral,
     });
   },
 };

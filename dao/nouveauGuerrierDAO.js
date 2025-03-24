@@ -11,7 +11,7 @@
  *   - incrementCount(id, username) : Incrémente le compteur de messages ou crée l'enregistrement s'il n'existe pas.
  */
 
-const { promisePool } = require('../utils/dbInit');
+const { promisePool } = require("../utils/dbInit");
 
 module.exports = {
   /**
@@ -23,7 +23,7 @@ module.exports = {
   getById: async (id) => {
     const [rows] = await promisePool.query(
       `SELECT id, username, count, date FROM nouveau_guerrier WHERE id = ?`,
-      [id]
+      [id],
     );
     return rows[0];
   },
@@ -45,7 +45,7 @@ module.exports = {
   create: async (id, username, date) => {
     const [result] = await promisePool.query(
       `INSERT INTO nouveau_guerrier (id, username, count, date) VALUES (?, ?, ?, ?)`,
-      [id, username, 1, date]
+      [id, username, 1, date],
     );
     return result.insertId;
   },
@@ -60,7 +60,7 @@ module.exports = {
   updateCount: async (id, count) => {
     await promisePool.query(
       `UPDATE nouveau_guerrier SET count = ? WHERE id = ?`,
-      [count, id]
+      [count, id],
     );
   },
 
@@ -81,8 +81,8 @@ module.exports = {
       return module.exports.updateCount(id, newCount);
     } else {
       // Lorsqu'un nouveau guerrier est détecté, on enregistre la date actuelle sous le format MySQL DATETIME.
-      const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
+      const now = new Date().toISOString().slice(0, 19).replace("T", " ");
       return module.exports.create(id, username, now);
     }
-  },  
+  },
 };

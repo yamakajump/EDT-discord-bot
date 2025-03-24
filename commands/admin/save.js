@@ -19,17 +19,17 @@
  *   - archiver & stream-buffers : compression d'un buffer au format ZIP.
  */
 
-const { EmbedBuilder, MessageFlags } = require('discord.js');
-const discordTranscripts = require('discord-html-transcripts');
-const path = require('path');
-const fs = require('fs');
-const puppeteer = require('puppeteer');
-const fileManager = require('../../utils/fileManager.js');
-const { PDFDocument } = require('pdf-lib');
-const archiver = require('archiver');
-const StreamBuffers = require('stream-buffers');
+const { EmbedBuilder, MessageFlags } = require("discord.js");
+const discordTranscripts = require("discord-html-transcripts");
+const path = require("path");
+const fs = require("fs");
+const puppeteer = require("puppeteer");
+const fileManager = require("../../utils/fileManager.js");
+const { PDFDocument } = require("pdf-lib");
+const archiver = require("archiver");
+const StreamBuffers = require("stream-buffers");
 
-const configPath = path.join(__dirname, '../../config/config.json');
+const configPath = path.join(__dirname, "../../config/config.json");
 const config = fileManager.loadJson(configPath, {});
 
 const MB = 1024 * 1024;
@@ -55,16 +55,16 @@ function getMaxUploadSize(guild) {
  * @param {string} [fileName='file.pdf'] - Nom du fichier dans l'archive ZIP.
  * @returns {Promise<Buffer>} - Buffer du fichier compressé.
  */
-function zipBuffer(buffer, fileName = 'file.pdf') {
+function zipBuffer(buffer, fileName = "file.pdf") {
   return new Promise((resolve, reject) => {
     if (!Buffer.isBuffer(buffer)) {
       buffer = Buffer.from(buffer);
     }
     const outputBuffer = new StreamBuffers.WritableStreamBuffer();
-    const archive = archiver('zip', { zlib: { level: 9 } });
+    const archive = archiver("zip", { zlib: { level: 9 } });
 
-    archive.on('error', err => reject(err));
-    outputBuffer.on('finish', () => resolve(outputBuffer.getContents()));
+    archive.on("error", (err) => reject(err));
+    outputBuffer.on("finish", () => resolve(outputBuffer.getContents()));
 
     archive.pipe(outputBuffer);
     archive.append(buffer, { name: fileName });
@@ -84,14 +84,14 @@ async function generatePdfSegment(pdfDoc, start, end) {
   const newPdf = await PDFDocument.create();
   const indices = Array.from({ length: end - start }, (_, i) => start + i);
   const pagesToCopy = await newPdf.copyPages(pdfDoc, indices);
-  pagesToCopy.forEach(page => newPdf.addPage(page));
+  pagesToCopy.forEach((page) => newPdf.addPage(page));
   const segmentUint8Array = await newPdf.save();
   return Buffer.from(segmentUint8Array);
 }
 
 /**
  * Découpe un PDF en segments adaptatifs.
- * Pour chaque segment, on ajoute des pages une à une tant que la taille générée reste 
+ * Pour chaque segment, on ajoute des pages une à une tant que la taille générée reste
  * inférieure ou égale à la taille maximale autorisée. Si l'ajout d'une page excède la limite,
  * le segment est finalisé avec le maximum de pages validé.
  *
@@ -108,11 +108,19 @@ async function splitPdfAdaptive(pdfBuffer, maxSize) {
   while (currentStart < totalPages) {
     // On doit ajouter au moins une page dans le segment.
     let currentEnd = currentStart + 1;
-    let segmentBuffer = await generatePdfSegment(pdfDoc, currentStart, currentEnd);
+    let segmentBuffer = await generatePdfSegment(
+      pdfDoc,
+      currentStart,
+      currentEnd,
+    );
 
     // Tente d'ajouter des pages tant que la taille du segment reste dans la limite.
     while (currentEnd < totalPages) {
-      const candidateBuffer = await generatePdfSegment(pdfDoc, currentStart, currentEnd + 1);
+      const candidateBuffer = await generatePdfSegment(
+        pdfDoc,
+        currentStart,
+        currentEnd + 1,
+      );
       if (candidateBuffer.length <= maxSize) {
         segmentBuffer = candidateBuffer;
         currentEnd++;
@@ -120,7 +128,10 @@ async function splitPdfAdaptive(pdfBuffer, maxSize) {
         break;
       }
     }
-    segments.push({ buffer: segmentBuffer, range: `${currentStart + 1}-${currentEnd}` });
+    segments.push({
+      buffer: segmentBuffer,
+      range: `${currentStart + 1}-${currentEnd}`,
+    });
     currentStart = currentEnd;
   }
   return segments;
@@ -133,63 +144,78 @@ module.exports = {
    * @param {CommandInteraction} interaction - L'interaction Discord.
    */
   async execute(interaction) {
-    const channel = interaction.options.getChannel('salon');
+    const channel = interaction.options.getChannel("salon");
     if (!channel) {
-      return interaction.reply({ content: 'Channel non trouvé', flags: MessageFlags.Ephemeral });
+      return interaction.reply({
+        content: "Channel non trouvé",
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
-    const format = interaction.options.getString('format') || 'pdf';
+    const format = interaction.options.getString("format") || "pdf";
     const allowedCategories = config.journalCategories || [];
     if (!allowedCategories.includes(channel.parentId)) {
       const embed = new EmbedBuilder()
-        .setColor('#BC1F1A')
-        .setTitle('Sauvegarde Journal')
+        .setColor("#BC1F1A")
+        .setTitle("Sauvegarde Journal")
         .setDescription("*Ce channel n'est pas un journal*");
-      return interaction.reply({ embeds: [embed], flags: MessageFlags.Ephemeral });
+      return interaction.reply({
+        embeds: [embed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
     const startTime = Date.now();
-    let currentStep = 'Initialisation';
+    let currentStep = "Initialisation";
     const updateProgress = async () => {
       const secondsElapsed = Math.floor((Date.now() - startTime) / 1000);
-      await interaction.editReply(`**${currentStep}** en cours... (${secondsElapsed} secondes écoulées)`);
+      await interaction.editReply(
+        `**${currentStep}** en cours... (${secondsElapsed} secondes écoulées)`,
+      );
     };
     const intervalId = setInterval(updateProgress, 1000);
 
     try {
       // Étape 1 : Génération de la transcription HTML.
-      currentStep = 'Génération du transcript';
+      currentStep = "Génération du transcript";
       const attachment = await discordTranscripts.createTranscript(channel, {
         limit: -1,
-        returnType: 'attachment',
-        filename: 'transcript.html',
-        poweredBy: false
+        returnType: "attachment",
+        filename: "transcript.html",
+        poweredBy: false,
       });
-      const tempHtmlPath = path.join(__dirname, 'transcript.html');
+      const tempHtmlPath = path.join(__dirname, "transcript.html");
       fs.writeFileSync(tempHtmlPath, attachment.attachment);
 
-      if (format === 'html') {
-        currentStep = 'Envoi du transcript HTML';
+      if (format === "html") {
+        currentStep = "Envoi du transcript HTML";
         await channel.send({
-          files: [{ attachment: tempHtmlPath, name: 'transcript.html' }]
+          files: [{ attachment: tempHtmlPath, name: "transcript.html" }],
         });
         fs.unlinkSync(tempHtmlPath);
         clearInterval(intervalId);
-        return interaction.editReply('Journal sauvegardé en HTML');
+        return interaction.editReply("Journal sauvegardé en HTML");
       }
 
       // Étape 2 : Conversion en PDF.
-      currentStep = 'Conversion en PDF';
-      const tempPdfPath = path.join(__dirname, 'transcript.pdf');
+      currentStep = "Conversion en PDF";
+      const tempPdfPath = path.join(__dirname, "transcript.pdf");
       const browser = await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox', '--disable-setuid-sandbox']
+        args: ["--no-sandbox", "--disable-setuid-sandbox"],
       });
       const page = await browser.newPage();
       const htmlFileUrl = "file://" + tempHtmlPath;
-      await page.goto(htmlFileUrl, { waitUntil: "networkidle0", timeout: 60000 });
-      await page.pdf({ path: tempPdfPath, format: "A4", printBackground: true });
+      await page.goto(htmlFileUrl, {
+        waitUntil: "networkidle0",
+        timeout: 60000,
+      });
+      await page.pdf({
+        path: tempPdfPath,
+        format: "A4",
+        printBackground: true,
+      });
       await browser.close();
 
       let pdfBuffer = fs.readFileSync(tempPdfPath);
@@ -211,10 +237,19 @@ module.exports = {
           const segments = await splitPdfAdaptive(pdfBuffer, maxUploadSize);
           for (const seg of segments) {
             if (seg.buffer.length > maxUploadSize) {
-              const segZip = await zipBuffer(seg.buffer, `transcript_${seg.range}.pdf`);
-              filesToSend.push({ buffer: segZip, name: `transcript_${seg.range}.zip` });
+              const segZip = await zipBuffer(
+                seg.buffer,
+                `transcript_${seg.range}.pdf`,
+              );
+              filesToSend.push({
+                buffer: segZip,
+                name: `transcript_${seg.range}.zip`,
+              });
             } else {
-              filesToSend.push({ buffer: seg.buffer, name: `transcript_${seg.range}.pdf` });
+              filesToSend.push({
+                buffer: seg.buffer,
+                name: `transcript_${seg.range}.pdf`,
+              });
             }
           }
         }
@@ -223,17 +258,21 @@ module.exports = {
       currentStep = "Envoi du fichier (ou segments)";
       for (const file of filesToSend) {
         await channel.send({
-          files: [{ attachment: file.buffer, name: file.name }]
+          files: [{ attachment: file.buffer, name: file.name }],
         });
       }
-      
+
       clearInterval(intervalId);
-      await interaction.editReply("Journal sauvegardé et converti en PDF (découpé et/ou compressé selon la taille)");
-      
+      await interaction.editReply(
+        "Journal sauvegardé et converti en PDF (découpé et/ou compressé selon la taille)",
+      );
     } catch (error) {
       clearInterval(intervalId);
-      console.error("Erreur lors de la génération ou de l'envoi de la transcription :", error);
+      console.error(
+        "Erreur lors de la génération ou de l'envoi de la transcription :",
+        error,
+      );
       await interaction.editReply("Erreur lors de la sauvegarde.");
     }
-  }
+  },
 };

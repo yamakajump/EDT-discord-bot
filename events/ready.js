@@ -5,11 +5,11 @@
  * Il affiche un message de confirmation dans la console et lance les tâches planifiées (schedulers).
  */
 
-const launchSchedulers = require('../utils/schedulerLauncher');
+const launchSchedulers = require("../utils/schedulerLauncher");
 
 module.exports = {
-  name: 'ready',  // Nom de l'événement associé
-  once: true,     // Indique que cet événement sera exécuté une seule fois
+  name: "ready", // Nom de l'événement associé
+  once: true, // Indique que cet événement sera exécuté une seule fois
   /**
    * Méthode exécutée lors du déclenchement de l'événement "ready".
    *
