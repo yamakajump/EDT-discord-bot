@@ -84,7 +84,8 @@ MYSQL_PASSWORD=
 MYSQL_DATABASE=
 ```
 
-> [!CAUTION] > **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
+> [!CAUTION] 
+> **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
 
 ---
 
