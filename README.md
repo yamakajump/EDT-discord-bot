@@ -51,6 +51,9 @@ Pour rejoindre le serveur Discord et participer à la communauté de l'École du
   - [Reconstruire les images et redémarrer](#reconstruire-les-images-et-redémarrer)
   - [Construire uniquement les images](#construire-uniquement-les-images)
   - [Arrêter et supprimer les containers](#arrêter-et-supprimer-les-containers)
+- [Contrôle de la Qualité du Code](#controle-de-la-qualite-du-code)
+  - [Vérification du Code avec ESLint](#verification-du-code-avec-eslint)
+  - [Formatage du Code avec Prettier](#formatage-du-code-avec-prettier)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -157,7 +160,9 @@ docker-compose down --rmi all
 
 ---
 
-## Vérification du Code avec ESLint
+## Contrôle de la Qualité du Code
+
+### Vérification du Code avec ESLint
 
 Ce projet intègre [ESLint](https://eslint.org/) afin de vous aider à maintenir une qualité de code optimale et uniforme. Pour utiliser ESLint, suivez ces étapes :
 
@@ -170,6 +175,20 @@ npm run lint
 ```
 
 Cette commande utilise la configuration définie par défaut dans votre projet (voir le fichier de configuration ESLint si présent ou les options par défaut) pour analyser vos fichiers JavaScript et vous signaler d’éventuelles erreurs ou incohérences.
+
+### Formatage du Code avec Prettier
+
+Pour maintenir une cohérence dans le projet et garantir que tout le code suit le même formatage, nous utilisons Prettier.
+
+**Formater le code avant de push**
+
+Lancez la commande suivante pour formater l'ensemble du projet :
+
+```bash
+npm run prettier
+```
+
+Cette commande s’assure que tous les fichiers respectent le format de code défini, ce qui rend le code plus lisible et facilite la collaboration.
 
 ---
 
