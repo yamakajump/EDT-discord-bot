@@ -84,7 +84,8 @@ MYSQL_PASSWORD=
 MYSQL_DATABASE=
 ```
 
-> [!CAUTION] > **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
+> [!CAUTION] 
+> **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
 
 ---
 
@@ -189,6 +190,8 @@ npm run prettier
 ```
 
 Cette commande s’assure que tous les fichiers respectent le format de code défini, ce qui rend le code plus lisible et facilite la collaboration.
+
+---oir le fichier de configuration ESLint si présent ou les options par défaut) pour analyser vos fichiers JavaScript et vous signaler d’éventuelles erreurs ou incohérences.
 
 ---
 
