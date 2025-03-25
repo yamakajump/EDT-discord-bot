@@ -56,31 +56,62 @@ module.exports = {
         )
         .addStringOption((option) =>
           option
-            .setName("nap")
-            .setDescription(
-              "Votre niveau d'activité physique en dehors du sport.",
-            )
+            .setName("activite")
+            .setDescription("Comment décrirais-tu tes activités quotidiennes ?")
             .addChoices(
-              { name: "Sédentaire (peu ou pas d'exercice)", value: "S" },
               {
-                name: "Peu actif (exercice léger ou sport 1-3 jours par semaine)",
-                value: "P",
+                name: "Sédentaire (je passe mes journées assis(e). Ex : travail de bureau)",
+                value: "S",
               },
               {
-                name: "Actif (exercice modéré ou sport 3-5 jours par semaine)",
+                name: "Légèrement actif (je passe une bonne partie de la journée debout. Ex : professeur, vendeur)",
+                value: "L",
+              },
+              {
+                name: "Actif (exercice modéré. Ex : serveur, facteur)",
                 value: "A",
               },
               {
-                name: "Très actif (exercice intense ou sport 6-7 jours par semaine)",
+                name: "Très actif (grosse activité physique. Ex : coursier à vélo, maçon)",
                 value: "T",
               },
             )
+            .setRequired(true),
+        )
+        .addIntegerOption((option) =>
+          option
+            .setName("jours")
+            .setDescription("Combien de jours par semaine t'entraînes-tu ?")
             .setRequired(true),
         )
         .addNumberOption((option) =>
           option
             .setName("temps")
             .setDescription("Votre temps d'entraînement journalier en minutes.")
+            .setRequired(true),
+        )
+        .addStringOption((option) =>
+          option
+            .setName("intensite")
+            .setDescription("À quelle intensité t'entraînes-tu ?")
+            .addChoices(
+              {
+                name: "Légère : je m'entraîne surtout pour m'entretenir.",
+                value: "leger",
+              },
+              {
+                name: "Modérée : je force de temps en temps pour me challenger.",
+                value: "moderee",
+              },
+              {
+                name: "Élevée : je me donne à fond et transpire beaucoup.",
+                value: "elevee",
+              },
+              {
+                name: "Intense : je suis ici pour en découdre afin de repousser mes limites.",
+                value: "intense",
+              },
+            )
             .setRequired(true),
         )
         .addNumberOption((option) =>
@@ -96,7 +127,7 @@ module.exports = {
             .setName("objectif")
             .setDescription("Votre objectif nutritionnel.")
             .addChoices(
-              { name: "Sèche", value: "seche" },
+              { name: "Sèche/Perdre de poids", value: "seche" },
               { name: "Maintien", value: "maintien" },
               { name: "Prise de masse", value: "pdm" },
             )
