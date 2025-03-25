@@ -47,7 +47,8 @@ module.exports = (client) => {
   let maxStatutWidth = headerStatut.length;
 
   tableRows.forEach((row) => {
-    if (row.Fichier.length > maxFichierWidth) maxFichierWidth = row.Fichier.length;
+    if (row.Fichier.length > maxFichierWidth)
+      maxFichierWidth = row.Fichier.length;
     if (row.Statut.length > maxStatutWidth) maxStatutWidth = row.Statut.length;
   });
 
@@ -75,7 +76,7 @@ module.exports = (client) => {
 
     // Affichage de la ligne du tableau
     console.log(
-      `│ ${row.Fichier.padEnd(maxFichierWidth)} │ ${statutAffichage.padEnd(maxStatutWidth + 9)} │`
+      `│ ${row.Fichier.padEnd(maxFichierWidth)} │ ${statutAffichage.padEnd(maxStatutWidth + 9)} │`,
     );
     // (Note : "+ 9" est ajouté pour compenser la longueur des codes d'échappement ANSI)
   });

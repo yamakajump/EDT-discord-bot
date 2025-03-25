@@ -58,7 +58,7 @@ module.exports = {
       tableType = "Âge";
     } else {
       table = thresholds.bodyweight;
-      tableType = "Poids du Corps";
+      tableType = "Poids";
     }
 
     // Définition de l'en-tête avec la première colonne dynamique
@@ -75,54 +75,140 @@ module.exports = {
     const numCols = headers.length;
     const numRows = table.length; // Le nombre de lignes dans la table issue du JSON
 
-    // Dimensions en pixels
+    // Dimensions en pixels pour chaque cellule
     const cellWidth = 120;
     const cellHeight = 30;
     const headerHeight = 40;
-    const canvasWidth = cellWidth * numCols;
-    const canvasHeight = headerHeight + cellHeight * numRows;
+
+    // Espace supplémentaire pour afficher le titre (nom de l'exercice)
+    const titleAreaHeight = 30;
+    const gapBetweenTitleAndTable = 10;
+
+    // Marges autour du tableau
+    const margin = 10;
+    const tableWidth = cellWidth * numCols;
+    const tableHeight = headerHeight + cellHeight * numRows;
+
+    // Dimensions totales du canvas
+    const canvasWidth = tableWidth + margin * 2;
+    const canvasHeight =
+      titleAreaHeight + gapBetweenTitleAndTable + tableHeight + margin * 2;
 
     // Création du canvas
     const canvas = createCanvas(canvasWidth, canvasHeight);
     const ctx = canvas.getContext("2d");
 
-    // Fond blanc
-    ctx.fillStyle = "#ffffff";
+    // Fond du canevas en #2F3135
+    ctx.fillStyle = "#2F3135";
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    // Dessin de l'en-tête
-    ctx.fillStyle = "#000000";
-    ctx.font = "bold 16px Arial";
+    // Affichage du titre (nom de l'exercice) en haut avec du texte en #e7e7e7
+    ctx.font = "bold 20px Arial";
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
+    ctx.fillStyle = "#e7e7e7";
+    ctx.fillText(
+      exerciseObj.exercise,
+      canvasWidth / 2,
+      margin + titleAreaHeight / 2,
+    );
+
+    // Position du tableau
+    const tableX = margin;
+    const tableY = margin + titleAreaHeight + gapBetweenTitleAndTable;
+
+    // Fonction utilitaire pour dessiner un rectangle arrondi
+    function drawRoundedRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(
+        x + width,
+        y + height,
+        x + width - radius,
+        y + height,
+      );
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    // Dessin du fond du tableau (avec bords arrondis) en #151619
+    const borderRadius = 10;
+    ctx.fillStyle = "#151619";
+    drawRoundedRect(ctx, tableX, tableY, tableWidth, tableHeight, borderRadius);
+
+    // Dessin de l'en-tête du tableau
+    // Texte de l'en-tête en #e7e7e7
+    ctx.font = "bold 16px Arial";
     for (let col = 0; col < numCols; col++) {
-      const x = col * cellWidth;
-      const y = 0;
-      // Bordure de la cellule d'en-tête
-      ctx.strokeStyle = "#000000";
+      const x = tableX + col * cellWidth;
+      const y = tableY;
+      // Fond de la cellule d'en-tête en #181A1E
+      ctx.fillStyle = "#181A1E";
+      ctx.fillRect(x, y, cellWidth, headerHeight);
+
+      // Bordure de la cellule d'en-tête (optionnelle)
+      ctx.strokeStyle = "#151619";
       ctx.strokeRect(x, y, cellWidth, headerHeight);
-      // Texte centré dans la cellule
+
+      // Texte centré dans l'en-tête
+      ctx.fillStyle = "#e7e7e7";
       ctx.fillText(headers[col], x + cellWidth / 2, y + headerHeight / 2);
     }
 
-    // Dessin des cellules du tableau
+    // Dessin des cellules de données
     ctx.font = "14px Arial";
     for (let row = 0; row < numRows; row++) {
       const rowData = table[row];
       for (let col = 0; col < numCols; col++) {
-        const x = col * cellWidth;
-        const y = headerHeight + row * cellHeight;
-        ctx.strokeStyle = "#000000";
+        const x = tableX + col * cellWidth;
+        const y = tableY + headerHeight + row * cellHeight;
+
+        // Fond de la cellule : première colonne = #181A1E, sinon #202226
+        ctx.fillStyle = col === 0 ? "#181A1E" : "#202226";
+        ctx.fillRect(x, y, cellWidth, cellHeight);
+
+        // Bordure de la cellule
+        ctx.strokeStyle = "#151619";
         ctx.strokeRect(x, y, cellWidth, cellHeight);
-        // On centre le texte dans la cellule
-        const text = rowData[col];
-        ctx.fillStyle = "#000000";
-        ctx.fillText(text, x + cellWidth / 2, y + cellHeight / 2);
+
+        // Choix de la couleur du texte :
+        // Pour la première colonne (et on pourrait appliquer pareil pour d'autres éléments spécifiques)
+        // on utilise #e7e7e7, sinon pour le reste on utilise #a0a0a0
+        ctx.fillStyle = col === 0 ? "#e7e7e7" : "#a0a0a0";
+        const text = rowData[col] !== undefined ? rowData[col] : "";
+        ctx.fillText(String(text), x + cellWidth / 2, y + cellHeight / 2);
       }
     }
 
     // Création d'un buffer à partir du canvas (format PNG)
-    const buffer = canvas.toBuffer("image/png");
+    const tableBuffer = canvas.toBuffer("image/png");
+
+    // Construction du nom de l'image de l'exercice.
+    // Remplace les espaces par des underscores et ajoute l'extension ".png"
+    const exerciseImageName = exerciseObj.exercise.replace(/ /g, "_") + ".png";
+    const exerciseImagePath = path.join(
+      __dirname,
+      "../../../images/strengthlevel",
+      exerciseImageName,
+    );
+
+    // Lecture du buffer de l'image de l'exercice (s'il existe)
+    let exerciseImageBuffer;
+    try {
+      exerciseImageBuffer = fs.readFileSync(exerciseImagePath);
+    } catch (error) {
+      console.error(
+        `Erreur lors de la lecture de l'image ${exerciseImageName}:`,
+        error,
+      );
+    }
 
     // Préparation de l'embed
     const headerEmoji = getEmoji("cible");
@@ -136,10 +222,23 @@ module.exports = {
         text: "Données issues de https://strengthlevel.com/",
       });
 
-    // Renvoi de l'embed avec l'image en pièce jointe
+    // Si l'image de l'exercice a été trouvée, on l'ajoute en miniature via setThumbnail
+    if (exerciseImageBuffer) {
+      embed.setThumbnail("attachment://exercise.png");
+    }
+
+    // Envoi de l'embed avec l'image du tableau (et celle de l'exercice si présente) en pièces jointes
+    const attachments = [{ attachment: tableBuffer, name: "tableau.png" }];
+    if (exerciseImageBuffer) {
+      attachments.push({
+        attachment: exerciseImageBuffer,
+        name: "exercise.png",
+      });
+    }
+
     return interaction.reply({
       embeds: [embed],
-      files: [{ attachment: buffer, name: "tableau.png" }],
+      files: attachments,
     });
   },
 };

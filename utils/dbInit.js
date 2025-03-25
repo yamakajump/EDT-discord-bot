@@ -45,7 +45,10 @@ async function initializeDatabase() {
     console.log("🗂️\x1b[32m Base de données initialisée avec succès. \x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur dans la console.
-    console.error("🗂️\x1b[31m Erreur lors de l'exécution du script SQL : \x1b[0m", err.message);
+    console.error(
+      "🗂️\x1b[31m Erreur lors de l'exécution du script SQL : \x1b[0m",
+      err.message,
+    );
     throw err;
   }
 }
