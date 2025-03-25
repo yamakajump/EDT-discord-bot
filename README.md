@@ -225,4 +225,4 @@ Pour plus de détails, consultez directement le fichier [LICENSE](./LICENSE).
 
 ---
 
-<p align="right">(<a href="#bot-discord-pour-l-école-du-tigre">back to top</a>)</p>
+<p align="right">(<a href="#bot-discord-pour-lécole-du-tigre">back to top</a>)</p>
