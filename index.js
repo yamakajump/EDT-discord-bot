@@ -64,9 +64,9 @@ const { initializeDatabase } = require("./utils/dbInit");
       const clientId = process.env.ID;
 
       await rest.put(Routes.applicationCommands(clientId), { body: commands });
-      console.log("Commandes enregistrées avec succès.");
+      console.log("📩\x1b[32m Commandes enregistrées avec succès. \x1b[0m");
     } catch (error) {
-      console.error("Erreur lors de l'enregistrement des commandes:", error);
+      console.error("📩\x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m", error);
       // Si vous avez une fonction reportError définie, vous pouvez l'utiliser ici
       // reportError(client, `Erreur lors de l'enregistrement des commandes:\n\`\`\`${error.message}\`\`\``);
     }

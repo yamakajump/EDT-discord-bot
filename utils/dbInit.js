@@ -42,10 +42,10 @@ async function initializeDatabase() {
     const sql = await fs.readFile(initSqlPath, "utf8");
     // Exécution du script SQL sur la base de données.
     await promisePool.query(sql);
-    console.log("Base de données initialisée avec succès.");
+    console.log("🗂️\x1b[32m Base de données initialisée avec succès. \x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur dans la console.
-    console.error("Erreur lors de l'exécution du script SQL :", err.message);
+    console.error("🗂️\x1b[31m Erreur lors de l'exécution du script SQL : \x1b[0m", err.message);
     throw err;
   }
 }
