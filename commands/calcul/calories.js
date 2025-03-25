@@ -120,7 +120,7 @@ module.exports = {
     // Dictionnaire pour le niveau d'activité (identique à l'ancien bot)
     const diconap = {
       S: { H: 1, F: 1 },
-      P: { H: 1.11, F: 1.12 },
+      L: { H: 1.11, F: 1.12 },
       A: { H: 1.25, F: 1.27 },
       T: { H: 1.48, F: 1.45 },
     };
@@ -152,7 +152,7 @@ module.exports = {
     // Calcul de la dépense de base (métabolisme de base ajusté par l'activité physique + entraînement)
     const baseExpenditure = TMB * NAP + averageTraining;
     // Calcul du TEF (Effet Thermique des Aliments)
-    const TEF = 1 + (tefInput / 100);
+    const TEF = 1 + tefInput / 100;
     // Calcul final de la DEJ
     const DEJ = Math.round(baseExpenditure * TEF);
 
@@ -213,19 +213,21 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
 - Calories calculées : **${customSeche}** kcal
 
 **Maintien (100%)** : **${DEJ}** kcal  
-**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
           );
       } else if (pourcentageInput > 100) {
         const customPdm = Math.round(DEJ * (pourcentageInput / 100));
         embed
-          .setTitle(`${emojiFrite} Besoins caloriques pour une **prise de masse**`)
+          .setTitle(
+            `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
+          )
           .setDescription(
             `${emojiCookie} **Prise de masse personnalisée :**
 - Pourcentage choisi : **${pourcentageInput}%**
 - Calories calculées : **${customPdm}** kcal
 
 **Maintien (100%)** : **${DEJ}** kcal  
-**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
           );
       } else {
         embed
@@ -234,7 +236,7 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
             `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
-Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`
+Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`,
           );
       }
     }
@@ -258,7 +260,7 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
 ${secheCalculs}
 - Maintien : **${DEJ}** kcal
 
-**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`
+**Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
           );
       } else if (objectif === "maintien") {
         embed
@@ -267,7 +269,7 @@ ${secheCalculs}
             `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
-Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`
+Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`,
           );
       } else if (objectif === "pdm") {
         const ratiosPdm = {
@@ -281,17 +283,19 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
           pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
         }
         embed
-          .setTitle(`${emojiFrite} Besoins caloriques pour une **prise de masse**`)
+          .setTitle(
+            `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
+          )
           .setDescription(
             `${emojiCookie} **Estimations pour une prise de masse :**
 ${pdmCalculs}
 - Maintien : **${DEJ}** kcal
 
-Le but est d'ajouter un surplus calorique pour favoriser la prise de masse.`
+Le but est d'ajouter un surplus calorique pour favoriser la prise de masse.`,
           );
       }
     }
-    
+
     // Envoi de l'Embed de résultat
     await interaction.reply({ embeds: [embed] });
   },
