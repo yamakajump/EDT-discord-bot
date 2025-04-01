@@ -11,11 +11,11 @@
  * La configuration (IDs de forum, rôle "Coach", etc.) est chargée depuis le fichier de configuration (config.json).
  */
 
-const config = require('../config/config.json');
-const nouveauGuerrierDAO = require('../dao/nouveauGuerrierDAO'); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
+const config = require("../config/config.json");
+const nouveauGuerrierDAO = require("../dao/nouveauGuerrierDAO"); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
 
 module.exports = {
-  name: 'messageCreate',
+  name: "messageCreate",
   /**
    * Exécute le gestionnaire lors de la création d'un message.
    *
@@ -26,7 +26,10 @@ module.exports = {
     if (message.author.bot) return;
 
     // Contrôle pour les messages envoyés dans un thread rattaché à un forum spécifique
-    if (message.channel.isThread() && config.forums.includes(message.channel.parentId)) {
+    if (
+      message.channel.isThread() &&
+      config.forums.includes(message.channel.parentId)
+    ) {
       // Vérification : Seul l'auteur du fil (message.channel.ownerId) ou les membres ayant le rôle Coach peuvent répondre
       if (
         message.channel.ownerId !== message.author.id &&
@@ -38,7 +41,7 @@ module.exports = {
 
           // Envoi d'une notification dans le thread pour informer l'auteur (et éventuellement les autres)
           const warning = await message.channel.send({
-            content: `<@${message.author.id}> Seuls l'auteur du post et les personnes ayant le rôle Coach peuvent répondre dans ce forum.`
+            content: `<@${message.author.id}> Seuls l'auteur du post et les personnes ayant le rôle Coach peuvent répondre dans ce forum.`,
           });
 
           // Suppression de la notification après 1 minute (60000 ms)
@@ -46,20 +49,32 @@ module.exports = {
             try {
               await warning.delete();
             } catch (err) {
-              console.error("Erreur lors de la suppression du message de notification :", err);
+              console.error(
+                "Erreur lors de la suppression du message de notification :",
+                err,
+              );
             }
           }, 60000);
         } catch (err) {
-          console.error("Erreur lors de la suppression ou de la gestion du message :", err);
+          console.error(
+            "Erreur lors de la suppression ou de la gestion du message :",
+            err,
+          );
         }
       }
     }
 
     // Incrémentation du compteur associé au Nouveau Guerrier pour chaque message (pour toutes les discussions)
     try {
-      await nouveauGuerrierDAO.incrementCount(message.author.id, message.author.username);
+      await nouveauGuerrierDAO.incrementCount(
+        message.author.id,
+        message.author.username,
+      );
     } catch (err) {
-      console.error("Erreur lors de la mise à jour du compteur du Nouveau Guerrier :", err);
+      console.error(
+        "Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
+        err,
+      );
     }
   },
 };

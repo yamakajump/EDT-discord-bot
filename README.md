@@ -1,4 +1,3 @@
-
 ![Contributors](https://img.shields.io/github/contributors/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
 ![Forks](https://img.shields.io/github/forks/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
 ![Stargazers](https://img.shields.io/github/stars/yamakajump/EDT-discord-bot.svg?style=for-the-badge)
@@ -9,13 +8,11 @@
 ![Docker](https://img.shields.io/badge/Docker-20232A?style=for-the-badge&logo=docker&logoColor=1D63ED)
 ![MySQL](https://img.shields.io/badge/MySQL-20232A?style=for-the-badge&logo=mysql&logoColor=00758f)
 
-
 <img src="https://i.ibb.co/Y795qQQd/logo-EDT.png" align="right" width="40%" />
 
 # Bot Discord pour l'École du Tigre
 
 Bienvenue sur le dépôt du bot Discord pour l'École du Tigre ! Ce bot est conçu pour améliorer l'expérience utilisateur sur le serveur Discord de l'École du Tigre.
-
 
 > [!NOTE]
 > Prenez le temps de lire chaque section afin de bien comprendre la structure, la configuration et la philosophie de développement du projet.
@@ -54,6 +51,9 @@ Pour rejoindre le serveur Discord et participer à la communauté de l'École du
   - [Reconstruire les images et redémarrer](#reconstruire-les-images-et-redémarrer)
   - [Construire uniquement les images](#construire-uniquement-les-images)
   - [Arrêter et supprimer les containers](#arrêter-et-supprimer-les-containers)
+- [Contrôle de la Qualité du Code](#contrôle-de-la-qualité-du-code)
+  - [Vérification du Code avec ESLint](#vérification-du-code-avec-eslint)
+  - [Formatage du Code avec Prettier](#formatage-du-code-avec-prettier)
 - [Contribution](#contribution)
 - [Licence](#licence)
 
@@ -84,8 +84,7 @@ MYSQL_PASSWORD=
 MYSQL_DATABASE=
 ```
 
-> [!CAUTION]
-> **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
+> [!CAUTION] > **Si vous utilisez Docker**, **ne remplissez pas** les informations relatives à la base de données (`MYSQL_HOST`, `MYSQL_USER`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`), car elles sont gérées automatiquement via le fichier `docker-compose.yml`.
 
 ---
 
@@ -161,19 +160,35 @@ docker-compose down --rmi all
 
 ---
 
-## Vérification du Code avec ESLint
+## Contrôle de la Qualité du Code
+
+### Vérification du Code avec ESLint
 
 Ce projet intègre [ESLint](https://eslint.org/) afin de vous aider à maintenir une qualité de code optimale et uniforme. Pour utiliser ESLint, suivez ces étapes :
 
 **Lancer la vérification du code**
 
-   Une fois l’installation terminée, vous pouvez lancer ESLint sur l’ensemble du projet avec la commande suivante :
+Une fois l’installation terminée, vous pouvez lancer ESLint sur l’ensemble du projet avec la commande suivante :
 
-   ```bash
-   npm run lint
-   ```
+```bash
+npm run lint
+```
 
-   Cette commande utilise la configuration définie par défaut dans votre projet (voir le fichier de configuration ESLint si présent ou les options par défaut) pour analyser vos fichiers JavaScript et vous signaler d’éventuelles erreurs ou incohérences.
+Cette commande utilise la configuration définie par défaut dans votre projet (voir le fichier de configuration ESLint si présent ou les options par défaut) pour analyser vos fichiers JavaScript et vous signaler d’éventuelles erreurs ou incohérences.
+
+### Formatage du Code avec Prettier
+
+Pour maintenir une cohérence dans le projet et garantir que tout le code suit le même formatage, nous utilisons Prettier.
+
+**Formater le code avant de push**
+
+Lancez la commande suivante pour formater l'ensemble du projet :
+
+```bash
+npm run prettier
+```
+
+Cette commande s’assure que tous les fichiers respectent le format de code défini, ce qui rend le code plus lisible et facilite la collaboration.
 
 ---
 
@@ -210,4 +225,4 @@ Pour plus de détails, consultez directement le fichier [LICENSE](./LICENSE).
 
 ---
 
-<p align="right">(<a href="#bot-discord-pour-l-école-du-tigre">back to top</a>)</p>
+<p align="right">(<a href="#bot-discord-pour-lécole-du-tigre">back to top</a>)</p>

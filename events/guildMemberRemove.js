@@ -8,32 +8,39 @@
  * La configuration (ID du salon à mettre à jour) est chargée depuis le fichier "config/config.json".
  */
 
-const { loadJson } = require('../utils/fileManager');
-const path = require('path');
+const { loadJson } = require("../utils/fileManager");
+const path = require("path");
 
 module.exports = {
-  name: 'guildMemberRemove', // Nom de l'événement
+  name: "guildMemberRemove", // Nom de l'événement
   async execute(member) {
     // 1. Chargement de la configuration depuis le fichier config/config.json
-    const configPath = path.join(__dirname, '../config/config.json');
+    const configPath = path.join(__dirname, "../config/config.json");
     const config = loadJson(configPath, {});
 
     // Vérifier que la clé "memberCountChannel" existe dans la configuration
     const memberCountChannelId = config.memberCountChannel;
     if (!memberCountChannelId) {
-      return console.error("La clé 'memberCountChannel' n'est pas définie dans config.json");
+      return console.error(
+        "La clé 'memberCountChannel' n'est pas définie dans config.json",
+      );
     }
 
     // 2. Récupération du salon où le nombre de membres est affiché
     const channel = member.guild.channels.cache.get(memberCountChannelId);
     if (!channel) {
-      return console.error(`Le salon avec l'ID ${memberCountChannelId} n'a pas été trouvé`);
+      return console.error(
+        `Le salon avec l'ID ${memberCountChannelId} n'a pas été trouvé`,
+      );
     }
 
     // 3. Mise à jour du nom du salon pour refléter le nouveau nombre de membres
     // Le nom du salon est mis à jour avec le compteur actuel de membres du serveur
     const newName = `📈 Discord : ${member.guild.memberCount} Membres`;
-    channel.setName(newName)
-      .catch(err => console.error("Erreur lors de la mise à jour du salon :", err));
-  }
+    channel
+      .setName(newName)
+      .catch((err) =>
+        console.error("Erreur lors de la mise à jour du salon :", err),
+      );
+  },
 };

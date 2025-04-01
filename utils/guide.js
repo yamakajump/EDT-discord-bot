@@ -1,4 +1,9 @@
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} = require("discord.js");
 
 /**
  * Génère un embed de guide personnalisé pour une page donnée.
@@ -19,7 +24,7 @@ function getGuideEmbed(page, user) {
           "👑 L'EDT, c'est un gros projet, marque déposée, en place depuis plus de 5 ans, et la commu N°1 dans le sport francophone. Bref, c'est une belle aventure !\n\n" +
           "🎉 Ici, nous organisons des événements uniques, comme la maison dans **Harry Pother** 🏰\n\n" +
           "💬 Partage ta passion, échange des conseils et profite de discussions enrichissantes !\n\n" +
-          "➡️ **Utilise les boutons ci-dessous pour naviguer dans le guide !**"
+          "➡️ **Utilise les boutons ci-dessous pour naviguer dans le guide !**",
       )
       .setColor("#fb7819"),
 
@@ -53,7 +58,7 @@ function getGuideEmbed(page, user) {
             "<#878009605358239744> → Compléments\n" +
             "<#1051482338053345341> → Recettes\n" +
             "<#612263023750545410> → Parler nutrition et demander conseil",
-        }
+        },
       )
       .setColor("#fb7819"),
 
@@ -65,7 +70,7 @@ function getGuideEmbed(page, user) {
           "✔️ **Motivation et soutien** 💪\n" +
           "✔️ **Respecte les salons** et pose tes questions dans les bons espaces 📚\n" +
           "✔️ **Partage tes progrès** dans <#1142034399383261184>\n\n" +
-          "**➡ Utilise les boutons ci-dessous pour continuer !**"
+          "**➡ Utilise les boutons ci-dessous pour continuer !**",
       )
       .setColor("#fb7819"),
 
@@ -74,7 +79,7 @@ function getGuideEmbed(page, user) {
       .setDescription(
         "🎫 **Ouvre un ticket si nécessaire**\n" +
           "👮‍♂️ **Mentionne un modérateur en cas de problème**\n\n" +
-          "**Tu es maintenant prêt à profiter de L'École du Tigre Discord !**"
+          "**Tu es maintenant prêt à profiter de L'École du Tigre Discord !**",
       )
       .setColor("#fb7819"),
   };
@@ -106,12 +111,12 @@ function getGuideButtons(page, userId) {
       .setLabel("➡ Suivant")
       .setStyle(ButtonStyle.Primary)
       .setDisabled(page === 4), // Désactive si on est sur la dernière page (page 4)
-    
+
     new ButtonBuilder()
       .setCustomId(`guide:home:${page}:${userId}`)
       .setLabel("🏠 Accueil")
       .setStyle(ButtonStyle.Success)
-      .setDisabled(page === 1) // Désactive si déjà sur l'accueil (page 1)
+      .setDisabled(page === 1), // Désactive si déjà sur l'accueil (page 1)
   );
 }
 

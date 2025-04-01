@@ -19,26 +19,29 @@
  * Le résultat final est envoyé en réponse à l'interaction Discord.
  */
 
-const { EmbedBuilder, AttachmentBuilder, MessageFlags } = require('discord.js');
-const { createCanvas, loadImage } = require('canvas');
-const path = require('path');
+const { EmbedBuilder, AttachmentBuilder, MessageFlags } = require("discord.js");
+const { createCanvas, loadImage } = require("canvas");
+const path = require("path");
+const { getEmoji } = require("../../utils/emoji");
 
 module.exports = {
   async execute(interaction) {
     // Récupération et validation des options saisies par l'utilisateur
-    const poids = interaction.options.getNumber('poids');
-    const tailleCm = interaction.options.getNumber('taille');
+    const poids = interaction.options.getNumber("poids");
+    const tailleCm = interaction.options.getNumber("taille");
 
     if (!poids || poids <= 0) {
       return interaction.reply({
-        content: "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
-        flags: MessageFlags.Ephemeral
+        content:
+          "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (!tailleCm || tailleCm <= 0) {
       return interaction.reply({
-        content: "Hé, ta taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
-        flags: MessageFlags.Ephemeral
+        content:
+          "Hé, ta taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -96,11 +99,13 @@ module.exports = {
     // Chargement de l'image de fond "imc.png" qui va occuper toute la surface du canvas
     let imcImage;
     try {
-      imcImage = await loadImage(path.join(__dirname, "..", "..", "images", "imc.png"));
+      imcImage = await loadImage(
+        path.join(__dirname, "..", "..", "images", "imc.png"),
+      );
     } catch (error) {
       console.error("Erreur lors du chargement de l'image IMC :", error);
     }
-    
+
     // Dessin de l'image de fond couvrant le canvas
     const imcImgWidth = 900;
     const imcImgHeight = 521;
@@ -165,35 +170,20 @@ module.exports = {
       // Restauration de l'état graphique initial
       ctx.restore();
     }
-    
-    // Vous pouvez désactiver ou activer le chargement du logo si nécessaire.
-    // Ci-dessous un exemple commenté de chargement et dessin du logo en haut à gauche.
-    /*
-    let logo;
-    try {
-      logo = await loadImage(path.join(__dirname, "..", "..", "images", "logo-EDT.png"));
-    } catch (error) {
-      console.error("Erreur lors du chargement du logo :", error);
-    }
-    
-    const logoWidth = 100;
-    const logoHeight = 100;
-    const logoX = 10;
-    const logoY = 10;
-    if (logo) {
-      ctx.drawImage(logo, logoX, logoY, logoWidth, logoHeight);
-    }
-    */
 
     // Exportation de l'image du canvas sous forme de buffer
     const buffer = canvas.toBuffer();
     const attachment = new AttachmentBuilder(buffer, { name: "imc.png" });
 
+    const infoEmoji = getEmoji("info");
+
     // Création de l'embed qui contient le résultat de l'IMC et l'image générée
     const embed = new EmbedBuilder()
       .setColor("#FFA500")
-      .setTitle("<:info:1343582548353089537> Résultat de votre IMC")
-      .setDescription(`- **IMC** : ${imc}\n- **Classification** : ${classification}`)
+      .setTitle(`${infoEmoji} Résultat de votre IMC`)
+      .setDescription(
+        `- **IMC** : ${imc}\n- **Classification** : ${classification}`,
+      )
       .setImage("attachment://imc.png")
       .setFooter({ text: "Calculé selon la formule de l’IMC" });
 

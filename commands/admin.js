@@ -13,76 +13,90 @@
  * et de créer le fichier correspondant dans le dossier "admin".
  */
 
-const { SlashCommandBuilder, MessageFlags } = require('discord.js');
-const path = require('path');
+const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+const path = require("path");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('admin')
-    .setDescription('Commandes administratives')
+    .setName("admin")
+    .setDescription("Commandes administratives")
     // Sous-commande : styx
-    .addSubcommand(subcommand =>
+    .addSubcommand((subcommand) =>
       subcommand
-        .setName('styx')
-        .setDescription('Ajoute ou enlève un utilisateur du Styx.')
-        .addUserOption(option =>
-          option.setName('membre')
-            .setDescription('Le membre ciblé')
-            .setRequired(true)
-        )
+        .setName("styx")
+        .setDescription("Ajoute ou enlève un utilisateur du Styx.")
+        .addUserOption((option) =>
+          option
+            .setName("membre")
+            .setDescription("Le membre ciblé")
+            .setRequired(true),
+        ),
     )
     // Sous-commande : save
-    .addSubcommand(subcommand =>
+    .addSubcommand((subcommand) =>
       subcommand
-        .setName('save')
-        .setDescription('Sauvegarde des informations dans un salon spécifié.')
-        .addChannelOption(option =>
-          option.setName('salon')
-            .setDescription('Le salon où sauvegarder')
-            .setRequired(true)
+        .setName("save")
+        .setDescription("Sauvegarde des informations dans un salon spécifié.")
+        .addChannelOption((option) =>
+          option
+            .setName("salon")
+            .setDescription("Le salon où sauvegarder")
+            .setRequired(true),
         )
-        .addStringOption(option =>
-          option.setName('format')
-            .setDescription('Format de sortie : "pdf" ou "html" (par défaut: pdf)')
-            .addChoices(
-              { name: 'PDF', value: 'pdf' },
-              { name: 'HTML', value: 'html' }
+        .addStringOption((option) =>
+          option
+            .setName("format")
+            .setDescription(
+              'Format de sortie : "pdf" ou "html" (par défaut: pdf)',
             )
-            .setRequired(false)
-        )
+            .addChoices(
+              { name: "PDF", value: "pdf" },
+              { name: "HTML", value: "html" },
+            )
+            .setRequired(false),
+        ),
     )
     // Sous-commande : journal
-    .addSubcommand(subcommand =>
+    .addSubcommand((subcommand) =>
       subcommand
-        .setName('journal')
-        .setDescription('Crée un journal pour un membre.')
-        .addUserOption(option =>
-          option.setName('membre')
+        .setName("journal")
+        .setDescription("Crée un journal pour un membre.")
+        .addUserOption((option) =>
+          option
+            .setName("membre")
             .setDescription("Le membre pour lequel créer le journal")
-            .setRequired(true)
+            .setRequired(true),
         )
-        .addStringOption(option =>
-          option.setName('accessibilite')
-            .setDescription("Détermine qui peut voir le journal : Tout le monde, Donateur ou Staff")
+        .addStringOption((option) =>
+          option
+            .setName("accessibilite")
+            .setDescription(
+              "Détermine qui peut voir le journal : Tout le monde, Donateur ou Staff",
+            )
             .setRequired(true)
             .addChoices(
-              { name: 'Tout le monde', value: 'public' },
-              { name: 'Donateur', value: 'donateur' },
-              { name: 'Staff', value: 'staff' }
-            )
-        )
+              { name: "Tout le monde", value: "public" },
+              { name: "Donateur", value: "donateur" },
+              { name: "Staff", value: "staff" },
+            ),
+        ),
     ),
   async execute(interaction) {
     const subCmd = interaction.options.getSubcommand();
     try {
-      const subcommandFile = require(path.join(__dirname, 'admin', `${subCmd}.js`));
+      const subcommandFile = require(
+        path.join(__dirname, "admin", `${subCmd}.js`),
+      );
       await subcommandFile.execute(interaction);
     } catch (error) {
-      console.error(`Erreur lors de l'exécution de la sous-commande ${subCmd}:`, error);
+      console.error(
+        `Erreur lors de l'exécution de la sous-commande ${subCmd}:`,
+        error,
+      );
       await interaction.reply({
         content: `Une erreur est survenue lors de l'exécution de la commande admin ${subCmd}.`,
-        flags: MessageFlags.Ephemeral
+        flags: MessageFlags.Ephemeral,
       });
     }
-  }
+  },
 };
