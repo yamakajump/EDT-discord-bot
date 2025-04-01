@@ -1,6 +1,6 @@
 FROM node:18
 
-# Installer les dépendances système nécessaires à Puppeteer
+# Installer les dépendances système nécessaires (Puppeteer + canvas)
 RUN apt-get update && apt-get install -y \
   wget \
   ca-certificates \
@@ -28,6 +28,12 @@ RUN apt-get update && apt-get install -y \
   libxss1 \
   libxtst6 \
   xdg-utils \
+  build-essential \
+  libcairo2-dev \
+  libpango1.0-dev \
+  libjpeg-dev \
+  libgif-dev \
+  pkg-config \
   --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Définir le répertoire de travail
