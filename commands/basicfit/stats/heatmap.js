@@ -1,5 +1,6 @@
 const { AttachmentBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 const { createCanvas } = require("canvas");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;

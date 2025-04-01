@@ -24,6 +24,10 @@ const {
   PermissionFlagsBits,
 } = require("discord.js");
 const config = require("../../config/config.json");
+const staffRole = config.staffRole;
+const donorRole = config.donateurRole;
+const categories = config.journalCategories;
+
 
 // PIN_MESSAGES est soit la permission native ou une valeur par défaut
 const PIN_MESSAGES = PermissionFlagsBits.PinMessages || 16384n;
@@ -32,9 +36,6 @@ module.exports = {
   async execute(interaction) {
     const membre = interaction.options.getUser("membre");
     const accessibilite = interaction.options.getString("accessibilite");
-    const staffRole = config.staffRole;
-    const donorRole = config.donateurRole;
-    const categories = config.journalCategories;
     const categoryId = categories[categories.length - 1];
 
     const overwrites = [];

@@ -11,7 +11,6 @@
  */
 
 const { EmbedBuilder } = require("discord.js");
-const { loadJson } = require("../utils/fileManager");
 const { getGuideEmbed, getGuideButtons } = require("../utils/guide"); // Importer les fonctions utilitaires pour le guide
 
 const { getEmoji } = require("../utils/emoji");
@@ -20,21 +19,20 @@ const emojiTrophe = getEmoji("trophe");
 const style = require("../config/style.json");
 const colorEmbed = style.colorEmbed;
 
-const path = require("path");
+const config = require("../config/config.json");
+const memberCountChannelId = config.memberCountChannel;
+const welcomeChannelId = config.welcomeChannel;
+const pingWelcomeChannelIds = config.pingWelcomeChannelIds;
 
 module.exports = {
   name: "guildMemberAdd",
   async execute(member) {
-    // Chargement de la configuration depuis le fichier config
-    const configPath = path.join(__dirname, "../config/config.json");
-    const config = loadJson(configPath, {});
 
     /*
      * 1. Mise à jour du compteur de membres
      * - La configuration doit contenir l'ID du salon où le nombre de membres doit être affiché.
      * - Le nom du salon est mis à jour avec la valeur actuelle du compteur de membres du serveur.
      */
-    const memberCountChannelId = config.memberCountChannel;
     if (!memberCountChannelId) {
       console.error(
         "La clé 'memberCountChannel' n'est pas définie dans config.json",
@@ -62,7 +60,6 @@ module.exports = {
      * - Le message de bienvenue inclut le nom de l'utilisateur, un message de présentation ainsi qu'un rappel vers
      *   le salon de présentation.
      */
-    const welcomeChannelId = config.welcomeChannel;
     if (!welcomeChannelId) {
       console.error(
         "La clé 'welcomeChannel' n'est pas définie dans config.json",
@@ -100,7 +97,6 @@ module.exports = {
      * - On récupère la liste des IDs des salons où le ping doit être envoyé.
      * - Pour chaque salon, un message mentionnant le nouveau membre est envoyé, puis supprimé après 2 secondes.
      */
-    const pingWelcomeChannelIds = config.pingWelcomeChannelIds;
     if (!pingWelcomeChannelIds || pingWelcomeChannelIds.length === 0) {
       console.error(
         "La clé 'pingWelcomeChannelIds' n'est pas définie ou vide dans config.json",

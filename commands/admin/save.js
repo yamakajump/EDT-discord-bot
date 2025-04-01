@@ -24,7 +24,6 @@ const discordTranscripts = require("discord-html-transcripts");
 const path = require("path");
 const fs = require("fs");
 const puppeteer = require("puppeteer");
-const fileManager = require("../../utils/fileManager.js");
 const { PDFDocument } = require("pdf-lib");
 const archiver = require("archiver");
 const StreamBuffers = require("stream-buffers");
@@ -33,8 +32,7 @@ const style = require("../../config/style.json");
 const colorEmbedError = style.colorEmbedError;
 const thumbnailEmbed = style.thumbnailEmbed;
 
-const configPath = path.join(__dirname, "../../config/config.json");
-const config = fileManager.loadJson(configPath, {});
+const config = require("../../config/config.json");
 
 const MB = 1024 * 1024;
 

@@ -11,8 +11,11 @@
  * La configuration (IDs de forum, rôle "Coach", etc.) est chargée depuis le fichier de configuration (config.json).
  */
 
-const config = require("../config/config.json");
 const guerrierDAO = require("../dao/guerrierDAO"); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
+
+const config = require("../config/config.json");
+const forums = config.forums; 
+const coachRole = config.coachRole; 
 
 module.exports = {
   name: "messageCreate",
@@ -28,12 +31,12 @@ module.exports = {
     // Contrôle pour les messages envoyés dans un thread rattaché à un forum spécifique
     if (
       message.channel.isThread() &&
-      config.forums.includes(message.channel.parentId)
+      forums.includes(message.channel.parentId)
     ) {
       // Vérification : Seul l'auteur du fil (message.channel.ownerId) ou les membres ayant le rôle Coach peuvent répondre
       if (
         message.channel.ownerId !== message.author.id &&
-        !message.member.roles.cache.has(config.coachRole)
+        !message.member.roles.cache.has(coachRole)
       ) {
         try {
           // Suppression du message non autorisé

@@ -14,7 +14,6 @@
 
 const path = require("path");
 const { EmbedBuilder, MessageFlags } = require("discord.js");
-const fileManager = require("../../utils/fileManager.js");
 
 const { getEmoji } = require("../../utils/emoji");
 const infoEmoji = getEmoji("info");
@@ -23,8 +22,11 @@ const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const thumbnailEmbed = style.thumbnailEmbed;
 
-const configPath = path.join(__dirname, "../../config/config.json");
-const config = fileManager.loadJson(configPath, {});
+const fileManager = require("../../utils/fileManager.js");
+const config = require("../../config/config.json");
+const protectedRole = config.protectedRole;
+const configStyxRole = config.styxRole;
+
 const jsonPath = path.join(__dirname, "../../data/styx.json");
 let styxjson = fileManager.loadJson(jsonPath, []);
 
@@ -44,7 +46,7 @@ module.exports = {
     }
 
     const embed = new EmbedBuilder().setColor(colorEmbed);
-    const styxRole = interaction.guild.roles.cache.get(config.styxRole);
+    const styxRole = interaction.guild.roles.cache.get(configStyxRole);
     if (!styxRole) {
       console.error(
         "Le rôle Styx n’a pas été trouvé sur ce serveur.",
@@ -89,7 +91,7 @@ module.exports = {
         let rolesToRemove = [];
         member.roles.cache.forEach((role) => {
           if (
-            role.id !== config.protectedRole &&
+            role.id !== protectedRole &&
             role.id !== interaction.guild.id
           ) {
             rolesToRemove.push(role.id);

@@ -8,18 +8,15 @@
  * La configuration (ID du salon à mettre à jour) est chargée depuis le fichier "config/config.json".
  */
 
-const { loadJson } = require("../utils/fileManager");
-const path = require("path");
+const config = require("../config/config.json");
+const memberCountChannelId = config.memberCountChannel;
 
 module.exports = {
   name: "guildMemberRemove", // Nom de l'événement
   async execute(member) {
     // 1. Chargement de la configuration depuis le fichier config/config.json
-    const configPath = path.join(__dirname, "../config/config.json");
-    const config = loadJson(configPath, {});
 
     // Vérifier que la clé "memberCountChannel" existe dans la configuration
-    const memberCountChannelId = config.memberCountChannel;
     if (!memberCountChannelId) {
       return console.error(
         "La clé 'memberCountChannel' n'est pas définie dans config.json",

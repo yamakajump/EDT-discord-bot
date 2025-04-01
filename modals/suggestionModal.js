@@ -8,7 +8,9 @@
  */
 
 const { MessageFlags, EmbedBuilder } = require("discord.js");
+
 const config = require("../config/config.json");
+const suggestionChannelId = config.suggestionChannel;
 
 const style = require("../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -24,9 +26,6 @@ module.exports = {
     // Récupération des valeurs saisies dans le modal
     const titre = interaction.fields.getTextInputValue("titre");
     const contenu = interaction.fields.getTextInputValue("contenu");
-
-    // Récupération de l'ID du salon configuré pour les suggestions
-    const suggestionChannelId = config.suggestionChannel;
 
     // Récupère le salon de suggestions à partir du cache du client Discord
     const channel = interaction.client.channels.cache.get(suggestionChannelId);
