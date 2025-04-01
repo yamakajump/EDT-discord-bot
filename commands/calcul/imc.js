@@ -24,6 +24,9 @@ const { createCanvas, loadImage } = require("canvas");
 const path = require("path");
 const { getEmoji } = require("../../utils/emoji");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+
 module.exports = {
   async execute(interaction) {
     // Récupération et validation des options saisies par l'utilisateur
@@ -179,7 +182,7 @@ module.exports = {
 
     // Création de l'embed qui contient le résultat de l'IMC et l'image générée
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(`${infoEmoji} Résultat de votre IMC`)
       .setDescription(
         `- **IMC** : ${imc}\n- **Classification** : ${classification}`,

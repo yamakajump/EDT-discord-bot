@@ -27,6 +27,10 @@ const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -87,7 +91,7 @@ module.exports = {
     } catch (error) {
       console.error("Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Erreur")
         .setDescription(
           "Une erreur est survenue lors de la récupération des données d'exercices.",
@@ -224,11 +228,11 @@ module.exports = {
 
     // Construction de l'embed combinant toutes les informations et le résultat du calcul
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(
         `${cibleEmoji} Calcul du Strength Level pour ${exerciseObj.exercise}`,
       )
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(description + thresholdsDescription)
       .setFooter({
         text: "Calcul effectué à partir de vos données personnelles et des seuils de https://strengthlevel.com/",

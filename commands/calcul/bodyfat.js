@@ -18,6 +18,10 @@
 
 const { EmbedBuilder } = require("discord.js");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   async execute(interaction) {
     // Récupération des options passées par l'utilisateur
@@ -44,9 +48,9 @@ module.exports = {
 
     // Création de l'embed pour présenter les résultats
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Calcul du Pourcentage de Masse Grasse")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         "Voici vos résultats basés sur la formule de Deurenberg :",
       )

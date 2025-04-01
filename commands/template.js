@@ -10,6 +10,9 @@
 
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
+const style = require("../config/style.json");
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   // Définition de la commande slash "template"
   data: new SlashCommandBuilder()
@@ -34,7 +37,7 @@ module.exports = {
       )
       .setFooter({
         text: "Bon travail !",
-        iconURL: "https://i.ibb.co/Y795qQQd/logo-EDT.png",
+        iconURL: thumbnailEmbed,
       });
 
     // Envoi de l'embed en réponse à la commande

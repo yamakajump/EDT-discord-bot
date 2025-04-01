@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -18,10 +22,11 @@ module.exports = {
     });
 
     const emojiInfo = getEmoji("info");
+    const emojiBoule = getEmoji("boule");
 
     if (!averageWeekVisits.length) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Semaine moyenne")
         .setDescription(
           `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -52,10 +57,11 @@ module.exports = {
     const averagePerWeek = (totalVisits / totalWeeks).toFixed(2);
 
     const averageWeekEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Semaine moyenne")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
-        `<a:boule:1321847679441178737> **Semaine moyenne** : <@${targetUser.id}> va à la salle en moyenne **${averagePerWeek} jours par semaine** !`,
+        `${emojiBoule} **Semaine moyenne** : <@${targetUser.id}> va à la salle en moyenne **${averagePerWeek} jours par semaine** !`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

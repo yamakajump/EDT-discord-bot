@@ -5,6 +5,9 @@ const {
   ButtonStyle,
 } = require("discord.js");
 
+const style = require("../config/style.json");
+const colorEmbed = style.colorEmbed;
+
 /**
  * Génère un embed de guide personnalisé pour une page donnée.
  *
@@ -26,7 +29,7 @@ function getGuideEmbed(page, user) {
           "💬 Partage ta passion, échange des conseils et profite de discussions enrichissantes !\n\n" +
           "➡️ **Utilise les boutons ci-dessous pour naviguer dans le guide !**",
       )
-      .setColor("#fb7819"),
+      .setColor(colorEmbed),
 
     2: new EmbedBuilder()
       .setTitle("🏢 Organisation du serveur")
@@ -60,7 +63,7 @@ function getGuideEmbed(page, user) {
             "<#612263023750545410> → Parler nutrition et demander conseil",
         },
       )
-      .setColor("#fb7819"),
+      .setColor(colorEmbed),
 
     3: new EmbedBuilder()
       .setTitle("🤝 Comment bien interagir avec la communauté ?")
@@ -72,7 +75,7 @@ function getGuideEmbed(page, user) {
           "✔️ **Partage tes progrès** dans <#1142034399383261184>\n\n" +
           "**➡ Utilise les boutons ci-dessous pour continuer !**",
       )
-      .setColor("#fb7819"),
+      .setColor(colorEmbed),
 
     4: new EmbedBuilder()
       .setTitle("🔥 Besoin d’aide ?")
@@ -81,7 +84,7 @@ function getGuideEmbed(page, user) {
           "👮‍♂️ **Mentionne un modérateur en cas de problème**\n\n" +
           "**Tu es maintenant prêt à profiter de L'École du Tigre Discord !**",
       )
-      .setColor("#fb7819"),
+      .setColor(colorEmbed),
   };
 
   // Retourne l'embed correspondant à la page demandée, ou la page 1 par défaut

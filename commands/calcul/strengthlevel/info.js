@@ -1,6 +1,10 @@
 const { EmbedBuilder } = require("discord.js");
 const { getEmoji } = require("../../../utils/emoji");
 
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 /**
  * Module d'affichage des explications relatives aux normes de force.
  *
@@ -19,7 +23,7 @@ module.exports = {
     const tropheEmoji = getEmoji("trophe");
 
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(`${cibleEmoji} Que signifient les normes de force ?`)
       .setDescription(
         `${globeEmoji} **__Débutant__** : Plus fort que **__5%__** des athlètes. Un athlète débutant est capable d'exécuter correctement le mouvement et s'entraîne depuis au moins **__un mois__**.\n\n` +
@@ -28,7 +32,7 @@ module.exports = {
           `${premierEmoji} **__Avancé__** : Plus fort que **__80%__** des athlètes. Un athlète avancé progresse depuis plus de **__cinq ans__**.\n\n` +
           `${tropheEmoji} **__Elite__** : Plus fort que **__95%__** des athlètes. Un athlète elite se consacre depuis plus de **__cinq ans__** pour devenir compétitif dans les sports de force.`,
       )
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setFooter({ text: "Informations sur les normes de force" });
 
     await interaction.reply({ embeds: [embed] });

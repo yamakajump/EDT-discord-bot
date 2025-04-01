@@ -1,5 +1,9 @@
 const { AttachmentBuilder, EmbedBuilder, MessageFlags } = require("discord.js");
 const { createCanvas } = require("canvas");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 /**
  * Exécute la commande affichant la heatmap des visites.
@@ -14,9 +18,9 @@ module.exports = {
     // Vérification de l'existence des données
     if (!jsonData) {
       const noDataEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Données introuvables")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune donnée trouvée pour **${targetUser.username}**.\nVeuillez téléverser vos données avec \`/basicfit upload\`.`,
         );
@@ -39,9 +43,9 @@ module.exports = {
     });
 
     const heatmapEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Heatmap des visites")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(`Voici la heatmap des visites pour <@${targetUser.id}>.`)
       .setImage("attachment://heatmap.png")
       .setFooter({

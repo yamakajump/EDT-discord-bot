@@ -1,4 +1,8 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -13,9 +17,9 @@ module.exports = {
     // Vérification des visites dans jsonData
     if (!jsonData || !jsonData.visits || !jsonData.visits.length) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Série consécutive")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -33,7 +37,7 @@ module.exports = {
 
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Série consécutive")
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -65,9 +69,9 @@ module.exports = {
     if (currentStreak > longestStreak) longestStreak = currentStreak;
 
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Série consécutive")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `Le plus long streak journalier de <@${targetUser.id}> est de **${longestStreak} jours consécutifs**.`,
       )

@@ -1,4 +1,8 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 /**
  * Exécute la commande affichant le nombre de visites par jour de la semaine.
@@ -13,9 +17,9 @@ module.exports = {
     const visits = jsonData.visits || [];
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Nombre de visites par jour")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -60,9 +64,9 @@ module.exports = {
       .join("\n");
 
     const embed = new EmbedBuilder()
-      .setColor("#00AAFF")
+      .setColor(colorEmbed)
       .setTitle("Nombre de visites par jour de la semaine")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(`Pour <@${targetUser.id}>,\n${description}`)
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

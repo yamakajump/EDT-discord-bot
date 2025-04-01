@@ -2,6 +2,10 @@ const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 /**
  * Module de recherche et de filtrage des exercices de force.
@@ -31,7 +35,7 @@ module.exports = {
     } catch (error) {
       console.error("Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Erreur")
         .setDescription(
           "Une erreur est survenue lors de la récupération des données d'exercices.",
@@ -69,7 +73,7 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
     // S'il n'y a aucun résultat, on informe l'utilisateur via un embed
     if (filteredExercises.length === 0) {
       const noResultEmbed = new EmbedBuilder()
-        .setColor("#FFA500")
+        .setColor(colorEmbed)
         .setTitle(`Aucun exercice trouvé ${nonEmoji}`)
         .setDescription(
           "Aucun exercice ne correspond aux critères de recherche spécifiés.",
@@ -90,9 +94,9 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
     // La limite d'un embed pour la description est de 4096 caractères.
     if (description.length > 4096) {
       const limitEmbed = new EmbedBuilder()
-        .setColor("#FFA500")
+        .setColor(colorEmbed)
         .setTitle(`Recherche trop large ${nonEmoji}`)
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           "Il y a trop d'exercices correspondant à votre recherche. Veuillez affiner votre recherche en utilisant des paramètres supplémentaires.",
         )
@@ -105,10 +109,10 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
 
     // Création de l'embed de résultat
     const resultEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Résultats de la recherche")
       .setDescription(description)
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .addFields({ name: "Filtres appliqués", value: filtersApplied })
       .setFooter({
         text: "Données extraites du site https://strengthlevel.com/",

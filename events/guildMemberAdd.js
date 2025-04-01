@@ -13,6 +13,13 @@
 const { EmbedBuilder } = require("discord.js");
 const { loadJson } = require("../utils/fileManager");
 const { getGuideEmbed, getGuideButtons } = require("../utils/guide"); // Importer les fonctions utilitaires pour le guide
+
+const { getEmoji } = require("../utils/emoji");
+const emojiTrophe = getEmoji("trophe");
+
+const style = require("../config/style.json");
+const colorEmbed = style.colorEmbed;
+
 const path = require("path");
 
 module.exports = {
@@ -71,11 +78,11 @@ module.exports = {
           .setTitle("Bienvenue")
           .setDescription(
             `**Tu es enfin là** ${member.user} !\n` +
-              `Bienvenue dans **L'Ecole du Tigre** <a:trophe:1343582450344788019>\n` +
+              `Bienvenue dans **L'Ecole du Tigre** ${emojiTrophe}\n` +
               `N'hésite pas à te présenter dans le salon <#610934395062190096> et à nous faire part de tes objectifs !`,
           )
           .setThumbnail(member.user.displayAvatarURL({ dynamic: true }))
-          .setColor("#FFA500");
+          .setColor(colorEmbed);
 
         welcomeChannel
           .send({ embeds: [embed] })

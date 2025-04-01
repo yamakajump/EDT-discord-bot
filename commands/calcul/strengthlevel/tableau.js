@@ -20,6 +20,10 @@ const path = require("path");
 const { createCanvas } = require("canvas");
 const { getEmoji } = require("../../../utils/emoji");
 
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+
 module.exports = {
   /**
    * Exécute la sous-commande "tableau" pour générer le tableau des seuils.
@@ -42,7 +46,7 @@ module.exports = {
     } catch (error) {
       console.error("Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Erreur")
         .setDescription(
           "Une erreur est survenue lors de la récupération des données d'exercices.",
@@ -236,7 +240,7 @@ module.exports = {
     // Préparation de l'embed Discord pour présenter le tableau des seuils
     const headerEmoji = getEmoji("cible");
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(`${headerEmoji} Tableau des seuils`)
       .setDescription(
         `Tableau des seuils (${tableType}) pour **${exerciseObj.exercise}** - \`${sexOption}\``,

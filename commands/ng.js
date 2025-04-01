@@ -20,6 +20,10 @@ const {
 const guerrierDAO = require("../dao/guerrierDAO");
 const { getEmoji } = require("../utils/emoji");
 
+const style = require("../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ng")
@@ -54,9 +58,9 @@ module.exports = {
       if (!data) {
         // Aucun message enregistré pour cet utilisateur
         embed
-          .setColor("#FFA500")
+          .setColor(colorEmbed)
           .setTitle("Statistiques de messages")
-          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+          .setThumbnail(thumbnailEmbed)
           .setDescription(
             `<@${user.id}>\n` +
               (user.id === interaction.user.id
@@ -85,9 +89,9 @@ module.exports = {
           data.count >= totalMessages ? emojiValid : emojiInvalid;
 
         embed
-          .setColor("#FFA500")
+          .setColor(colorEmbed)
           .setTitle("Statistiques de messages")
-          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+          .setThumbnail(thumbnailEmbed)
           .setDescription(
             `**Utilisateur** : <@${user.id}>\n` +
               `**Date du premier message** : ${formattedDate}\n` +

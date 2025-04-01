@@ -18,6 +18,10 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../utils/emoji");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur
@@ -158,8 +162,8 @@ module.exports = {
 
     // Création de l'Embed pour afficher le résultat
     const embed = new EmbedBuilder()
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
-      .setColor("#ffa600");
+      .setThumbnail(thumbnailEmbed)
+      .setColor(colorEmbed);
 
     const TMBrounded = Math.round(TMB);
 

@@ -10,6 +10,10 @@
 const { MessageFlags, EmbedBuilder } = require("discord.js");
 const config = require("../config/config.json");
 
+const style = require("../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   /**
    * Exécute le traitement de la soumission du modal.
@@ -35,11 +39,11 @@ module.exports = {
 
     // Construction de l'embed pour la suggestion
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(`${interaction.user.username} : ${titre}`)
       .setDescription(contenu)
       .setTimestamp()
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
+      .setThumbnail(thumbnailEmbed);
 
     // Envoi de l'embed dans le salon, puis ajout de réactions pour le vote
     channel

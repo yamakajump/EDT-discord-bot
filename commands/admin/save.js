@@ -29,6 +29,10 @@ const { PDFDocument } = require("pdf-lib");
 const archiver = require("archiver");
 const StreamBuffers = require("stream-buffers");
 
+const style = require("../../config/style.json");
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 const configPath = path.join(__dirname, "../../config/config.json");
 const config = fileManager.loadJson(configPath, {});
 
@@ -156,8 +160,9 @@ module.exports = {
     const allowedCategories = config.journalCategories || [];
     if (!allowedCategories.includes(channel.parentId)) {
       const embed = new EmbedBuilder()
-        .setColor("#BC1F1A")
+        .setColor(colorEmbedError)
         .setTitle("Sauvegarde Journal")
+        .setThumbnail(thumbnailEmbed)
         .setDescription("*Ce channel n'est pas un journal*");
       return interaction.reply({
         embeds: [embed],

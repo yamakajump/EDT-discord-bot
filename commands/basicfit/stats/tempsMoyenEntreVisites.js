@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -22,9 +26,9 @@ module.exports = {
 
     if (avgVisits.length < 2) {
       const notEnoughEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Temps moyen entre les visites")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Pas assez de données pour calculer la moyenne de temps entre les visites pour **${targetUser.username}**.`,
         )
@@ -49,9 +53,9 @@ module.exports = {
     ).toFixed(2);
 
     const avgVisitsEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Temps moyen entre les visites")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `${emojiInfo} **Temps moyen entre les visites** : <@${targetUser.id}> a une moyenne de **${avgTimeBetweenVisits} jours** entre deux séances.`,
       )

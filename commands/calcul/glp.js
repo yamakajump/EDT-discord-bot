@@ -28,6 +28,10 @@
 
 const { EmbedBuilder } = require("discord.js");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 /**
  * Calcule la valeur d'un polynôme du 4ème degré pour x.
  *
@@ -149,9 +153,9 @@ module.exports = {
 
     // Création de l'embed de réponse contenant l'indice GLP et les Dots calculés
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Indice GLP en Force Athlétique")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `Votre indice GLP : **${glp.toFixed(2)} Points**\nVos Dots : **${dots.toFixed(2)}**`,
       )

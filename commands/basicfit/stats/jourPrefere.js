@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -16,9 +20,9 @@ module.exports = {
     // Vérification des données de visites
     if (!jsonData || !jsonData.visits || !jsonData.visits.length) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Jour préféré")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -55,9 +59,9 @@ module.exports = {
     const favoriteDayCount = dayCounts[favoriteDayIndex];
 
     const favoriteDayEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Jour préféré")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `${emojiInfo} **Jour préféré** : Le jour où <@${targetUser.id}> va le plus souvent à la salle est **${favoriteDay}** avec **${favoriteDayCount} visites** !`,
       )

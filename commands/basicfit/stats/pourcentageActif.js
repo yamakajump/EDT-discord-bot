@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../../utils/emoji");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -22,9 +26,9 @@ module.exports = {
       const emojiInfo = getEmoji("info");
 
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Activité en pourcentage")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
         )
@@ -52,9 +56,9 @@ module.exports = {
 
     // Création de l'Embed et réponse à l'interaction
     const activePercentageEmbed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle("Activité en pourcentage")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `${emojiCible} **Activité en pourcentage** : <@${targetUser.id}> a été actif ` +
           `**${activePercentage}%** des jours sur la période totale ` +

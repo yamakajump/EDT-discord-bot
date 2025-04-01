@@ -29,6 +29,12 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const { getEmoji } = require("../../utils/emoji");
+const emojiMuscle = getEmoji("muscle");
+
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   async execute(interaction) {
@@ -158,10 +164,10 @@ module.exports = {
 
     // Construction de l'embed avec le résultat final
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
-      .setTitle("<a:muscle:1343579279279132795> Résultat de votre 1RM")
+      .setColor(colorEmbed)
+      .setTitle(`${emojiMuscle} Résultat de votre 1RM`)
       .setDescription(resultsText)
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setFooter({ text: "Calculé à partir de 13 méthodes différentes" });
 
     // Réponse de l'interaction avec l'embed final

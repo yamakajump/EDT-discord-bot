@@ -36,6 +36,10 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { getEmoji } = require("../../utils/emoji");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 module.exports = {
   async execute(interaction) {
     // Récupération des options obligatoires
@@ -153,7 +157,7 @@ module.exports = {
 
     // Création de l'embed Discord de récapitulatif
     const embed = new EmbedBuilder()
-      .setColor("#FFA500")
+      .setColor(colorEmbed)
       .setTitle(`${coinInfoEmoji} Répartition des macronutriments`)
       .setDescription(
         `**${tropheEmoji} Objectif** : ${objectifTexte}
@@ -176,7 +180,7 @@ module.exports = {
           inline: true,
         },
       )
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setFooter({ text: "Répartition estimée" });
 
     // Si des informations complémentaires (sexe et/ou état corporel) ont été renseignées,

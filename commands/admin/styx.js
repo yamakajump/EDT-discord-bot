@@ -17,6 +17,10 @@ const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fileManager = require("../../utils/fileManager.js");
 const { getEmoji } = require("../../utils/emoji");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 const configPath = path.join(__dirname, "../../config/config.json");
 const config = fileManager.loadJson(configPath, {});
 const jsonPath = path.join(__dirname, "../../data/styx.json");
@@ -37,7 +41,7 @@ module.exports = {
       }
     }
 
-    const embed = new EmbedBuilder().setColor("#FFA500");
+    const embed = new EmbedBuilder().setColor(colorEmbed);
     const styxRole = interaction.guild.roles.cache.get(config.styxRole);
     if (!styxRole) {
       console.error(
@@ -69,7 +73,7 @@ module.exports = {
           .setDescription(
             `*Vous venez d'enlever* **${member.user.username}** *du Styx*`,
           )
-          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
+          .setThumbnail(thumbnailEmbed);
         await interaction.reply({
           embeds: [embed],
           flags: MessageFlags.Ephemeral,
@@ -105,7 +109,7 @@ module.exports = {
           .setDescription(
             `*Vous venez d'envoyer* **${member.user.username}** *au Styx*`,
           )
-          .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png");
+          .setThumbnail(thumbnailEmbed);
         await interaction.reply({
           embeds: [embed],
           flags: MessageFlags.Ephemeral,

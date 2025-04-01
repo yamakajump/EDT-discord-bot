@@ -1,4 +1,8 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -10,26 +14,12 @@ module.exports = {
    * @param {string} jsonDate - La date associée aux statistiques.
    */
   async execute(interaction, targetUser, jsonData, jsonDate) {
-    if (!jsonData || !jsonData.visits) {
-      const noDataEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
-        .setTitle("Données introuvables")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
-        .setDescription(
-          `Aucune donnée trouvée pour **${targetUser.username}**.\nVeuillez téléverser vos données avec \`/basicfit upload\`.`,
-        );
-      return interaction.reply({
-        embeds: [noDataEmbed],
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-
     const visits = jsonData.visits;
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Répartition par Heure")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -74,9 +64,9 @@ module.exports = {
       .join("\n");
 
     const embed = new EmbedBuilder()
-      .setColor("#00AAFF")
+      .setColor(colorEmbed)
       .setTitle("Répartition des visites par heure de la journée")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(`Pour <@${targetUser.id}>,\n${description}`)
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

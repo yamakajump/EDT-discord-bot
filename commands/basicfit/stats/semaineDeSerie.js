@@ -1,4 +1,8 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const style = require("../../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 /**
  * Calcule le numéro de la semaine ISO pour une date donnée.
@@ -26,9 +30,9 @@ module.exports = {
   async execute(interaction, targetUser, jsonData, jsonDate) {
     if (!jsonData || !jsonData.visits || jsonData.visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
-        .setColor("#FF0000")
+        .setColor(colorEmbedError)
         .setTitle("Streak Hebdomadaire")
-        .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+        .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -86,9 +90,9 @@ module.exports = {
     longestStreak = Math.max(longestStreak, currentStreak);
 
     const embed = new EmbedBuilder()
-      .setColor("#00AAFF")
+      .setColor(colorEmbed)
       .setTitle("Série Hebdomadaire")
-      .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
+      .setThumbnail(thumbnailEmbed)
       .setDescription(
         `Le plus long streak hebdomadaire de <@${targetUser.id}> est de **${longestStreak} semaines consécutives**.`,
       )
