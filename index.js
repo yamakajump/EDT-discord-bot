@@ -31,7 +31,7 @@ const { initializeDatabase } = require("./utils/dbInit");
     client.commands = new Collection();
     const commands = [];
 
-    // Charger toutes les commandes
+    // Charger toutes les commandes depuis le dossier "commands"
     const commandsPath = path.join(__dirname, "commands");
     const commandFiles = fs
       .readdirSync(commandsPath)
@@ -40,16 +40,16 @@ const { initializeDatabase } = require("./utils/dbInit");
       const filePath = path.join(commandsPath, file);
       const command = require(filePath);
       if (command.data && command.data.name) {
+        client.commands.set(command.data.name, command);
+        commands.push(command.data.toJSON());
         console.log(
-          `📜\x1b[32m Chargement de la commande ${command.data.name}... \x1b[0m`,
+          `📜\x1b[34m Chargement de la commande ${command.data.name} \x1b[0m`
         );
       } else {
         console.error(
-          `📜\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
+          `⚠️\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`
         );
       }
-      client.commands.set(command.data.name, command);
-      commands.push(command.data.toJSON());
     }
 
     // Charger les événements
@@ -62,25 +62,62 @@ const { initializeDatabase } = require("./utils/dbInit");
       const event = require(filePath);
       if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));
+        console.log(
+          `📜\x1b[35m Chargement de l'événement ${event.name} (once) \x1b[0m`
+        );
       } else {
         client.on(event.name, (...args) => event.execute(...args, client));
+        console.log(
+          `📜\x1b[35m Chargement de l'événement ${event.name} \x1b[0m`
+        );
       }
     }
 
-    // Enregistrer les commandes auprès de Discord
+    // Préparer l'API REST avec le token du bot
     const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
-    try {
-      const clientId = process.env.ID;
+    const clientId = process.env.ID;
 
+    // Récupérer les commandes actuellement enregistrées sur Discord
+    let registeredCommands = [];
+    try {
+      registeredCommands = await rest.get(
+        Routes.applicationCommands(clientId)
+      );
+    } catch (error) {
+      console.error(
+        "⚠️\x1b[31m Erreur lors de la récupération des commandes enregistrées: \x1b[0m",
+        error
+      );
+    }
+
+    // Supprimer les commandes enregistrées qui ne sont plus présentes localement
+    for (const registeredCommand of registeredCommands) {
+      if (!client.commands.has(registeredCommand.name)) {
+        try {
+          await rest.delete(
+            `${Routes.applicationCommands(clientId)}/${registeredCommand.id}`
+          );
+          console.log(
+            `📍\x1b[33m Suppression de la commande obsolète: ${registeredCommand.name} \x1b[0m`
+          );
+        } catch (error) {
+          console.error(
+            `⚠️\x1b[31m Erreur lors de la suppression de la commande ${registeredCommand.name}: \x1b[0m`,
+            error
+          );
+        }
+      }
+    }
+
+    // Enregistrer (ou mettre à jour) les commandes auprès de Discord
+    try {
       await rest.put(Routes.applicationCommands(clientId), { body: commands });
       console.log("📩\x1b[32m Commandes enregistrées avec succès. \x1b[0m");
     } catch (error) {
       console.error(
-        "📩\x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m",
-        error,
+        "⚠️\x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m",
+        error
       );
-      // Si vous avez une fonction reportError définie, vous pouvez l'utiliser ici
-      // reportError(client, `Erreur lors de l'enregistrement des commandes:\n\`\`\`${error.message}\`\`\``);
     }
 
     // Lancer le bot
@@ -88,7 +125,7 @@ const { initializeDatabase } = require("./utils/dbInit");
   } catch (err) {
     console.error(
       "Erreur lors de l'initialisation de la base de données ou du bot:",
-      err,
+      err
     );
     process.exit(1);
   }
