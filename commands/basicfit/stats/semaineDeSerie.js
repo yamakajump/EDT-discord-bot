@@ -29,8 +29,13 @@ module.exports = {
         .setColor("#FF0000")
         .setTitle("Streak Hebdomadaire")
         .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
-        .setDescription(`Aucune visite enregistrée pour **${targetUser.username}**.`);
-      return interaction.reply({ embeds: [noVisitEmbed], flags: MessageFlags.Ephemeral });
+        .setDescription(
+          `Aucune visite enregistrée pour **${targetUser.username}**.`,
+        );
+      return interaction.reply({
+        embeds: [noVisitEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     const visits = jsonData.visits;
@@ -85,7 +90,7 @@ module.exports = {
       .setTitle("Série Hebdomadaire")
       .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
       .setDescription(
-        `Le plus long streak hebdomadaire de <@${targetUser.id}> est de **${longestStreak} semaines consécutives**.`
+        `Le plus long streak hebdomadaire de <@${targetUser.id}> est de **${longestStreak} semaines consécutives**.`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

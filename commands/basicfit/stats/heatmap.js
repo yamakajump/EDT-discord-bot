@@ -18,7 +18,7 @@ module.exports = {
         .setTitle("Données introuvables")
         .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
         .setDescription(
-          `Aucune donnée trouvée pour **${targetUser.username}**.\nVeuillez téléverser vos données avec \`/basicfit upload\`.`
+          `Aucune donnée trouvée pour **${targetUser.username}**.\nVeuillez téléverser vos données avec \`/basicfit upload\`.`,
         );
       return interaction.reply({
         embeds: [noDataEmbed],
@@ -58,16 +58,16 @@ function generateHeatmap(jsonData, displayName) {
   const cellGap = 3;
   const padding = 60; // marge à gauche et à droite
   const paddingBottom = 5; // marge en bas
-  const numWeeks = 53; 
+  const numWeeks = 53;
 
   // Calcul de la largeur de la grille : nb semaines * (taille + gap) (dernier gap non inclus)
   const gridWidth = numWeeks * (cellSize + cellGap) - cellGap;
   // Largeur totale du canvas (padding gauche + grille + padding droite)
-  const canvasWidth = padding + gridWidth + padding; 
+  const canvasWidth = padding + gridWidth + padding;
 
   // Zone réservée au titre en haut
   const titleArea = 50;
-  
+
   // Regroupement des visites par année (date format "DD-MM-YYYY")
   const visits = jsonData.visits;
   const yearData = {};
@@ -82,13 +82,14 @@ function generateHeatmap(jsonData, displayName) {
 
   // Récupération et tri des années
   const sortedYears = Object.keys(yearData).sort();
-  
+
   // Hauteur de la grille pour chaque année (7 jours)
   const gridHeight = 7 * (cellSize + cellGap) - cellGap;
   // Espace requis par bloc d'année, incluant la légende des mois (20px) et un margin (10px)
-  const yPerYear = gridHeight + 30; 
+  const yPerYear = gridHeight + 30;
   // Calcul de la hauteur totale du canvas
-  const canvasHeight = titleArea + sortedYears.length * yPerYear + paddingBottom;
+  const canvasHeight =
+    titleArea + sortedYears.length * yPerYear + paddingBottom;
 
   // Création du canvas
   const canvas = createCanvas(canvasWidth, canvasHeight);
@@ -103,7 +104,7 @@ function generateHeatmap(jsonData, displayName) {
   ctx.font = "20px Arial";
   ctx.textAlign = "center";
   ctx.fillText(`Heatmap de ${displayName}`, canvasWidth / 2, 30);
-  
+
   // Dessin de chaque bloc d'année
   let yOffset = titleArea;
   for (const year of sortedYears) {
@@ -115,11 +116,20 @@ function generateHeatmap(jsonData, displayName) {
     ctx.fillText(year, padding - 55, yOffset + gridHeight / 2);
 
     // Dessin de la grille avec gestion des cases hors de l'année
-    drawYearHeatmap(ctx, yearData[year], year, yOffset, cellSize, cellGap, padding, numWeeks);
+    drawYearHeatmap(
+      ctx,
+      yearData[year],
+      year,
+      yOffset,
+      cellSize,
+      cellGap,
+      padding,
+      numWeeks,
+    );
 
     // Légende des mois sous la grille
     drawMonths(ctx, yOffset, cellSize, cellGap, padding);
-    
+
     // Passage au bloc de l'année suivante
     yOffset += yPerYear;
   }
@@ -142,7 +152,16 @@ function generateHeatmap(jsonData, displayName) {
  * @param {number} padding - Marge à gauche (début de la grille).
  * @param {number} numWeeks - Nombre de semaines (colonnes).
  */
-function drawYearHeatmap(ctx, data, year, yOffset, cellSize, cellGap, padding, numWeeks) {
+function drawYearHeatmap(
+  ctx,
+  data,
+  year,
+  yOffset,
+  cellSize,
+  cellGap,
+  padding,
+  numWeeks,
+) {
   // Déterminer l'indice du jour de la semaine du 1er janvier
   const firstJan = new Date(year, 0, 1);
   // Pour notre grille, 0 = Lundi, ..., 6 = Dimanche
@@ -157,7 +176,7 @@ function drawYearHeatmap(ctx, data, year, yOffset, cellSize, cellGap, padding, n
     ctx.fillText(
       jour,
       padding - 10,
-      yOffset + index * (cellSize + cellGap) + cellSize / 2
+      yOffset + index * (cellSize + cellGap) + cellSize / 2,
     );
   });
 
@@ -201,8 +220,18 @@ function drawYearHeatmap(ctx, data, year, yOffset, cellSize, cellGap, padding, n
  */
 function drawMonths(ctx, yOffset, cellSize, cellGap, padding) {
   const mois = [
-    "Jan", "Fév", "Mar", "Avr", "Mai", "Juin",
-    "Juil", "Août", "Sept", "Oct", "Nov", "Déc"
+    "Jan",
+    "Fév",
+    "Mar",
+    "Avr",
+    "Mai",
+    "Juin",
+    "Juil",
+    "Août",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Déc",
   ];
   ctx.fillStyle = "#FFFFFF";
   ctx.font = "10px Arial";
@@ -225,7 +254,8 @@ function drawMonths(ctx, yOffset, cellSize, cellGap, padding) {
 function getDayOfYear(date) {
   const debut = new Date(date.getFullYear(), 0, 0);
   const diff =
-    date - debut +
+    date -
+    debut +
     (debut.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000;
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }

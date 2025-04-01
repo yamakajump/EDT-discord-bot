@@ -43,11 +43,11 @@ const { initializeDatabase } = require("./utils/dbInit");
         client.commands.set(command.data.name, command);
         commands.push(command.data.toJSON());
         console.log(
-          `📜\x1b[34m Chargement de la commande ${command.data.name} \x1b[0m`
+          `📜\x1b[34m Chargement de la commande ${command.data.name} \x1b[0m`,
         );
       } else {
         console.error(
-          `⚠️\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`
+          `⚠️\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
         );
       }
     }
@@ -63,12 +63,12 @@ const { initializeDatabase } = require("./utils/dbInit");
       if (event.once) {
         client.once(event.name, (...args) => event.execute(...args, client));
         console.log(
-          `📜\x1b[35m Chargement de l'événement ${event.name} (once) \x1b[0m`
+          `📜\x1b[35m Chargement de l'événement ${event.name} (once) \x1b[0m`,
         );
       } else {
         client.on(event.name, (...args) => event.execute(...args, client));
         console.log(
-          `📜\x1b[35m Chargement de l'événement ${event.name} \x1b[0m`
+          `📜\x1b[35m Chargement de l'événement ${event.name} \x1b[0m`,
         );
       }
     }
@@ -80,13 +80,11 @@ const { initializeDatabase } = require("./utils/dbInit");
     // Récupérer les commandes actuellement enregistrées sur Discord
     let registeredCommands = [];
     try {
-      registeredCommands = await rest.get(
-        Routes.applicationCommands(clientId)
-      );
+      registeredCommands = await rest.get(Routes.applicationCommands(clientId));
     } catch (error) {
       console.error(
         "⚠️\x1b[31m Erreur lors de la récupération des commandes enregistrées: \x1b[0m",
-        error
+        error,
       );
     }
 
@@ -95,15 +93,15 @@ const { initializeDatabase } = require("./utils/dbInit");
       if (!client.commands.has(registeredCommand.name)) {
         try {
           await rest.delete(
-            `${Routes.applicationCommands(clientId)}/${registeredCommand.id}`
+            `${Routes.applicationCommands(clientId)}/${registeredCommand.id}`,
           );
           console.log(
-            `📍\x1b[33m Suppression de la commande obsolète: ${registeredCommand.name} \x1b[0m`
+            `📍\x1b[33m Suppression de la commande obsolète: ${registeredCommand.name} \x1b[0m`,
           );
         } catch (error) {
           console.error(
             `⚠️\x1b[31m Erreur lors de la suppression de la commande ${registeredCommand.name}: \x1b[0m`,
-            error
+            error,
           );
         }
       }
@@ -116,7 +114,7 @@ const { initializeDatabase } = require("./utils/dbInit");
     } catch (error) {
       console.error(
         "⚠️\x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m",
-        error
+        error,
       );
     }
 
@@ -125,7 +123,7 @@ const { initializeDatabase } = require("./utils/dbInit");
   } catch (err) {
     console.error(
       "Erreur lors de l'initialisation de la base de données ou du bot:",
-      err
+      err,
     );
     process.exit(1);
   }

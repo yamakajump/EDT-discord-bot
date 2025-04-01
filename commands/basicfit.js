@@ -286,7 +286,12 @@ module.exports = {
 
       // Si c'est la sous-commande stats, on passe en plus targetUser et les stats récupérées
       if (subcommandGroup === "stats") {
-        await subcommandFile.execute(interaction, targetUser, statsJSON, jsonDate);
+        await subcommandFile.execute(
+          interaction,
+          targetUser,
+          statsJSON,
+          jsonDate,
+        );
       } else {
         await subcommandFile.execute(interaction);
       }

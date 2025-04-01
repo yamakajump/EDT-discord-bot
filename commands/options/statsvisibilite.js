@@ -28,10 +28,11 @@ module.exports = {
     } catch (error) {
       console.error(
         `Erreur lors de la mise à jour de la visibilité des statistiques pour l'utilisateur ${userId}:`,
-        error
+        error,
       );
       await interaction.reply({
-        content: "Une erreur est survenue lors de la mise à jour de la visibilité des statistiques.",
+        content:
+          "Une erreur est survenue lors de la mise à jour de la visibilité des statistiques.",
         flags: MessageFlags.Ephemeral,
       });
     }

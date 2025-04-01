@@ -16,8 +16,13 @@ module.exports = {
         .setColor("#FF0000")
         .setTitle("Série consécutive")
         .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
-        .setDescription(`Aucune visite enregistrée pour **${targetUser.username}**.`);
-      return interaction.reply({ embeds: [noVisitEmbed], flags: MessageFlags.Ephemeral });
+        .setDescription(
+          `Aucune visite enregistrée pour **${targetUser.username}**.`,
+        );
+      return interaction.reply({
+        embeds: [noVisitEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     // Transformation des dates (on suppose le format "DD-MM-YYYY")
@@ -30,8 +35,13 @@ module.exports = {
       const noVisitEmbed = new EmbedBuilder()
         .setColor("#FF0000")
         .setTitle("Série consécutive")
-        .setDescription(`Aucune visite enregistrée pour **${targetUser.username}**.`);
-      return interaction.reply({ embeds: [noVisitEmbed], flags: MessageFlags.Ephemeral });
+        .setDescription(
+          `Aucune visite enregistrée pour **${targetUser.username}**.`,
+        );
+      return interaction.reply({
+        embeds: [noVisitEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     // Tri des dates dans l'ordre croissant
@@ -59,7 +69,7 @@ module.exports = {
       .setTitle("Série consécutive")
       .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
       .setDescription(
-        `Le plus long streak journalier de <@${targetUser.id}> est de **${longestStreak} jours consécutifs**.`
+        `Le plus long streak journalier de <@${targetUser.id}> est de **${longestStreak} jours consécutifs**.`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

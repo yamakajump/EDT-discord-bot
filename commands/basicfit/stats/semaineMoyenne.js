@@ -24,13 +24,15 @@ module.exports = {
         .setColor("#FF0000")
         .setTitle("Semaine moyenne")
         .setDescription(
-          `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`
+          `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
         )
         .setFooter({
           text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,
         });
-      return interaction.reply({ embeds: [noVisitEmbed],
-              flags: MessageFlags.Ephemeral, });
+      return interaction.reply({
+        embeds: [noVisitEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     // Regroupement des visites par semaine-années
@@ -38,7 +40,7 @@ module.exports = {
     averageWeekVisits.forEach((date) => {
       const year = date.getUTCFullYear();
       const week = Math.floor(
-        (date - new Date(year, 0, 1)) / (1000 * 60 * 60 * 24 * 7)
+        (date - new Date(year, 0, 1)) / (1000 * 60 * 60 * 24 * 7),
       );
       const weekKey = `${year}-W${week}`;
       if (!weeklyVisits[weekKey]) weeklyVisits[weekKey] = 0;
@@ -53,7 +55,7 @@ module.exports = {
       .setColor("#FFA500")
       .setTitle("Semaine moyenne")
       .setDescription(
-        `<a:boule:1321847679441178737> **Semaine moyenne** : <@${targetUser.id}> va à la salle en moyenne **${averagePerWeek} jours par semaine** !`
+        `<a:boule:1321847679441178737> **Semaine moyenne** : <@${targetUser.id}> va à la salle en moyenne **${averagePerWeek} jours par semaine** !`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

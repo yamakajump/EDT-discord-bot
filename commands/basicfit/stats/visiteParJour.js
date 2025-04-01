@@ -16,7 +16,9 @@ module.exports = {
         .setColor("#FF0000")
         .setTitle("Nombre de visites par jour")
         .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
-        .setDescription(`Aucune visite enregistrée pour **${targetUser.username}**.`);
+        .setDescription(
+          `Aucune visite enregistrée pour **${targetUser.username}**.`,
+        );
       return interaction.reply({
         embeds: [noVisitEmbed],
         flags: MessageFlags.Ephemeral,
@@ -53,8 +55,7 @@ module.exports = {
 
     const description = Object.entries(dayCounts)
       .map(
-        ([day, count]) =>
-          `**${day}** : ${count} visite${count > 1 ? "s" : ""}`
+        ([day, count]) => `**${day}** : ${count} visite${count > 1 ? "s" : ""}`,
       )
       .join("\n");
 

@@ -11,7 +11,6 @@ module.exports = {
    * @param {string} jsonDate - La date associée aux statistiques.
    */
   async execute(interaction, targetUser, jsonData, jsonDate) {
-
     const emojiInfo = getEmoji("info");
 
     // Vérification des données de visites
@@ -21,10 +20,12 @@ module.exports = {
         .setTitle("Jour préféré")
         .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
         .setDescription(
-          `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`
+          `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
-      return interaction.reply({ embeds: [noVisitEmbed], 
-              flags: MessageFlags.Ephemeral, });
+      return interaction.reply({
+        embeds: [noVisitEmbed],
+        flags: MessageFlags.Ephemeral,
+      });
     }
 
     // Transformation des visites en dates (format attendu : "DD-MM-YYYY")
@@ -58,7 +59,7 @@ module.exports = {
       .setTitle("Jour préféré")
       .setThumbnail("https://i.ibb.co/Y795qQQd/logo-EDT.png")
       .setDescription(
-        `${emojiInfo} **Jour préféré** : Le jour où <@${targetUser.id}> va le plus souvent à la salle est **${favoriteDay}** avec **${favoriteDayCount} visites** !`
+        `${emojiInfo} **Jour préféré** : Le jour où <@${targetUser.id}> va le plus souvent à la salle est **${favoriteDay}** avec **${favoriteDayCount} visites** !`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

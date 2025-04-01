@@ -32,7 +32,7 @@ module.exports = {
 
   /**
    * Récupère la date de la dernière modification des statistiques d'un guerrier.
-   * 
+   *
    * @param {string} guerrierId - L'ID du guerrier.
    * @returns {Promise<Date|undefined>} La date de la dernière modification ou undefined si aucune donnée n'est trouvée.
    */

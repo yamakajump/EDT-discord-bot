@@ -28,20 +28,20 @@ module.exports = {
             .addChoices(
               { name: "Public", value: "public" },
               { name: "Privé", value: "prive" },
-            )
-        )
+            ),
+        ),
     ),
   async execute(interaction) {
     const subCmd = interaction.options.getSubcommand();
     try {
       const subcommandFile = require(
-        path.join(__dirname, "options", `${subCmd}.js`)
+        path.join(__dirname, "options", `${subCmd}.js`),
       );
       await subcommandFile.execute(interaction);
     } catch (error) {
       console.error(
         `Erreur lors de l'exécution de la sous-commande ${subCmd}:`,
-        error
+        error,
       );
       await interaction.reply({
         content: `Une erreur est survenue lors de l'exécution de la commande options ${subCmd}.`,
