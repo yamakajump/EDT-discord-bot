@@ -28,7 +28,6 @@ const staffRole = config.staffRole;
 const donorRole = config.donateurRole;
 const categories = config.journalCategories;
 
-
 // PIN_MESSAGES est soit la permission native ou une valeur par défaut
 const PIN_MESSAGES = PermissionFlagsBits.PinMessages || 16384n;
 

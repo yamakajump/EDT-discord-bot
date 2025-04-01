@@ -27,7 +27,6 @@ const pingWelcomeChannelIds = config.pingWelcomeChannelIds;
 module.exports = {
   name: "guildMemberAdd",
   async execute(member) {
-
     /*
      * 1. Mise à jour du compteur de membres
      * - La configuration doit contenir l'ID du salon où le nombre de membres doit être affiché.

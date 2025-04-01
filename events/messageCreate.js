@@ -14,8 +14,8 @@
 const guerrierDAO = require("../dao/guerrierDAO"); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
 
 const config = require("../config/config.json");
-const forums = config.forums; 
-const coachRole = config.coachRole; 
+const forums = config.forums;
+const coachRole = config.coachRole;
 
 module.exports = {
   name: "messageCreate",

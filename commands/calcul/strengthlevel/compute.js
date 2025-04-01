@@ -199,8 +199,7 @@ module.exports = {
     };
 
     // Récupération d'emojis personnalisés pour une meilleure présentation
-    const emojiSexe =
-      sexOption === "Homme" ? emojiHomme : emojiFemme;
+    const emojiSexe = sexOption === "Homme" ? emojiHomme : emojiFemme;
 
     // Construction de la description principale avec les informations fournies par l'utilisateur
     const description =

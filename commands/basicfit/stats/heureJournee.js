@@ -23,7 +23,9 @@ module.exports = {
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle(`${emojiCible} Répartition des visites par heure de la journée`)
+        .setTitle(
+          `${emojiCible} Répartition des visites par heure de la journée`,
+        )
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,

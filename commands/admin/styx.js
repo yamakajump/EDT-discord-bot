@@ -90,10 +90,7 @@ module.exports = {
       } else {
         let rolesToRemove = [];
         member.roles.cache.forEach((role) => {
-          if (
-            role.id !== protectedRole &&
-            role.id !== interaction.guild.id
-          ) {
+          if (role.id !== protectedRole && role.id !== interaction.guild.id) {
             rolesToRemove.push(role.id);
           }
         });

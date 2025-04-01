@@ -155,7 +155,6 @@ module.exports = {
             ? "Prise de masse"
             : "Recomposition corporelle";
 
-
     // Création de l'embed Discord de récapitulatif
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
