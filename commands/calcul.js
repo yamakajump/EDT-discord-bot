@@ -24,6 +24,37 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("calcul")
     .setDescription("Commandes pour effectuer divers calculs.")
+    // Sous-commande : bodyfat
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("bodyfat")
+        .setDescription("Calcule votre pourcentage de masse grasse.")
+        .addNumberOption((option) =>
+          option
+            .setName("poids")
+            .setDescription("Votre poids en kg.")
+            .setRequired(true),
+        )
+        .addNumberOption((option) =>
+          option
+            .setName("taille")
+            .setDescription("Votre taille en cm.")
+            .setRequired(true),
+        )
+        .addIntegerOption((option) =>
+          option.setName("age").setDescription("Votre âge.").setRequired(true),
+        )
+        .addStringOption((option) =>
+          option
+            .setName("sexe")
+            .setDescription("Votre sexe.")
+            .addChoices(
+              { name: "Homme", value: "homme" },
+              { name: "Femme", value: "femme" },
+            )
+            .setRequired(true),
+        ),
+    )
     // Sous-commande : calories
     .addSubcommand((subcommand) =>
       subcommand
