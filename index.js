@@ -39,6 +39,15 @@ const { initializeDatabase } = require("./utils/dbInit");
     for (const file of commandFiles) {
       const filePath = path.join(commandsPath, file);
       const command = require(filePath);
+      if (command.data && command.data.name) {
+        console.log(
+          `📜\x1b[32m Chargement de la commande ${command.data.name}... \x1b[0m`,
+        );
+      } else {
+        console.error(
+          `📜\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
+        );
+      }
       client.commands.set(command.data.name, command);
       commands.push(command.data.toJSON());
     }

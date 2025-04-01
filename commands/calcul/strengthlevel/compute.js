@@ -1,9 +1,40 @@
+/**
+ * Module de calcul du Strength Level.
+ *
+ * Ce module calcule le niveau de force d'un utilisateur en fonction de plusieurs paramètres :
+ *   - Le poids du corps (bodyweight)
+ *   - Le poids soulevé (liftweight)
+ *   - L'âge
+ *   - Le nom de l'exercice
+ *   - Le sexe (Homme ou Femme)
+ *
+ * La commande récupère également des données de seuils depuis un fichier JSON afin de comparer
+ * la performance de l'utilisateur à différents paliers ("Débutant", "Novice", "Intermédiaire", "Avancé", "Elite").
+ *
+ * Fonctionnalités principales :
+ *   - Récupération et vérification des options fournies par l'utilisateur.
+ *   - Lecture et parsing du fichier JSON contenant les seuils pour les différents exercices.
+ *   - Recherche de l'exercice demandé dans le fichier JSON (non sensible à la casse).
+ *   - Sélection des données de seuils en fonction du sexe de l'utilisateur.
+ *   - Détermination du niveau atteint en comparant le poids soulevé aux valeurs seuils.
+ *   - Construction d'un embed Discord détaillant les informations fournies, le résultat du calcul ainsi que les paliers.
+ *
+ * Ce module utilise également des utilitaires pour récupérer les emojis personnalisés afin d'améliorer la lisibilité
+ * et la présentation du résultat.
+ */
+
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const { getEmoji } = require("../../../utils/emoji");
 
 module.exports = {
+  /**
+   * Exécute la commande pour calculer le Strength Level.
+   *
+   * @param {object} interaction - L'objet interaction de Discord contenant les informations de la commande et des options.
+   * @returns {Promise<void>} Une promesse résolue une fois le traitement et la réponse terminés.
+   */
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur
     const bodyWeight = interaction.options.getNumber("bodyweight");
@@ -12,7 +43,7 @@ module.exports = {
     const exerciseName = interaction.options.getString("exercise");
     const sexOption = interaction.options.getString("sex");
 
-    // Vérifications simples
+    // Vérifications simples sur les options fournies
     if (!bodyWeight || bodyWeight <= 0) {
       return interaction.reply({
         content:
@@ -47,7 +78,7 @@ module.exports = {
       });
     }
 
-    // Chargement du fichier JSON contenant les seuils
+    // Chargement du fichier JSON contenant les seuils pour le calcul des niveaux
     const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
     let exercisesData;
     try {
@@ -67,7 +98,7 @@ module.exports = {
       });
     }
 
-    // Recherche de l'exercice (non sensible à la casse)
+    // Recherche de l'exercice dans le fichier JSON (comparaison non sensible à la casse)
     const exerciseObj = exercisesData.find(
       (ex) => ex.exercise.toLowerCase() === exerciseName.toLowerCase(),
     );
@@ -87,9 +118,17 @@ module.exports = {
       });
     }
     const bodyTable = thresholds.bodyweight; // Tableau des seuils pour le poids du corps
-    const ageTable = thresholds.age; // Tableau des seuils pour l'"âge" (seuils en kg)
+    const ageTable = thresholds.age; // Tableau des seuils pour l'âge
 
-    // Fonction utilitaire pour sélectionner la ligne de seuil dont la référence est la plus proche (sans dépasser la valeur utilisateur)
+    /**
+     * Fonction utilitaire pour sélectionner la ligne de seuil dont la référence est la plus proche.
+     * La ligne sélectionnée est celle pour laquelle la valeur de référence (première valeur de la ligne)
+     * est la plus proche sans dépasser la valeur fournie par l'utilisateur.
+     *
+     * @param {Array} table - Le tableau contenant les lignes de seuils.
+     * @param {number} inputValue - La valeur de l'utilisateur (poids ou âge).
+     * @returns {Array} La ligne de seuils correspondant.
+     */
     function findRow(table, inputValue) {
       let chosen = table[0];
       for (let row of table) {
@@ -106,10 +145,17 @@ module.exports = {
     const bodyRow = findRow(bodyTable, bodyWeight);
     const ageRow = findRow(ageTable, age);
 
-    // Définition des niveaux
+    // Définition des niveaux de force
     const levels = ["Débutant", "Novice", "Intermédiaire", "Avancé", "Elite"];
 
-    // Fonction qui détermine le niveau atteint en testant si le poids soulevé est >= seuil du niveau.
+    /**
+     * Fonction qui détermine le niveau atteint en testant si le poids soulevé est supérieur ou égal
+     * au seuil correspondant pour chaque niveau de force.
+     *
+     * @param {Array} row - La ligne de seuils pour le poids du corps ou l'âge.
+     * @param {number} liftWeight - Le poids soulevé par l'utilisateur.
+     * @returns {string} Le niveau atteint.
+     */
     function computeLevel(row, liftWeight) {
       let achieved = "Below Beginner";
       for (let i = 0; i < levels.length; i++) {
@@ -135,7 +181,7 @@ module.exports = {
       Elite: getEmoji("trophe"),
     };
 
-    // Récupération dynamique d'emojis généraux
+    // Récupération d'emojis personnalisés pour une meilleure présentation
     const sexEmoji =
       sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
     const emojiBody = getEmoji("cookie");
@@ -143,7 +189,7 @@ module.exports = {
     const cibleEmoji = getEmoji("cible");
     const emojiLift = getEmoji("muscle");
 
-    // Construction de la description principale (informations et statistiques)
+    // Construction de la description principale avec les informations fournies par l'utilisateur
     const description =
       `**Informations fournies :**\n` +
       `• ${sexEmoji} Sexe : **${sexOption}**\n` +
@@ -155,7 +201,7 @@ module.exports = {
       `• Selon le poids du corps : ${emojiMapping[levelByBody] || ""} **${levelByBody}**\n` +
       `• Selon l'âge : ${emojiMapping[levelByAge] || ""} **${levelByAge}**`;
 
-    // Présentation des paliers avec emojis personnalisés
+    // Construction des paliers avec affichage des seuils et des emojis associés
     const globeEmoji = getEmoji("globe");
     const troisiemeEmoji = getEmoji("troisieme");
     const deuxiemeEmoji = getEmoji("deuxieme");
@@ -176,7 +222,7 @@ module.exports = {
       `${premierEmoji} **__${levels[3]}__** : ${ageRow[4]} kg\n` +
       `${tropheEmoji} **__${levels[4]}__** : ${ageRow[5]} kg`;
 
-    // Création de l'embed principal combinant informations, statistiques et affichage des paliers
+    // Construction de l'embed combinant toutes les informations et le résultat du calcul
     const embed = new EmbedBuilder()
       .setColor("#FFA500")
       .setTitle(
@@ -188,6 +234,7 @@ module.exports = {
         text: "Calcul effectué à partir de vos données personnelles et des seuils de https://strengthlevel.com/",
       });
 
+    // Envoie de l'embed en réponse à l'interaction
     await interaction.reply({ embeds: [embed] });
   },
 };

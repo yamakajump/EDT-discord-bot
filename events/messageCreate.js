@@ -12,7 +12,7 @@
  */
 
 const config = require("../config/config.json");
-const nouveauGuerrierDAO = require("../dao/nouveauGuerrierDAO"); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
+const guerrierDAO = require("../dao/guerrierDAO"); // Importation du DAO pour gérer le compteur du Nouveau Guerrier
 
 module.exports = {
   name: "messageCreate",
@@ -66,7 +66,7 @@ module.exports = {
 
     // Incrémentation du compteur associé au Nouveau Guerrier pour chaque message (pour toutes les discussions)
     try {
-      await nouveauGuerrierDAO.incrementCount(
+      await guerrierDAO.incrementCount(
         message.author.id,
         message.author.username,
       );

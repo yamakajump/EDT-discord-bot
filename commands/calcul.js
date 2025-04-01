@@ -467,12 +467,10 @@ module.exports = {
 
       // Si on est dans un groupe, on charge depuis le dossier correspondant
       if (subcommandGroup) {
-        // par exemple : /calcul strengthlevel search -> dossier strengthlevel/ et fichier search.js
         subcommandFile = require(
           path.join(__dirname, "calcul", subcommandGroup, `${subcommand}.js`),
         );
       } else {
-        // Sinon, fichier directement dans /calcul/
         subcommandFile = require(
           path.join(__dirname, "calcul", `${subcommand}.js`),
         );

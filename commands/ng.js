@@ -9,7 +9,7 @@
  * On peut spécifier un utilisateur via l'option "utilisateur". Si aucun utilisateur n'est
  * précisé, les statistiques sont affichées pour l'utilisateur qui exécute la commande.
  *
- * Les données statistiques sont récupérées via "nouveauGuerrierDAO".
+ * Les données statistiques sont récupérées via "guerrierDAO".
  */
 
 const {
@@ -17,7 +17,7 @@ const {
   EmbedBuilder,
   MessageFlags,
 } = require("discord.js");
-const nouveauGuerrierDAO = require("../dao/nouveauGuerrierDAO");
+const guerrierDAO = require("../dao/guerrierDAO");
 const { getEmoji } = require("../utils/emoji");
 
 module.exports = {
@@ -49,7 +49,7 @@ module.exports = {
 
     try {
       // Récupération des données de l'utilisateur via le DAO
-      const data = await nouveauGuerrierDAO.getById(id);
+      const data = await guerrierDAO.getById(id);
 
       if (!data) {
         // Aucun message enregistré pour cet utilisateur
