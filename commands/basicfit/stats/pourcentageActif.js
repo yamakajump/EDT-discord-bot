@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
 const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -23,11 +27,9 @@ module.exports = {
 
     // S'il n'y a aucune visite enregistrée
     if (!visitsActive.length) {
-      const emojiInfo = getEmoji("info");
-
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Activité en pourcentage")
+        .setTitle(`${emojiCible} Activité en pourcentage`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -52,15 +54,13 @@ module.exports = {
     ).size;
     const activePercentage = ((uniqueActiveDays / totalDays) * 100).toFixed(2);
 
-    const emojiCible = getEmoji("cible");
-
     // Création de l'Embed et réponse à l'interaction
     const activePercentageEmbed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Activité en pourcentage")
+      .setTitle(`${emojiCible} Activité en pourcentage`)
       .setThumbnail(thumbnailEmbed)
       .setDescription(
-        `${emojiCible} **Activité en pourcentage** : <@${targetUser.id}> a été actif ` +
+        `**Activité en pourcentage** : <@${targetUser.id}> a été actif ` +
           `**${activePercentage}%** des jours sur la période totale ` +
           `(${uniqueActiveDays} jours actifs sur ${totalDays} jours).`,
       )

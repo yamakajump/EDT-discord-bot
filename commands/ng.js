@@ -18,7 +18,10 @@ const {
   MessageFlags,
 } = require("discord.js");
 const guerrierDAO = require("../dao/guerrierDAO");
+
 const { getEmoji } = require("../utils/emoji");
+const emojiValid = getEmoji("oui");
+const emojiInvalid = getEmoji("non");
 
 const style = require("../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -45,9 +48,6 @@ module.exports = {
 
     const embed = new EmbedBuilder();
     const totalMessages = 300; // Nombre de messages requis pour valider la cible
-
-    const emojiValid = getEmoji("oui");
-    const emojiInvalid = getEmoji("non");
 
     const totalDays = 14; // Durée de la période de suivi en jours
 

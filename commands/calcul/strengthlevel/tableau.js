@@ -18,7 +18,9 @@ const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
 const { createCanvas } = require("canvas");
+
 const { getEmoji } = require("../../../utils/emoji");
+const headerEmoji = getEmoji("cible");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -238,7 +240,6 @@ module.exports = {
     }
 
     // Préparation de l'embed Discord pour présenter le tableau des seuils
-    const headerEmoji = getEmoji("cible");
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
       .setTitle(`${headerEmoji} Tableau des seuils`)

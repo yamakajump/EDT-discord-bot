@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
 const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -21,12 +25,10 @@ module.exports = {
       return new Date(`${year}-${month}-${day}`);
     });
 
-    const emojiInfo = getEmoji("info");
-
     if (!visitsMonth.length) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Meilleur mois")
+        .setTitle(`${emojiCible} Meilleur mois`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -71,7 +73,7 @@ module.exports = {
 
     const bestMonthEmbed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Meilleur mois")
+      .setTitle(`${emojiCible} Meilleur mois`)
       .setThumbnail(thumbnailEmbed)
       .setDescription(
         `${emojiInfo} **Meilleur mois** : Le mois où <@${targetUser.id}> est allé le plus souvent à la salle est **${bestMonthName}** avec **${bestMonthCount} visites** !`,

@@ -1,5 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
+
 const { getEmoji } = require("../../../utils/emoji");
+const cibleEmoji = getEmoji("cible");
+const globeEmoji = getEmoji("globe");
+const troisiemeEmoji = getEmoji("troisieme");
+const deuxiemeEmoji = getEmoji("deuxieme");
+const premierEmoji = getEmoji("premier");
+const tropheEmoji = getEmoji("trophe");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -15,13 +22,6 @@ const thumbnailEmbed = style.thumbnailEmbed;
  */
 module.exports = {
   async execute(interaction) {
-    const cibleEmoji = getEmoji("cible");
-    const globeEmoji = getEmoji("globe");
-    const troisiemeEmoji = getEmoji("troisieme");
-    const deuxiemeEmoji = getEmoji("deuxieme");
-    const premierEmoji = getEmoji("premier");
-    const tropheEmoji = getEmoji("trophe");
-
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
       .setTitle(`${cibleEmoji} Que signifient les normes de force ?`)

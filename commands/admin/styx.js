@@ -15,7 +15,9 @@
 const path = require("path");
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fileManager = require("../../utils/fileManager.js");
+
 const { getEmoji } = require("../../utils/emoji");
+const infoEmoji = getEmoji("info");
 
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -56,8 +58,6 @@ module.exports = {
 
     try {
       const member = await interaction.guild.members.fetch(id);
-
-      const infoEmoji = getEmoji("info");
 
       if (userIsInStyx) {
         for (const roleId of styxjson[indice].role) {

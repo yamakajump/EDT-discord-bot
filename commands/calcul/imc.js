@@ -22,7 +22,9 @@
 const { EmbedBuilder, AttachmentBuilder, MessageFlags } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
 const path = require("path");
+
 const { getEmoji } = require("../../utils/emoji");
+const infoEmoji = getEmoji("info");
 
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -177,8 +179,6 @@ module.exports = {
     // Exportation de l'image du canvas sous forme de buffer
     const buffer = canvas.toBuffer();
     const attachment = new AttachmentBuilder(buffer, { name: "imc.png" });
-
-    const infoEmoji = getEmoji("info");
 
     // Création de l'embed qui contient le résultat de l'IMC et l'image générée
     const embed = new EmbedBuilder()

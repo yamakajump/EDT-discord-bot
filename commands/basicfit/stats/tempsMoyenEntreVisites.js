@@ -1,5 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
 const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -15,7 +19,6 @@ module.exports = {
    * @param {string} jsonDate - La date associée aux statistiques.
    */
   async execute(interaction, targetUser, jsonData, jsonDate) {
-    const emojiInfo = getEmoji("info");
     // Transformation des visites en dates et tri chronologique
     const avgVisits = jsonData.visits
       .map((entry) => {
@@ -27,7 +30,7 @@ module.exports = {
     if (avgVisits.length < 2) {
       const notEnoughEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Temps moyen entre les visites")
+        .setTitle(`${emojiCible} Temps moyen entre les visites`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `${emojiInfo} Pas assez de données pour calculer la moyenne de temps entre les visites pour **${targetUser.username}**.`,
@@ -54,7 +57,7 @@ module.exports = {
 
     const avgVisitsEmbed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Temps moyen entre les visites")
+      .setTitle(`${emojiCible} Temps moyen entre les visites`)
       .setThumbnail(thumbnailEmbed)
       .setDescription(
         `${emojiInfo} **Temps moyen entre les visites** : <@${targetUser.id}> a une moyenne de **${avgTimeBetweenVisits} jours** entre deux séances.`,

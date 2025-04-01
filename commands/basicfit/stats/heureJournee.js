@@ -1,4 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
+const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -18,7 +23,7 @@ module.exports = {
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Répartition par Heure")
+        .setTitle(`${emojiCible} Répartition des visites par heure de la journée`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -65,9 +70,9 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Répartition des visites par heure de la journée")
+      .setTitle(`${emojiCible} Répartition des visites par heure de la journée`)
       .setThumbnail(thumbnailEmbed)
-      .setDescription(`Pour <@${targetUser.id}>,\n${description}`)
+      .setDescription(`${emojiInfo} Pour <@${targetUser.id}>,\n${description}`)
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,
       });

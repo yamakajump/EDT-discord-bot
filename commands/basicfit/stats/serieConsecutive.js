@@ -1,4 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
+const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -18,7 +23,7 @@ module.exports = {
     if (!jsonData || !jsonData.visits || !jsonData.visits.length) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Série consécutive")
+        .setTitle(`${emojiCible} Série consécutive`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -38,7 +43,7 @@ module.exports = {
     if (visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Série consécutive")
+        .setTitle(`${emojiCible} Série consécutive`)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
         );
@@ -70,10 +75,10 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Série consécutive")
+      .setTitle(`${emojiCible} Série consécutive`)
       .setThumbnail(thumbnailEmbed)
       .setDescription(
-        `Le plus long streak journalier de <@${targetUser.id}> est de **${longestStreak} jours consécutifs**.`,
+        `${emojiInfo} Le plus long streak journalier de <@${targetUser.id}> est de **${longestStreak} jours consécutifs**.`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

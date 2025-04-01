@@ -34,7 +34,11 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
 const { getEmoji } = require("../../utils/emoji");
+const coinInfoEmoji = getEmoji("coin_info");
+const tropheEmoji = getEmoji("trophe_or");
+const cookieEmoji = getEmoji("cookie");
 
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -151,9 +155,6 @@ module.exports = {
             ? "Prise de masse"
             : "Recomposition corporelle";
 
-    const coinInfoEmoji = getEmoji("coin_info");
-    const tropheEmoji = getEmoji("trophe_or");
-    const cookieEmoji = getEmoji("cookie");
 
     // Création de l'embed Discord de récapitulatif
     const embed = new EmbedBuilder()

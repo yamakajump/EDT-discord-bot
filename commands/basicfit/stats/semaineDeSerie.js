@@ -1,4 +1,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
+const { getEmoji } = require("../../../utils/emoji");
+const emojiCible = getEmoji("cible");
+const emojiInfo = getEmoji("info");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -31,7 +36,7 @@ module.exports = {
     if (!jsonData || !jsonData.visits || jsonData.visits.length === 0) {
       const noVisitEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
-        .setTitle("Streak Hebdomadaire")
+        .setTitle(`${emojiCible} Série Hebdomadaire`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           `Aucune visite enregistrée pour **${targetUser.username}**.`,
@@ -91,10 +96,10 @@ module.exports = {
 
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Série Hebdomadaire")
+      .setTitle(`${emojiCible} Série Hebdomadaire`)
       .setThumbnail(thumbnailEmbed)
       .setDescription(
-        `Le plus long streak hebdomadaire de <@${targetUser.id}> est de **${longestStreak} semaines consécutives**.`,
+        `${emojiInfo} Le plus long streak hebdomadaire de <@${targetUser.id}> est de **${longestStreak} semaines consécutives**.`,
       )
       .setFooter({
         text: `Statistiques BasicFit de ${targetUser.username} du ${jsonDate}`,

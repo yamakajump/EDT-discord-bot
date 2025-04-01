@@ -1,9 +1,17 @@
-const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+const { EmbedBuilder, SlashCommandBuilder, MessageFlags } = require("discord.js");
 const path = require("path");
 
 // Charger les modules DAO
 const guerrierDAO = require("../dao/guerrierDAO");
 const basicFitStatsDAO = require("../dao/basicFitStatsDAO");
+
+// Charger les emojis et styles
+const { getEmoji } = require("../utils/emoji");
+const emojiInfo = getEmoji("info");
+
+const style = require("../config/style.json");
+const colorEmbedError = style.colorEmbedError;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -228,11 +236,18 @@ module.exports = {
 
       jsonDate = await basicFitStatsDAO.getLastModifiedDate(targetUser.id);
 
+      const description = targetUser.id === interaction.user.id
+        ? `Aucune donnée trouvée. Veuillez téléverser vos données avec \`/basicfit upload\`.`
+        : `Aucune donnée trouvée pour ${targetUser.username}.`;
+
       if (!jsonDate) {
-        return interaction.reply({
-          content: `Aucune date de modification trouvée pour **${targetUser.username}**.`,
-          ephemeral: true,
-        });
+        const embed = new EmbedBuilder()
+              .setColor(colorEmbedError)
+              .setTitle(`${emojiInfo} Aucune donnée trouvée`)
+              .setThumbnail(thumbnailEmbed)
+              .setDescription(description)
+        
+            return interaction.reply({ embeds: [embed] });
       } else {
         // Formater la date au format français jj/mm/aaaa
         jsonDate = new Date(jsonDate);

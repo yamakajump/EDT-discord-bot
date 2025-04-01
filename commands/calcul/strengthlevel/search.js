@@ -1,7 +1,10 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+
 const { getEmoji } = require("../../../utils/emoji");
+const nonEmoji = getEmoji("non");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -67,8 +70,6 @@ module.exports = {
     // Préparation du résumé des filtres appliqués
     const filtersApplied = `Catégorie: ${categoryOption && categoryOption !== "none" ? categoryOption : "Tous"}
 Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption : "Toutes"}`;
-
-    const nonEmoji = getEmoji("non");
 
     // S'il n'y a aucun résultat, on informe l'utilisateur via un embed
     if (filteredExercises.length === 0) {

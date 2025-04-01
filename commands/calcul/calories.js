@@ -16,7 +16,12 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+
 const { getEmoji } = require("../../utils/emoji");
+const emojiPomme = getEmoji("pomme");
+const emojiCookie = getEmoji("cookie");
+const emojiFrite = getEmoji("frite");
+const emojiBrioche = getEmoji("brioche");
 
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -166,11 +171,6 @@ module.exports = {
       .setColor(colorEmbed);
 
     const TMBrounded = Math.round(TMB);
-
-    const emojiPomme = getEmoji("pomme");
-    const emojiCookie = getEmoji("cookie");
-    const emojiFrite = getEmoji("frite");
-    const emojiBrioche = getEmoji("brioche");
 
     // 1. Option "ajustement" renseignée (ajustement direct des calories)
     if (ajustementInput !== null) {

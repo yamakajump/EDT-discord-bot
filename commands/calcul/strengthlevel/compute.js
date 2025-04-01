@@ -26,7 +26,20 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const fs = require("fs");
 const path = require("path");
+
 const { getEmoji } = require("../../../utils/emoji");
+const emojiMuscle = getEmoji("muscle");
+const emojiCookie = getEmoji("cookie");
+const emojiTrophe = getEmoji("trophe");
+const emojiGlobe = getEmoji("globe");
+const emojiTroisieme = getEmoji("troisieme");
+const emojiDeuxieme = getEmoji("deuxieme");
+const emojiPremier = getEmoji("premier");
+const emojiCible = getEmoji("cible");
+const emojiFemme = getEmoji("femme");
+const emojiHomme = getEmoji("homme");
+const emojiCd = getEmoji("cd");
+
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const colorEmbedError = style.colorEmbedError;
@@ -178,59 +191,49 @@ module.exports = {
 
     // Mapping des niveaux aux emojis
     const emojiMapping = {
-      Débutant: getEmoji("globe"),
-      Novice: getEmoji("troisieme"),
-      Intermédiaire: getEmoji("deuxieme"),
-      Avancé: getEmoji("premier"),
-      Elite: getEmoji("trophe"),
+      Débutant: emojiGlobe,
+      Novice: emojiTroisieme,
+      Intermédiaire: emojiDeuxieme,
+      Avancé: emojiPremier,
+      Elite: emojiTrophe,
     };
 
     // Récupération d'emojis personnalisés pour une meilleure présentation
-    const sexEmoji =
-      sexOption === "Homme" ? getEmoji("homme") : getEmoji("femme");
-    const emojiBody = getEmoji("cookie");
-    const emojiAge = getEmoji("cd");
-    const cibleEmoji = getEmoji("cible");
-    const emojiLift = getEmoji("muscle");
+    const emojiSexe =
+      sexOption === "Homme" ? emojiHomme : emojiFemme;
 
     // Construction de la description principale avec les informations fournies par l'utilisateur
     const description =
       `**Informations fournies :**\n` +
-      `• ${sexEmoji} Sexe : **${sexOption}**\n` +
-      `• ${emojiBody} Poids du corps : **${bodyWeight} kg**\n` +
-      `• ${emojiAge} Âge : **${age} ans**\n` +
-      `• ${cibleEmoji} Exercice : **${exerciseObj.exercise}**\n` +
-      `• ${emojiLift} Poids soulevé : **${liftWeight} kg**\n\n` +
+      `• ${emojiSexe} Sexe : **${sexOption}**\n` +
+      `• ${emojiCookie} Poids du corps : **${bodyWeight} kg**\n` +
+      `• ${emojiCd} Âge : **${age} ans**\n` +
+      `• ${emojiCible} Exercice : **${exerciseObj.exercise}**\n` +
+      `• ${emojiMuscle} Poids soulevé : **${liftWeight} kg**\n\n` +
       `**Statistiques :**\n` +
       `• Selon le poids du corps : ${emojiMapping[levelByBody] || ""} **${levelByBody}**\n` +
       `• Selon l'âge : ${emojiMapping[levelByAge] || ""} **${levelByAge}**`;
 
     // Construction des paliers avec affichage des seuils et des emojis associés
-    const globeEmoji = getEmoji("globe");
-    const troisiemeEmoji = getEmoji("troisieme");
-    const deuxiemeEmoji = getEmoji("deuxieme");
-    const premierEmoji = getEmoji("premier");
-    const tropheEmoji = getEmoji("trophe");
-
     const thresholdsDescription =
       `\n\n**Paliers pour le poids du corps**\n` +
-      `${globeEmoji} **__${levels[0]}__** : ${bodyRow[1]} kg\n` +
-      `${troisiemeEmoji} **__${levels[1]}__** : ${bodyRow[2]} kg\n` +
-      `${deuxiemeEmoji} **__${levels[2]}__** : ${bodyRow[3]} kg\n` +
-      `${premierEmoji} **__${levels[3]}__** : ${bodyRow[4]} kg\n` +
-      `${tropheEmoji} **__${levels[4]}__** : ${bodyRow[5]} kg\n\n` +
+      `${emojiGlobe} **__${levels[0]}__** : ${bodyRow[1]} kg\n` +
+      `${emojiTroisieme} **__${levels[1]}__** : ${bodyRow[2]} kg\n` +
+      `${emojiDeuxieme} **__${levels[2]}__** : ${bodyRow[3]} kg\n` +
+      `${emojiPremier} **__${levels[3]}__** : ${bodyRow[4]} kg\n` +
+      `${emojiTrophe} **__${levels[4]}__** : ${bodyRow[5]} kg\n\n` +
       `**Paliers pour l'âge**\n` +
-      `${globeEmoji} **__${levels[0]}__** : ${ageRow[1]} kg\n` +
-      `${troisiemeEmoji} **__${levels[1]}__** : ${ageRow[2]} kg\n` +
-      `${deuxiemeEmoji} **__${levels[2]}__** : ${ageRow[3]} kg\n` +
-      `${premierEmoji} **__${levels[3]}__** : ${ageRow[4]} kg\n` +
-      `${tropheEmoji} **__${levels[4]}__** : ${ageRow[5]} kg`;
+      `${emojiGlobe} **__${levels[0]}__** : ${ageRow[1]} kg\n` +
+      `${emojiTroisieme} **__${levels[1]}__** : ${ageRow[2]} kg\n` +
+      `${emojiDeuxieme} **__${levels[2]}__** : ${ageRow[3]} kg\n` +
+      `${emojiPremier} **__${levels[3]}__** : ${ageRow[4]} kg\n` +
+      `${emojiTrophe} **__${levels[4]}__** : ${ageRow[5]} kg`;
 
     // Construction de l'embed combinant toutes les informations et le résultat du calcul
     const embed = new EmbedBuilder()
       .setColor(colorEmbed)
       .setTitle(
-        `${cibleEmoji} Calcul du Strength Level pour ${exerciseObj.exercise}`,
+        `${emojiCible} Calcul du Strength Level pour ${exerciseObj.exercise}`,
       )
       .setThumbnail(thumbnailEmbed)
       .setDescription(description + thresholdsDescription)
