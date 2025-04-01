@@ -47,7 +47,7 @@ const { initializeDatabase } = require("./utils/dbInit");
         );
       } else {
         console.error(
-          `⚠️\x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
+          `⚠️ \x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
         );
       }
     }
@@ -83,7 +83,7 @@ const { initializeDatabase } = require("./utils/dbInit");
       registeredCommands = await rest.get(Routes.applicationCommands(clientId));
     } catch (error) {
       console.error(
-        "⚠️\x1b[31m Erreur lors de la récupération des commandes enregistrées: \x1b[0m",
+        "⚠️ \x1b[31m Erreur lors de la récupération des commandes enregistrées: \x1b[0m",
         error,
       );
     }
@@ -100,7 +100,7 @@ const { initializeDatabase } = require("./utils/dbInit");
           );
         } catch (error) {
           console.error(
-            `⚠️\x1b[31m Erreur lors de la suppression de la commande ${registeredCommand.name}: \x1b[0m`,
+            `⚠️ \x1b[31m Erreur lors de la suppression de la commande ${registeredCommand.name}: \x1b[0m`,
             error,
           );
         }
@@ -113,7 +113,7 @@ const { initializeDatabase } = require("./utils/dbInit");
       console.log("📩\x1b[32m Commandes enregistrées avec succès. \x1b[0m");
     } catch (error) {
       console.error(
-        "⚠️\x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m",
+        "⚠️ \x1b[31m Erreur lors de l'enregistrement des commandes: \x1b[0m",
         error,
       );
     }
