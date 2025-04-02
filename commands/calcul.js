@@ -340,44 +340,44 @@ module.exports = {
         .setDescription("Calculs et recherches liés au strength level.")
         .addSubcommand((subcommand) =>
           subcommand
-            .setName("search")
-            .setDescription("Recherche un exercice via Category et Body Part.")
+            .setName("recherche")
+            .setDescription("Recherche un exercice via catégorie et partie du corps.")
             .addStringOption((option) =>
               option
-                .setName("category")
-                .setDescription("Filtrer par Category")
+                .setName("categorie")
+                .setDescription("Filtrer par catégorie")
                 .setRequired(false)
                 .addChoices(
-                  { name: "Any Category", value: "none" },
-                  { name: "Barbell", value: "Barbell" },
-                  { name: "Bodyweight", value: "Bodyweight" },
-                  { name: "Dumbbell", value: "Dumbbell" },
+                  { name: "Toutes catégories", value: "none" },
+                  { name: "Barre", value: "Barre" },
+                  { name: "Poids du corps", value: "Poids du corps" },
+                  { name: "Haltère", value: "Haltere" },
                   { name: "Machine", value: "Machine" },
-                  { name: "Cable", value: "Cable" },
-                ),
+                  { name: "Câble", value: "Cable" }
+                )
             )
             .addStringOption((option) =>
               option
-                .setName("bodypart")
-                .setDescription("Filtrer par Body Part")
+                .setName("muscle")
+                .setDescription("Filtrer par partie du corps")
                 .setRequired(false)
                 .addChoices(
-                  { name: "Any Body Part", value: "none" },
-                  { name: "Whole Body", value: "Whole Body" },
-                  { name: "Legs", value: "Legs" },
-                  { name: "Back", value: "Back" },
-                  { name: "Chest", value: "Chest" },
-                  { name: "Shoulders", value: "Shoulders" },
+                  { name: "Toutes parties", value: "none" },
+                  { name: "Corps entier", value: "Corps entier" },
+                  { name: "Jambes", value: "Jambes" },
+                  { name: "Dos", value: "Dos" },
+                  { name: "Pecs", value: "Pecs" },
+                  { name: "Épaules", value: "Épaules" },
                   { name: "Biceps", value: "Biceps" },
                   { name: "Triceps", value: "Triceps" },
-                  { name: "Core", value: "Core" },
-                  { name: "Forearms", value: "Forearms" },
-                ),
-            ),
+                  { name: "Abdominaux", value: "Abdominaux" },
+                  { name: "Avant-bras", value: "Avant-bras" }
+                )
+            )
         )
         .addSubcommand((subcommand) =>
           subcommand
-            .setName("compute")
+            .setName("estimer")
             .setDescription(
               "Calcule le strength level avec le poids, le poids soulevé, l'âge et le nom de l'exercice.",
             )

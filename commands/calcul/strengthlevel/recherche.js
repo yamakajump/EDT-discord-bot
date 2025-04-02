@@ -3,7 +3,9 @@ const fs = require("fs");
 const path = require("path");
 
 const { getEmoji } = require("../../../utils/emoji");
+const cibleEmoji = getEmoji("cible");
 const nonEmoji = getEmoji("non");
+const emojiBoule = getEmoji("boule");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
@@ -24,8 +26,8 @@ const thumbnailEmbed = style.thumbnailEmbed;
 module.exports = {
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur (optionnelles)
-    const categoryOption = interaction.options.getString("category");
-    const bodyPartOption = interaction.options.getString("bodypart");
+    const categoryOption = interaction.options.getString("categorie");
+    const bodyPartOption = interaction.options.getString("muscle");
 
     // Chemin absolu vers le fichier JSON
     const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
@@ -79,7 +81,7 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
         .setDescription(
           "Aucun exercice ne correspond aux critères de recherche spécifiés.",
         )
-        .addFields({ name: "Filtres appliqués", value: filtersApplied });
+        .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied });
       return interaction.reply({
         embeds: [noResultEmbed],
         flags: MessageFlags.Ephemeral,
@@ -96,12 +98,12 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
     if (description.length > 4096) {
       const limitEmbed = new EmbedBuilder()
         .setColor(colorEmbed)
-        .setTitle(`Recherche trop large ${nonEmoji}`)
+        .setTitle(`${nonEmoji} Recherche trop large`)
         .setThumbnail(thumbnailEmbed)
         .setDescription(
           "Il y a trop d'exercices correspondant à votre recherche. Veuillez affiner votre recherche en utilisant des paramètres supplémentaires.",
         )
-        .addFields({ name: "Filtres appliqués", value: filtersApplied });
+        .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied });
       return interaction.reply({
         embeds: [limitEmbed],
         flags: MessageFlags.Ephemeral,
@@ -111,10 +113,10 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
     // Création de l'embed de résultat
     const resultEmbed = new EmbedBuilder()
       .setColor(colorEmbed)
-      .setTitle("Résultats de la recherche")
+      .setTitle(`${cibleEmoji} Résultats de la recherche`)
       .setDescription(description)
       .setThumbnail(thumbnailEmbed)
-      .addFields({ name: "Filtres appliqués", value: filtersApplied })
+      .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied })
       .setFooter({
         text: "Données extraites du site https://strengthlevel.com/",
       });

@@ -1,8 +1,8 @@
 [
   {
     "exercise": "Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "24", "38", "57", "79", "103"],
@@ -86,8 +86,8 @@
   },
   {
     "exercise": "Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "33", "52", "76", "104", "136"],
@@ -171,8 +171,8 @@
   },
   {
     "exercise": "Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "44", "65", "93", "125", "160"],
@@ -256,8 +256,8 @@
   },
   {
     "exercise": "Shoulder Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "15", "25", "38", "53", "71"],
@@ -341,8 +341,8 @@
   },
   {
     "exercise": "Dumbbell Bench Press",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "8", "15", "26", "39", "54"],
@@ -426,8 +426,8 @@
   },
   {
     "exercise": "Pull Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "-9 kg", "+6 kg", "+24 kg", "+44 kg", "+66 kg"],
@@ -511,7 +511,7 @@
   },
   {
     "exercise": "Dumbbell Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -596,7 +596,7 @@
   },
   {
     "exercise": "Barbell Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -681,8 +681,8 @@
   },
   {
     "exercise": "Push Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "16", "42", "73", "108"],
@@ -767,7 +767,7 @@
   {
     "exercise": "Sled Leg Press",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "40", "78", "132", "199", "276"],
@@ -851,8 +851,8 @@
   },
   {
     "exercise": "Bent Over Row",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "21", "34", "51", "71", "94"],
@@ -936,8 +936,8 @@
   },
   {
     "exercise": "Dumbbell Shoulder Press",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "6", "11", "19", "28", "38"],
@@ -1021,8 +1021,8 @@
   },
   {
     "exercise": "Incline Dumbbell Bench Press",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "10", "16", "24", "33", "44"],
@@ -1106,8 +1106,8 @@
   },
   {
     "exercise": "Incline Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "22", "34", "49", "67", "87"],
@@ -1192,7 +1192,7 @@
   {
     "exercise": "Lat Pulldown",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "25", "39", "58", "81", "105"],
@@ -1276,7 +1276,7 @@
   },
   {
     "exercise": "Dips",
-    "Category": "Bodyweight",
+    "Category": "Poids du corps",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -1361,8 +1361,8 @@
   },
   {
     "exercise": "Front Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "31", "46", "65", "88", "113"],
@@ -1446,8 +1446,8 @@
   },
   {
     "exercise": "Hex Bar Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "55", "78", "107", "141", "178"],
@@ -1531,8 +1531,8 @@
   },
   {
     "exercise": "Dumbbell Lateral Raise",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "1", "5", "10", "18", "27"],
@@ -1616,8 +1616,8 @@
   },
   {
     "exercise": "Power Clean",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "28", "42", "60", "81", "104"],
@@ -1701,8 +1701,8 @@
   },
   {
     "exercise": "Hip Thrust",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "15", "38", "73", "120", "176"],
@@ -1787,7 +1787,7 @@
   {
     "exercise": "Leg Extension",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "21", "40", "68", "102", "141"],
@@ -1871,8 +1871,8 @@
   },
   {
     "exercise": "Romanian Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "28", "47", "73", "103", "138"],
@@ -1956,8 +1956,8 @@
   },
   {
     "exercise": "Chin Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "-6 kg", "+8 kg", "+24 kg", "+42 kg", "+61 kg"],
@@ -2042,7 +2042,7 @@
   {
     "exercise": "Horizontal Leg Press",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "36", "72", "122", "185", "258"],
@@ -2126,8 +2126,8 @@
   },
   {
     "exercise": "Military Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "15", "24", "36", "50", "66"],
@@ -2211,8 +2211,8 @@
   },
   {
     "exercise": "Dumbbell Row",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "7", "15", "25", "39", "55"],
@@ -2296,8 +2296,8 @@
   },
   {
     "exercise": "Sumo Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "52", "75", "105", "140", "178"],
@@ -2382,7 +2382,7 @@
   {
     "exercise": "Chest Press",
     "Category": "Machine",
-    "Body Part": "Chest",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "17", "35", "59", "90", "126"],
@@ -2551,7 +2551,7 @@
   },
   {
     "exercise": "Hammer Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -2637,7 +2637,7 @@
   {
     "exercise": "Seated Cable Row",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "24", "38", "56", "78", "102"],
@@ -2721,8 +2721,8 @@
   },
   {
     "exercise": "Seated Dumbbell Shoulder Press",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "6", "11", "18", "27", "38"],
@@ -2807,7 +2807,7 @@
   {
     "exercise": "Hack Squat",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "23", "51", "92", "146", "209"],
@@ -2891,8 +2891,8 @@
   },
   {
     "exercise": "Clean and Jerk",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "25", "41", "60", "84", "110"],
@@ -2976,8 +2976,8 @@
   },
   {
     "exercise": "Snatch",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "20", "33", "50", "71", "94"],
@@ -3062,7 +3062,7 @@
   {
     "exercise": "Machine Chest Fly",
     "Category": "Machine",
-    "Body Part": "Chest",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "17", "33", "55", "83", "114"],
@@ -3146,8 +3146,8 @@
   },
   {
     "exercise": "Dumbbell Bulgarian Split Squat",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "5", "11", "20", "31", "45"],
@@ -3232,7 +3232,7 @@
   {
     "exercise": "Seated Leg Curl",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "17", "33", "56", "84", "116"],
@@ -3316,7 +3316,7 @@
   },
   {
     "exercise": "EZ Bar Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -3401,8 +3401,8 @@
   },
   {
     "exercise": "Close Grip Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "22", "35", "50", "68", "88"],
@@ -3486,8 +3486,8 @@
   },
   {
     "exercise": "Seated Shoulder Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "10", "21", "36", "54", "76"],
@@ -3572,7 +3572,7 @@
   {
     "exercise": "Machine Shoulder Press",
     "Category": "Machine",
-    "Body Part": "Shoulders",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "10", "23", "44", "71", "102"],
@@ -3656,7 +3656,7 @@
   },
   {
     "exercise": "Lying Tricep Extension",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -3741,8 +3741,8 @@
   },
   {
     "exercise": "Clean",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "31", "45", "62", "82", "103"],
@@ -3826,8 +3826,8 @@
   },
   {
     "exercise": "Barbell Shrug",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "17", "38", "69", "108", "155"],
@@ -3911,7 +3911,7 @@
   },
   {
     "exercise": "Preacher Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -3996,8 +3996,8 @@
   },
   {
     "exercise": "Push Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "18", "31", "49", "70", "94"],
@@ -4081,8 +4081,8 @@
   },
   {
     "exercise": "Goblet Squat",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "8", "17", "30", "48", "68"],
@@ -4167,7 +4167,7 @@
   {
     "exercise": "Lying Leg Curl",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "12", "24", "42", "64", "91"],
@@ -4251,8 +4251,8 @@
   },
   {
     "exercise": "Dumbbell Fly",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "3", "7", "15", "26", "38"],
@@ -4336,8 +4336,8 @@
   },
   {
     "exercise": "T Bar Row",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "17", "32", "52", "77", "106"],
@@ -4421,8 +4421,8 @@
   },
   {
     "exercise": "Decline Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "24", "39", "58", "82", "107"],
@@ -4507,7 +4507,7 @@
   {
     "exercise": "Machine Calf Raise",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "11", "37", "80", "141", "214"],
@@ -4591,8 +4591,8 @@
   },
   {
     "exercise": "Dumbbell Shrug",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "6", "15", "28", "45", "65"],
@@ -4761,8 +4761,8 @@
   },
   {
     "exercise": "Dumbbell Lunge",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "3", "9", "19", "32", "48"],
@@ -4846,8 +4846,8 @@
   },
   {
     "exercise": "Smith Machine Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "27", "42", "62", "85", "111"],
@@ -4931,7 +4931,7 @@
   },
   {
     "exercise": "Dumbbell Tricep Extension",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -5016,8 +5016,8 @@
   },
   {
     "exercise": "Clean and Press",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "19", "33", "51", "73", "97"],
@@ -5187,7 +5187,7 @@
   {
     "exercise": "Machine Row",
     "Category": "Machine",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "18", "36", "61", "92", "129"],
@@ -5271,8 +5271,8 @@
   },
   {
     "exercise": "Rack Pull",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "51", "80", "119", "165", "216"],
@@ -5356,7 +5356,7 @@
   },
   {
     "exercise": "Incline Dumbbell Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -5441,8 +5441,8 @@
   },
   {
     "exercise": "Bodyweight Squat",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "12", "62", "131", "215"],
@@ -5526,8 +5526,8 @@
   },
   {
     "exercise": "Dumbbell Romanian Deadlift",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "5", "13", "25", "41", "60"],
@@ -5611,8 +5611,8 @@
   },
   {
     "exercise": "Pendlay Row",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "25", "37", "53", "72", "92"],
@@ -5696,8 +5696,8 @@
   },
   {
     "exercise": "Bulgarian Split Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "4", "15", "33", "60", "92"],
@@ -5781,8 +5781,8 @@
   },
   {
     "exercise": "Box Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "34", "58", "89", "127", "169"],
@@ -5866,8 +5866,8 @@
   },
   {
     "exercise": "Smith Machine Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "25", "46", "75", "112", "153"],
@@ -5951,7 +5951,7 @@
   },
   {
     "exercise": "Dumbbell Concentration Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -6037,7 +6037,7 @@
   {
     "exercise": "Cable Lateral Raise",
     "Category": "Cable",
-    "Body Part": "Shoulders",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "0", "3", "11", "24", "42"],
@@ -6121,8 +6121,8 @@
   },
   {
     "exercise": "Sit Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "25", "69", "128", "196"],
@@ -6207,7 +6207,7 @@
   {
     "exercise": "Seated Calf Raise",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "8", "29", "64", "112", "171"],
@@ -6291,8 +6291,8 @@
   },
   {
     "exercise": "Upright Row",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "9", "21", "39", "61", "88"],
@@ -6376,8 +6376,8 @@
   },
   {
     "exercise": "Dumbbell Front Raise",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "1", "5", "11", "21", "33"],
@@ -6462,7 +6462,7 @@
   {
     "exercise": "Vertical Leg Press",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "37", "75", "130", "198", "278"],
@@ -6546,7 +6546,7 @@
   },
   {
     "exercise": "Tricep Extension",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -6632,7 +6632,7 @@
   {
     "exercise": "Cable Fly",
     "Category": "Cable",
-    "Body Part": "Chest",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "1", "7", "21", "42", "69"],
@@ -6716,8 +6716,8 @@
   },
   {
     "exercise": "Arnold Press",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "4", "9", "16", "25", "35"],
@@ -6802,7 +6802,7 @@
   {
     "exercise": "Hip Abduction",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "14", "35", "66", "107", "156"],
@@ -6886,8 +6886,8 @@
   },
   {
     "exercise": "Hang Clean",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "27", "39", "54", "72", "91"],
@@ -6971,8 +6971,8 @@
   },
   {
     "exercise": "Stiff Leg Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "26", "47", "74", "107", "145"],
@@ -7056,8 +7056,8 @@
   },
   {
     "exercise": "Muscle Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Whole Body",
+    "Category": "Poids du corps",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "-14 kg", "-5 kg", "+6 kg", "+17 kg", "+29 kg"],
@@ -7141,8 +7141,8 @@
   },
   {
     "exercise": "Zercher Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "24", "42", "66", "97", "131"],
@@ -7227,7 +7227,7 @@
   {
     "exercise": "Face Pull",
     "Category": "Cable",
-    "Body Part": "Shoulders",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "5", "14", "28", "48", "71"],
@@ -7311,8 +7311,8 @@
   },
   {
     "exercise": "Good Morning",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "8", "23", "47", "81", "121"],
@@ -7396,8 +7396,8 @@
   },
   {
     "exercise": "Floor Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "16", "31", "53", "80", "111"],
@@ -7481,8 +7481,8 @@
   },
   {
     "exercise": "Wrist Curl",
-    "Category": "Barbell",
-    "Body Part": "Forearms",
+    "Category": "Barre",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "0", "8", "28", "61", "105"],
@@ -7566,8 +7566,8 @@
   },
   {
     "exercise": "Dumbbell Pullover",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "5", "12", "21", "33", "47"],
@@ -7736,7 +7736,7 @@
   },
   {
     "exercise": "Lying Dumbbell Tricep Extension",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -7821,8 +7821,8 @@
   },
   {
     "exercise": "Incline Dumbbell Fly",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "3", "8", "16", "26", "39"],
@@ -7906,8 +7906,8 @@
   },
   {
     "exercise": "Barbell Lunge",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "13", "28", "49", "76", "108"],
@@ -7991,8 +7991,8 @@
   },
   {
     "exercise": "Dumbbell Floor Press",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "7", "13", "22", "33", "45"],
@@ -8077,7 +8077,7 @@
   {
     "exercise": "Hip Adduction",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "16", "39", "74", "121", "175"],
@@ -8161,8 +8161,8 @@
   },
   {
     "exercise": "Dumbbell Reverse Fly",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "0", "4", "11", "22", "36"],
@@ -8331,8 +8331,8 @@
   },
   {
     "exercise": "Chest Supported Dumbbell Row",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "3", "11", "23", "39", "59"],
@@ -8417,7 +8417,7 @@
   {
     "exercise": "Machine Seated Crunch",
     "Category": "Machine",
-    "Body Part": "Core",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "17", "37", "66", "104", "148"],
@@ -8502,7 +8502,7 @@
   {
     "exercise": "Cable Crunch",
     "Category": "Cable",
-    "Body Part": "Core",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "7", "23", "49", "85", "128"],
@@ -8586,8 +8586,8 @@
   },
   {
     "exercise": "Dumbbell Squat",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "5", "12", "23", "38", "54"],
@@ -8671,8 +8671,8 @@
   },
   {
     "exercise": "Barbell Calf Raise",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "17", "39", "72", "115", "165"],
@@ -8756,8 +8756,8 @@
   },
   {
     "exercise": "Overhead Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "12", "26", "48", "77", "110"],
@@ -8842,7 +8842,7 @@
   {
     "exercise": "Close Grip Lat Pulldown",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "30", "44", "63", "84", "108"],
@@ -8927,7 +8927,7 @@
   {
     "exercise": "Machine Reverse Fly",
     "Category": "Machine",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "11", "23", "40", "61", "87"],
@@ -9011,7 +9011,7 @@
   },
   {
     "exercise": "Dumbbell Tricep Kickback",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -9096,8 +9096,8 @@
   },
   {
     "exercise": "Power Snatch",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "17", "29", "45", "65", "87"],
@@ -9181,8 +9181,8 @@
   },
   {
     "exercise": "Reverse Barbell Curl",
-    "Category": "Barbell",
-    "Body Part": "Forearms",
+    "Category": "Barre",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "5", "13", "26", "44", "66"],
@@ -9351,8 +9351,8 @@
   },
   {
     "exercise": "Thruster",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "15", "30", "50", "75", "104"],
@@ -9436,8 +9436,8 @@
   },
   {
     "exercise": "Paused Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "35", "48", "64", "82", "102"],
@@ -9521,8 +9521,8 @@
   },
   {
     "exercise": "Split Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "7", "22", "45", "76", "114"],
@@ -9606,8 +9606,8 @@
   },
   {
     "exercise": "Crunches",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "15", "57", "111", "176"],
@@ -9691,8 +9691,8 @@
   },
   {
     "exercise": "Push Jerk",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "22", "36", "54", "76", "100"],
@@ -9776,8 +9776,8 @@
   },
   {
     "exercise": "One Arm Push Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "8", "25", "47"],
@@ -9861,8 +9861,8 @@
   },
   {
     "exercise": "Dumbbell Calf Raise",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "3", "12", "26", "46", "71"],
@@ -9946,7 +9946,7 @@
   },
   {
     "exercise": "Strict Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -10031,8 +10031,8 @@
   },
   {
     "exercise": "Decline Dumbbell Bench Press",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "7", "14", "25", "39", "55"],
@@ -10116,8 +10116,8 @@
   },
   {
     "exercise": "Dumbbell Wrist Curl",
-    "Category": "Dumbbell",
-    "Body Part": "Forearms",
+    "Category": "Haltere",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "1", "6", "18", "34", "55"],
@@ -10286,8 +10286,8 @@
   },
   {
     "exercise": "Dumbbell Deadlift",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "7", "17", "31", "49", "70"],
@@ -10371,7 +10371,7 @@
   },
   {
     "exercise": "One Arm Dumbbell Preacher Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -10541,8 +10541,8 @@
   },
   {
     "exercise": "Reverse Wrist Curl",
-    "Category": "Barbell",
-    "Body Part": "Forearms",
+    "Category": "Barre",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "0", "6", "28", "66", "116"],
@@ -10626,8 +10626,8 @@
   },
   {
     "exercise": "Diamond Push Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "6", "21", "41", "63"],
@@ -10712,7 +10712,7 @@
   {
     "exercise": "Reverse Grip Lat Pulldown",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "24", "39", "59", "82", "109"],
@@ -10796,8 +10796,8 @@
   },
   {
     "exercise": "Barbell Reverse Lunge",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "15", "29", "47", "71", "97"],
@@ -10881,8 +10881,8 @@
   },
   {
     "exercise": "Neutral Grip Pull Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "5", "15", "29", "43"],
@@ -10967,7 +10967,7 @@
   {
     "exercise": "Single Leg Press",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "9", "33", "74", "133", "205"],
@@ -11051,8 +11051,8 @@
   },
   {
     "exercise": "Reverse Grip Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "13", "30", "54", "86", "124"],
@@ -11137,7 +11137,7 @@
   {
     "exercise": "Sled Press Calf Raise",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "9", "38", "91", "166", "259"],
@@ -11222,7 +11222,7 @@
   {
     "exercise": "Standing Leg Curl",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "1", "10", "31", "62", "103"],
@@ -11307,7 +11307,7 @@
   {
     "exercise": "Cable Pull Through",
     "Category": "Cable",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "5", "16", "36", "64", "98"],
@@ -11391,8 +11391,8 @@
   },
   {
     "exercise": "Barbell Glute Bridge",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "15", "40", "79", "130", "192"],
@@ -11476,7 +11476,7 @@
   },
   {
     "exercise": "Seated Dumbbell Tricep Extension",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -11561,8 +11561,8 @@
   },
   {
     "exercise": "Landmine Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "9", "27", "57", "98", "148"],
@@ -11646,8 +11646,8 @@
   },
   {
     "exercise": "Back Extension",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "22", "52", "88"],
@@ -11732,7 +11732,7 @@
   {
     "exercise": "Belt Squat",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "17", "45", "90", "151", "222"],
@@ -11817,7 +11817,7 @@
   {
     "exercise": "Machine Lateral Raise",
     "Category": "Machine",
-    "Body Part": "Shoulders",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "5", "15", "32", "55", "82"],
@@ -11901,8 +11901,8 @@
   },
   {
     "exercise": "Neck Curl",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "0", "7", "29", "65", "112"],
@@ -11986,8 +11986,8 @@
   },
   {
     "exercise": "Single Leg Squat",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "10", "29", "52"],
@@ -12071,8 +12071,8 @@
   },
   {
     "exercise": "Bent Over Dumbbell Row",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "6", "13", "23", "36", "51"],
@@ -12156,8 +12156,8 @@
   },
   {
     "exercise": "Pistol Squat",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "13", "29", "46"],
@@ -12242,7 +12242,7 @@
   {
     "exercise": "Straight Arm Pulldown",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "8", "19", "37", "60", "86"],
@@ -12326,8 +12326,8 @@
   },
   {
     "exercise": "Deficit Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "50", "72", "100", "131", "165"],
@@ -12411,8 +12411,8 @@
   },
   {
     "exercise": "Safety Bar Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "31", "51", "79", "112", "149"],
@@ -12496,8 +12496,8 @@
   },
   {
     "exercise": "Dumbbell Upright Row",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "1", "5", "13", "26", "41"],
@@ -12581,8 +12581,8 @@
   },
   {
     "exercise": "Handstand Push Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Shoulders",
+    "Category": "Poids du corps",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "9", "29", "52"],
@@ -12666,8 +12666,8 @@
   },
   {
     "exercise": "Behind The Neck Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "8", "18", "33", "52", "75"],
@@ -12751,8 +12751,8 @@
   },
   {
     "exercise": "Close Grip Dumbbell Bench Press",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "3", "9", "18", "30", "45"],
@@ -12836,8 +12836,8 @@
   },
   {
     "exercise": "Yates Row",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "26", "42", "62", "86", "113"],
@@ -12922,7 +12922,7 @@
   {
     "exercise": "Cable Reverse Fly",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "1", "6", "16", "32", "53"],
@@ -13006,8 +13006,8 @@
   },
   {
     "exercise": "Pause Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "36", "54", "77", "104", "134"],
@@ -13092,7 +13092,7 @@
   {
     "exercise": "Machine Back Extension",
     "Category": "Machine",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "9", "30", "64", "110", "167"],
@@ -13176,8 +13176,8 @@
   },
   {
     "exercise": "Barbell Front Raise",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "0", "3", "15", "36", "64"],
@@ -13261,8 +13261,8 @@
   },
   {
     "exercise": "Burpees",
-    "Category": "Bodyweight",
-    "Body Part": "Whole Body",
+    "Category": "Poids du corps",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "4", "36", "80", "133"],
@@ -13346,8 +13346,8 @@
   },
   {
     "exercise": "Barbell Hack Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "25", "47", "77", "115", "158"],
@@ -13431,8 +13431,8 @@
   },
   {
     "exercise": "Single Leg Romanian Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "0", "8", "26", "56", "95"],
@@ -13516,8 +13516,8 @@
   },
   {
     "exercise": "Sumo Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "8", "28", "60", "105", "160"],
@@ -13601,8 +13601,8 @@
   },
   {
     "exercise": "Hang Power Clean",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "26", "40", "58", "79", "102"],
@@ -13686,8 +13686,8 @@
   },
   {
     "exercise": "Bench Pull",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "18", "32", "51", "74", "101"],
@@ -13771,8 +13771,8 @@
   },
   {
     "exercise": "Dumbbell Side Bend",
-    "Category": "Dumbbell",
-    "Body Part": "Core",
+    "Category": "Haltere",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "1", "9", "26", "52", "86"],
@@ -13856,8 +13856,8 @@
   },
   {
     "exercise": "Bench Pin Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "27", "40", "58", "79", "102"],
@@ -13941,8 +13941,8 @@
   },
   {
     "exercise": "Log Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "15", "26", "41", "60", "81"],
@@ -14026,8 +14026,8 @@
   },
   {
     "exercise": "Split Jerk",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "28", "42", "59", "80", "102"],
@@ -14111,8 +14111,8 @@
   },
   {
     "exercise": "Dumbbell Snatch",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "4", "10", "19", "31", "45"],
@@ -14196,7 +14196,7 @@
   },
   {
     "exercise": "Incline Hammer Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -14281,8 +14281,8 @@
   },
   {
     "exercise": "Hanging Leg Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "3", "16", "33", "52"],
@@ -14366,8 +14366,8 @@
   },
   {
     "exercise": "Bodyweight Calf Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "21", "84", "173", "280"],
@@ -14451,8 +14451,8 @@
   },
   {
     "exercise": "Snatch Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "34", "53", "79", "108", "141"],
@@ -14537,7 +14537,7 @@
   {
     "exercise": "Cable Kickback",
     "Category": "Cable",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "2", "5", "12", "22", "33"],
@@ -14621,8 +14621,8 @@
   },
   {
     "exercise": "Clean High Pull",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "13", "28", "49", "76", "108"],
@@ -14707,7 +14707,7 @@
   {
     "exercise": "Cable Woodchopper",
     "Category": "Cable",
-    "Body Part": "Core",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "3", "13", "29", "53", "81"],
@@ -14791,8 +14791,8 @@
   },
   {
     "exercise": "One Arm Pull Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "3", "8", "13"],
@@ -14876,7 +14876,7 @@
   },
   {
     "exercise": "JM Press",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -14961,8 +14961,8 @@
   },
   {
     "exercise": "Barbell Pullover",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "5", "14", "29", "50", "75"],
@@ -15046,7 +15046,7 @@
   },
   {
     "exercise": "Seated Dumbbell Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -15131,7 +15131,7 @@
   },
   {
     "exercise": "Spider Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -15216,8 +15216,8 @@
   },
   {
     "exercise": "Clean Pull",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "22", "42", "71", "106", "147"],
@@ -15301,8 +15301,8 @@
   },
   {
     "exercise": "Landmine Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "9", "20", "38", "60", "87"],
@@ -15386,8 +15386,8 @@
   },
   {
     "exercise": "Inverted Row",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "3", "16", "34", "54"],
@@ -15471,8 +15471,8 @@
   },
   {
     "exercise": "Decline Push Up",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "8", "27", "51", "78"],
@@ -15556,8 +15556,8 @@
   },
   {
     "exercise": "Pause Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "54", "76", "103", "134", "167"],
@@ -15641,8 +15641,8 @@
   },
   {
     "exercise": "Neck Extension",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "0", "3", "18", "44", "79"],
@@ -15726,8 +15726,8 @@
   },
   {
     "exercise": "Russian Twist",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "22", "60", "109", "165"],
@@ -15811,8 +15811,8 @@
   },
   {
     "exercise": "Lunge",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "9", "41", "84", "135"],
@@ -15981,7 +15981,7 @@
   },
   {
     "exercise": "Zottman Curl",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -16066,8 +16066,8 @@
   },
   {
     "exercise": "Single Leg Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "1", "9", "29", "59", "99"],
@@ -16151,8 +16151,8 @@
   },
   {
     "exercise": "Wide Grip Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "24", "38", "57", "79", "104"],
@@ -16236,8 +16236,8 @@
   },
   {
     "exercise": "Muscle Snatch",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "10", "23", "41", "64", "91"],
@@ -16321,8 +16321,8 @@
   },
   {
     "exercise": "Renegade Row",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "0", "5", "16", "33", "56"],
@@ -16407,7 +16407,7 @@
   {
     "exercise": "One Arm Lat Pulldown",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "5", "12", "24", "38", "56"],
@@ -16491,8 +16491,8 @@
   },
   {
     "exercise": "Jefferson Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "31", "57", "93", "137", "187"],
@@ -16576,8 +16576,8 @@
   },
   {
     "exercise": "Glute Bridge",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "1", "35", "82", "139"],
@@ -16661,8 +16661,8 @@
   },
   {
     "exercise": "Lying Leg Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "2", "35", "81", "136"],
@@ -16746,8 +16746,8 @@
   },
   {
     "exercise": "Dumbbell Bench Pull",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "5", "14", "27", "44", "64"],
@@ -16831,8 +16831,8 @@
   },
   {
     "exercise": "Z Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "13", "22", "34", "49", "66"],
@@ -16916,7 +16916,7 @@
   },
   {
     "exercise": "Ring Dips",
-    "Category": "Bodyweight",
+    "Category": "Poids du corps",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -17001,8 +17001,8 @@
   },
   {
     "exercise": "Dumbbell Reverse Wrist Curl",
-    "Category": "Dumbbell",
-    "Body Part": "Forearms",
+    "Category": "Haltere",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "1", "6", "16", "31", "50"],
@@ -17086,8 +17086,8 @@
   },
   {
     "exercise": "Viking Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "7", "22", "45", "78", "117"],
@@ -17171,7 +17171,7 @@
   },
   {
     "exercise": "Bench Dips",
-    "Category": "Bodyweight",
+    "Category": "Poids du corps",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -17256,7 +17256,7 @@
   },
   {
     "exercise": "Tate Press",
-    "Category": "Dumbbell",
+    "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
       "bodyweight": [
@@ -17341,8 +17341,8 @@
   },
   {
     "exercise": "Shoulder Pin Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "13", "23", "37", "53", "72"],
@@ -17426,7 +17426,7 @@
   },
   {
     "exercise": "Cheat Curl",
-    "Category": "Barbell",
+    "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
       "bodyweight": [
@@ -17511,8 +17511,8 @@
   },
   {
     "exercise": "Pin Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "21", "43", "74", "113", "158"],
@@ -17596,8 +17596,8 @@
   },
   {
     "exercise": "Snatch Pull",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "23", "35", "51", "71", "92"],
@@ -17681,8 +17681,8 @@
   },
   {
     "exercise": "Dumbbell Front Squat",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "3", "11", "22", "38", "58"],
@@ -17766,8 +17766,8 @@
   },
   {
     "exercise": "Walking Lunge",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "0", "8", "36", "83", "148"],
@@ -17852,7 +17852,7 @@
   {
     "exercise": "One Arm Seated Cable Row",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "12", "25", "44", "67", "94"],
@@ -17936,8 +17936,8 @@
   },
   {
     "exercise": "Dumbbell Z Press",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "4", "9", "16", "26", "38"],
@@ -18021,8 +18021,8 @@
   },
   {
     "exercise": "Decline Sit Up",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "12", "44", "85", "133"],
@@ -18191,8 +18191,8 @@
   },
   {
     "exercise": "Wall Ball",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "2", "6", "13", "22", "34"],
@@ -18276,8 +18276,8 @@
   },
   {
     "exercise": "Hanging Knee Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "6", "22", "44", "68"],
@@ -18361,8 +18361,8 @@
   },
   {
     "exercise": "Dumbbell Split Squat",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "4", "10", "19", "31", "45"],
@@ -18446,8 +18446,8 @@
   },
   {
     "exercise": "Close Grip Incline Bench Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "19", "29", "43", "60", "78"],
@@ -18531,8 +18531,8 @@
   },
   {
     "exercise": "Ab Wheel Rollout",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "21", "48", "79"],
@@ -18616,8 +18616,8 @@
   },
   {
     "exercise": "Reverse Lunge",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "9", "38", "76", "120"],
@@ -18701,8 +18701,8 @@
   },
   {
     "exercise": "Dumbbell Reverse Curl",
-    "Category": "Dumbbell",
-    "Body Part": "Forearms",
+    "Category": "Haltere",
+    "Body Part": "Avant-bras",
     "Homme": {
       "bodyweight": [
         ["50", "3", "8", "15", "25", "36"],
@@ -18786,8 +18786,8 @@
   },
   {
     "exercise": "Squat Jump",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "1", "33", "78", "131"],
@@ -18871,8 +18871,8 @@
   },
   {
     "exercise": "Zercher Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "25", "41", "62", "88", "116"],
@@ -18957,7 +18957,7 @@
   {
     "exercise": "Cable Upright Row",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "12", "27", "50", "80", "115"],
@@ -19041,8 +19041,8 @@
   },
   {
     "exercise": "Nordic Hamstring Curl",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "11", "28", "49"],
@@ -19126,8 +19126,8 @@
   },
   {
     "exercise": "One Arm Landmine Press",
-    "Category": "Barbell",
-    "Body Part": "Shoulders",
+    "Category": "Barre",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "4", "9", "16", "26", "37"],
@@ -19212,7 +19212,7 @@
   {
     "exercise": "Machine Shrug",
     "Category": "Machine",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "15", "31", "53", "80", "112"],
@@ -19296,8 +19296,8 @@
   },
   {
     "exercise": "Toes To Bar",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "13", "29", "46"],
@@ -19381,8 +19381,8 @@
   },
   {
     "exercise": "Jumping Jack",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "24", "124", "275", "468"],
@@ -19466,8 +19466,8 @@
   },
   {
     "exercise": "Pike Push Up",
-    "Category": "Bodyweight",
-    "Body Part": "Shoulders",
+    "Category": "Poids du corps",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "4", "19", "37", "57"],
@@ -19551,8 +19551,8 @@
   },
   {
     "exercise": "Hex Bar Shrug",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "17", "38", "69", "109", "155"],
@@ -19636,8 +19636,8 @@
   },
   {
     "exercise": "Decline Crunch",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "17", "39", "65", "94"],
@@ -19721,8 +19721,8 @@
   },
   {
     "exercise": "Sissy Squat",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "4", "40", "91", "152"],
@@ -19806,8 +19806,8 @@
   },
   {
     "exercise": "Dumbbell External Rotation",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "2", "5", "11", "19", "29"],
@@ -19891,8 +19891,8 @@
   },
   {
     "exercise": "Incline Push Up",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "22", "57", "100"],
@@ -19976,8 +19976,8 @@
   },
   {
     "exercise": "Single Leg Dumbbell Deadlift",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "5", "12", "23", "37", "53"],
@@ -20061,8 +20061,8 @@
   },
   {
     "exercise": "Dumbbell Face Pull",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "2", "6", "13", "23", "35"],
@@ -20146,8 +20146,8 @@
   },
   {
     "exercise": "Dumbbell Push Press",
-    "Category": "Dumbbell",
-    "Body Part": "Shoulders",
+    "Category": "Haltere",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "4", "10", "18", "30", "43"],
@@ -20231,8 +20231,8 @@
   },
   {
     "exercise": "Smith Machine Shrug",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "27", "51", "85", "126", "174"],
@@ -20316,8 +20316,8 @@
   },
   {
     "exercise": "Close Grip Push Up",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "8", "31", "60", "93"],
@@ -20401,8 +20401,8 @@
   },
   {
     "exercise": "Bicycle Crunch",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "22", "67", "126", "195"],
@@ -20486,8 +20486,8 @@
   },
   {
     "exercise": "Half Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "37", "57", "83", "113", "146"],
@@ -20571,8 +20571,8 @@
   },
   {
     "exercise": "Dumbbell Incline Y Raise",
-    "Category": "Dumbbell",
-    "Body Part": "Back",
+    "Category": "Haltere",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "1", "5", "14", "27", "44"],
@@ -20656,8 +20656,8 @@
   },
   {
     "exercise": "Archer Push Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Chest",
+    "Category": "Poids du corps",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "3", "22", "47", "75"],
@@ -20741,8 +20741,8 @@
   },
   {
     "exercise": "Dumbbell Clean and Press",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "5", "10", "18", "27", "38"],
@@ -20827,7 +20827,7 @@
   {
     "exercise": "Cable Leg Extension",
     "Category": "Cable",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "2", "9", "20", "37", "57"],
@@ -20912,7 +20912,7 @@
   {
     "exercise": "Cable Shrug",
     "Category": "Cable",
-    "Body Part": "Back",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "11", "28", "53", "86", "125"],
@@ -20997,7 +20997,7 @@
   {
     "exercise": "Single Leg Seated Calf Raise",
     "Category": "Machine",
-    "Body Part": "Legs",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "6", "18", "39", "67", "101"],
@@ -21081,8 +21081,8 @@
   },
   {
     "exercise": "Glute Ham Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "19", "46", "78"],
@@ -21166,8 +21166,8 @@
   },
   {
     "exercise": "Meadows Row",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "5", "13", "24", "38", "55"],
@@ -21251,8 +21251,8 @@
   },
   {
     "exercise": "Barbell Power Shrug",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "11", "33", "68", "116", "174"],
@@ -21336,8 +21336,8 @@
   },
   {
     "exercise": "Bent Arm Barbell Pullover",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "3", "8", "15", "25", "37"],
@@ -21421,8 +21421,8 @@
   },
   {
     "exercise": "Side Lunge",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "12", "41", "79", "121"],
@@ -21507,7 +21507,7 @@
   {
     "exercise": "Cable External Rotation",
     "Category": "Cable",
-    "Body Part": "Shoulders",
+    "Body Part": "Épaules",
     "Homme": {
       "bodyweight": [
         ["50", "0", "4", "12", "23", "37"],
@@ -21591,8 +21591,8 @@
   },
   {
     "exercise": "Reverse Crunches",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "9", "31", "57", "87"],
@@ -21676,8 +21676,8 @@
   },
   {
     "exercise": "Ring Muscle Ups",
-    "Category": "Bodyweight",
-    "Body Part": "Whole Body",
+    "Category": "Poids du corps",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "7", "18", "31"],
@@ -21846,8 +21846,8 @@
   },
   {
     "exercise": "Glute Kickback",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "25", "62", "107"],
@@ -21931,8 +21931,8 @@
   },
   {
     "exercise": "Hang Snatch",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "21", "34", "50", "69", "91"],
@@ -22016,8 +22016,8 @@
   },
   {
     "exercise": "Dumbbell Thruster",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "5", "10", "18", "27", "38"],
@@ -22101,8 +22101,8 @@
   },
   {
     "exercise": "Spoto Press",
-    "Category": "Barbell",
-    "Body Part": "Chest",
+    "Category": "Barre",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "22", "35", "52", "72", "94"],
@@ -22186,8 +22186,8 @@
   },
   {
     "exercise": "Behind The Back Barbell Shrug",
-    "Category": "Barbell",
-    "Body Part": "Back",
+    "Category": "Barre",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "17", "38", "69", "109", "155"],
@@ -22271,8 +22271,8 @@
   },
   {
     "exercise": "Flutter Kicks",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "20", "94", "201", "334"],
@@ -22356,8 +22356,8 @@
   },
   {
     "exercise": "Decline Dumbbell Fly",
-    "Category": "Dumbbell",
-    "Body Part": "Chest",
+    "Category": "Haltere",
+    "Body Part": "Pecs",
     "Homme": {
       "bodyweight": [
         ["50", "2", "7", "15", "26", "39"],
@@ -22441,8 +22441,8 @@
   },
   {
     "exercise": "Mountain Climbers",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "14", "48", "91", "141"],
@@ -22526,8 +22526,8 @@
   },
   {
     "exercise": "Dumbbell High Pull",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "4", "9", "17", "27", "39"],
@@ -22611,8 +22611,8 @@
   },
   {
     "exercise": "Donkey Calf Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "28", "91", "177", "281"],
@@ -22696,8 +22696,8 @@
   },
   {
     "exercise": "Behind The Back Deadlift",
-    "Category": "Barbell",
-    "Body Part": "Whole Body",
+    "Category": "Barre",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "31", "53", "82", "118", "159"],
@@ -22781,8 +22781,8 @@
   },
   {
     "exercise": "Dumbbell Hang Clean",
-    "Category": "Dumbbell",
-    "Body Part": "Whole Body",
+    "Category": "Haltere",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "5", "11", "19", "30", "43"],
@@ -22867,7 +22867,7 @@
   {
     "exercise": "Standing Cable Crunch",
     "Category": "Cable",
-    "Body Part": "Core",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "9", "24", "48", "81", "119"],
@@ -22951,8 +22951,8 @@
   },
   {
     "exercise": "Dumbbell Walking Calf Raise",
-    "Category": "Dumbbell",
-    "Body Part": "Legs",
+    "Category": "Haltere",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "2", "9", "19", "33", "51"],
@@ -23036,8 +23036,8 @@
   },
   {
     "exercise": "Clap Pull Up",
-    "Category": "Bodyweight",
-    "Body Part": "Whole Body",
+    "Category": "Poids du corps",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "2", "12", "25", "40"],
@@ -23122,7 +23122,7 @@
   {
     "exercise": "High Pulley Crunch",
     "Category": "Cable",
-    "Body Part": "Core",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "14", "25", "40", "58", "79"],
@@ -23206,8 +23206,8 @@
   },
   {
     "exercise": "Superman",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "3", "24", "52", "83"],
@@ -23291,8 +23291,8 @@
   },
   {
     "exercise": "Reverse Hyperextension",
-    "Category": "Bodyweight",
-    "Body Part": "Back",
+    "Category": "Poids du corps",
+    "Body Part": "Dos",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "< 1", "21", "50", "85"],
@@ -23376,8 +23376,8 @@
   },
   {
     "exercise": "Side Leg Raise",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "2", "22", "47", "77"],
@@ -23546,8 +23546,8 @@
   },
   {
     "exercise": "Side Crunch",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "17", "48", "88", "134"],
@@ -23631,8 +23631,8 @@
   },
   {
     "exercise": "Roman Chair Side Bend",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "5", "22", "44", "69"],
@@ -23716,8 +23716,8 @@
   },
   {
     "exercise": "Floor Hip Abduction",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "1", "16", "35", "56"],
@@ -23801,8 +23801,8 @@
   },
   {
     "exercise": "Hip Extension",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "10", "33", "63", "97"],
@@ -23886,8 +23886,8 @@
   },
   {
     "exercise": "Jefferson Squat",
-    "Category": "Barbell",
-    "Body Part": "Legs",
+    "Category": "Barre",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "28", "48", "73", "104", "139"],
@@ -23971,8 +23971,8 @@
   },
   {
     "exercise": "Squat Thrust",
-    "Category": "Bodyweight",
-    "Body Part": "Whole Body",
+    "Category": "Poids du corps",
+    "Body Part": "Corps entier",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "3", "27", "61", "100"],
@@ -24141,8 +24141,8 @@
   },
   {
     "exercise": "Scissor Kicks",
-    "Category": "Bodyweight",
-    "Body Part": "Core",
+    "Category": "Poids du corps",
+    "Body Part": "Abdominaux",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "5", "31", "68", "110"],
@@ -24311,8 +24311,8 @@
   },
   {
     "exercise": "Floor Hip Extension",
-    "Category": "Bodyweight",
-    "Body Part": "Legs",
+    "Category": "Poids du corps",
+    "Body Part": "Jambes",
     "Homme": {
       "bodyweight": [
         ["50", "< 1", "1", "16", "35", "56"],
