@@ -10,12 +10,12 @@ const fs = require("fs").promises;
 const path = require("path");
 
 // Affichage des variables d'environnement utilisées pour la connexion
-console.log("🔍 Tentative de connexion MySQL avec les paramètres suivants :");
-console.log("MYSQL_HOST:", process.env.MYSQL_HOST || "localhost");
-console.log("MYSQL_PORT:", process.env.MYSQL_PORT || 3306);
-console.log("MYSQL_USER:", process.env.MYSQL_USER || "root");
-console.log("MYSQL_PASSWORD:", process.env.MYSQL_PASSWORD ? "******" : "password");
-console.log("MYSQL_DATABASE:", process.env.MYSQL_DATABASE || "edt_db");
+console.log("\x1b[34m🔍 Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m");
+console.log("\x1b[36mMYSQL_HOST:\x1b[0m", process.env.MYSQL_HOST || "localhost");
+console.log("\x1b[36mMYSQL_PORT:\x1b[0m", process.env.MYSQL_PORT || 3306);
+console.log("\x1b[36mMYSQL_USER:\x1b[0m", process.env.MYSQL_USER || "root");
+console.log("\x1b[36mMYSQL_PASSWORD:\x1b[0m", process.env.MYSQL_PASSWORD ? "******" : "password");
+console.log("\x1b[36mMYSQL_DATABASE:\x1b[0m", process.env.MYSQL_DATABASE || "edt_db");
 
 // Création du pool de connexions MySQL
 const pool = mysql.createPool({
@@ -38,12 +38,12 @@ const promisePool = pool.promise();
  */
 async function testConnection() {
   try {
-    console.log("🔄 Test de connexion à MySQL...");
+    console.log("\x1b[35m🔄 Test de connexion à MySQL...\x1b[0m");
     const connection = await promisePool.getConnection();
-    console.log("✅ Connexion à MySQL réussie !");
+    console.log("\x1b[32m✅ Connexion à MySQL réussie !\x1b[0m");
     connection.release();
   } catch (err) {
-    console.error("❌ Échec de la connexion à MySQL :", err.message);
+    console.error("\x1b[31m❌ Échec de la connexion à MySQL :\x1b[0m", err.message);
     throw err;
   }
 }
@@ -57,24 +57,20 @@ async function testConnection() {
  * @returns {Promise<void>} Une promesse qui se résout une fois le script exécuté.
  */
 async function initializeDatabase() {
-  // Test de la connexion avant de lancer le script SQL
-  await testConnection();
-
   // Construction du chemin absolu vers le fichier SQL d'initialisation.
   const initSqlPath = path.join(__dirname, "..", "sql", "init_tables.sql");
-  console.log("📂 Lecture du fichier SQL d'initialisation :", initSqlPath);
-
   try {
+    console.log("\x1b[34m📂 Lecture du fichier SQL d'initialisation :\x1b[0m", initSqlPath);
     // Lecture du fichier SQL en tant que chaîne de caractères.
     const sql = await fs.readFile(initSqlPath, "utf8");
-    console.log("📜 Contenu du script SQL obtenu, exécution en cours...");
+    console.log("\x1b[34m📝 Contenu du fichier SQL chargé.\x1b[0m");
     // Exécution du script SQL sur la base de données.
     const [results, fields] = await promisePool.query(sql);
-    console.log("🗂️ \x1b[32mBase de données initialisée avec succès.\x1b[0m");
-    console.log("Résultats de l'exécution :", results);
+    console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
+    console.log("\x1b[36m📊 Résultats de l'exécution :\x1b[0m", results);
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
-    console.error("🗂️ \x1b[31mErreur lors de l'exécution du script SQL :\x1b[0m", err);
+    console.error("\x1b[31m🗂️  Erreur lors de l'exécution du script SQL :\x1b[0m", err);
     throw err;
   }
 }
