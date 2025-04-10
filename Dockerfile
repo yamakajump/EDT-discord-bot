@@ -1,5 +1,8 @@
 FROM node:23-slim
 
+# Créer l'utilisateur "container" avec son répertoire home
+RUN useradd -m container
+
 # Installer les dépendances système nécessaires (Puppeteer + canvas)
 RUN apt-get update && apt-get install -y \
   wget \
@@ -36,15 +39,23 @@ RUN apt-get update && apt-get install -y \
   pkg-config \
   --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Définir le répertoire de travail
-WORKDIR /app
+# Définir le répertoire de travail dans /home/container, comme requis par Pterodactyl
+WORKDIR /home/container
 
-# Copier les fichiers package.json et installer les dépendances Node.js
+# Copier les fichiers package.json et package-lock.json (ou yarn.lock) dans le répertoire de travail
 COPY package*.json ./
+
+# Installer les dépendances Node.js
 RUN npm install
 
-# Copier l'intégralité du projet
+# Copier l'intégralité du projet dans /home/container
 COPY . .
+
+# Assurer que l'utilisateur "container" possède bien tous les fichiers
+RUN chown -R container:container /home/container
+
+# Passer à l'utilisateur non-root "container"
+USER container
 
 # Lancer l'application
 CMD ["node", "index.js"]
