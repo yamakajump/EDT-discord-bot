@@ -1,6 +1,6 @@
 FROM node:18
 
-# Installer les dépendances système nécessaires (Puppeteer + canvas)
+# Installer les dépendances système nécessaires (Puppeteer + canvas)a
 RUN apt-get update && apt-get install -y \
   wget \
   ca-certificates \
