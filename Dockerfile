@@ -71,7 +71,3 @@ RUN chown -R container:container /home/container
 
 # Se positionner sous l'utilisateur non-root "container"
 USER container
-
-# Le panel Pterodactyl va injecter les variables d'environnement et le script de démarrage (startup) défini dans l'egg.
-# Afin de ne pas interférer avec ce comportement, nous définissons l'entrypoint par défaut sur bash.
-CMD ["bash"]
