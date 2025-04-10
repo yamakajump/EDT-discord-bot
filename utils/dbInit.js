@@ -9,17 +9,15 @@ const mysql = require("mysql2");
 const fs = require("fs").promises;
 const path = require("path");
 
-// Configuration du pool de connexions.
-// Les paramètres de connexion sont récupérés via les variables d'environnement
-// sinon des valeurs par défaut sont utilisées.
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST || "localhost", // Hôte de la base de données
-  user: process.env.MYSQL_USER || "root", // Nom d'utilisateur
+  port: process.env.MYSQL_PORT || 3306,          // Port MySQL
+  user: process.env.MYSQL_USER || "root",        // Nom d'utilisateur
   password: process.env.MYSQL_PASSWORD || "password", // Mot de passe
-  database: process.env.MYSQL_DATABASE || "edt_db", // Base de données cible
+  database: process.env.MYSQL_DATABASE || "edt_db",   // Base de données cible
   waitForConnections: true, // Active l'attente des connexions disponibles
-  connectionLimit: 10, // Nombre maximum de connexions simultanées
-  queueLimit: 0, // Pas de limite sur la file d'attente
+  connectionLimit: 10,      // Nombre maximum de connexions simultanées
+  queueLimit: 0,            // Pas de limite sur la file d'attente
   multipleStatements: true, // Permet l'exécution de plusieurs instructions SQL
 });
 
