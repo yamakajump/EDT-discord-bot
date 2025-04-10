@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:23-slim
 
 # Installer les dépendances système nécessaires (Puppeteer + canvas)
 RUN apt-get update && apt-get install -y \
