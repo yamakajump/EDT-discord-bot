@@ -1,6 +1,6 @@
 FROM node:23-slim
 
-# Installer les dépendances système (comme Puppeteer, canvas, etc.)
+# Installer les dépendances système nécessaires (Puppeteer + canvas)
 RUN apt-get update && apt-get install -y \
   wget \
   ca-certificates \
@@ -36,30 +36,15 @@ RUN apt-get update && apt-get install -y \
   pkg-config \
   --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Créer l’utilisateur "container" et définir le répertoire de travail dans /home/container
-RUN useradd -m -d /home/container container
-WORKDIR /home/container
+# Définir le répertoire de travail
+WORKDIR /app
 
 # Copier les fichiers package.json et installer les dépendances Node.js
 COPY package*.json ./
 RUN npm install
 
-# Copier l'intégralité du projet dans /home/container
+# Copier l'intégralité du projet
 COPY . .
 
-# Copier le script d'entrypoint personnalisé
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-# Déclarer la variable d'environnement NODE_PACKAGES avec une valeur par défaut vide
-ENV NODE_PACKAGES=""
-
-# Installer tini et le définir comme entrypoint pour une meilleure gestion du signal
-RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
-ENTRYPOINT ["/usr/bin/tini", "--"]
-
-# Pour des raisons de sécurité, exécuter le conteneur avec l'utilisateur "container"
-USER container
-
-# Utiliser le script d'entrypoint pour démarrer le conteneur
-CMD ["/entrypoint.sh"]
+# Lancer l'application
+CMD ["node", "index.js"]
