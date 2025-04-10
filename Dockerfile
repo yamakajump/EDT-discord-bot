@@ -1,7 +1,7 @@
 FROM node:23-slim
 
-# Installer les dépendances système nécessaires (Puppeteer + canvas + tini)
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# Installer les dépendances système (comme Puppeteer, canvas, etc.)
+RUN apt-get update && apt-get install -y \
   wget \
   ca-certificates \
   fonts-liberation \
@@ -34,31 +34,32 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libjpeg-dev \
   libgif-dev \
   pkg-config \
-  tini \
-  && rm -rf /var/lib/apt/lists/*
+  --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-# Créer un utilisateur non-root nommé "container" avec son répertoire personnel
+# Créer l’utilisateur "container" et définir le répertoire de travail dans /home/container
 RUN useradd -m -d /home/container container
-
-# Définir des variables d'environnement pour faciliter l'utilisation de l'utilisateur
-ENV USER=container
-ENV HOME=/home/container
-
-# Définir le répertoire de travail sur le dossier personnel de l'utilisateur
 WORKDIR /home/container
 
-# Copier les fichiers package*.json et installer les dépendances Node.js
+# Copier les fichiers package.json et installer les dépendances Node.js
 COPY package*.json ./
 RUN npm install
 
-# Copier l'intégralité du projet dans le conteneur
+# Copier l'intégralité du projet dans /home/container
 COPY . .
 
-# Pour s'assurer que l'utilisateur "container" possède bien tous les fichiers
-RUN chown -R container:container /home/container
+# Copier le script d'entrypoint personnalisé
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Utiliser Tini comme init pour une meilleure gestion des signaux et des processus zombies
+# Déclarer la variable d'environnement NODE_PACKAGES avec une valeur par défaut vide
+ENV NODE_PACKAGES=""
+
+# Installer tini et le définir comme entrypoint pour une meilleure gestion du signal
+RUN apt-get update && apt-get install -y tini && rm -rf /var/lib/apt/lists/*
 ENTRYPOINT ["/usr/bin/tini", "--"]
 
-# Lancer l'application Node.js
-CMD ["node", "index.js"]
+# Pour des raisons de sécurité, exécuter le conteneur avec l'utilisateur "container"
+USER container
+
+# Utiliser le script d'entrypoint pour démarrer le conteneur
+CMD ["/entrypoint.sh"]
