@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Activation de corepack afin d'utiliser Yarn si besoin
-corepack enable
-
 # Installation des dépendances Node.js en mode production
 yarn install --check-cache --production
 
