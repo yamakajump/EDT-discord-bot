@@ -1,16 +1,17 @@
 #!/bin/bash
 set -e
 
-# Si package-lock.json existe, on peut utiliser npm ci pour une installation propre,
-# sinon, on utilise npm install.
+# Définir explicitement le cache npm
+export npm_config_cache=/home/container/.npm
+
+# Si package-lock.json existe, utilisation de 'npm ci', sinon 'npm install'
 if [ -f /home/container/package-lock.json ]; then
   npm ci --production
 else
   npm install --production
 fi
 
-# Préparation de la commande de démarrage en substituant les variables.
-# On utilise des quotes pour éviter que le shell n'interprète trop tôt certains caractères.
+# Préparation de la commande de démarrage en substituant les variables
 MODIFIED_STARTUP=$(eval echo "$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')")
 echo "Starting bot with command: ${MODIFIED_STARTUP}"
 
