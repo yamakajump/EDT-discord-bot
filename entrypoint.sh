@@ -11,9 +11,7 @@ else
   npm install --production
 fi
 
-# Préparation de la commande de démarrage en substituant les variables
-MODIFIED_STARTUP=$(eval echo "$(echo ${STARTUP} | sed -e 's/{{/${/g' -e 's/}}/}/g')")
-echo "Starting bot with command: ${MODIFIED_STARTUP}"
-
-# Exécution de la commande de démarrage
-eval "${MODIFIED_STARTUP}"
+# Traitement de la commande STARTUP
+STARTUP_PROCESSED=$(echo "${STARTUP}" | sed -e 's/{{/${/g' -e 's/}}/}/g')
+echo "Starting bot with command: ${STARTUP_PROCESSED}"
+eval "${STARTUP_PROCESSED}"
