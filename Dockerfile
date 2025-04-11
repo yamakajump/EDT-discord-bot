@@ -54,7 +54,7 @@ RUN apt-get update && \
         --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
-# Installation de ts-node globalement pour supporter l'exécution de fichiers TypeScript
+# Installation de ts-node globalement pour supporter l'exécution de fichiers TypeScript (si nécessaire)
 RUN npm install -g ts-node
 
 # Création de l'utilisateur "container" avec son répertoire personnel
@@ -67,9 +67,8 @@ WORKDIR /home/container
 COPY ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Passer à l'utilisateur non-root "container" (conformément aux bonnes pratiques et à la configuration de l'egg)
+# Passer à l'utilisateur non-root "container"
 USER container
 
-# La commande de démarrage est définie dans l'egg Pterodactyl.
-# Ici, nous utilisons le script entrypoint.sh qui prendra en charge l'exécution de la commande de démarrage (STARTUP) définie.
+# Définir la commande de démarrage qui appellera votre script d'entrypoint.
 CMD ["/bin/bash", "/entrypoint.sh"]
