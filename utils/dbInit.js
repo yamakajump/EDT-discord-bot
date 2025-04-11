@@ -67,7 +67,6 @@ async function initializeDatabase() {
     // Exécution du script SQL sur la base de données.
     const [results, fields] = await promisePool.query(sql);
     console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
-    console.log("\x1b[36m📊 Résultats de l'exécution :\x1b[0m", results);
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
     console.error("\x1b[31m🗂️  Erreur lors de l'exécution du script SQL :\x1b[0m", err);
