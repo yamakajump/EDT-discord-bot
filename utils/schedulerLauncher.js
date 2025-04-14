@@ -38,7 +38,7 @@ module.exports = (client) => {
   });
 
   // Affichage du tableau stylisé
-  console.log("\n\x1b[1m📅 Liste des schedulers :\x1b[0m");
+  console.log("\n\x1b[1m📅  Liste des schedulers :\x1b[0m");
 
   // Détermine la largeur maximale de chaque colonne
   const headerFichier = "Fichier";

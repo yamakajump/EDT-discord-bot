@@ -27,7 +27,7 @@ module.exports = {
 `);
 
     console.log(
-      `\x1b[0m🚀 Le bot est prêt ! Connecté en tant que \x1b[38;5;45m${client.user.tag}\x1b[0m (\x1b[38;5;45m${client.user.id}\x1b[0m)`,
+      `\x1b[0m🚀  Le bot est prêt ! Connecté en tant que \x1b[38;5;45m${client.user.tag}\x1b[0m (\x1b[38;5;45m${client.user.id}\x1b[0m)`,
     );
 
     // Lancement des tâches planifiées (schedulers)

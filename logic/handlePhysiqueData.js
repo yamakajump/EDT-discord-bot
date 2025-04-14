@@ -5,6 +5,7 @@ const {
   ActionRowBuilder,
   ButtonBuilder,
   ButtonStyle,
+  MessageFlags,
 } = require("discord.js");
 const pendingInteractions = require("../cache/pendingInteractions");
 const guerrierDAO = require("../dao/guerrierDAO");
