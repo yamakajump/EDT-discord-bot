@@ -47,28 +47,28 @@ module.exports = {
     };
 
     // Vérifications humoristiques des valeurs saisies
-    if (providedData.poids != null || providedData.poids <= 0) {
+    if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
         content:
           "Attention ! Un poids négatif (ou nul), ce n'est pas de la magie, c'est juste étrange. Mettez un nombre positif, s'il vous plaît !",
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.taille != null || providedData.taille <= 0) {
+    if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
         content:
           "La taille doit être supérieure à zéro (en cm). Merci de vérifier ta saisie !",
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.age != null || providedData.age <= 0) {
+    if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content:
           "L'âge doit être un nombre positif. Vérifie ton âge s'il te plaît !",
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.temps != null || providedData.temps < 0) {
+    if (providedData.temps != null && providedData.temps < 0) {
       return interaction.reply({
         content:
           "Le temps d'entraînement doit être positif (en minutes). Merci de vérifier ta saisie !",
@@ -76,8 +76,8 @@ module.exports = {
       });
     }
     if (
-      providedData.tef != null ||
-      providedData.tef < 10 ||
+      providedData.tef != null &&
+      providedData.tef < 10 &&
       providedData.tef > 25
     ) {
       return interaction.reply({
@@ -86,22 +86,10 @@ module.exports = {
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.jours != null || providedData.jours < 0) {
+    if (providedData.jours != null && providedData.jours < 0) {
       return interaction.reply({
         content:
           "Le nombre de jours d'entraînement par semaine doit être positif. Merci de vérifier ta saisie !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (!providedData.activite) {
-      return interaction.reply({
-        content: "Merci de renseigner votre niveau d'activité quotidienne.",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (!providedData.intensite) {
-      return interaction.reply({
-        content: "Merci de renseigner l'intensité de ton entraînement.",
         flags: MessageFlags.Ephemeral,
       });
     }
