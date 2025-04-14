@@ -18,82 +18,73 @@
 
 const { EmbedBuilder } = require("discord.js");
 const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   async execute(interaction) {
-    // Récupération des valeurs fournies par l'utilisateur
-    const poids = interaction.options.getNumber("poids");
-    const taille = interaction.options.getNumber("taille"); // en cm
-    const age = interaction.options.getInteger("age");
-    const sexe = interaction.options.getString("sexe");
-
-    // Création d'un tableau pour lister les champs manquants
-    const missingFields = [];
-
-    if (poids === null || poids === undefined) missingFields.push("poids");
-    if (taille === null || taille === undefined) missingFields.push("taille");
-    if (age === null || age === undefined) missingFields.push("age");
-    if (!sexe) missingFields.push("sexe");
-
-    if (missingFields.length > 0) {
-      return interaction.reply({
-        content: `Les champs suivants sont manquants : ${missingFields.join(
-          ", ",
-        )}. Veuillez les renseigner.`,
-        ephemeral: true,
-      });
-    }
+    // Construction des données fournies par l'utilisateur
+    const providedData = {
+      poids: interaction.options.getNumber("poids"),
+      taille: interaction.options.getNumber("taille"), // en cm
+      age: interaction.options.getInteger("age"),
+      sexe: interaction.options.getString("sexe"),
+    };
 
     // Vérification que les valeurs numériques sont positives
-    if (poids <= 0) {
+    if (providedData.poids <= 0) {
       return interaction.reply({
         content: "Le poids doit être un nombre positif.",
         ephemeral: true,
       });
     }
-    if (taille <= 0) {
+    if (providedData.taille <= 0) {
       return interaction.reply({
         content: "La taille doit être un nombre positif.",
         ephemeral: true,
       });
     }
-    if (age <= 0) {
+    if (providedData.age <= 0) {
       return interaction.reply({
         content: "L'âge doit être un nombre positif.",
         ephemeral: true,
       });
     }
 
-    // Normalisation et vérification du champ 'sexe'
-    const sexeNormalized = sexe.trim().toLowerCase();
-    if (sexeNormalized !== "homme" && sexeNormalized !== "femme") {
-      return interaction.reply({
-        content: 'Le champ "sexe" doit être renseigné avec "homme" ou "femme".',
-        ephemeral: true,
-      });
-    }
-
-    // Construction de l'objet de données fourni
-    const providedData = {
-      poids,
-      taille,
-      age,
-      sexe,
-    };
-
     // Callback qui exécute le calcul de la masse grasse
     const executeCalculationCallback = async (
       interactionContext,
       finalData,
     ) => {
+      // Vérification des champs manquants
+      const missingFields = [];
+      if (finalData.poids === null || finalData.poids === undefined) {
+        missingFields.push("poids");
+      }
+      if (finalData.taille === null || finalData.taille === undefined) {
+        missingFields.push("taille");
+      }
+      if (finalData.age === null || finalData.age === undefined) {
+        missingFields.push("age");
+      }
+      if (!finalData.sexe) {
+        missingFields.push("sexe");
+      }
+
+      if (missingFields.length > 0) {
+        return interaction.reply({
+          content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Veuillez les renseigner.`,
+          ephemeral: true,
+        });
+      }
+
       // On utilise finalData, sachant que la taille est stockée en cm.
       const poids = finalData.poids;
       const tailleM = finalData.taille / 100; // conversion de cm en m
       const age = finalData.age;
-      // Normalisation de la valeur de sexe (minuscule)
+      // Normalisation de la valeur de sexe (minuscule pour éviter les problèmes de casse)
       const sexe = finalData.sexe.toLowerCase();
 
       // Calcul de l'IMC
@@ -130,7 +121,7 @@ module.exports = {
         )
         .setFooter({ text: "Calculé selon la formule de Deurenberg" });
 
-      // Si une réponse éphémère existe déjà, on la supprime puis on envoie un message public.
+      // S'il existe déjà une réponse (souvent éphémère), on la supprime et on envoie un message public.
       if (interactionContext.replied || interactionContext.deferred) {
         try {
           await interactionContext.deleteReply();
@@ -147,7 +138,10 @@ module.exports = {
       }
     };
 
-    // Appel à la logique de gestion du physique.
+    // Appel à la logique de gestion du physique. Celle‑ci se charge de :
+    //  • Vérifier si l'utilisateur doit choisir d'enregistrer ses données
+    //  • Fusionner les données fournies et celles stockées
+    //  • Vérifier si un rappel de mise à jour s'impose au vu de la date de dernière modification
     await handleUserPhysique(
       interaction,
       providedData,
