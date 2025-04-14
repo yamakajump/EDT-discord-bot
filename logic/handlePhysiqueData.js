@@ -9,7 +9,7 @@ const {
 const pendingInteractions = require("../cache/pendingInteractions");
 const guerrierDAO = require("../dao/guerrierDAO");
 
-const style = require("../../config/style.json");
+const style = require("../config/style.json");
 const colorEmbed = style.colorEmbed;
 const thumbnailEmbed = style.thumbnailEmbed;
 
