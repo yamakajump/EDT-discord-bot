@@ -78,19 +78,19 @@ async function handleUserPhysique(
   // 2. Si "enregistrer" est false : on utilise uniquement les données fournies
 
   console.log("enregistrer : ", guerrier.enregistrer);
+  console.log(
+    "Données fournies par l'utilisateur :",
+    providedData,
+    "Données stockées en base :",
+    guerrier,
+  );
 
-  if (guerrier.enregistrer === false) {
+  if (guerrier.enregistrer == 0) {
     finalData = providedData;
-    console.log(
-      "Données fournies par l'utilisateur :",
-      providedData,
-      "Données stockées en base :",
-      guerrier,
-    );
   }
 
   // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
-  else if (guerrier.enregistrer === true) {
+  else if (guerrier.enregistrer == 1) {
     finalData = {
       poids:
         providedData.poids !== undefined ? providedData.poids : guerrier.poids,
@@ -116,56 +116,15 @@ async function handleUserPhysique(
     };
 
     console.log("Données finales après fusion :", finalData);
-
-    // 4. Vérifier la date de dernière modification et la durée de rappel
-    // On suppose que guerrier.derniere_modification et guerrier.rappel_update_physique existent en base
-    const lastModification = new Date(guerrier.derniere_modification);
-    const now = new Date();
-    const diffWeeks = (now - lastModification) / (1000 * 60 * 60 * 24 * 7);
-    if (diffWeeks >= guerrier.rappel_update_physique) {
-      const embed = new EmbedBuilder()
-        .setTitle("Mise à jour de vos données physiques")
-        .setDescription(
-          "Vos données physiques semblent anciennes. Souhaitez-vous vérifier et/ou mettre à jour vos informations ?",
-        )
-        .setColor(colorEmbed)
-        .setThumbnail(thumbnailEmbed);
-
-      const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("updatePhysique:yes")
-          .setLabel("Oui")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("updatePhysique:no")
-          .setLabel("Non")
-          .setStyle(ButtonStyle.Secondary),
-      );
-      await interaction.reply({
-        embeds: [embed],
-        components: [row],
-        flags: MessageFlags.Ephemeral,
-      });
-
-      // Stocker le contexte pour reprendre une fois la décision prise
-      pendingInteractions.add(userId, {
-        type: "physiqueUpdateConfirmation",
-        finalData,
-        executeCalculationCallback,
-        guerrier,
-        originalInteraction: interaction,
-      });
-      return;
-    }
   }
 
-  // 5. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
+  // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
   if (guerrier.enregistrer === true) {
     // On s'attend à ce que la méthode updateUserData du DAO mette à jour
     await guerrierDAO.updateUserData(userId, finalData);
   }
 
-  // 6. Exécuter la suite de la commande (le calcul) avec les données finales
+  // 5. Exécuter la suite de la commande (le calcul) avec les données finales
   await executeCalculationCallback(interaction, finalData);
 }
 
