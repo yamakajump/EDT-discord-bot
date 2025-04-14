@@ -208,7 +208,7 @@ module.exports = {
       }
 
       // 1. Option "ajustement" renseignée (ajustement direct des calories)
-      if (ajustementInput !== null) {
+      if (ajustementInput !== undefined) {
         const adjustedCalories = DEJ + ajustementInput;
         let title, description;
         if (ajustementInput < 0) {
@@ -239,7 +239,7 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
         embed.setTitle(title).setDescription(description);
       }
       // 2. Option "pourcentage" renseignée (personnalisation par pourcentage)
-      else if (pourcentageInput !== null) {
+      else if (pourcentageInput !== undefined) {
         if (pourcentageInput < 100) {
           const customSeche = Math.round(DEJ * (pourcentageInput / 100));
           embed
