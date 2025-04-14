@@ -9,6 +9,10 @@ const {
 const pendingInteractions = require("../cache/pendingInteractions");
 const guerrierDAO = require("../dao/guerrierDAO");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 /**
  * Gère la récupération ou la mise à jour des informations physiques de l'utilisateur.
  *
@@ -38,7 +42,8 @@ async function handleUserPhysique(
       .setDescription(
         "Voulez-vous enregistrer vos données physiques afin de ne pas les ressaisir à chaque commande ?\nVos données sont confidentielles.",
       )
-      .setColor("Blue");
+      .setColor(colorEmbed)
+      .setThumbnail(thumbnailEmbed);
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -54,7 +59,7 @@ async function handleUserPhysique(
     await interaction.reply({
       embeds: [embed],
       components: [row],
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     });
     // On conserve le contexte pour reprendre la commande après la réponse
     pendingInteractions.add(userId, {
@@ -110,7 +115,8 @@ async function handleUserPhysique(
         .setDescription(
           "Vos données physiques semblent anciennes. Souhaitez-vous vérifier et/ou mettre à jour vos informations ?",
         )
-        .setColor("Orange");
+        .setColor(colorEmbed)
+        .setThumbnail(thumbnailEmbed);
 
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -125,7 +131,7 @@ async function handleUserPhysique(
       await interaction.reply({
         embeds: [embed],
         components: [row],
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
       // Stocker le contexte pour reprendre une fois la décision prise
       pendingInteractions.add(userId, {
