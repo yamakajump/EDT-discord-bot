@@ -208,14 +208,6 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
 
   // Envoi de la réponse en fonction du contexte
   if (interactionContext.replied || interactionContext.deferred) {
-    try {
-      await interactionContext.deleteReply();
-    } catch (error) {
-      console.error(
-        "Erreur lors de la suppression de la réponse éphémère :",
-        error,
-      );
-    }
     await interactionContext.channel.send({ embeds: [embed] });
   } else {
     await interactionContext.reply({ embeds: [embed] });
