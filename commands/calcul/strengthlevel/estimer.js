@@ -87,8 +87,8 @@ module.exports = {
       });
     }
     if (
-      !providedData.sex ||
-      (providedData.sex !== "Homme" && providedData.sex !== "Femme")
+      !providedData.sexe ||
+      (providedData.sexe !== "Homme" && providedData.sexe !== "Femme")
     ) {
       return interaction.reply({
         content: "Erreur : veuillez spécifier votre sexe ('Homme' ou 'Femme').",
