@@ -92,27 +92,22 @@ async function handleUserPhysique(
   // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
   else if (guerrier.enregistrer == 1) {
     finalData = {
-      poids:
-        providedData.poids !== undefined ? providedData.poids : guerrier.poids,
+      poids: providedData.poids != null ? providedData.poids : guerrier.poids,
       taille:
-        providedData.taille !== undefined
-          ? providedData.taille
-          : guerrier.taille,
-      age: providedData.age !== undefined ? providedData.age : guerrier.age,
-      sexe: providedData.sexe !== undefined ? providedData.sexe : guerrier.sexe,
+        providedData.taille != null ? providedData.taille : guerrier.taille,
+      age: providedData.age != null ? providedData.age : guerrier.age,
+      sexe: providedData.sexe != null ? providedData.sexe : guerrier.sexe,
       activite:
-        providedData.activite !== undefined
+        providedData.activite != null
           ? providedData.activite
           : guerrier.activite,
-      jours:
-        providedData.jours !== undefined ? providedData.jours : guerrier.jours,
-      temps:
-        providedData.temps !== undefined ? providedData.temps : guerrier.temps,
+      jours: providedData.jours != null ? providedData.jours : guerrier.jours,
+      temps: providedData.temps != null ? providedData.temps : guerrier.temps,
       intensite:
-        providedData.intensite !== undefined
+        providedData.intensite != null
           ? providedData.intensite
           : guerrier.intensite,
-      tef: providedData.tef !== undefined ? providedData.tef : guerrier.tef,
+      tef: providedData.tef != null ? providedData.tef : guerrier.tef,
     };
 
     console.log("Données finales après fusion :", finalData);
