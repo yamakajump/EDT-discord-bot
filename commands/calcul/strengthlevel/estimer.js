@@ -119,10 +119,10 @@ module.exports = {
         missingFields.push("exercise");
       }
       if (
-        !finalData.sex ||
-        (finalData.sex !== "Homme" && finalData.sex !== "Femme")
+        !finalData.sexe ||
+        (finalData.sexe !== "Homme" && finalData.sexe !== "Femme")
       ) {
-        missingFields.push("sex");
+        missingFields.push("sexe");
       }
 
       if (missingFields.length > 0) {
@@ -197,10 +197,10 @@ module.exports = {
           : exerciseObj.exerciceEN || exerciseObj.exerciceFR;
 
       // Récupération des seuils correspondant au sexe choisi
-      const thresholds = exerciseObj[finalData.sex];
+      const thresholds = exerciseObj[finalData.sexe];
       if (!thresholds || !thresholds.bodyweight || !thresholds.age) {
         return interactionContext.reply({
-          content: `Erreur : aucune donnée de seuils n'est disponible pour le sexe "${finalData.sex}" pour cet exercice.`,
+          content: `Erreur : aucune donnée de seuils n'est disponible pour le sexe "${finalData.sexe}" pour cet exercice.`,
           ephemeral: true,
         });
       }
@@ -254,12 +254,12 @@ module.exports = {
       };
 
       // Détermination de l'emoji en fonction du sexe
-      const emojiSexe = finalData.sex === "Homme" ? emojiHomme : emojiFemme;
+      const emojiSexe = finalData.sexe === "Homme" ? emojiHomme : emojiFemme;
 
       // Construction de la description avec les informations saisies
       const description =
         `**Informations fournies :**\n` +
-        `• ${emojiSexe} Sexe : **${finalData.sex}**\n` +
+        `• ${emojiSexe} Sexe : **${finalData.sexe}**\n` +
         `• ${emojiCookie} Poids du corps : **${finalData.bodyWeight} kg**\n` +
         `• ${emojiCd} Âge : **${finalData.age} ans**\n` +
         `• ${emojiCible} Exercice : **${displayExerciseName}**\n` +
