@@ -62,7 +62,7 @@ module.exports = {
         ephemeral: true,
       });
     }
-    if (providedData.liftWeight != null || providedData.liftWeight <= 0) {
+    if (providedData.liftWeight <= 0) {
       return interaction.reply({
         content:
           "Hmm… lever un poids négatif serait plutôt de la prestidigitation. Merci de fournir un poids soulevé positif !",
