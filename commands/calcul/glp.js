@@ -175,8 +175,8 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
   let dots =
     finalData.total *
     (finalData.sexe === "H"
-      ? dots_men(finalData.bodyweight)
-      : dots_women(finalData.bodyweight));
+      ? dots_men(finalData.poids)
+      : dots_women(finalData.poids));
 
   // Récupération des coefficients adaptés à l'athlète
   const params =
@@ -184,13 +184,13 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
 
   // Calcul du dénominateur de la formule GLP
   const denom =
-    params[0] - params[1] * Math.exp(-params[2] * finalData.bodyweight);
+    params[0] - params[1] * Math.exp(-params[2] * finalData.poids);
 
   // Calcul du score GLP
   let glp = denom === 0 ? 0 : Math.max(0, (finalData.total * 100.0) / denom);
 
   // Vérification supplémentaire : si glp n'est pas valide ou si le poids est trop faible
-  if (isNaN(glp) || finalData.bodyweight < 35) {
+  if (isNaN(glp) || finalData.poids < 35) {
     glp = 0;
   }
 
