@@ -198,9 +198,9 @@ module.exports = {
         .setThumbnail(thumbnailEmbed)
         .setColor(colorEmbed);
 
-      // Vérification que l'utilisateur ne fournit pas à la fois ajustement et pourcentage
-      if (pourcentageInput !== null && ajustementInput !== null) {
-        return interactionContext.reply({
+      // Vérifier que l'utilisateur n'a pas renseigné les deux options de personnalisation simultanément
+      if (pourcentageInput !== undefined && ajustementInput !== undefined) {
+        return interaction.reply({
           content:
             "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
           flags: MessageFlags.Ephemeral,
