@@ -80,7 +80,10 @@ module.exports = {
         flags: MessageFlags.Ephemeral,
       });
     } catch (error) {
-      console.error("⚠️\x1b[31m  Erreur lors du traitement du fichier JSON :", error);
+      console.error(
+        "⚠️\x1b[31m  Erreur lors du traitement du fichier JSON :",
+        error,
+      );
       return interaction.reply({
         content: `⚠️\x1b[31m  Erreur lors du traitement du fichier : ${error.message}`,
         flags: MessageFlags.Ephemeral,

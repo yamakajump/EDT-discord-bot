@@ -37,7 +37,10 @@ module.exports = {
     channel
       .setName(newName)
       .catch((err) =>
-        console.error("⚠️\x1b[31m  Erreur lors de la mise à jour du salon :", err),
+        console.error(
+          "⚠️\x1b[31m  Erreur lors de la mise à jour du salon :",
+          err,
+        ),
       );
   },
 };

@@ -140,4 +140,59 @@ module.exports = {
       [poids, taille, age, sexe, activite, jours, temps, intensite, tef, id],
     );
   },
+
+  /**
+   * Met à jour la préférence d'enregistrement des données physiques d'un guerrier.
+   *
+   * @param {string} id - L'ID du membre.
+   * @param {boolean} enregistrer - La valeur souhaitée pour enregistrer ou non les données.
+   * @returns {Promise<void>}
+   */
+  updateEnregistrer: async (id, enregistrer) => {
+    await promisePool.query(
+      `UPDATE guerrier SET enregistrer = ? WHERE id = ?`,
+      [enregistrer, id],
+    );
+  },
+
+  /**
+   * Met à jour la durée de rappel pour la mise à jour physique d'un guerrier.
+   *
+   * @param {string} id - L'ID du membre.
+   * @param {number} rappel_update_physique - La nouvelle durée de rappel.
+   * @returns {Promise<void>}
+   */
+  updateRappelUpdatePhysique: async (id, rappel_update_physique) => {
+    await promisePool.query(
+      `UPDATE guerrier SET rappel_update_physique = ? WHERE id = ?`,
+      [rappel_update_physique, id],
+    );
+  },
+
+  /**
+   * Récupère la durée de rappel pour la mise à jour physique d'un guerrier.
+   *
+   * @param {string} id - L'ID du membre.
+   * @returns {Promise<number>} La durée de rappel en heures.
+   */
+  getRappelUpdatePhysique: async (id) => {
+    const [rows] = await promisePool.query(
+      `SELECT rappel_update_physique FROM guerrier WHERE id = ?`,
+      [id],
+    );
+    return rows[0]?.rappel_update_physique || null;
+  },
+  
+  /**
+   * Met à jour la date de dernière modification des données physiques d'un guerrier.
+   *
+   * @param {string} id - L'ID du membre.
+   * @returns {Promise<void>}
+   */
+  updateDerniereModification: async (id) => {
+    await promisePool.query(
+      `UPDATE guerrier SET derniere_modification = NOW() WHERE id = ?`,
+      [id],
+    );
+  },
 };

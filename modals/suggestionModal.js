@@ -57,7 +57,10 @@ module.exports = {
         if (customEmoji) msg.react(customEmoji);
       })
       .catch((err) => {
-        console.error("⚠️\x1b[31m  Erreur lors de l'envoi de la suggestion :", err);
+        console.error(
+          "⚠️\x1b[31m  Erreur lors de l'envoi de la suggestion :",
+          err,
+        );
       });
 
     // Réponse éphémère pour confirmer à l'utilisateur que sa suggestion a été envoyée

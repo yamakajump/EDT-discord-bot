@@ -282,7 +282,10 @@ module.exports = {
       try {
         statsJSON = statsRecord.stats;
       } catch (error) {
-        console.error("⚠️\x1b[31m  Erreur lors du parsing du JSON des stats :", error);
+        console.error(
+          "⚠️\x1b[31m  Erreur lors du parsing du JSON des stats :",
+          error,
+        );
         return interaction.reply({
           content: `Une erreur est survenue lors du traitement des statistiques.`,
           ephemeral: true,

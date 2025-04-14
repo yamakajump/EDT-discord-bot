@@ -70,7 +70,10 @@ function scheduleMessages(client) {
         // Envoi du message dans le salon configuré
         await channel.send({ embeds: [embed], components: [row] });
       } catch (error) {
-        console.error("⚠️\x1b[31m  Erreur lors de l'envoi du message programmé :", error);
+        console.error(
+          "⚠️\x1b[31m  Erreur lors de l'envoi du message programmé :",
+          error,
+        );
       }
     });
   });

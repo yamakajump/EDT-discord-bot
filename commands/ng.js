@@ -106,7 +106,10 @@ module.exports = {
         allowedMentions: { users: [user.id] },
       });
     } catch (err) {
-      console.error("⚠️\x1b[31m  Erreur lors de l'exécution de la commande ng :", err);
+      console.error(
+        "⚠️\x1b[31m  Erreur lors de l'exécution de la commande ng :",
+        err,
+      );
       await interaction.reply({
         content:
           "Une erreur est survenue lors de la récupération des statistiques.",
