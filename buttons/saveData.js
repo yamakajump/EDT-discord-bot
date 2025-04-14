@@ -45,6 +45,16 @@ module.exports = {
     // Supprimer le contexte en attente
     pendingInteractions.remove(userId);
 
+    // Notifier l'utilisateur et supprimer les boutons
+    await interaction.update({
+      content: `Vos données seront ${enregistrerChoice ? "" : "non "}enregistrées.`,
+      components: [],
+      embeds: [],
+    });
+
+    // Attendre 3 secondes avant de lancer la commande
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
     // Relancer la commande en appelant le callback avec les données fournies
     await pending.executeCalculationCallback(
       pending.originalInteraction,
