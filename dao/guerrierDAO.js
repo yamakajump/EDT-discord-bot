@@ -131,7 +131,7 @@ module.exports = {
    * @returns {Promise<void>}
    */
   updateUserData: async (id, data) => {
-    const { poids, taille, age, sexe, activite, jours, temps, intensite, tef } =
+    let { poids, taille, age, sexe, activite, jours, temps, intensite, tef } =
       data;
 
     // Si la donnée 'sexe' est présente, on conserve uniquement la première lettre en majuscule.
