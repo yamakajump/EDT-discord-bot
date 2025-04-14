@@ -20,7 +20,7 @@ const path = require("path");
 const { createCanvas } = require("canvas");
 
 // Importation de la logique de gestion des données physiques
-const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+const { handleUserPhysique } = require("../../../logic/handlePhysiqueData");
 
 const { getEmoji } = require("../../../utils/emoji");
 const headerEmoji = getEmoji("cible");

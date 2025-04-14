@@ -23,7 +23,7 @@ const fs = require("fs");
 const path = require("path");
 
 // 1. Importation des dépendances et configuration du style
-const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+const { handleUserPhysique } = require("../../../logic/handlePhysiqueData");
 const { getEmoji } = require("../../../utils/emoji");
 const emojiMuscle = getEmoji("muscle");
 const emojiCookie = getEmoji("cookie");
