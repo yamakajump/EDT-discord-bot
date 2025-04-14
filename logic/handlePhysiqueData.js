@@ -48,11 +48,11 @@ async function handleUserPhysique(
 
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("saveData:yes")
+        .setCustomId(`saveData:yes:${userId}`)
         .setLabel("Oui")
         .setStyle(ButtonStyle.Success),
       new ButtonBuilder()
-        .setCustomId("saveData:no")
+        .setCustomId(`saveData:no:${userId}`)
         .setLabel("Non")
         .setStyle(ButtonStyle.Danger),
     );
@@ -134,6 +134,7 @@ async function handleUserPhysique(
         components: [row],
         flags: MessageFlags.Ephemeral,
       });
+
       // Stocker le contexte pour reprendre une fois la décision prise
       pendingInteractions.add(userId, {
         type: "physiqueUpdateConfirmation",
