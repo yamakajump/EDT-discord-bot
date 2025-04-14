@@ -55,14 +55,14 @@ module.exports = {
     };
 
     // 3. Validation humoristique des valeurs saisies
-    if (providedData.bodyWeight != null && providedData.bodyWeight <= 0) {
+    if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
         content:
           "Attention ! Un poids corporel négatif, ce n'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
         ephemeral: true,
       });
     }
-    if (providedData.liftWeight != null && providedData.liftWeight <= 0) {
+    if (providedData.liftWeight != null || providedData.liftWeight <= 0) {
       return interaction.reply({
         content:
           "Hmm… lever un poids négatif serait plutôt de la prestidigitation. Merci de fournir un poids soulevé positif !",
@@ -86,15 +86,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-    if (
-      !providedData.sexe ||
-      (providedData.sexe !== "Homme" && providedData.sexe !== "Femme")
-    ) {
-      return interaction.reply({
-        content: "Erreur : veuillez spécifier votre sexe ('Homme' ou 'Femme').",
-        ephemeral: true,
-      });
-    }
 
     // 4. Mise en place du callback de calcul
     const executeCalculationCallback = async (
@@ -103,8 +94,8 @@ module.exports = {
     ) => {
       // Vérification des champs requis dans finalData (après fusion avec les données en base, par exemple)
       const missingFields = [];
-      if (finalData.bodyWeight === null || finalData.bodyWeight === undefined) {
-        missingFields.push("bodyweight");
+      if (finalData.poids === null || finalData.poids === undefined) {
+        missingFields.push("poids");
       }
       if (finalData.liftWeight === null || finalData.liftWeight === undefined) {
         missingFields.push("liftweight");
@@ -221,7 +212,7 @@ module.exports = {
         return chosen;
       }
 
-      const bodyRow = findRow(bodyTable, finalData.bodyWeight);
+      const bodyRow = findRow(bodyTable, finalData.poids);
       const ageRow = findRow(ageTable, finalData.age);
 
       // Définition des niveaux de force standards
@@ -260,7 +251,7 @@ module.exports = {
       const description =
         `**Informations fournies :**\n` +
         `• ${emojiSexe} Sexe : **${finalData.sexe}**\n` +
-        `• ${emojiCookie} Poids du corps : **${finalData.bodyWeight} kg**\n` +
+        `• ${emojiCookie} Poids du corps : **${finalData.poids} kg**\n` +
         `• ${emojiCd} Âge : **${finalData.age} ans**\n` +
         `• ${emojiCible} Exercice : **${displayExerciseName}**\n` +
         `• ${emojiMuscle} Poids soulevé : **${finalData.liftWeight} kg**\n\n` +
