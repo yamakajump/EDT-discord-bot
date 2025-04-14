@@ -48,7 +48,7 @@ module.exports = {
         countChannel
           .setName(newName)
           .catch((err) =>
-            console.error("Erreur lors de la mise à jour du salon :", err),
+            console.error("⚠️\x1b[31m Erreur lors de la mise à jour du salon :", err),
           );
       }
     }
@@ -84,7 +84,7 @@ module.exports = {
           .send({ embeds: [embed] })
           .catch((err) =>
             console.error(
-              "Erreur lors de l'envoi du message de bienvenue :",
+              "⚠️\x1b[31m Erreur lors de l'envoi du message de bienvenue :",
               err,
             ),
           );
@@ -114,12 +114,12 @@ module.exports = {
               pingMessage
                 .delete()
                 .catch((err) =>
-                  console.error("Erreur lors de la suppression du ping :", err),
+                  console.error("⚠️\x1b[31m Erreur lors de la suppression du ping :", err),
                 );
             }, 2000);
           } catch (err) {
             console.error(
-              "Erreur lors de l'envoi du ping dans le salon de bienvenue :",
+              "⚠️\x1b[31m Erreur lors de l'envoi du ping dans le salon de bienvenue :",
               err,
             );
           }

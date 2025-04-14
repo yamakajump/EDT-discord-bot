@@ -480,7 +480,7 @@ module.exports = {
       await subcommandFile.execute(interaction);
     } catch (error) {
       console.error(
-        `Erreur lors de l'exécution de la commande ${subcommand}${
+        `⚠️\x1b[31m Erreur lors de l'exécution de la commande ${subcommand}${
           subcommandGroup ? ` du groupe ${subcommandGroup}` : ""
         }:`,
         error,

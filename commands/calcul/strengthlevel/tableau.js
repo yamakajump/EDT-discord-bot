@@ -46,7 +46,7 @@ module.exports = {
       const rawData = fs.readFileSync(dataPath, "utf8");
       exercisesData = JSON.parse(rawData);
     } catch (error) {
-      console.error("Erreur lors de la lecture du fichier JSON :", error);
+      console.error("⚠️\x1b[31m Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
         .setTitle("Erreur")
@@ -234,7 +234,7 @@ module.exports = {
       exerciseImageBuffer = fs.readFileSync(exerciseImagePath);
     } catch (error) {
       console.error(
-        `Erreur lors de la lecture de l'image ${exerciseImageName}:`,
+        `⚠️\x1b[31m Erreur lors de la lecture de l'image ${exerciseImageName}:`,
         error,
       );
     }

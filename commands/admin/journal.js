@@ -104,7 +104,7 @@ module.exports = {
         flags: MessageFlags.Ephemeral,
       });
     } catch (error) {
-      console.error("Erreur lors de la création du journal :", error);
+      console.error("⚠️\x1b[31m Erreur lors de la création du journal :", error);
       await interaction.reply({
         content: "Une erreur est survenue lors de la création du journal.",
         flags: MessageFlags.Ephemeral,
