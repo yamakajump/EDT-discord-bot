@@ -18,59 +18,71 @@
 
 const { EmbedBuilder } = require("discord.js");
 
+const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   async execute(interaction) {
-    // Récupération des options passées par l'utilisateur
-    const poids = interaction.options.getNumber("poids");
-    // Conversion de la taille fournie en cm vers des mètres
-    const taille = interaction.options.getNumber("taille") / 100;
-    const age = interaction.options.getInteger("age");
-    const sexe = interaction.options.getString("sexe");
+    // Construction des données fournies par l'utilisateur
+    const providedData = {
+      poids: interaction.options.getNumber("poids"),
+      taille: interaction.options.getNumber("taille"), // en cm
+      age: interaction.options.getInteger("age"),
+      sexe: interaction.options.getString("sexe"),
+      // Vous pouvez ajouter d'autres informations si nécessaire : activite, jours, temps, intensite, tef
+    };
 
-    // Calcul de l'IMC (Indice de Masse Corporelle)
-    const imc = poids / (taille * taille);
+    // Callback qui exécute le calcul de la masse grasse
+    const executeCalculationCallback = async (interaction, finalData) => {
+      // On utilise finalData, sachant que la taille est stockée en cm.
+      const poids = finalData.poids;
+      const tailleM = finalData.taille / 100; // conversion de cm en m
+      const age = finalData.age;
+      // On normalise le sexe pour éviter les problèmes de casse ("homme" ou "femme")
+      const sexe = finalData.sexe.toLowerCase();
 
-    // Calcul du pourcentage de masse grasse selon le sexe
-    // Pour homme : IMC * 1.20 + Age * 0.23 - 10.8 - 5.4
-    // Pour femme : IMC * 1.20 + Age * 0.23 - 5.4
-    let bodyFatPercentage;
-    if (sexe === "homme") {
-      bodyFatPercentage = 1.2 * imc + 0.23 * age - 10.8 - 5.4;
-    } else {
-      bodyFatPercentage = 1.2 * imc + 0.23 * age - 5.4;
-    }
-    // Arrondi à deux décimales
-    bodyFatPercentage = parseFloat(bodyFatPercentage.toFixed(2));
+      // Calcul de l'IMC
+      const imc = poids / (tailleM * tailleM);
 
-    // Création de l'embed pour présenter les résultats
-    const embed = new EmbedBuilder()
-      .setColor(colorEmbed)
-      .setTitle("Calcul du Pourcentage de Masse Grasse")
-      .setThumbnail(thumbnailEmbed)
-      .setDescription(
-        "Voici vos résultats basés sur la formule de Deurenberg :",
-      )
-      .addFields(
-        { name: "Poids", value: `${poids} kg`, inline: true },
-        { name: "Taille", value: `${taille * 100} cm`, inline: true },
-        { name: "Âge", value: `${age} ans`, inline: true },
-        { name: "Sexe", value: `${sexe}`, inline: true },
-        { name: "IMC", value: `${imc.toFixed(2)}`, inline: true },
-        {
-          name: "Masse grasse estimée",
-          value: `${bodyFatPercentage}%`,
-          inline: true,
-        },
-      )
-      .setFooter({
-        text: "Calculé selon la formule de Deurenberg",
-      });
+      // Calcul du pourcentage de masse grasse selon la formule de Deurenberg
+      let bodyFatPercentage;
+      if (sexe === "homme") {
+        bodyFatPercentage = 1.2 * imc + 0.23 * age - 10.8 - 5.4;
+      } else {
+        bodyFatPercentage = 1.2 * imc + 0.23 * age - 5.4;
+      }
+      bodyFatPercentage = parseFloat(bodyFatPercentage.toFixed(2));
 
-    // Envoi de l'embed en réponse à l'interaction
-    await interaction.reply({ embeds: [embed] });
+      // Création de l'embed pour présenter le résultat
+      const embed = new EmbedBuilder()
+        .setColor(colorEmbed)
+        .setTitle("Calcul du Pourcentage de Masse Grasse")
+        .setThumbnail(thumbnailEmbed)
+        .setDescription("Voici vos résultats basés sur la formule de Deurenberg :")
+        .addFields(
+          { name: "Poids", value: `${poids} kg`, inline: true },
+          { name: "Taille", value: `${finalData.taille} cm`, inline: true },
+          { name: "Âge", value: `${age} ans`, inline: true },
+          { name: "Sexe", value: `${finalData.sexe}`, inline: true },
+          { name: "IMC", value: `${imc.toFixed(2)}`, inline: true },
+          {
+            name: "Masse grasse estimée",
+            value: `${bodyFatPercentage}%`,
+            inline: true,
+          }
+        )
+        .setFooter({ text: "Calculé selon la formule de Deurenberg" });
+
+      await interaction.reply({ embeds: [embed] });
+    };
+
+    // Appel à la logique de gestion du physique. Celle‑ci se charge de :
+    //  • Vérifier si l'utilisateur doit choisir d'enregistrer ses données
+    //  • Fusionner les données fournies et celles stockées
+    //  • Vérifier si un rappel de mise à jour s'impose au vu de la date de dernière modification
+    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
   },
 };
