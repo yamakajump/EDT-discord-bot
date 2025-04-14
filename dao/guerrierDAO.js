@@ -35,17 +35,15 @@ module.exports = {
    *
    * La colonne 'display_stats' est gérée par défaut par MySQL (valeur false / 0)
    * et 'enregistrer' reste à NULL par défaut.
-   * La colonne 'rappel_update_physique' doit être renseignée (valeur entre 1 et 52).
    *
    * @param {string} id - L'ID du membre.
    * @param {string} username - Le nom d'utilisateur.
-   * @param {number} rappel_update_physique - Durée de rappel en semaines (entre 1 et 52).
    * @returns {Promise<number>} L'identifiant de l'insertion (insertId) retourné par MySQL.
    */
-  create: async (id, username, rappel_update_physique) => {
+  create: async (id, username) => {
     const [result] = await promisePool.query(
-      `INSERT INTO guerrier (id, username, count, rappel_update_physique) VALUES (?, ?, ?, ?)`,
-      [id, username, 1, rappel_update_physique],
+      `INSERT INTO guerrier (id, username, count) VALUES (?, ?, ?)`,
+      [id, username, 1],
     );
     return result.insertId;
   },
