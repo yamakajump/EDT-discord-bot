@@ -183,8 +183,7 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
     PARAMETERS[finalData.sexe][finalData.equipement][finalData.mouvements];
 
   // Calcul du dénominateur de la formule GLP
-  const denom =
-    params[0] - params[1] * Math.exp(-params[2] * finalData.poids);
+  const denom = params[0] - params[1] * Math.exp(-params[2] * finalData.poids);
 
   // Calcul du score GLP
   let glp = denom === 0 ? 0 : Math.max(0, (finalData.total * 100.0) / denom);

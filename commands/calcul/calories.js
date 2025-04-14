@@ -16,291 +16,363 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
 
+// Pour les emojis
 const { getEmoji } = require("../../utils/emoji");
 const emojiPomme = getEmoji("pomme");
 const emojiCookie = getEmoji("cookie");
 const emojiFrite = getEmoji("frite");
 const emojiBrioche = getEmoji("brioche");
 
-const style = require("../../config/style.json");
-const colorEmbed = style.colorEmbed;
-const thumbnailEmbed = style.thumbnailEmbed;
-
 module.exports = {
   async execute(interaction) {
-    // Récupération des options fournies par l'utilisateur
-    const poids = interaction.options.getNumber("poids");
-    const taille = interaction.options.getNumber("taille"); // en cm
-    const age = interaction.options.getInteger("age");
-    const sexe = interaction.options.getString("sexe"); // 'H' ou 'F'
+    // Récupération des données fournies par l'utilisateur dans providedData
+    const providedData = {
+      poids: interaction.options.getNumber("poids"),
+      taille: interaction.options.getNumber("taille"), // en cm
+      age: interaction.options.getInteger("age"),
+      sexe: interaction.options.getString("sexe"), // "H" ou "F"
+      activite: interaction.options.getString("activite"), // S, L, A ou T
+      jours: interaction.options.getInteger("jours"), // Jours d'entraînement par semaine
+      temps: interaction.options.getNumber("temps"), // temps d'entraînement en minutes par séance
+      intensite: interaction.options.getString("intensite"), // faible, moderee, elevee ou intense
+      tef: interaction.options.getNumber("tef"),
+      pourcentageInput: interaction.options.getNumber("pourcentage"),
+      ajustementInput: interaction.options.getNumber("ajustement"),
+      objectif: interaction.options.getString("objectif") || "maintien", // seche, maintien ou pdm, avec valeur par défaut
+    };
 
-    // Options supplémentaires
-    const activite = interaction.options.getString("activite"); // doit correspondre à S, P, A ou T
-    const jours = interaction.options.getInteger("jours"); // Nombre de jours d'entraînement par semaine
-    const temps = interaction.options.getNumber("temps"); // temps d'entraînement en minutes (par séance)
-    const intensite = interaction.options.getString("intensite"); // intensité de l'entraînement (faible, moderee, elevee ou intense)
-    const tefInput = interaction.options.getNumber("tef");
-    const pourcentageInput = interaction.options.getNumber("pourcentage");
-    const ajustementInput = interaction.options.getNumber("ajustement");
-    let objectif = interaction.options.getString("objectif"); // 'seche', 'maintien' ou 'pdm'
-
-    // Vérifier que l'utilisateur n'a pas renseigné les deux options de personnalisation simultanément
-    if (pourcentageInput !== null && ajustementInput !== null) {
+    // Vérifications humoristiques des valeurs saisies
+    if (providedData.poids == null || providedData.poids <= 0) {
       return interaction.reply({
         content:
-          "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
-        flags: MessageFlags.Ephemeral,
+          "Attention ! Un poids négatif (ou nul), ce n'est pas de la magie, c'est juste étrange. Mettez un nombre positif, s'il vous plaît !",
+        ephemeral: true,
       });
     }
-
-    // Définir un objectif par défaut
-    if (!objectif) {
-      objectif = "maintien";
-    }
-
-    // Vérifications de base sur les données
-    if (!poids || poids <= 0) {
+    if (providedData.taille == null || providedData.taille <= 0) {
       return interaction.reply({
         content:
-          "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
-        flags: MessageFlags.Ephemeral,
+          "La taille doit être supérieure à zéro (en cm). Merci de vérifier ta saisie !",
+        ephemeral: true,
       });
     }
-    if (!taille || taille <= 0) {
+    if (providedData.age == null || providedData.age <= 0) {
       return interaction.reply({
         content:
-          "La taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
-        flags: MessageFlags.Ephemeral,
+          "L'âge doit être un nombre positif. Vérifie ton âge s'il te plaît !",
+        ephemeral: true,
       });
     }
-    if (!age || age <= 0) {
+    if (providedData.temps == null || providedData.temps < 0) {
       return interaction.reply({
         content:
-          "L'âge doit être un nombre positif. Vérifie ton âge s'il te plaît.",
-        flags: MessageFlags.Ephemeral,
+          "Le temps d'entraînement doit être positif (en minutes). Merci de vérifier ta saisie !",
+        ephemeral: true,
       });
     }
-    if (temps === null || temps < 0) {
-      return interaction.reply({
-        content:
-          "Le temps d'entraînement doit être positif (en minutes). Merci de vérifier !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (tefInput === null || tefInput < 10 || tefInput > 25) {
+    if (
+      providedData.tef == null ||
+      providedData.tef < 10 ||
+      providedData.tef > 25
+    ) {
       return interaction.reply({
         content:
           "Le TEF doit être compris entre 10 et 25. Merci de vérifier ta saisie !",
-        flags: MessageFlags.Ephemeral,
+        ephemeral: true,
       });
     }
-    if (jours === null || jours < 0) {
+    if (providedData.jours == null || providedData.jours < 0) {
       return interaction.reply({
         content:
-          "Le nombre de jours d'entraînement par semaine doit être positif. Merci de vérifier !",
-        flags: MessageFlags.Ephemeral,
+          "Le nombre de jours d'entraînement par semaine doit être positif. Merci de vérifier ta saisie !",
+        ephemeral: true,
       });
     }
-    if (!activite) {
+    if (!providedData.activite) {
       return interaction.reply({
         content: "Merci de renseigner votre niveau d'activité quotidienne.",
-        flags: MessageFlags.Ephemeral,
+        ephemeral: true,
       });
     }
-    if (!intensite) {
+    if (!providedData.intensite) {
       return interaction.reply({
         content: "Merci de renseigner l'intensité de ton entraînement.",
-        flags: MessageFlags.Ephemeral,
+        ephemeral: true,
       });
     }
 
-    // Conversion de la taille de centimètres en mètres
-    const tailleMeters = taille / 100;
+    // Définition du callback qui exécutera les calculs une fois les données fusionnées
+    const executeCalculationCallback = async (
+      interactionContext,
+      finalData,
+    ) => {
+      // Vérification des champs requis dans finalData
+      const missingFields = [];
+      if (finalData.poids == null || finalData.poids <= 0)
+        missingFields.push("poids");
+      if (finalData.taille == null || finalData.taille <= 0)
+        missingFields.push("taille");
+      if (finalData.age == null || finalData.age <= 0)
+        missingFields.push("age");
+      if (finalData.temps == null || finalData.temps < 0)
+        missingFields.push("temps");
+      if (
+        finalData.tef == null ||
+        finalData.tef < 10 ||
+        finalData.tef > 25
+      )
+        missingFields.push("tef");
+      if (finalData.jours == null || finalData.jours < 0)
+        missingFields.push("jours");
+      if (!finalData.activite) missingFields.push("activite");
+      if (!finalData.intensite) missingFields.push("intensite");
 
-    // Calcul du TMB (Métabolisme Basal) selon le sexe
-    let TMB = 0;
-    if (sexe === "H") {
-      TMB = 13.707 * poids + 492.3 * tailleMeters - 6.673 * age + 77.0607;
-    } else {
-      TMB = 9.74 * poids + 172.9 * tailleMeters - 4.737 * age + 667.051;
-    }
+      if (missingFields.length > 0) {
+        const errorMessage = {
+          content: `Il manque les informations suivantes : ${missingFields.join(
+            ", ",
+          )}. Merci de les renseigner.`,
+          ephemeral: true,
+        };
 
-    // Dictionnaire pour le niveau d'activité (identique à l'ancien bot)
-    const diconap = {
-      S: { H: 1, F: 1 },
-      L: { H: 1.11, F: 1.12 },
-      A: { H: 1.25, F: 1.27 },
-      T: { H: 1.48, F: 1.45 },
-    };
-    // Le paramètre "activite" doit correspondre à une des clés : S, P, A ou T
-    const NAP = diconap[activite][sexe];
+        if (interactionContext.replied || interactionContext.deferred) {
+          try {
+            await interactionContext.deleteReply();
+          } catch (error) {
+            console.error(
+              "Erreur lors de la suppression de la réponse :",
+              error,
+            );
+          }
+          return interactionContext.channel.send(errorMessage);
+        } else {
+          return interactionContext.reply(errorMessage);
+        }
+      }
 
-    // Utilisation de l'intensité et du temps pour calculer la dépense liée à l'entraînement
-    // Utilisation d'une formule basée sur le MET :
-    // Calories brûlées = (MET * 3.5 * poids) / 200 * temps (en minutes)
-    const intensiteFactors = {
-      leger: 4,
-      moderee: 6,
-      elevee: 8,
-      intense: 10,
-    };
-    const intensityKey = intensite.toLowerCase();
-    const MET = intensiteFactors[intensityKey];
-    if (!MET) {
-      return interaction.reply({
-        content:
-          "L'intensité renseignée n'est pas valide. Merci d'utiliser l'une des valeurs suivantes : faible, moderee, elevee ou intense.",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    const trainingCalories = ((MET * 3.5 * poids) / 200) * temps;
-    // Moyenne quotidienne en fonction du nombre de jours d'entraînement par semaine
-    const averageTraining = trainingCalories * (jours / 7);
+      // Récupération des données finales dans des variables locales
+      const {
+        poids,
+        taille,
+        age,
+        sexe,
+        activite,
+        jours,
+        temps,
+        intensite,
+        tef,
+        pourcentageInput,
+        ajustementInput,
+        objectif,
+      } = finalData;
 
-    // Calcul de la dépense de base (métabolisme de base ajusté par l'activité physique + entraînement)
-    const baseExpenditure = TMB * NAP + averageTraining;
-    // Calcul du TEF (Effet Thermique des Aliments)
-    const TEF = 1 + tefInput / 100;
-    // Calcul final de la DEJ
-    const DEJ = Math.round(baseExpenditure * TEF);
+      // Conversion de la taille de centimètres en mètres
+      const tailleMeters = taille / 100;
 
-    // Création de l'Embed pour afficher le résultat
-    const embed = new EmbedBuilder()
-      .setThumbnail(thumbnailEmbed)
-      .setColor(colorEmbed);
+      // Calcul du TMB (Métabolisme Basal) selon le sexe
+      let TMB = 0;
+      if (sexe === "H") {
+        TMB = 13.707 * poids + 492.3 * tailleMeters - 6.673 * age + 77.0607;
+      } else {
+        TMB = 9.74 * poids + 172.9 * tailleMeters - 4.737 * age + 667.051;
+      }
+      const TMBrounded = Math.round(TMB);
 
-    const TMBrounded = Math.round(TMB);
+      // Dictionnaire pour le niveau d'activité
+      const diconap = {
+        S: { H: 1, F: 1 },
+        L: { H: 1.11, F: 1.12 },
+        A: { H: 1.25, F: 1.27 },
+        T: { H: 1.48, F: 1.45 },
+      };
+      const NAP = diconap[activite][sexe];
 
-    // 1. Option "ajustement" renseignée (ajustement direct des calories)
-    if (ajustementInput !== null) {
-      const adjustedCalories = DEJ + ajustementInput;
-      let title, description;
-      if (ajustementInput < 0) {
-        // Réduction pour une sèche
-        title = `${emojiPomme} Besoins caloriques ajustés pour une **sèche**`;
-        description = `${emojiCookie} **Ajustement direct :**
+      // Traitement de l'entraînement via l'intensité (MET)
+      const intensiteFactors = {
+        leger: 4,
+        moderee: 6,
+        elevee: 8,
+        intense: 10,
+      };
+      const intensityKey = intensite.toLowerCase();
+      const MET = intensiteFactors[intensityKey];
+      if (!MET) {
+        return interactionContext.reply({
+          content:
+            "L'intensité renseignée n'est pas valide. Utilise l'une des valeurs suivantes : faible, moderee, elevee ou intense.",
+          ephemeral: true,
+        });
+      }
+      const trainingCalories = ((MET * 3.5 * poids) / 200) * temps;
+      // Moyenne quotidienne en fonction du nombre de jours d'entraînement par semaine
+      const averageTraining = trainingCalories * (jours / 7);
+
+      // Calcul de la dépense de base et du TEF (Effet Thermique des Aliments)
+      const baseExpenditure = TMB * NAP + averageTraining;
+      const TEF = 1 + tef / 100;
+      const DEJ = Math.round(baseExpenditure * TEF);
+
+      // Création de l'Embed de réponse
+      const embed = new EmbedBuilder()
+        .setThumbnail(thumbnailEmbed)
+        .setColor(colorEmbed);
+
+      // Vérification que l'utilisateur ne fournit pas à la fois ajustement et pourcentage
+      if (pourcentageInput !== null && ajustementInput !== null) {
+        return interactionContext.reply({
+          content:
+            "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
+          ephemeral: true,
+        });
+      }
+
+      // 1. Option "ajustement" renseignée (ajustement direct des calories)
+      if (ajustementInput !== null) {
+        const adjustedCalories = DEJ + ajustementInput;
+        let title, description;
+        if (ajustementInput < 0) {
+          title = `${emojiPomme} Besoins caloriques ajustés pour une **sèche**`;
+          description = `${emojiCookie} **Ajustement direct :**
 - Calories de maintien : **${DEJ}** kcal
 - Réduction de : **${Math.abs(ajustementInput)}** kcal
 - Total ajusté : **${adjustedCalories}** kcal
 
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
-      } else if (ajustementInput > 0) {
-        // Ajout pour une prise de masse
-        title = `${emojiFrite} Besoins caloriques ajustés pour une **prise de masse**`;
-        description = `${emojiCookie} **Ajustement direct :**
+        } else if (ajustementInput > 0) {
+          title = `${emojiFrite} Besoins caloriques ajustés pour une **prise de masse**`;
+          description = `${emojiCookie} **Ajustement direct :**
 - Calories de maintien : **${DEJ}** kcal
 - Ajout de : **${ajustementInput}** kcal
 - Total ajusté : **${adjustedCalories}** kcal
 
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
-      } else {
-        title = `${emojiBrioche} Besoins caloriques pour le **maintien**`;
-        description = `${emojiCookie} **Maintien :**
+        } else {
+          title = `${emojiBrioche} Besoins caloriques pour le **maintien**`;
+          description = `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.
 
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`;
+        }
+        embed.setTitle(title).setDescription(description);
       }
-      embed.setTitle(title).setDescription(description);
-    }
-    // 2. Option "pourcentage" renseignée (personnalisation par pourcentage)
-    else if (pourcentageInput !== null) {
-      if (pourcentageInput < 100) {
-        const customSeche = Math.round(DEJ * (pourcentageInput / 100));
-        embed
-          .setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
-          .setDescription(
-            `${emojiCookie} **Sèche personnalisée :**
+      // 2. Option "pourcentage" renseignée (personnalisation par pourcentage)
+      else if (pourcentageInput !== null) {
+        if (pourcentageInput < 100) {
+          const customSeche = Math.round(DEJ * (pourcentageInput / 100));
+          embed
+            .setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
+            .setDescription(
+              `${emojiCookie} **Sèche personnalisée :**
 - Pourcentage choisi : **${pourcentageInput}%**
 - Calories calculées : **${customSeche}** kcal
 
 **Maintien (100%)** : **${DEJ}** kcal  
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
-          );
-      } else if (pourcentageInput > 100) {
-        const customPdm = Math.round(DEJ * (pourcentageInput / 100));
-        embed
-          .setTitle(
-            `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
-          )
-          .setDescription(
-            `${emojiCookie} **Prise de masse personnalisée :**
+            );
+        } else if (pourcentageInput > 100) {
+          const customPdm = Math.round(DEJ * (pourcentageInput / 100));
+          embed
+            .setTitle(
+              `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
+            )
+            .setDescription(
+              `${emojiCookie} **Prise de masse personnalisée :**
 - Pourcentage choisi : **${pourcentageInput}%**
 - Calories calculées : **${customPdm}** kcal
 
 **Maintien (100%)** : **${DEJ}** kcal  
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
-          );
-      } else {
-        embed
-          .setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
-          .setDescription(
-            `${emojiCookie} **Maintien :**
+            );
+        } else {
+          embed
+            .setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
+            .setDescription(
+              `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`,
-          );
-      }
-    }
-    // 3. Aucune option de personnalisation renseignée, utilisation de l'objectif nutritionnel
-    else {
-      if (objectif === "seche") {
-        const ratiosSeche = {
-          "5%": 0.95,
-          "10%": 0.9,
-          "15%": 0.85,
-          "20%": 0.8,
-        };
-        let secheCalculs = "";
-        for (const [pourcentage, ratio] of Object.entries(ratiosSeche)) {
-          secheCalculs += `- Réduction de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
+            );
         }
-        embed
-          .setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
-          .setDescription(
-            `${emojiCookie} **Estimations pour une sèche :**
+      }
+      // 3. Aucune option de personnalisation renseignée, utilisation de l'objectif nutritionnel
+      else {
+        if (objectif === "seche") {
+          const ratiosSeche = {
+            "5%": 0.95,
+            "10%": 0.9,
+            "15%": 0.85,
+            "20%": 0.8,
+          };
+          let secheCalculs = "";
+          for (const [key, ratio] of Object.entries(ratiosSeche)) {
+            secheCalculs += `- Réduction de ${key} : **${Math.round(DEJ * ratio)}** kcal\n`;
+          }
+          embed
+            .setTitle(`${emojiPomme} Besoins caloriques pour une **sèche**`)
+            .setDescription(
+              `${emojiCookie} **Estimations pour une sèche :**
 ${secheCalculs}
 - Maintien : **${DEJ}** kcal
 
 **Métabolisme Basal (TMB)** : **${TMBrounded}** kcal`,
-          );
-      } else if (objectif === "maintien") {
-        embed
-          .setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
-          .setDescription(
-            `${emojiCookie} **Maintien :**
+            );
+        } else if (objectif === "maintien") {
+          embed
+            .setTitle(`${emojiBrioche} Besoins caloriques pour le **maintien**`)
+            .setDescription(
+              `${emojiCookie} **Maintien :**
 - Calories : **${DEJ}** kcal
 
 Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de poids.`,
-          );
-      } else if (objectif === "pdm") {
-        const ratiosPdm = {
-          "5%": 1.05,
-          "10%": 1.1,
-          "15%": 1.15,
-          "20%": 1.2,
-        };
-        let pdmCalculs = "";
-        for (const [pourcentage, ratio] of Object.entries(ratiosPdm)) {
-          pdmCalculs += `- Surplus de ${pourcentage} : **${Math.round(DEJ * ratio)}** kcal\n`;
-        }
-        embed
-          .setTitle(
-            `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
-          )
-          .setDescription(
-            `${emojiCookie} **Estimations pour une prise de masse :**
+            );
+        } else if (objectif === "pdm") {
+          const ratiosPdm = { "5%": 1.05, "10%": 1.1, "15%": 1.15, "20%": 1.2 };
+          let pdmCalculs = "";
+          for (const [key, ratio] of Object.entries(ratiosPdm)) {
+            pdmCalculs += `- Surplus de ${key} : **${Math.round(DEJ * ratio)}** kcal\n`;
+          }
+          embed
+            .setTitle(
+              `${emojiFrite} Besoins caloriques pour une **prise de masse**`,
+            )
+            .setDescription(
+              `${emojiCookie} **Estimations pour une prise de masse :**
 ${pdmCalculs}
 - Maintien : **${DEJ}** kcal
 
 Le but est d'ajouter un surplus calorique pour favoriser la prise de masse.`,
-          );
+            );
+        }
       }
-    }
 
-    // Envoi de l'Embed de résultat
-    await interaction.reply({ embeds: [embed] });
+      // Envoi de la réponse selon le contexte (réponse ou channel)
+      if (interactionContext.replied || interactionContext.deferred) {
+        try {
+          await interactionContext.deleteReply();
+        } catch (error) {
+          console.error(
+            "Erreur lors de la suppression de la réponse éphémère :",
+            error,
+          );
+        }
+        await interactionContext.channel.send({ embeds: [embed] });
+      } else {
+        await interactionContext.reply({ embeds: [embed] });
+      }
+    };
+
+    // Appel à la logique de gestion du physique qui va fusionner les données et appeler le callback
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };

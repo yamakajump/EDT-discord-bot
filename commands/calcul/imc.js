@@ -2,198 +2,226 @@
  * Module de calcul et affichage de l'IMC avec une illustration graphique.
  *
  * Ce module récupère le poids et la taille de l'utilisateur via une commande Discord.
- * Il valide ces données, calcule l'IMC (Indice de Masse Corporelle) et détermine la classification associée.
- *
- * Ensuite, à l'aide de la librairie "canvas", il crée une image graphique qui représente l'IMC
- * sous la forme d'une jauge. La jauge affiche une flèche positionnée en fonction de l’IMC calculé.
- *
- * Le code procède ainsi :
- *   1. Récupération et validation des entrées (poids et taille).
- *   2. Calcul de l'IMC et détermination de la classification.
- *   3. Détermination de l'angle de la flèche à partir de l'IMC à l'aide de la fonction "getGaugeAngle".
- *   4. Création d'un canvas en définissant un fond et en dessinant l'image de fond IMC.
- *   5. Dessin de la flèche indiquant l'IMC sur le canvas avec rotation et création d'une double tête.
- *   6. Exportation du canvas en buffer et création d'une pièce jointe pour Discord.
- *   7. Création d'un embed contenant le résultat de l'IMC, la classification et l'image générée.
- *
- * Le résultat final est envoyé en réponse à l'interaction Discord.
+ * Après validation humoristique des valeurs saisies, il fusionne ces données avec celles en base
+ * via handleUserPhysique, puis exécute le calcul de l'IMC et génère un visuel.
  */
 
 const { EmbedBuilder, AttachmentBuilder, MessageFlags } = require("discord.js");
 const { createCanvas, loadImage } = require("canvas");
 const path = require("path");
 
+// 1. Importation des dépendances et configuration du style
+const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 const { getEmoji } = require("../../utils/emoji");
 const infoEmoji = getEmoji("info");
 
-const style = require("../../config/style.json");
-const colorEmbed = style.colorEmbed;
-
 module.exports = {
   async execute(interaction) {
-    // Récupération et validation des options saisies par l'utilisateur
-    const poids = interaction.options.getNumber("poids");
-    const tailleCm = interaction.options.getNumber("taille");
+    // 2. Récupération des données fournies par l'utilisateur dans providedData
+    const providedData = {
+      poids: interaction.options.getNumber("poids"),
+      taille: interaction.options.getNumber("taille"),
+    };
 
-    if (!poids || poids <= 0) {
+    // 3. Validation humoristique des valeurs saisies
+    if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
         content:
-          "Oups ! Le poids saisi n'est pas valide. Réessaie en entrant un poids positif.",
-        flags: MessageFlags.Ephemeral,
+          "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
+        ephemeral: true,
       });
     }
-    if (!tailleCm || tailleCm <= 0) {
+    if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
         content:
-          "Hé, ta taille doit être un nombre supérieur à zéro (en cm). Merci de vérifier ta saisie.",
-        flags: MessageFlags.Ephemeral,
+          "Hey ! Ta taille doit être supérieure à zéro (en cm), sinon on passera pour des nains. Réessaie !",
+        ephemeral: true,
       });
     }
 
-    // Calcul de l'IMC
-    const taille = tailleCm / 100; // conversion de la taille en mètres
-    const imc = parseFloat((poids / (taille * taille)).toFixed(2));
-
-    // Classification de l'IMC selon les standards
-    let classification;
-    if (imc < 18.5) classification = "Maigreur";
-    else if (imc < 24.9) classification = "Normal";
-    else if (imc < 29.9) classification = "Surpoids";
-    else if (imc < 34.9) classification = "Obésité modérée";
-    else classification = "Obésité sévère";
-
-    /**
-     * Calcule l'angle de la jauge (de 0° à 180°) en fonction de l'IMC.
-     *
-     * Les zones définies en degrés sont les suivantes :
-     *  • 0 à 18,5      => 0°   à 36°
-     *  • 18,5 à 25     => 36°  à 72°
-     *  • 25 à 30       => 72°  à 108°
-     *  • 30 à 40       => 108° à 144°
-     *  • ≥ 40          => 144° à 180° (capé à 180°)
-     *
-     * @param {number} imcValue La valeur de l'IMC à convertir en angle.
-     * @returns {number} L'angle de la jauge en degrés.
-     */
-    function getGaugeAngle(imcValue) {
-      if (imcValue <= 18.5) {
-        return (imcValue / 18.5) * 36;
-      } else if (imcValue <= 25) {
-        return 36 + ((imcValue - 18.5) / (25 - 18.5)) * 36;
-      } else if (imcValue <= 30) {
-        return 72 + ((imcValue - 25) / 5) * 36;
-      } else if (imcValue <= 40) {
-        return 108 + ((imcValue - 30) / 10) * 36;
-      } else if (imcValue <= 50) {
-        return 144 + ((imcValue - 40) / 10) * 36;
-      } else {
-        return 180;
+    // 4. Mise en place du callback de calcul
+    const executeCalculationCallback = async (interactionContext, finalData) => {
+      // Vérification des champs manquants dans finalData
+      const missingFields = [];
+      if (finalData.poids === null || finalData.poids === undefined) {
+        missingFields.push("poids");
       }
-    }
+      if (finalData.taille === null || finalData.taille === undefined) {
+        missingFields.push("taille");
+      }
+      if (missingFields.length > 0) {
+        const errorMessage = {
+          content: `Les champs suivants sont manquants : ${missingFields.join(
+            ", "
+          )}. Veuillez les renseigner.`,
+          ephemeral: true,
+        };
+        if (interactionContext.replied || interactionContext.deferred) {
+          try {
+            await interactionContext.deleteReply();
+          } catch (error) {
+            console.error("Erreur lors de la suppression de la réponse :", error);
+          }
+          return interactionContext.channel.send(errorMessage);
+        } else {
+          return interactionContext.reply(errorMessage);
+        }
+      }
 
-    // Création du canvas pour l'image finale (dimensions définies en pixels)
-    const canvasWidth = 900;
-    const canvasHeight = 521;
-    const canvas = createCanvas(canvasWidth, canvasHeight);
-    const ctx = canvas.getContext("2d");
+      // Tous les champs requis sont présents, on procède au calcul.
+      const poids = finalData.poids;
+      const tailleCm = finalData.taille;
+      const taille = tailleCm / 100; // Conversion en mètres
+      const imc = parseFloat((poids / (taille * taille)).toFixed(2));
 
-    // Définition du fond (ici une couleur de fond personnalisée)
-    ctx.fillStyle = "#2B2D31";
-    ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-    // Chargement de l'image de fond "imc.png" qui va occuper toute la surface du canvas
-    let imcImage;
-    try {
-      imcImage = await loadImage(
-        path.join(__dirname, "..", "..", "images", "imc.png"),
-      );
-    } catch (error) {
-      console.error(
-        "⚠️\x1b[31m  Erreur lors du chargement de l'image IMC :",
-        error,
-      );
-    }
-
-    // Dessin de l'image de fond couvrant le canvas
-    const imcImgWidth = 900;
-    const imcImgHeight = 521;
-    const imcImgX = 0;
-    const imcImgY = 0;
-    if (imcImage) {
-      ctx.drawImage(imcImage, imcImgX, imcImgY, imcImgWidth, imcImgHeight);
+      // Classification de l'IMC selon les standards
+      let classification;
+      if (imc < 18.5) classification = "Maigreur";
+      else if (imc < 24.9) classification = "Normal";
+      else if (imc < 29.9) classification = "Surpoids";
+      else if (imc < 34.9) classification = "Obésité modérée";
+      else classification = "Obésité sévère";
 
       /**
-       * Calcul de l'angle final de la flèche.
+       * Calcule l'angle de la jauge (de 0° à 180°) en fonction de l'IMC.
        *
-       * On démarre par obtenir l'angle de la jauge (0 à 180°) via getGaugeAngle.
-       * Cet angle est ensuite transformé pour déterminer un angle final compris dans [-135° ; -45°]
-       * afin que la flèche pointe vers la gauche pour un IMC faible et vers la droite pour un IMC élevé.
+       * Les zones définies en degrés sont les suivantes :
+       *  • 0 à 18,5      => 0°   à 36°
+       *  • 18,5 à 25     => 36°  à 72°
+       *  • 25 à 30       => 72°  à 108°
+       *  • 30 à 40       => 108° à 144°
+       *  • ≥ 40          => 144° à 180° (capé à 180°)
        *
-       * Ici, la transformation consiste à additionner 180° à l'angle initial et le convertir en radians.
+       * @param {number} imcValue La valeur de l'IMC à convertir en angle.
+       * @returns {number} L'angle de la jauge en degrés.
        */
-      const gaugeAngleOriginal = getGaugeAngle(imc); // angle initial de 0 à 180°
-      const finalArrowAngleDeg = gaugeAngleOriginal + 180; // Transformation vers [-135° ; -45°] (en°)
-      const finalArrowAngle = finalArrowAngleDeg * (Math.PI / 180); // conversion en radians
+      function getGaugeAngle(imcValue) {
+        if (imcValue <= 18.5) {
+          return (imcValue / 18.5) * 36;
+        } else if (imcValue <= 25) {
+          return 36 + ((imcValue - 18.5) / (25 - 18.5)) * 36;
+        } else if (imcValue <= 30) {
+          return 72 + ((imcValue - 25) / 5) * 36;
+        } else if (imcValue <= 40) {
+          return 108 + ((imcValue - 30) / 10) * 36;
+        } else if (imcValue <= 50) {
+          return 144 + ((imcValue - 40) / 10) * 36;
+        } else {
+          return 180;
+        }
+      }
 
-      // Position de base de la flèche sur l'image (centre horizontal, position basse verticalement)
-      const baseX = imcImgWidth / 2;
-      const baseY = 445; // position choisie pour bien diriger la flèche vers le haut
+      // Création du canvas pour l'image finale
+      const canvasWidth = 900;
+      const canvasHeight = 521;
+      const canvas = createCanvas(canvasWidth, canvasHeight);
+      const ctx = canvas.getContext("2d");
 
-      // Longueur de la flèche
-      const arrowLength = 115;
+      // Définition du fond (ici une couleur de fond personnalisée)
+      ctx.fillStyle = "#2B2D31";
+      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // Sauvegarde de l'état graphique courant, afin de revenir après transformation
-      ctx.save();
-      // Translation du contexte au point de départ de la flèche
-      ctx.translate(baseX, baseY);
-      // Rotation du contexte en fonction de l'angle final
-      ctx.rotate(finalArrowAngle);
+      // Chargement de l'image de fond "imc.png"
+      let imcImage;
+      try {
+        imcImage = await loadImage(
+          path.join(__dirname, "..", "..", "images", "imc.png")
+        );
+      } catch (error) {
+        console.error("Erreur lors du chargement de l'image IMC :", error);
+      }
 
-      // Dessin de la ligne de la flèche
-      ctx.strokeStyle = "#595659";
-      ctx.lineWidth = 14;
-      ctx.beginPath();
-      ctx.moveTo(0, 0);
-      ctx.lineTo(arrowLength, 0);
-      ctx.stroke();
+      // Dessin de l'image de fond sur le canvas
+      const imcImgWidth = 900;
+      const imcImgHeight = 521;
+      if (imcImage) {
+        ctx.drawImage(imcImage, 0, 0, imcImgWidth, imcImgHeight);
 
-      // Dessin de la tête de la flèche côté droit (triangle)
-      ctx.beginPath();
-      ctx.moveTo(arrowLength + 75, 0);
-      ctx.lineTo(arrowLength - 25, 25);
-      ctx.lineTo(arrowLength - 15, 0);
-      ctx.closePath();
-      ctx.fillStyle = "#8A878A";
-      ctx.fill();
+        /**
+         * Calcul de l'angle final de la flèche.
+         * On obtient d'abord l'angle de la jauge (0 à 180°) via getGaugeAngle.
+         * Cet angle est ensuite transformé pour déterminer un angle final (en radians)
+         * qui permettra de pointer vers la gauche pour un IMC faible et vers la droite pour un IMC élevé.
+         */
+        const gaugeAngleOriginal = getGaugeAngle(imc);
+        const finalArrowAngleDeg = gaugeAngleOriginal + 180;
+        const finalArrowAngle = finalArrowAngleDeg * (Math.PI / 180);
 
-      // Dessin de la tête de la flèche côté gauche (triangle)
-      ctx.beginPath();
-      ctx.moveTo(arrowLength + 75, 0);
-      ctx.lineTo(arrowLength - 25, -25);
-      ctx.lineTo(arrowLength - 15, 0);
-      ctx.closePath();
-      ctx.fillStyle = "#5A575B";
-      ctx.fill();
+        // Position de base de la flèche et longueur de la flèche
+        const baseX = imcImgWidth / 2;
+        const baseY = 445;
+        const arrowLength = 115;
 
-      // Restauration de l'état graphique initial
-      ctx.restore();
-    }
+        // Sauvegarde de l'état graphique et transformation
+        ctx.save();
+        ctx.translate(baseX, baseY);
+        ctx.rotate(finalArrowAngle);
 
-    // Exportation de l'image du canvas sous forme de buffer
-    const buffer = canvas.toBuffer();
-    const attachment = new AttachmentBuilder(buffer, { name: "imc.png" });
+        // Dessin de la ligne de la flèche
+        ctx.strokeStyle = "#595659";
+        ctx.lineWidth = 14;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(arrowLength, 0);
+        ctx.stroke();
 
-    // Création de l'embed qui contient le résultat de l'IMC et l'image générée
-    const embed = new EmbedBuilder()
-      .setColor(colorEmbed)
-      .setTitle(`${infoEmoji} Résultat de votre IMC`)
-      .setDescription(
-        `- **IMC** : ${imc}\n- **Classification** : ${classification}`,
-      )
-      .setImage("attachment://imc.png")
-      .setFooter({ text: "Calculé selon la formule de l’IMC" });
+        // Dessin de la tête de la flèche côté droit (triangle)
+        ctx.beginPath();
+        ctx.moveTo(arrowLength + 75, 0);
+        ctx.lineTo(arrowLength - 25, 25);
+        ctx.lineTo(arrowLength - 15, 0);
+        ctx.closePath();
+        ctx.fillStyle = "#8A878A";
+        ctx.fill();
 
-    // Envoi de l'embed et de la pièce jointe en réponse à l'interaction
-    await interaction.reply({ embeds: [embed], files: [attachment] });
+        // Dessin de la tête de la flèche côté gauche (triangle)
+        ctx.beginPath();
+        ctx.moveTo(arrowLength + 75, 0);
+        ctx.lineTo(arrowLength - 25, -25);
+        ctx.lineTo(arrowLength - 15, 0);
+        ctx.closePath();
+        ctx.fillStyle = "#5A575B";
+        ctx.fill();
+
+        // Restauration de l'état graphique initial
+        ctx.restore();
+      }
+
+      // Exportation de l'image en buffer et création de la pièce jointe Discord
+      const buffer = canvas.toBuffer();
+      const attachment = new AttachmentBuilder(buffer, { name: "imc.png" });
+
+      // Création de l'embed de réponse
+      const embed = new EmbedBuilder()
+        .setColor(colorEmbed)
+        .setTitle(`${infoEmoji} Résultat de votre IMC`)
+        .setDescription(
+          `- **IMC** : ${imc}\n- **Classification** : ${classification}`
+        )
+        .setImage("attachment://imc.png")
+        .setFooter({ text: "Calculé selon la formule de l’IMC" });
+
+      // Envoi de l'embed en fonction du contexte de la réponse
+      if (interactionContext.replied || interactionContext.deferred) {
+        try {
+          await interactionContext.deleteReply();
+        } catch (error) {
+          console.error(
+            "Erreur lors de la suppression de la réponse éphémère :",
+            error
+          );
+        }
+        await interactionContext.channel.send({ embeds: [embed], files: [attachment] });
+      } else {
+        await interactionContext.reply({ embeds: [embed], files: [attachment] });
+      }
+    };
+
+    // 5. Exécution de la logique physique : fusion des données et calcul via handleUserPhysique
+    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
   },
 };

@@ -1,8 +1,8 @@
 -- ⚠️ ATTENTION ⚠️
 -- Ne pas décommenter les lignes DROP TABLE si vous ne savez pas ce que vous faites.
 
-DROP TABLE IF EXISTS basicfit_stats;
-DROP TABLE IF EXISTS guerrier;
+-- DROP TABLE IF EXISTS basicfit_stats;
+-- DROP TABLE IF EXISTS guerrier;
 
 -- Création de la table guerrier
 CREATE TABLE IF NOT EXISTS guerrier (

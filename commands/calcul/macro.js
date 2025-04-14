@@ -10,189 +10,211 @@
  *  - etat  : état corporel perçu ('maigre' ou 'grasse')
  *  - proteines, glucides, lipides : pourcentages personnalisés (ils doivent être les trois renseignés et totaliser 100)
  *
- * Le module détermine une répartition par défaut des macronutriments en fonction de l'objectif :
- *   - perte (de poids) : 35% protéines, 25% lipides, 40% glucides.
- *   - maintien : 30% protéines, 30% lipides, 40% glucides.
- *   - prise de masse : 25% protéines, 25% lipides, 50% glucides.
- *   - recomposition corporelle : 35% protéines, 20% lipides, 45% glucides.
+ * La répartition par défaut des macronutriments est ensuite ajustée en fonction des options.
+ * Enfin, le module calcule en grammes la répartition sachant que :
+ *   - Protéines et glucides : 4 kcal/g.
+ *   - Lipides : 9 kcal/g.
  *
- * Ces pourcentages par défaut peuvent être ajustés selon l'état corporel
- * (augmentation des protéines et diminution des glucides pour 'grasse', inversement pour 'maigre')
- * et selon le sexe (pour les femmes, on augmente légèrement la part des lipides au détriment des protéines).
- *
- * Si des pourcentages personnalisés sont fournis, ils remplacent les valeurs par défaut.
- *
- * Enfin, le module calcule en grammes la répartition des macronutriments sachant que :
- *   - Les protéines et glucides apportent environ 4 kcal/g.
- *   - Les lipides apportent environ 9 kcal/g.
- *
- * Le résultat est présenté dans un embed Discord comprenant :
- *   - L'objectif nutritionnel retenu.
- *   - Le nombre total de calories.
- *   - La répartition sous forme de grammes et de pourcentage pour les protéines, lipides et glucides.
- *   - Des informations complémentaires si le sexe et/ou l'état corporel ont été renseignés.
+ * Le résultat est présenté dans un embed Discord.
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
+const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
 
 const { getEmoji } = require("../../utils/emoji");
 const coinInfoEmoji = getEmoji("coin_info");
 const tropheEmoji = getEmoji("trophe_or");
 const cookieEmoji = getEmoji("cookie");
 
-const style = require("../../config/style.json");
-const colorEmbed = style.colorEmbed;
-const thumbnailEmbed = style.thumbnailEmbed;
-
 module.exports = {
   async execute(interaction) {
-    // Récupération des options obligatoires
-    const calories = interaction.options.getNumber("calories");
-    const objectif = interaction.options.getString("objectif"); // 'perte', 'maintien', 'prise', 'recomp'
+    // 1. Récupération des données fournies par l'utilisateur dans providedData
+    const providedData = {
+      calories: interaction.options.getNumber("calories"),
+      objectif: interaction.options.getString("objectif"), // 'perte', 'maintien', 'prise', 'recomp'
+      sexe: interaction.options.getString("sexe"),         // 'H' ou 'F'
+      etat: interaction.options.getString("etat"),          // 'maigre' ou 'grasse'
+      proteines: interaction.options.getNumber("proteines"),
+      glucides: interaction.options.getNumber("glucides"),
+      lipides: interaction.options.getNumber("lipides")
+    };
 
-    // Récupération des options optionnelles
-    const sexe = interaction.options.getString("sexe"); // 'H' ou 'F'
-    const etat = interaction.options.getString("etat"); // 'maigre' ou 'grasse'
-    const protCustom = interaction.options.getNumber("proteines");
-    const glucCustom = interaction.options.getNumber("glucides");
-    const lipCustom = interaction.options.getNumber("lipides");
-
-    // Vérification de la validité des calories
-    if (!calories || calories <= 0) {
+    // 2. Validation humoristique des valeurs saisies
+    if (providedData.calories != null && providedData.calories <= 0) {
       return interaction.reply({
-        content:
-          "Oups ! Le nombre de calories doit être un nombre positif. Essayez avec un nombre réel (et énergisant) !",
-        flags: MessageFlags.Ephemeral,
+        content: "Attention ! Des calories négatives, c'est comme un régime invisible… ça n'existe pas. Merci d'entrer un nombre positif !",
+        ephemeral: true,
       });
     }
-
-    // Vérifier la validité des pourcentages personnalisés : soit tous les trois sont renseignés, soit aucun.
+    // Vous pouvez ajouter d'autres validations sur d'autres données (ex : poids, taille, âge, etc.)
+    
+    // Vérification de la cohérence des pourcentages personnalisés
+    const { proteines, glucides, lipides } = providedData;
     if (
-      (protCustom !== null || glucCustom !== null || lipCustom !== null) &&
-      (protCustom === null || glucCustom === null || lipCustom === null)
+      (proteines !== null || glucides !== null || lipides !== null) &&
+      (proteines === null || glucides === null || lipides === null)
     ) {
       return interaction.reply({
-        content:
-          "Veuillez renseigner les trois pourcentages personnalisés (protéines, glucides, lipides) ou aucun.",
-        flags: MessageFlags.Ephemeral,
+        content: "Merci de renseigner soit les trois pourcentages personnalisés (protéines, glucides, lipides) ou aucun.",
+        ephemeral: true,
       });
     }
 
-    // Déclaration des variables de répartition par défaut en fonction de l'objectif nutritionnel
-    let proteinesPct, lipidesPct, glucidesPct;
-
-    // Détermination de la répartition initiale selon l'objectif spécifié
-    if (objectif === "perte") {
-      proteinesPct = 35;
-      lipidesPct = 25;
-      glucidesPct = 40;
-    } else if (objectif === "maintien") {
-      proteinesPct = 30;
-      lipidesPct = 30;
-      glucidesPct = 40;
-    } else if (objectif === "prise") {
-      proteinesPct = 25;
-      lipidesPct = 25;
-      glucidesPct = 50;
-    } else if (objectif === "recomp") {
-      proteinesPct = 35;
-      lipidesPct = 20;
-      glucidesPct = 45;
-    } else {
-      // Cas par défaut si l'objectif n'est pas reconnu
-      proteinesPct = 30;
-      lipidesPct = 30;
-      glucidesPct = 40;
-    }
-
-    // Ajustement en fonction de l'état corporel
-    // Si l'utilisateur se considère "grasse", augmenter les protéines et réduire les glucides.
-    // À l'inverse pour "maigre".
-    if (etat === "grasse") {
-      proteinesPct += 5;
-      glucidesPct -= 5;
-    } else if (etat === "maigre") {
-      proteinesPct -= 5;
-      glucidesPct += 5;
-    }
-
-    // Ajustement spécifique pour le sexe féminin : augmenter les lipides et réduire les protéines
-    if (sexe === "F") {
-      lipidesPct += 2;
-      proteinesPct -= 2;
-    }
-
-    // Si des pourcentages personnalisés sont fournis, ils priment sur les valeurs par défaut et ajustées.
-    if (protCustom !== null && glucCustom !== null && lipCustom !== null) {
-      // Vérification que la somme des pourcentages personnalisés est exactement 100%
-      if (protCustom + glucCustom + lipCustom !== 100) {
-        return interaction.reply({
-          content:
-            "La somme des pourcentages personnalisés doit être égale à 100%.",
-          flags: MessageFlags.Ephemeral,
-        });
+    // 3. Définition du callback de calcul qui sera exécuté après la fusion des données
+    const executeCalculationCallback = async (interactionContext, finalData) => {
+      // Vérification que les champs requis sont présents
+      const missingFields = [];
+      if (finalData.calories === null || finalData.calories === undefined) {
+        missingFields.push("calories");
       }
-      proteinesPct = protCustom;
-      glucidesPct = glucCustom;
-      lipidesPct = lipCustom;
-    }
+      if (finalData.objectif === null || finalData.objectif === undefined) {
+        missingFields.push("objectif");
+      }
 
-    // Calcul des grammes pour chaque macronutriment
-    // Rappel des valeurs énergétiques approximatives :
-    //   - Protéines et glucides : 4 kcal par gramme.
-    //   - Lipides : 9 kcal par gramme.
-    const proteinesGr = ((calories * proteinesPct) / 100 / 4).toFixed(2);
-    const glucidesGr = ((calories * glucidesPct) / 100 / 4).toFixed(2);
-    const lipidesGr = ((calories * lipidesPct) / 100 / 9).toFixed(2);
+      if (missingFields.length > 0) {
+        const errorMessage = {
+          content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Merci de bien vouloir les renseigner.`,
+          ephemeral: true,
+        };
 
-    // Détermination du libellé d'objectif en fonction du code fourni
-    const objectifTexte =
-      objectif === "perte"
-        ? "Perte de poids"
-        : objectif === "maintien"
-          ? "Maintien"
-          : objectif === "prise"
-            ? "Prise de masse"
-            : "Recomposition corporelle";
+        if (interactionContext.replied || interactionContext.deferred) {
+          try {
+            await interactionContext.deleteReply();
+          } catch (error) {
+            console.error("Erreur lors de la suppression de la réponse :", error);
+          }
+          return interactionContext.channel.send(errorMessage);
+        } else {
+          return interactionContext.reply(errorMessage);
+        }
+      }
 
-    // Création de l'embed Discord de récapitulatif
-    const embed = new EmbedBuilder()
-      .setColor(colorEmbed)
-      .setTitle(`${coinInfoEmoji} Répartition des macronutriments`)
-      .setDescription(
-        `**${tropheEmoji} Objectif** : ${objectifTexte}
-**${cookieEmoji} Calories totales** : ${calories} kcal`,
-      )
-      .addFields(
-        {
-          name: "Protéines",
-          value: `${proteinesGr} g (${proteinesPct}%)`,
-          inline: true,
-        },
-        {
-          name: "Lipides",
-          value: `${lipidesGr} g (${lipidesPct}%)`,
-          inline: true,
-        },
-        {
-          name: "Glucides",
-          value: `${glucidesGr} g (${glucidesPct}%)`,
-          inline: true,
-        },
-      )
-      .setThumbnail(thumbnailEmbed)
-      .setFooter({ text: "Répartition estimée" });
+      // 4. Calcul de la répartition des macronutriments
 
-    // Si des informations complémentaires (sexe et/ou état corporel) ont été renseignées,
-    // on les ajoute dans un champ dédié.
-    let infoSup = "";
-    if (sexe) infoSup += `• Sexe : **${sexe === "H" ? "Homme" : "Femme"}**\n`;
-    if (etat) infoSup += `• État corporel : **${etat}**\n`;
-    if (infoSup.length > 0) {
-      embed.addFields({ name: "Informations complémentaires", value: infoSup });
-    }
+      // Variables pour la répartition par défaut, en fonction de l'objectif nutritionnel
+      let proteinesPct, lipidesPct, glucidesPct;
+      const objectif = finalData.objectif;
+      if (objectif === "perte") {
+        proteinesPct = 35;
+        lipidesPct = 25;
+        glucidesPct = 40;
+      } else if (objectif === "maintien") {
+        proteinesPct = 30;
+        lipidesPct = 30;
+        glucidesPct = 40;
+      } else if (objectif === "prise") {
+        proteinesPct = 25;
+        lipidesPct = 25;
+        glucidesPct = 50;
+      } else if (objectif === "recomp") {
+        proteinesPct = 35;
+        lipidesPct = 20;
+        glucidesPct = 45;
+      } else {
+        proteinesPct = 30;
+        lipidesPct = 30;
+        glucidesPct = 40;
+      }
 
-    // Répondre à l'interaction avec l'embed final
-    await interaction.reply({ embeds: [embed] });
+      // Ajustements en fonction de l'état corporel, si renseigné
+      if (finalData.etat === "grasse") {
+        proteinesPct += 5;
+        glucidesPct -= 5;
+      } else if (finalData.etat === "maigre") {
+        proteinesPct -= 5;
+        glucidesPct += 5;
+      }
+
+      // Ajustement spécifique pour le sexe féminin
+      if (finalData.sexe === "F") {
+        lipidesPct += 2;
+        proteinesPct -= 2;
+      }
+
+      // Si des pourcentages personnalisés sont fournis, ils priment sur les valeurs par défaut
+      if (finalData.proteines !== null && finalData.glucides !== null && finalData.lipides !== null) {
+        if (finalData.proteines + finalData.glucides + finalData.lipides !== 100) {
+          return interactionContext.reply({
+            content: "La somme des pourcentages personnalisés doit être égale à 100%.",
+            ephemeral: true,
+          });
+        }
+        proteinesPct = finalData.proteines;
+        glucidesPct = finalData.glucides;
+        lipidesPct = finalData.lipides;
+      }
+
+      // Calcul des grammes pour chaque macronutriment
+      // Valeurs énergétiques approximatives :
+      // - Protéines et glucides : 4 kcal/g.
+      // - Lipides : 9 kcal/g.
+      const calories = finalData.calories;
+      const proteinesGr = ((calories * proteinesPct) / 100 / 4).toFixed(2);
+      const glucidesGr  = ((calories * glucidesPct) / 100 / 4).toFixed(2);
+      const lipidesGr   = ((calories * lipidesPct) / 100 / 9).toFixed(2);
+
+      // Détermination du libellé d'objectif
+      const objectifTexte =
+        objectif === "perte"
+          ? "Perte de poids"
+          : objectif === "maintien"
+            ? "Maintien"
+            : objectif === "prise"
+              ? "Prise de masse"
+              : "Recomposition corporelle";
+
+      // Création de l'embed de récapitulatif
+      const embed = new EmbedBuilder()
+        .setColor(colorEmbed)
+        .setTitle(`${coinInfoEmoji} Répartition des macronutriments`)
+        .setDescription(
+          `**${tropheEmoji} Objectif** : ${objectifTexte}\n**${cookieEmoji} Calories totales** : ${calories} kcal`
+        )
+        .addFields(
+          {
+            name: "Protéines",
+            value: `${proteinesGr} g (${proteinesPct}%)`,
+            inline: true,
+          },
+          {
+            name: "Lipides",
+            value: `${lipidesGr} g (${lipidesPct}%)`,
+            inline: true,
+          },
+          {
+            name: "Glucides",
+            value: `${glucidesGr} g (${glucidesPct}%)`,
+            inline: true,
+          }
+        )
+        .setThumbnail(thumbnailEmbed)
+        .setFooter({ text: "Répartition estimée" });
+
+      // Ajout d'informations complémentaires, si renseignées
+      let infoSup = "";
+      if (finalData.sexe) infoSup += `• Sexe : **${finalData.sexe === "H" ? "Homme" : "Femme"}**\n`;
+      if (finalData.etat) infoSup += `• État corporel : **${finalData.etat}**\n`;
+      if (infoSup.length > 0) {
+        embed.addFields({ name: "Informations complémentaires", value: infoSup });
+      }
+
+      // 5. Envoi de l'embed en réponse à l'interaction
+      if (interactionContext.replied || interactionContext.deferred) {
+        try {
+          await interactionContext.deleteReply();
+        } catch (error) {
+          console.error("Erreur lors de la suppression de la réponse éphémère :", error);
+        }
+        await interactionContext.channel.send({ embeds: [embed] });
+      } else {
+        await interactionContext.reply({ embeds: [embed] });
+      }
+    };
+
+    // 6. Exécution de la logique de gestion du physique
+    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
   },
 };
