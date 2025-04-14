@@ -75,31 +75,22 @@ async function handleUserPhysique(
 
   let finalData = {};
 
-  // 2. Si "enregistrer" est false : on utilise uniquement les données fournies
+  // 2. Si "enregistrer" est false, on utilise uniquement les données fournies
   if (guerrier.enregistrer == 0) {
-    finalData = providedData;
+    finalData = { ...providedData };
   }
 
-  // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
+  // 3. Si "enregistrer" est true, on fusionne données fournies et stockées
   else if (guerrier.enregistrer == 1) {
-    finalData = {
-      poids: providedData.poids != null ? providedData.poids : guerrier.poids,
-      taille:
-        providedData.taille != null ? providedData.taille : guerrier.taille,
-      age: providedData.age != null ? providedData.age : guerrier.age,
-      sexe: providedData.sexe != null ? providedData.sexe : guerrier.sexe,
-      activite:
-        providedData.activite != null
-          ? providedData.activite
-          : guerrier.activite,
-      jours: providedData.jours != null ? providedData.jours : guerrier.jours,
-      temps: providedData.temps != null ? providedData.temps : guerrier.temps,
-      intensite:
-        providedData.intensite != null
-          ? providedData.intensite
-          : guerrier.intensite,
-      tef: providedData.tef != null ? providedData.tef : guerrier.tef,
-    };
+    // On part de toutes les données stockées
+    finalData = { ...guerrier };
+
+    // Pour chaque clé de providedData, si la valeur n'est pas nulle, on l'utilise pour écraser celle de finalData
+    Object.keys(providedData).forEach((key) => {
+      if (providedData[key] != null) {
+        finalData[key] = providedData[key];
+      }
+    });
   }
 
   // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)

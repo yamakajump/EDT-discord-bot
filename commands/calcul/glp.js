@@ -70,7 +70,7 @@ function dots_men(bw) {
     -0.1918759221,
     24.0900756,
     -307.75076,
-    bw
+    bw,
   );
 }
 
@@ -91,7 +91,7 @@ function dots_women(bw) {
     -0.1126655495,
     13.6175032,
     -57.96288,
-    bw
+    bw,
   );
 }
 
@@ -144,7 +144,7 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
   if (finalData.mouvements === null || finalData.mouvements === undefined) {
     missingFields.push("mouvements");
   }
-  if (finalData.bodyweight === null || finalData.bodyweight === undefined) {
+  if (finalData.poids === null || finalData.poids === undefined) {
     missingFields.push("bodyweight");
   }
   if (finalData.total === null || finalData.total === undefined) {
@@ -154,7 +154,7 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
   if (missingFields.length > 0) {
     const errorMessage = {
       content: `Les champs suivants sont manquants : ${missingFields.join(
-        ", "
+        ", ",
       )}. Veuillez les renseigner.`,
       ephemeral: true,
     };
@@ -179,10 +179,12 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
       : dots_women(finalData.bodyweight));
 
   // Récupération des coefficients adaptés à l'athlète
-  const params = PARAMETERS[finalData.sexe][finalData.equipement][finalData.mouvements];
+  const params =
+    PARAMETERS[finalData.sexe][finalData.equipement][finalData.mouvements];
 
   // Calcul du dénominateur de la formule GLP
-  const denom = params[0] - params[1] * Math.exp(-params[2] * finalData.bodyweight);
+  const denom =
+    params[0] - params[1] * Math.exp(-params[2] * finalData.bodyweight);
 
   // Calcul du score GLP
   let glp = denom === 0 ? 0 : Math.max(0, (finalData.total * 100.0) / denom);
@@ -199,8 +201,8 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
     .setThumbnail(thumbnailEmbed)
     .setDescription(
       `Votre indice GLP : **${glp.toFixed(
-        2
-      )} Points**\nVos Dots : **${dots.toFixed(2)}**`
+        2,
+      )} Points**\nVos Dots : **${dots.toFixed(2)}**`,
     )
     .setFooter({ text: "Calculé selon la formule GLP adaptée" });
 
@@ -209,7 +211,10 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
     try {
       await interactionContext.deleteReply();
     } catch (error) {
-      console.error("Erreur lors de la suppression de la réponse éphémère :", error);
+      console.error(
+        "Erreur lors de la suppression de la réponse éphémère :",
+        error,
+      );
     }
     await interactionContext.channel.send({ embeds: [embed] });
   } else {
@@ -224,7 +229,7 @@ module.exports = {
       sexe: interaction.options.getString("sexe"), // "M" ou "F"
       equipement: interaction.options.getString("equipement"), // "Raw" ou "Single-ply"
       mouvements: interaction.options.getString("mouvements"), // "SBD" ou "B"
-      bodyweight: interaction.options.getNumber("bodyweight"), // poids de l'athlète
+      poids: interaction.options.getNumber("bodyweight"), // poids de l'athlète
       total: interaction.options.getNumber("total"), // total des charges soulevées
     };
 
@@ -246,6 +251,10 @@ module.exports = {
     }
 
     // Appel à la logique de gestion du physique qui fusionnera les données et appellera executeCalculationCallback
-    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };

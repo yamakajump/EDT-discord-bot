@@ -38,22 +38,25 @@ module.exports = {
     // Ici, aucun message n'a encore été envoyé : interaction.reply est sûr.
     if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
-        content: "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
+        content:
+          "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
         ephemeral: true,
       });
     }
     if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
-        content: "La taille négative ? Même les nains n'oseraient pas ça ! Indiquez une taille positive, merci.",
+        content:
+          "La taille négative ? Même les nains n'oseraient pas ça ! Indiquez une taille positive, merci.",
         ephemeral: true,
       });
     }
     if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
-        content: "Un âge négatif, c'est un retour dans le passé ! Donnez-nous un âge positif, et on oublie la machine à remonter le temps.",
+        content:
+          "Un âge négatif, c'est un retour dans le passé ! Donnez-nous un âge positif, et on oublie la machine à remonter le temps.",
         ephemeral: true,
       });
-    }    
+    }
 
     // Callback qui exécute le calcul de la masse grasse.
     // Notez que dans ce callback, l'interaction (souvent passée par handleUserPhysique)
