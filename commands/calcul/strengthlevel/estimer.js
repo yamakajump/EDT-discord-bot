@@ -46,11 +46,11 @@ const thumbnailEmbed = style.thumbnailEmbed;
 module.exports = {
   async execute(interaction) {
     const providedData = {
-      bodyWeight: interaction.options.getNumber("bodyweight"),
+      poids: interaction.options.getNumber("bodyweight"),
       liftWeight: interaction.options.getNumber("liftweight"),
       age: interaction.options.getInteger("age"),
       exerciseName: interaction.options.getString("exercise"),
-      sex: interaction.options.getString("sexe"),
+      sexe: interaction.options.getString("sexe"),
       langue: interaction.options.getString("langue"),
     };
 
@@ -191,9 +191,10 @@ module.exports = {
 
       // Pour l'affichage dans l'embed, nous cherchons à utiliser le nom en anglais (exerciceEN) si disponible
       // Sinon, nous revenons au nom français.
-      const displayExerciseName = exerciseObj.exerciceEN
-        ? exerciseObj.exerciceEN
-        : exerciseObj.exerciceFR;
+      const displayExerciseName =
+        finalData.langue === "fr"
+          ? exerciseObj.exerciceFR
+          : exerciseObj.exerciceEN || exerciseObj.exerciceFR;
 
       // Récupération des seuils correspondant au sexe choisi
       const thresholds = exerciseObj[finalData.sex];
