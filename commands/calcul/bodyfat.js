@@ -35,7 +35,10 @@ module.exports = {
     };
 
     // Callback qui exécute le calcul de la masse grasse
-    const executeCalculationCallback = async (interactionContext, finalData) => {
+    const executeCalculationCallback = async (
+      interactionContext,
+      finalData,
+    ) => {
       // On utilise finalData, sachant que la taille est stockée en cm.
       const poids = finalData.poids;
       const tailleM = finalData.taille / 100; // conversion de cm en m
@@ -60,7 +63,9 @@ module.exports = {
         .setColor(colorEmbed)
         .setTitle("Calcul du Pourcentage de Masse Grasse")
         .setThumbnail(thumbnailEmbed)
-        .setDescription("Voici vos résultats basés sur la formule de Deurenberg :")
+        .setDescription(
+          "Voici vos résultats basés sur la formule de Deurenberg :",
+        )
         .addFields(
           { name: "Poids", value: `${poids} kg`, inline: true },
           { name: "Taille", value: `${finalData.taille} cm`, inline: true },
@@ -71,15 +76,23 @@ module.exports = {
             name: "Masse grasse estimée",
             value: `${bodyFatPercentage}%`,
             inline: true,
-          }
+          },
         )
         .setFooter({ text: "Calculé selon la formule de Deurenberg" });
 
-      // Si la réponse a déjà été envoyée (par exemple via un update),
-      // on modifie la réponse, sinon on envoie une nouvelle réponse.
+      // S'il existe déjà une réponse (souvent éphémère), on la supprime et on envoie un message public.
       if (interactionContext.replied || interactionContext.deferred) {
-        await interactionContext.editReply({ embeds: [embed] });
+        try {
+          await interactionContext.deleteReply();
+        } catch (error) {
+          console.error(
+            "Erreur lors de la suppression du message éphémère :",
+            error,
+          );
+        }
+        await interactionContext.channel.send({ embeds: [embed] });
       } else {
+        // Envoyer directement la réponse publique
         await interactionContext.reply({ embeds: [embed] });
       }
     };
@@ -88,6 +101,10 @@ module.exports = {
     //  • Vérifier si l'utilisateur doit choisir d'enregistrer ses données
     //  • Fusionner les données fournies et celles stockées
     //  • Vérifier si un rappel de mise à jour s'impose au vu de la date de dernière modification
-    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };
