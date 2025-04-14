@@ -111,7 +111,7 @@ module.exports = {
       }
       if (
         !finalData.sexe ||
-        (finalData.sexe !== "Homme" && finalData.sexe !== "Femme")
+        (finalData.sexe !== "H" && finalData.sexe !== "F")
       ) {
         missingFields.push("sexe");
       }
