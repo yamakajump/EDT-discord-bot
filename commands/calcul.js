@@ -322,7 +322,7 @@ module.exports = {
             .setDescription("Votre sexe.")
             .setRequired(false)
             .addChoices(
-              { name: "Homme", value: "M" },
+              { name: "Homme", value: "H" },
               { name: "Femme", value: "F" },
             ),
         )

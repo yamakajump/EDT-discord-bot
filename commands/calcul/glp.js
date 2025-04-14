@@ -10,14 +10,14 @@
  *   - dots_women : limite le poids entre 40 et 150 kg et utilise une autre série de coefficients.
  *
  * Le calcul du GLP se base ensuite sur des paramètres ajustés selon :
- *   - Le sexe ("M" ou "F")
+ *   - Le sexe ("H" ou "F")
  *   - L'équipement ("Raw" ou "Single-ply")
  *   - Les mouvements ("SBD" ou "B")
  *
  * Les paramètres de calcul sont stockés dans l'objet PARAMETERS.
  *
  * Le module récupère les options suivantes :
- *   - sexe : le sexe de l'athlète ("M" ou "F")
+ *   - sexe : le sexe de l'athlète ("H" ou "F")
  *   - equipement : le type d'équipement ("Raw" ou "Single-ply")
  *   - mouvements : la discipline ("SBD" ou "B")
  *   - bodyweight : le poids de l'athlète
@@ -102,7 +102,7 @@ function dots_women(bw) {
  * et le type de mouvement.
  */
 const PARAMETERS = {
-  M: {
+  H: {
     Raw: {
       SBD: [1199.72839, 1025.18162, 0.00921],
       B: [320.98041, 281.40258, 0.01008],
@@ -174,7 +174,7 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
   // Calcul de la valeur "dots"
   let dots =
     finalData.total *
-    (finalData.sexe === "M"
+    (finalData.sexe === "H"
       ? dots_men(finalData.bodyweight)
       : dots_women(finalData.bodyweight));
 
@@ -218,7 +218,7 @@ module.exports = {
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur
     const providedData = {
-      sexe: interaction.options.getString("sexe"), // "M" ou "F"
+      sexe: interaction.options.getString("sexe"), // "H" ou "F"
       equipement: interaction.options.getString("equipement"), // "Raw" ou "Single-ply"
       mouvements: interaction.options.getString("mouvements"), // "SBD" ou "B"
       poids: interaction.options.getNumber("bodyweight"), // poids de l'athlète
