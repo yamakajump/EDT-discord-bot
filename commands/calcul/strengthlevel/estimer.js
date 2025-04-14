@@ -46,14 +46,16 @@ const thumbnailEmbed = style.thumbnailEmbed;
 module.exports = {
   async execute(interaction) {
     const providedData = {
-      poids: interaction.options.getNumber("bodyweight"),
+      bodyWeight: interaction.options.getNumber("bodyweight"),
       liftWeight: interaction.options.getNumber("liftweight"),
       age: interaction.options.getInteger("age"),
       exerciseName: interaction.options.getString("exercise"),
-      sexe: interaction.options.getString("sexe"),
+      sex: interaction.options.getString("sexe"),
+      langue: interaction.options.getString("langue"),
     };
 
     // 3. Validation humoristique des valeurs saisies
+    // Vérification du poids corporel
     if (providedData.bodyWeight != null && providedData.bodyWeight <= 0) {
       return interaction.reply({
         content:
@@ -61,13 +63,15 @@ module.exports = {
         ephemeral: true,
       });
     }
+    // Vérification du poids soulevé
     if (providedData.liftWeight != null && providedData.liftWeight <= 0) {
       return interaction.reply({
         content:
-          "Hmm… lever un poids négatif serait plutôt du prestidigitation. Merci de fournir un poids soulevé positif !",
+          "Hmm… lever un poids négatif serait plutôt de la prestidigitation. Merci de fournir un poids soulevé positif !",
         ephemeral: true,
       });
     }
+    // Vérification de l'âge
     if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content:
@@ -75,6 +79,7 @@ module.exports = {
         ephemeral: true,
       });
     }
+    // Vérification du nom de l'exercice
     if (
       !providedData.exerciseName ||
       providedData.exerciseName.trim().length === 0
@@ -85,6 +90,7 @@ module.exports = {
         ephemeral: true,
       });
     }
+    // Vérification du sexe
     if (
       !providedData.sex ||
       (providedData.sex !== "Homme" && providedData.sex !== "Femme")
@@ -126,7 +132,9 @@ module.exports = {
 
       if (missingFields.length > 0) {
         const errorMessage = {
-          content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Veuillez les renseigner.`,
+          content: `Les champs suivants sont manquants : ${missingFields.join(
+            ", ",
+          )}. Veuillez les renseigner.`,
           ephemeral: true,
         };
 
@@ -165,16 +173,33 @@ module.exports = {
         });
       }
 
-      // Recherche de l'exercice dans le tableau (comparaison insensible à la casse)
-      const exerciseObj = exercisesData.find(
-        (ex) =>
-          ex.exercise.toLowerCase() === finalData.exerciseName.toLowerCase(),
-      );
+      // Recherche de l'exercice dans le tableau
+      // On compare à la fois le champ exerciceFR et, si présent, exerciceEN de manière insensible à la casse
+      const exerciseObj = exercisesData.find((ex) => {
+        return (
+          ex.exerciceFR.toLowerCase() ===
+            finalData.exerciseName.toLowerCase() ||
+          (ex.exerciceEN &&
+            ex.exerciceEN.toLowerCase() ===
+              finalData.exerciseName.toLowerCase())
+        );
+      });
       if (!exerciseObj) {
         return interactionContext.reply({
           content: `Erreur : l'exercice "${finalData.exerciseName}" est introuvable dans la base de données.`,
           ephemeral: true,
         });
+      }
+
+      // Pour l'affichage, on choisit par défaut le nom français (exerciceFR)
+      // sauf si l'option "langue" est définie sur "en" et que le champ exerciceEN existe.
+      let displayExerciseName = exerciseObj.exerciceFR;
+      if (
+        finalData.langue &&
+        finalData.langue.toLowerCase() === "en" &&
+        exerciseObj.exerciceEN
+      ) {
+        displayExerciseName = exerciseObj.exerciceEN;
       }
 
       // Récupération des seuils correspondant au sexe choisi
@@ -243,7 +268,7 @@ module.exports = {
         `• ${emojiSexe} Sexe : **${finalData.sex}**\n` +
         `• ${emojiCookie} Poids du corps : **${finalData.bodyWeight} kg**\n` +
         `• ${emojiCd} Âge : **${finalData.age} ans**\n` +
-        `• ${emojiCible} Exercice : **${exerciseObj.exercise}**\n` +
+        `• ${emojiCible} Exercice : **${displayExerciseName}**\n` +
         `• ${emojiMuscle} Poids soulevé : **${finalData.liftWeight} kg**\n\n` +
         `**Statistiques :**\n` +
         `• Selon le poids du corps : ${emojiMapping[levelByBody] || ""} **${levelByBody}**\n` +
@@ -268,7 +293,7 @@ module.exports = {
       const embed = new EmbedBuilder()
         .setColor(colorEmbed)
         .setTitle(
-          `${emojiCible} Calcul du Strength Level pour ${exerciseObj.exercise}`,
+          `${emojiCible} Calcul du Strength Level pour ${displayExerciseName}`,
         )
         .setThumbnail(thumbnailEmbed)
         .setDescription(description + thresholdsDescription)

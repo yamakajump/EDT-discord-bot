@@ -28,6 +28,11 @@ module.exports = {
     // Récupération des options fournies par l'utilisateur (optionnelles)
     const categoryOption = interaction.options.getString("categorie");
     const bodyPartOption = interaction.options.getString("muscle");
+    const langue = interaction.options.getString("langue");
+
+    // On définit la clé à utiliser pour afficher le nom de l'exercice (par défaut : français)
+    const displayKey =
+      langue && langue.toLowerCase() === "en" ? "exerciceEN" : "exerciceFR";
 
     // Chemin absolu vers le fichier JSON
     const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
@@ -38,10 +43,7 @@ module.exports = {
       const rawData = fs.readFileSync(dataPath, "utf8");
       exercises = JSON.parse(rawData);
     } catch (error) {
-      console.error(
-        "⚠️\x1b[31m  Erreur lors de la lecture du fichier JSON :",
-        error,
-      );
+      console.error("⚠️ Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
         .setTitle("Erreur")
@@ -94,13 +96,12 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
       });
     }
 
-    // Construction de la description à afficher dans l'embed
+    // Construction de la description à afficher dans l'embed en utilisant la clé définie
     const description = filteredExercises
-      .map((ex) => `**${ex.exercise}**`)
+      .map((ex) => `**${ex[displayKey]}**`)
       .join("\n\n");
 
-    // Vérification de la taille du message pour ne pas dépasser la limite Discord
-    // La limite d'un embed pour la description est de 4096 caractères.
+    // Vérification de la taille du message pour ne pas dépasser la limite Discord (4096 caractères)
     if (description.length > 4096) {
       const limitEmbed = new EmbedBuilder()
         .setColor(colorEmbed)

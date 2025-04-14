@@ -426,6 +426,16 @@ module.exports = {
                   { name: "Homme", value: "Homme" },
                   { name: "Femme", value: "Femme" },
                 ),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("langue")
+                .setDescription("Langue de l'exercice.")
+                .setRequired(false)
+                .addChoices(
+                  { name: "Français", value: "FR" },
+                  { name: "Anglais", value: "EN" },
+                ),
             ),
         )
         .addSubcommand((subcommand) =>
