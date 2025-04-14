@@ -3,6 +3,9 @@
 const { EmbedBuilder, MessageFlags } = require("discord.js");
 const guerrierDAO = require("../../dao/guerrierDAO");
 
+const style = require("../../config/style.json");
+const colorEmbed = style.colorEmbed;
+
 module.exports = {
   async execute(interaction) {
     const userId = interaction.user.id;
@@ -20,7 +23,7 @@ module.exports = {
     // Créer l'embed avec les informations du guerrier.
     const embed = new EmbedBuilder()
       .setTitle(`${interaction.user.username} - Profil`)
-      .setColor("#3498db")
+      .setColor(colorEmbed)
       .setThumbnail(interaction.user.displayAvatarURL())
       .addFields(
         {
