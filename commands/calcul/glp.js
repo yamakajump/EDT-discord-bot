@@ -20,14 +20,14 @@
  *   - sexe : le sexe de l'athlète ("M" ou "F")
  *   - equipement : le type d'équipement ("Raw" ou "Single-ply")
  *   - mouvements : la discipline ("SBD" ou "B")
- *   - bodyweight (bw) : le poids de l'athlète
+ *   - bodyweight : le poids de l'athlète
  *   - total : le total des charges soulevées
  *
  * Finalement, un embed est envoyé en réponse, affichant l'indice GLP et les Dots calculés.
  */
 
 const { EmbedBuilder } = require("discord.js");
-
+const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
 const thumbnailEmbed = style.thumbnailEmbed;
@@ -70,7 +70,7 @@ function dots_men(bw) {
     -0.1918759221,
     24.0900756,
     -307.75076,
-    bw,
+    bw
   );
 }
 
@@ -91,7 +91,7 @@ function dots_women(bw) {
     -0.1126655495,
     13.6175032,
     -57.96288,
-    bw,
+    bw
   );
 }
 
@@ -99,8 +99,7 @@ function dots_women(bw) {
  * Paramètres de conformité pour le calcul GLP.
  *
  * La structure PARAMETERS contient les coefficients suivant le sexe, le type d'équipement
- * et le type de mouvement. Par exemple, pour un homme en Raw effectuant le mouvement "SBD",
- * les coefficients sont [1199.72839, 1025.18162, 0.009210].
+ * et le type de mouvement.
  */
 const PARAMETERS = {
   M: {
@@ -125,43 +124,128 @@ const PARAMETERS = {
   },
 };
 
+/**
+ * Callback exécuté après la fusion des données fournies et stockées.
+ *
+ * Il vérifie les champs requis, exécute les calculs (dots et GLP) et envoie un embed de réponse.
+ *
+ * @param {Object} interactionContext Contexte de l'interaction Discord.
+ * @param {Object} finalData Données finales fusionnées (doivent contenir sexe, equipement, mouvements, bodyweight, total).
+ */
+const executeCalculationCallback = async (interactionContext, finalData) => {
+  // Vérification des champs manquants dans finalData
+  const missingFields = [];
+  if (finalData.sexe === null || finalData.sexe === undefined) {
+    missingFields.push("sexe");
+  }
+  if (finalData.equipement === null || finalData.equipement === undefined) {
+    missingFields.push("equipement");
+  }
+  if (finalData.mouvements === null || finalData.mouvements === undefined) {
+    missingFields.push("mouvements");
+  }
+  if (finalData.bodyweight === null || finalData.bodyweight === undefined) {
+    missingFields.push("bodyweight");
+  }
+  if (finalData.total === null || finalData.total === undefined) {
+    missingFields.push("total");
+  }
+
+  if (missingFields.length > 0) {
+    const errorMessage = {
+      content: `Les champs suivants sont manquants : ${missingFields.join(
+        ", "
+      )}. Veuillez les renseigner.`,
+      ephemeral: true,
+    };
+
+    if (interactionContext.replied || interactionContext.deferred) {
+      try {
+        await interactionContext.deleteReply();
+      } catch (error) {
+        console.error("Erreur lors de la suppression de la réponse :", error);
+      }
+      return interactionContext.channel.send(errorMessage);
+    } else {
+      return interactionContext.reply(errorMessage);
+    }
+  }
+
+  // Calcul de la valeur "dots"
+  let dots =
+    finalData.total *
+    (finalData.sexe === "M"
+      ? dots_men(finalData.bodyweight)
+      : dots_women(finalData.bodyweight));
+
+  // Récupération des coefficients adaptés à l'athlète
+  const params = PARAMETERS[finalData.sexe][finalData.equipement][finalData.mouvements];
+
+  // Calcul du dénominateur de la formule GLP
+  const denom = params[0] - params[1] * Math.exp(-params[2] * finalData.bodyweight);
+
+  // Calcul du score GLP
+  let glp = denom === 0 ? 0 : Math.max(0, (finalData.total * 100.0) / denom);
+
+  // Vérification supplémentaire : si glp n'est pas valide ou si le poids est trop faible
+  if (isNaN(glp) || finalData.bodyweight < 35) {
+    glp = 0;
+  }
+
+  // Création de l'embed de réponse
+  const embed = new EmbedBuilder()
+    .setColor(colorEmbed)
+    .setTitle("Indice GLP en Force Athlétique")
+    .setThumbnail(thumbnailEmbed)
+    .setDescription(
+      `Votre indice GLP : **${glp.toFixed(
+        2
+      )} Points**\nVos Dots : **${dots.toFixed(2)}**`
+    )
+    .setFooter({ text: "Calculé selon la formule GLP adaptée" });
+
+  // Envoi de la réponse en fonction du contexte
+  if (interactionContext.replied || interactionContext.deferred) {
+    try {
+      await interactionContext.deleteReply();
+    } catch (error) {
+      console.error("Erreur lors de la suppression de la réponse éphémère :", error);
+    }
+    await interactionContext.channel.send({ embeds: [embed] });
+  } else {
+    await interactionContext.reply({ embeds: [embed] });
+  }
+};
+
 module.exports = {
   async execute(interaction) {
     // Récupération des options fournies par l'utilisateur
-    const sexe = interaction.options.getString("sexe"); // "M" ou "F"
-    const equipement = interaction.options.getString("equipement"); // "Raw" ou "Single-ply"
-    const mouvements = interaction.options.getString("mouvements"); // "SBD" ou "B"
-    const bw = interaction.options.getNumber("bodyweight"); // poids de l'athlète
-    const total = interaction.options.getNumber("total"); // total des charges soulevées
+    const providedData = {
+      sexe: interaction.options.getString("sexe"), // "M" ou "F"
+      equipement: interaction.options.getString("equipement"), // "Raw" ou "Single-ply"
+      mouvements: interaction.options.getString("mouvements"), // "SBD" ou "B"
+      bodyweight: interaction.options.getNumber("bodyweight"), // poids de l'athlète
+      total: interaction.options.getNumber("total"), // total des charges soulevées
+    };
 
-    // Calcul de la valeur "dots" en multipliant le total par le coefficient adapté au sexe
-    let dots = total * (sexe === "M" ? dots_men(bw) : dots_women(bw));
-
-    // Récupération des coefficients adaptés à l'athlète selon le sexe, l'équipement et le mouvement
-    const params = PARAMETERS[sexe][equipement][mouvements];
-
-    // Calcul du dénominateur de la formule GLP à partir des coefficients
-    const denom = params[0] - params[1] * Math.exp(-params[2] * bw);
-
-    // Calcul du score GLP en ajustant le total par rapport au dénominateur
-    let glp = denom === 0 ? 0 : Math.max(0, (total * 100.0) / denom);
-
-    // Si le score n'est pas valide ou que le poids est trop faible (bw < 35), on force le score à 0
-    if (isNaN(glp) || bw < 35) {
-      glp = 0;
+    // Validation humoristique des valeurs saisies
+    if (providedData.bodyweight != null && providedData.bodyweight <= 0) {
+      return interaction.reply({
+        content:
+          "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
+        ephemeral: true,
+      });
     }
 
-    // Création de l'embed de réponse contenant l'indice GLP et les Dots calculés
-    const embed = new EmbedBuilder()
-      .setColor(colorEmbed)
-      .setTitle("Indice GLP en Force Athlétique")
-      .setThumbnail(thumbnailEmbed)
-      .setDescription(
-        `Votre indice GLP : **${glp.toFixed(2)} Points**\nVos Dots : **${dots.toFixed(2)}**`,
-      )
-      .setFooter({ text: "Calculé selon la formule GLP adaptée" });
+    if (providedData.total != null && providedData.total <= 0) {
+      return interaction.reply({
+        content:
+          "Attention ! Un total négatif ou nul, c'est comme un dîner sans dessert. Veuillez saisir une valeur positive !",
+        ephemeral: true,
+      });
+    }
 
-    // Réponse de l'interaction avec l'embed
-    await interaction.reply({ embeds: [embed] });
+    // Appel à la logique de gestion du physique qui fusionnera les données et appellera executeCalculationCallback
+    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
   },
 };
