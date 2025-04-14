@@ -33,20 +33,21 @@ module.exports = {
       sexe: interaction.options.getString("sexe"),
     };
 
-    // Vérification que les valeurs numériques sont positives
-    if (providedData.poids <= 0) {
+    // Vérification que les valeurs numériques sont positives,
+    // uniquement si elles ont été fournies
+    if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
         content: "Le poids doit être un nombre positif.",
         ephemeral: true,
       });
     }
-    if (providedData.taille <= 0) {
+    if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
         content: "La taille doit être un nombre positif.",
         ephemeral: true,
       });
     }
-    if (providedData.age <= 0) {
+    if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content: "L'âge doit être un nombre positif.",
         ephemeral: true,
@@ -58,7 +59,7 @@ module.exports = {
       interactionContext,
       finalData,
     ) => {
-      // Vérification des champs manquants
+      // Vérification des champs manquants dans finalData
       const missingFields = [];
       if (finalData.poids === null || finalData.poids === undefined) {
         missingFields.push("poids");
@@ -75,7 +76,9 @@ module.exports = {
 
       if (missingFields.length > 0) {
         return interaction.reply({
-          content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Veuillez les renseigner.`,
+          content: `Les champs suivants sont manquants : ${missingFields.join(
+            ", ",
+          )}. Veuillez les renseigner.`,
           ephemeral: true,
         });
       }
