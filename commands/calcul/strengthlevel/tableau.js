@@ -36,7 +36,7 @@ module.exports = {
   async execute(interaction) {
     // Récupération des options de la sous-commande
     const exerciseName = interaction.options.getString("exercise");
-    const sexOption = interaction.options.getString("sex");
+    const sexOption = interaction.options.getString("sexe");
     const sourceChoice = interaction.options.getString("source"); // "age" ou "bodyweight"
 
     // Chargement du fichier JSON contenant les seuils de force

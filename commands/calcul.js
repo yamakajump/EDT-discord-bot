@@ -375,6 +375,16 @@ module.exports = {
                   { name: "Abdominaux", value: "Abdominaux" },
                   { name: "Avant-bras", value: "Avant-bras" },
                 ),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("langue")
+                .setDescription("Langue de l'exercice.")
+                .setRequired(false)
+                .addChoices(
+                  { name: "Français", value: "FR" },
+                  { name: "Anglais", value: "EN" },
+                ),
             ),
         )
         .addSubcommand((subcommand) =>
@@ -409,7 +419,7 @@ module.exports = {
             )
             .addStringOption((option) =>
               option
-                .setName("sex")
+                .setName("sexe")
                 .setDescription("Sélectionnez votre sexe.")
                 .setRequired(false)
                 .addChoices(
@@ -449,12 +459,22 @@ module.exports = {
             )
             .addStringOption((option) =>
               option
-                .setName("sex")
+                .setName("sexe")
                 .setDescription("Sélectionnez votre sexe.")
                 .setRequired(false)
                 .addChoices(
                   { name: "Homme", value: "Homme" },
                   { name: "Femme", value: "Femme" },
+                ),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("langue")
+                .setDescription("Langue de l'exercice.")
+                .setRequired(false)
+                .addChoices(
+                  { name: "Français", value: "FR" },
+                  { name: "Anglais", value: "EN" },
                 ),
             ),
         ),
