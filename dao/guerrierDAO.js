@@ -182,7 +182,7 @@ module.exports = {
     );
     return rows[0]?.rappel_update_physique || null;
   },
-  
+
   /**
    * Met à jour la date de dernière modification des données physiques d'un guerrier.
    *

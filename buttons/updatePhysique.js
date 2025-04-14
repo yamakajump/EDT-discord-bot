@@ -25,6 +25,7 @@ module.exports = {
     await interaction.update({
       content: `Vous avez choisi de ${updateChoice ? "mettre à jour" : "conserver"} vos données actuelles.`,
       components: [],
+      embeds: [],
     });
 
     // Suppression du contexte en attente

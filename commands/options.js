@@ -3,6 +3,7 @@
  *
  * Cette commande slash "options" gère la configuration des options :
  *   - statsvisibilite : Permet de modifier la visibilité des statistiques.
+ *   - profil : Affiche les informations de votre profil.
  *
  * La logique d'exécution consiste à importer et exécuter le module correspondant
  * à la sous-commande utilisée par l'utilisateur.
@@ -30,6 +31,12 @@ module.exports = {
               { name: "Privé", value: "prive" },
             ),
         ),
+    )
+    // Sous-commande : profil
+    .addSubcommand((subcommand) =>
+      subcommand
+        .setName("profil")
+        .setDescription("Affiche les informations de votre profil"),
     ),
   async execute(interaction) {
     const subCmd = interaction.options.getSubcommand();

@@ -47,7 +47,7 @@ const { initializeDatabase } = require("./utils/dbInit");
         );
       } else {
         console.error(
-          `⚠️ \x1b[31m Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
+          `⚠️ \x1b[31m  Erreur: La commande dans le fichier ${file} est invalide ou n'a pas de nom. \x1b[0m`,
         );
       }
     }

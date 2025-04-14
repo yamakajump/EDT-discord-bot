@@ -22,7 +22,7 @@ module.exports = {
     const choice = interaction.customId.split(":")[1];
     const enregistrerChoice = choice === "yes";
 
-    // Mettez à jour la valeur "enregistrer" en base pour cet utilisateur
+    // Met à jour la valeur "enregistrer" en base pour cet utilisateur via le DAO
     await guerrierDAO.updateEnregistrer(userId, enregistrerChoice);
 
     // Optionnel : mettre à jour l'objet contextuel si nécessaire
@@ -35,6 +35,7 @@ module.exports = {
     await interaction.update({
       content: `Vos données seront ${enregistrerChoice ? "" : "non "}enregistrées.`,
       components: [],
+      embeds: [],
     });
 
     // Relancer la commande en appelant le callback avec les données fournies
