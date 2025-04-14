@@ -10,23 +10,34 @@ const fs = require("fs").promises;
 const path = require("path");
 
 // Affichage des variables d'environnement utilisées pour la connexion
-console.log("\x1b[34m🔍 Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m");
-console.log("\x1b[36mMYSQL_HOST:\x1b[0m", process.env.MYSQL_HOST || "localhost");
+console.log(
+  "\x1b[34m🔍 Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m",
+);
+console.log(
+  "\x1b[36mMYSQL_HOST:\x1b[0m",
+  process.env.MYSQL_HOST || "localhost",
+);
 console.log("\x1b[36mMYSQL_PORT:\x1b[0m", process.env.MYSQL_PORT || 3306);
 console.log("\x1b[36mMYSQL_USER:\x1b[0m", process.env.MYSQL_USER || "root");
-console.log("\x1b[36mMYSQL_PASSWORD:\x1b[0m", process.env.MYSQL_PASSWORD ? "******" : "password");
-console.log("\x1b[36mMYSQL_DATABASE:\x1b[0m", process.env.MYSQL_DATABASE || "edt_db");
+console.log(
+  "\x1b[36mMYSQL_PASSWORD:\x1b[0m",
+  process.env.MYSQL_PASSWORD ? "******" : "password",
+);
+console.log(
+  "\x1b[36mMYSQL_DATABASE:\x1b[0m",
+  process.env.MYSQL_DATABASE || "edt_db",
+);
 
 // Création du pool de connexions MySQL
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST || "localhost", // Hôte de la base de données
-  port: process.env.MYSQL_PORT || 3306,          // Port MySQL
-  user: process.env.MYSQL_USER || "root",          // Nom d'utilisateur
+  port: process.env.MYSQL_PORT || 3306, // Port MySQL
+  user: process.env.MYSQL_USER || "root", // Nom d'utilisateur
   password: process.env.MYSQL_PASSWORD || "password", // Mot de passe
-  database: process.env.MYSQL_DATABASE || "edt_db",   // Base de données cible
+  database: process.env.MYSQL_DATABASE || "edt_db", // Base de données cible
   waitForConnections: true, // Active l'attente des connexions disponibles
-  connectionLimit: 10,      // Nombre maximum de connexions simultanées
-  queueLimit: 0,            // Pas de limite sur la file d'attente
+  connectionLimit: 10, // Nombre maximum de connexions simultanées
+  queueLimit: 0, // Pas de limite sur la file d'attente
   multipleStatements: true, // Permet l'exécution de plusieurs instructions SQL
 });
 
@@ -43,7 +54,10 @@ async function testConnection() {
     console.log("\x1b[32m✅ Connexion à MySQL réussie !\x1b[0m");
     connection.release();
   } catch (err) {
-    console.error("\x1b[31m❌ Échec de la connexion à MySQL :\x1b[0m", err.message);
+    console.error(
+      "\x1b[31m❌ Échec de la connexion à MySQL :\x1b[0m",
+      err.message,
+    );
     throw err;
   }
 }
@@ -60,7 +74,10 @@ async function initializeDatabase() {
   // Construction du chemin absolu vers le fichier SQL d'initialisation.
   const initSqlPath = path.join(__dirname, "..", "sql", "init_tables.sql");
   try {
-    console.log("\x1b[34m📂 Lecture du fichier SQL d'initialisation :\x1b[0m", initSqlPath);
+    console.log(
+      "\x1b[34m📂 Lecture du fichier SQL d'initialisation :\x1b[0m",
+      initSqlPath,
+    );
     // Lecture du fichier SQL en tant que chaîne de caractères.
     const sql = await fs.readFile(initSqlPath, "utf8");
     console.log("\x1b[34m📝 Contenu du fichier SQL chargé.\x1b[0m");
@@ -69,7 +86,10 @@ async function initializeDatabase() {
     console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
-    console.error("\x1b[31m🗂️  Erreur lors de l'exécution du script SQL :\x1b[0m", err);
+    console.error(
+      "\x1b[31m🗂️  Erreur lors de l'exécution du script SQL :\x1b[0m",
+      err,
+    );
     throw err;
   }
 }

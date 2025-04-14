@@ -81,7 +81,10 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
         .setDescription(
           "Aucun exercice ne correspond aux critères de recherche spécifiés.",
         )
-        .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied });
+        .addFields({
+          name: `${emojiBoule} Filtres appliqués :`,
+          value: filtersApplied,
+        });
       return interaction.reply({
         embeds: [noResultEmbed],
         flags: MessageFlags.Ephemeral,
@@ -103,7 +106,10 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
         .setDescription(
           "Il y a trop d'exercices correspondant à votre recherche. Veuillez affiner votre recherche en utilisant des paramètres supplémentaires.",
         )
-        .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied });
+        .addFields({
+          name: `${emojiBoule} Filtres appliqués :`,
+          value: filtersApplied,
+        });
       return interaction.reply({
         embeds: [limitEmbed],
         flags: MessageFlags.Ephemeral,
@@ -116,7 +122,10 @@ Partie du corps: ${bodyPartOption && bodyPartOption !== "none" ? bodyPartOption 
       .setTitle(`${cibleEmoji} Résultats de la recherche`)
       .setDescription(description)
       .setThumbnail(thumbnailEmbed)
-      .addFields({ name: `${emojiBoule} Filtres appliqués :`, value: filtersApplied })
+      .addFields({
+        name: `${emojiBoule} Filtres appliqués :`,
+        value: filtersApplied,
+      })
       .setFooter({
         text: "Données extraites du site https://strengthlevel.com/",
       });

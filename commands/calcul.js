@@ -341,7 +341,9 @@ module.exports = {
         .addSubcommand((subcommand) =>
           subcommand
             .setName("recherche")
-            .setDescription("Recherche un exercice via catégorie et partie du corps.")
+            .setDescription(
+              "Recherche un exercice via catégorie et partie du corps.",
+            )
             .addStringOption((option) =>
               option
                 .setName("categorie")
@@ -353,8 +355,8 @@ module.exports = {
                   { name: "Poids du corps", value: "Poids du corps" },
                   { name: "Haltère", value: "Haltere" },
                   { name: "Machine", value: "Machine" },
-                  { name: "Câble", value: "Cable" }
-                )
+                  { name: "Câble", value: "Cable" },
+                ),
             )
             .addStringOption((option) =>
               option
@@ -371,9 +373,9 @@ module.exports = {
                   { name: "Biceps", value: "Biceps" },
                   { name: "Triceps", value: "Triceps" },
                   { name: "Abdominaux", value: "Abdominaux" },
-                  { name: "Avant-bras", value: "Avant-bras" }
-                )
-            )
+                  { name: "Avant-bras", value: "Avant-bras" },
+                ),
+            ),
         )
         .addSubcommand((subcommand) =>
           subcommand
