@@ -1,4 +1,11 @@
-const { MessageEmbed, MessageActionRow, MessageButton } = require("discord.js");
+// /logic/handlePhysiqueData.js
+
+const {
+  EmbedBuilder,
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+} = require("discord.js");
 const pendingInteractions = require("../cache/pendingInteractions");
 const guerrierDAO = require("../dao/guerrierDAO");
 
@@ -10,7 +17,11 @@ const guerrierDAO = require("../dao/guerrierDAO");
  *   { poids, taille, age, sexe, activite, jours, temps, intensite, tef }
  * @param {Function} executeCalculationCallback - Callback à exécuter avec les données finales pour poursuivre le calcul.
  */
-async function handleUserPhysique(interaction, providedData, executeCalculationCallback) {
+async function handleUserPhysique(
+  interaction,
+  providedData,
+  executeCalculationCallback,
+) {
   const userId = interaction.user.id;
   let guerrier = await guerrierDAO.getById(userId);
 
@@ -22,23 +33,29 @@ async function handleUserPhysique(interaction, providedData, executeCalculationC
 
   // 1. Si le champ "enregistrer" est null, on demande confirmation via un embed interactif
   if (guerrier.enregistrer === null) {
-    const embed = new MessageEmbed()
+    const embed = new EmbedBuilder()
       .setTitle("Mise à jour des données")
       .setDescription(
-        "Voulez-vous enregistrer vos données physiques afin de ne pas les ressaisir à chaque commande ?\nVos données sont confidentielles."
+        "Voulez-vous enregistrer vos données physiques afin de ne pas les ressaisir à chaque commande ?\nVos données sont confidentielles.",
       )
-      .setColor("BLUE");
-    const row = new MessageActionRow().addComponents(
-      new MessageButton()
+      .setColor("Blue");
+
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
         .setCustomId("saveData:yes")
         .setLabel("Oui")
-        .setStyle("SUCCESS"),
-      new MessageButton()
+        .setStyle(ButtonStyle.Success),
+      new ButtonBuilder()
         .setCustomId("saveData:no")
         .setLabel("Non")
-        .setStyle("DANGER")
+        .setStyle(ButtonStyle.Danger),
     );
-    await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+
+    await interaction.reply({
+      embeds: [embed],
+      components: [row],
+      ephemeral: true,
+    });
     // On conserve le contexte pour reprendre la commande après la réponse
     pendingInteractions.add(userId, {
       type: "physiqueConfirmation",
@@ -59,14 +76,26 @@ async function handleUserPhysique(interaction, providedData, executeCalculationC
   // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
   else if (guerrier.enregistrer === true) {
     finalData = {
-      poids: providedData.poids !== undefined ? providedData.poids : guerrier.poids,
-      taille: providedData.taille !== undefined ? providedData.taille : guerrier.taille,
+      poids:
+        providedData.poids !== undefined ? providedData.poids : guerrier.poids,
+      taille:
+        providedData.taille !== undefined
+          ? providedData.taille
+          : guerrier.taille,
       age: providedData.age !== undefined ? providedData.age : guerrier.age,
       sexe: providedData.sexe !== undefined ? providedData.sexe : guerrier.sexe,
-      activite: providedData.activite !== undefined ? providedData.activite : guerrier.activite,
-      jours: providedData.jours !== undefined ? providedData.jours : guerrier.jours,
-      temps: providedData.temps !== undefined ? providedData.temps : guerrier.temps,
-      intensite: providedData.intensite !== undefined ? providedData.intensite : guerrier.intensite,
+      activite:
+        providedData.activite !== undefined
+          ? providedData.activite
+          : guerrier.activite,
+      jours:
+        providedData.jours !== undefined ? providedData.jours : guerrier.jours,
+      temps:
+        providedData.temps !== undefined ? providedData.temps : guerrier.temps,
+      intensite:
+        providedData.intensite !== undefined
+          ? providedData.intensite
+          : guerrier.intensite,
       tef: providedData.tef !== undefined ? providedData.tef : guerrier.tef,
     };
 
@@ -76,23 +105,28 @@ async function handleUserPhysique(interaction, providedData, executeCalculationC
     const now = new Date();
     const diffWeeks = (now - lastModification) / (1000 * 60 * 60 * 24 * 7);
     if (diffWeeks >= guerrier.rappel_update_physique) {
-      const embed = new MessageEmbed()
+      const embed = new EmbedBuilder()
         .setTitle("Mise à jour de vos données physiques")
         .setDescription(
-          "Vos données physiques semblent anciennes. Souhaitez-vous vérifier et/ou mettre à jour vos informations ?"
+          "Vos données physiques semblent anciennes. Souhaitez-vous vérifier et/ou mettre à jour vos informations ?",
         )
-        .setColor("ORANGE");
-      const row = new MessageActionRow().addComponents(
-        new MessageButton()
+        .setColor("Orange");
+
+      const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
           .setCustomId("updatePhysique:yes")
           .setLabel("Oui")
-          .setStyle("PRIMARY"),
-        new MessageButton()
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
           .setCustomId("updatePhysique:no")
           .setLabel("Non")
-          .setStyle("SECONDARY")
+          .setStyle(ButtonStyle.Secondary),
       );
-      await interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+      await interaction.reply({
+        embeds: [embed],
+        components: [row],
+        ephemeral: true,
+      });
       // Stocker le contexte pour reprendre une fois la décision prise
       pendingInteractions.add(userId, {
         type: "physiqueUpdateConfirmation",

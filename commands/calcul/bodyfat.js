@@ -61,7 +61,9 @@ module.exports = {
         .setColor(colorEmbed)
         .setTitle("Calcul du Pourcentage de Masse Grasse")
         .setThumbnail(thumbnailEmbed)
-        .setDescription("Voici vos résultats basés sur la formule de Deurenberg :")
+        .setDescription(
+          "Voici vos résultats basés sur la formule de Deurenberg :",
+        )
         .addFields(
           { name: "Poids", value: `${poids} kg`, inline: true },
           { name: "Taille", value: `${finalData.taille} cm`, inline: true },
@@ -72,7 +74,7 @@ module.exports = {
             name: "Masse grasse estimée",
             value: `${bodyFatPercentage}%`,
             inline: true,
-          }
+          },
         )
         .setFooter({ text: "Calculé selon la formule de Deurenberg" });
 
@@ -83,6 +85,10 @@ module.exports = {
     //  • Vérifier si l'utilisateur doit choisir d'enregistrer ses données
     //  • Fusionner les données fournies et celles stockées
     //  • Vérifier si un rappel de mise à jour s'impose au vu de la date de dernière modification
-    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };
