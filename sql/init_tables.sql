@@ -11,8 +11,8 @@ CREATE TABLE IF NOT EXISTS guerrier (
   id VARCHAR(255) PRIMARY KEY, -- Identifiant unique du guerrier
   username VARCHAR(255) NOT NULL, -- Nom d'utilisateur du guerrier
   count INT NOT NULL DEFAULT 1, -- Compteur, valeur par défaut à 1
-  display_stats BOOLEAN(1) NULL, -- Autorisation d'afficher les stats, false par défaut
-  enregistrer BOOLEAN(1) NULL, -- Champ pour savoir si la personne veut enregistrer ou non, NULL par défaut
+  display_stats BOOLEAN NULL, -- Autorisation d'afficher les stats, false par défaut
+  enregistrer BOOLEAN NULL, -- Champ pour savoir si la personne veut enregistrer ou non, NULL par défaut
   rappel_update_physique INT NOT NULL DEFAULT 4 CHECK (rappel_update_physique BETWEEN 1 AND 52), -- Durée de rappel en semaines (entre 1 et 52)
 
   -- info physique
