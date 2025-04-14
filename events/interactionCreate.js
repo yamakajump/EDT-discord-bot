@@ -31,7 +31,7 @@ module.exports = {
         await command.execute(interaction);
       } catch (error) {
         console.error(
-          `⚠️\x1b[31m Erreur lors de l'exécution de la commande ${interaction.commandName}:`,
+          `⚠️\x1b[31m  Erreur lors de l'exécution de la commande ${interaction.commandName}:`,
           error,
         );
         await interaction.reply({
@@ -56,7 +56,7 @@ module.exports = {
           await modalHandler.execute(interaction);
         } catch (error) {
           console.error(
-            `⚠️\x1b[31m Erreur lors du traitement du modal ${interaction.customId}:`,
+            `⚠️\x1b[31m  Erreur lors du traitement du modal ${interaction.customId}:`,
             error,
           );
         }
@@ -81,7 +81,7 @@ module.exports = {
           await buttonHandler.execute(interaction, params);
         } catch (error) {
           console.error(
-            `⚠️\x1b[31m Erreur lors du traitement du bouton ${interaction.customId}:`,
+            `⚠️\x1b[31m  Erreur lors du traitement du bouton ${interaction.customId}:`,
             error,
           );
         }

@@ -27,7 +27,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(
-        `⚠️\x1b[31m Erreur lors de la mise à jour de la visibilité des statistiques pour l'utilisateur ${userId}:`,
+        `⚠️\x1b[31m  Erreur lors de la mise à jour de la visibilité des statistiques pour l'utilisateur ${userId}:`,
         error,
       );
       await interaction.reply({

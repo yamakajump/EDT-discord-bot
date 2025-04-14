@@ -53,14 +53,14 @@ module.exports = {
               await warning.delete();
             } catch (err) {
               console.error(
-                "⚠️\x1b[31m Erreur lors de la suppression du message de notification :",
+                "⚠️\x1b[31m  Erreur lors de la suppression du message de notification :",
                 err,
               );
             }
           }, 60000);
         } catch (err) {
           console.error(
-            "⚠️\x1b[31m Erreur lors de la suppression ou de la gestion du message :",
+            "⚠️\x1b[31m  Erreur lors de la suppression ou de la gestion du message :",
             err,
           );
         }
@@ -75,7 +75,7 @@ module.exports = {
       );
     } catch (err) {
       console.error(
-        "⚠️\x1b[31m Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
+        "⚠️\x1b[31m  Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
         err,
       );
     }

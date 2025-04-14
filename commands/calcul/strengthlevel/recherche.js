@@ -38,7 +38,7 @@ module.exports = {
       const rawData = fs.readFileSync(dataPath, "utf8");
       exercises = JSON.parse(rawData);
     } catch (error) {
-      console.error("⚠️\x1b[31m Erreur lors de la lecture du fichier JSON :", error);
+      console.error("⚠️\x1b[31m  Erreur lors de la lecture du fichier JSON :", error);
       const errorEmbed = new EmbedBuilder()
         .setColor(colorEmbedError)
         .setTitle("Erreur")

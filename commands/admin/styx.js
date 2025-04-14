@@ -118,7 +118,7 @@ module.exports = {
     } catch (error) {
       console.error(error);
       return interaction.reply({
-        content: "⚠️\x1b[31m Erreur lors de la modification des rôles.",
+        content: "⚠️\x1b[31m  Erreur lors de la modification des rôles.",
         flags: MessageFlags.Ephemeral,
       });
     }

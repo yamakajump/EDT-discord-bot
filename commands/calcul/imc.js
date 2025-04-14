@@ -108,7 +108,7 @@ module.exports = {
         path.join(__dirname, "..", "..", "images", "imc.png"),
       );
     } catch (error) {
-      console.error("⚠️\x1b[31m Erreur lors du chargement de l'image IMC :", error);
+      console.error("⚠️\x1b[31m  Erreur lors du chargement de l'image IMC :", error);
     }
 
     // Dessin de l'image de fond couvrant le canvas

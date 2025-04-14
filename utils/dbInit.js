@@ -11,7 +11,7 @@ const path = require("path");
 
 // Affichage des variables d'environnement utilisées pour la connexion
 console.log(
-  "\x1b[34m🔍 Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m",
+  "\x1b[34m🔍  Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m",
 );
 console.log(
   "\x1b[36mMYSQL_HOST:\x1b[0m",
@@ -49,13 +49,13 @@ const promisePool = pool.promise();
  */
 async function testConnection() {
   try {
-    console.log("\x1b[35m🔄 Test de connexion à MySQL...\x1b[0m");
+    console.log("\x1b[35m🔄  Test de connexion à MySQL...\x1b[0m");
     const connection = await promisePool.getConnection();
-    console.log("\x1b[32m✅ Connexion à MySQL réussie !\x1b[0m");
+    console.log("\x1b[32m✅  Connexion à MySQL réussie !\x1b[0m");
     connection.release();
   } catch (err) {
     console.error(
-      "\x1b[31m❌ Échec de la connexion à MySQL :\x1b[0m",
+      "\x1b[31m❌  Échec de la connexion à MySQL :\x1b[0m",
       err.message,
     );
     throw err;
@@ -75,19 +75,19 @@ async function initializeDatabase() {
   const initSqlPath = path.join(__dirname, "..", "sql", "init_tables.sql");
   try {
     console.log(
-      "\x1b[34m📂 Lecture du fichier SQL d'initialisation :\x1b[0m",
+      "\x1b[34m📂  Lecture du fichier SQL d'initialisation :\x1b[0m",
       initSqlPath,
     );
     // Lecture du fichier SQL en tant que chaîne de caractères.
     const sql = await fs.readFile(initSqlPath, "utf8");
-    console.log("\x1b[34m📝 Contenu du fichier SQL chargé.\x1b[0m");
+    console.log("\x1b[34m📝  Contenu du fichier SQL chargé.\x1b[0m");
     // Exécution du script SQL sur la base de données.
     const [results, fields] = await promisePool.query(sql);
     console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
     console.error(
-      "\x1b[31m🗂️  Erreur lors de l'exécution du script SQL :\x1b[0m",
+      "\x1b[31m🗂️   Erreur lors de l'exécution du script SQL :\x1b[0m",
       err,
     );
     throw err;
