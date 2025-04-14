@@ -55,7 +55,6 @@ module.exports = {
     };
 
     // 3. Validation humoristique des valeurs saisies
-    // Vérification du poids corporel
     if (providedData.bodyWeight != null && providedData.bodyWeight <= 0) {
       return interaction.reply({
         content:
@@ -63,7 +62,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-    // Vérification du poids soulevé
     if (providedData.liftWeight != null && providedData.liftWeight <= 0) {
       return interaction.reply({
         content:
@@ -71,7 +69,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-    // Vérification de l'âge
     if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content:
@@ -79,7 +76,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-    // Vérification du nom de l'exercice
     if (
       !providedData.exerciseName ||
       providedData.exerciseName.trim().length === 0
@@ -90,7 +86,6 @@ module.exports = {
         ephemeral: true,
       });
     }
-    // Vérification du sexe
     if (
       !providedData.sex ||
       (providedData.sex !== "Homme" && providedData.sex !== "Femme")
@@ -174,7 +169,7 @@ module.exports = {
       }
 
       // Recherche de l'exercice dans le tableau
-      // On compare à la fois le champ exerciceFR et, si présent, exerciceEN de manière insensible à la casse
+      // On compare à la fois le champ exerciceFR et, si présent, exerciceEN de manière insensible à la casse.
       const exerciseObj = exercisesData.find((ex) => {
         return (
           ex.exerciceFR.toLowerCase() ===
@@ -191,16 +186,14 @@ module.exports = {
         });
       }
 
-      // Pour l'affichage, on choisit par défaut le nom français (exerciceFR)
-      // sauf si l'option "langue" est définie sur "en" et que le champ exerciceEN existe.
-      let displayExerciseName = exerciseObj.exerciceFR;
-      if (
-        finalData.langue &&
-        finalData.langue.toLowerCase() === "en" &&
-        exerciseObj.exerciceEN
-      ) {
-        displayExerciseName = exerciseObj.exerciceEN;
-      }
+      // Pour l'image, nous conservons toujours le nom français (exerciceFR)
+      const imageExerciseName = exerciseObj.exerciceFR;
+
+      // Pour l'affichage dans l'embed, nous cherchons à utiliser le nom en anglais (exerciceEN) si disponible
+      // Sinon, nous revenons au nom français.
+      const displayExerciseName = exerciseObj.exerciceEN
+        ? exerciseObj.exerciceEN
+        : exerciseObj.exerciceFR;
 
       // Récupération des seuils correspondant au sexe choisi
       const thresholds = exerciseObj[finalData.sex];

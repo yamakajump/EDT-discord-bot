@@ -152,7 +152,11 @@ module.exports = {
         });
       }
 
-      // Pour l'affichage, on choisit par défaut le français,
+      // Pour l'image, le nom est toujours basé sur l'exerciceFR (nom français)
+      const exerciseImageName =
+        exerciseObj.exerciceFR.replace(/ /g, "_") + ".png";
+
+      // Pour l'affichage dans l'embed, on choisit par défaut le français,
       // sauf si l'option "langue" est définie sur "en" et que le nom anglais existe.
       let displayExerciseName = exerciseObj.exerciceFR;
       if (langue && langue.toLowerCase() === "en" && exerciseObj.exerciceEN) {
@@ -310,8 +314,7 @@ module.exports = {
       // Génération d'un buffer PNG à partir du canvas
       const tableBuffer = canvas.toBuffer("image/png");
 
-      // Construction du nom de l'image correspondant à l'exercice
-      const exerciseImageName = displayExerciseName.replace(/ /g, "_") + ".png";
+      // Utilisation du nom français pour la recherche de l'image
       const exerciseImagePath = path.join(
         __dirname,
         "../../../images/strengthlevel",
