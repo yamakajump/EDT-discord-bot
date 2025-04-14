@@ -76,9 +76,21 @@ async function handleUserPhysique(
   let finalData = {};
 
   // 2. Si "enregistrer" est false : on utilise uniquement les données fournies
+
+  console.log("enregistrer : ", guerrier.enregistrer);
+
   if (guerrier.enregistrer === false) {
     finalData = providedData;
+    console.log(
+      "Données fournies par l'utilisateur :",
+      providedData,
+      "Données stockées en base :",
+      guerrier,
+    );
   }
+
+
+
   // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
   else if (guerrier.enregistrer === true) {
     finalData = {
@@ -104,6 +116,8 @@ async function handleUserPhysique(
           : guerrier.intensite,
       tef: providedData.tef !== undefined ? providedData.tef : guerrier.tef,
     };
+
+    console.log("Données finales après fusion :", finalData);
 
     // 4. Vérifier la date de dernière modification et la durée de rappel
     // On suppose que guerrier.derniere_modification et guerrier.rappel_update_physique existent en base
