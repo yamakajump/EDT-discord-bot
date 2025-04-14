@@ -26,7 +26,7 @@
  * Finalement, un embed est envoyé en réponse, affichant l'indice GLP et les Dots calculés.
  */
 
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;

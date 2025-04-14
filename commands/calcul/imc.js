@@ -14,7 +14,6 @@ const path = require("path");
 const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
 const style = require("../../config/style.json");
 const colorEmbed = style.colorEmbed;
-const thumbnailEmbed = style.thumbnailEmbed;
 
 const { getEmoji } = require("../../utils/emoji");
 const infoEmoji = getEmoji("info");

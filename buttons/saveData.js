@@ -6,9 +6,9 @@ const { MessageFlags } = require("discord.js");
 
 module.exports = {
   // Ce handler s'applique aux customId commençant par "saveData:"
-  async execute(interaction) {
+  async execute(interaction, params) {
     // Extraction des paramètres depuis le customId au format "saveData:yes:<userId>" ou "saveData:no:<userId>"
-    const [prefix, choice, customUserId] = interaction.customId.split(":");
+    const [choice, customUserId] = params;
 
     // Vérification que l'ID contenu dans le customId correspond à celui de l'utilisateur qui a cliqué
     if (interaction.user.id !== customUserId) {

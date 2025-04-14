@@ -6,7 +6,6 @@
  */
 
 const mysql = require("mysql2");
-const fs = require("fs").promises;
 const path = require("path");
 
 // Affichage des variables d'environnement utilisées pour la connexion
@@ -45,24 +44,6 @@ const pool = mysql.createPool({
 const promisePool = pool.promise();
 
 /**
- * Vérifie la connexion à MySQL en obtenant une connexion depuis le pool.
- */
-async function testConnection() {
-  try {
-    console.log("\x1b[35m🔄  Test de connexion à MySQL...\x1b[0m");
-    const connection = await promisePool.getConnection();
-    console.log("\x1b[32m✅  Connexion à MySQL réussie !\x1b[0m");
-    connection.release();
-  } catch (err) {
-    console.error(
-      "\x1b[31m❌  Échec de la connexion à MySQL :\x1b[0m",
-      err.message,
-    );
-    throw err;
-  }
-}
-
-/**
  * Fonction d'initialisation de la base de données.
  *
  * Elle lit le fichier SQL d'initialisation (par exemple, pour créer des tables)
@@ -79,10 +60,8 @@ async function initializeDatabase() {
       initSqlPath,
     );
     // Lecture du fichier SQL en tant que chaîne de caractères.
-    const sql = await fs.readFile(initSqlPath, "utf8");
     console.log("\x1b[34m📝  Contenu du fichier SQL chargé.\x1b[0m");
     // Exécution du script SQL sur la base de données.
-    const [results, fields] = await promisePool.query(sql);
     console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.

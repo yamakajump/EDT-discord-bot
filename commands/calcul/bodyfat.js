@@ -16,7 +16,7 @@
  * Le résultat est présenté dans un embed Discord.
  */
 
-const { EmbedBuilder } = require("discord.js");
+const { EmbedBuilder, MessageFlags } = require("discord.js");
 const { handleUserPhysique } = require("../../logic/handlePhysiqueData");
 
 const style = require("../../config/style.json");
