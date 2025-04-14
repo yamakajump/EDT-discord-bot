@@ -292,16 +292,6 @@ module.exports = {
         .setDescription("Calcule l'indice GLP en Force Athlétique.")
         .addStringOption((option) =>
           option
-            .setName("sexe")
-            .setDescription("Votre sexe.")
-            .setRequired(false)
-            .addChoices(
-              { name: "Homme", value: "M" },
-              { name: "Femme", value: "F" },
-            ),
-        )
-        .addStringOption((option) =>
-          option
             .setName("equipement")
             .setDescription("Votre équipement.")
             .setRequired(true)
@@ -322,15 +312,25 @@ module.exports = {
         )
         .addNumberOption((option) =>
           option
-            .setName("bodyweight")
-            .setDescription("Votre poids en kg.")
-            .setRequired(false),
-        )
-        .addNumberOption((option) =>
-          option
             .setName("total")
             .setDescription("Votre total en kg.")
             .setRequired(true),
+        )
+        .addStringOption((option) =>
+          option
+            .setName("sexe")
+            .setDescription("Votre sexe.")
+            .setRequired(false)
+            .addChoices(
+              { name: "Homme", value: "M" },
+              { name: "Femme", value: "F" },
+            ),
+        )
+        .addNumberOption((option) =>
+          option
+            .setName("bodyweight")
+            .setDescription("Votre poids en kg.")
+            .setRequired(false),
         ),
     )
     // Groupe de sous-commandes pour strengthlevel
@@ -385,15 +385,21 @@ module.exports = {
             )
             .addNumberOption((option) =>
               option
-                .setName("bodyweight")
-                .setDescription("Votre poids en kg.")
-                .setRequired(false),
-            )
-            .addNumberOption((option) =>
-              option
                 .setName("liftweight")
                 .setDescription("Le poids soulevé en kg.")
                 .setRequired(true),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("exercise")
+                .setDescription("Le nom de l'exercice.")
+                .setRequired(true),
+            )
+            .addNumberOption((option) =>
+              option
+                .setName("bodyweight")
+                .setDescription("Votre poids en kg.")
+                .setRequired(false),
             )
             .addIntegerOption((option) =>
               option
@@ -410,12 +416,6 @@ module.exports = {
                   { name: "Homme", value: "Homme" },
                   { name: "Femme", value: "Femme" },
                 ),
-            )
-            .addStringOption((option) =>
-              option
-                .setName("exercise")
-                .setDescription("Le nom de l'exercice.")
-                .setRequired(true),
             ),
         )
         .addSubcommand((subcommand) =>
@@ -437,16 +437,6 @@ module.exports = {
             )
             .addStringOption((option) =>
               option
-                .setName("sex")
-                .setDescription("Sélectionnez votre sexe.")
-                .setRequired(false)
-                .addChoices(
-                  { name: "Homme", value: "Homme" },
-                  { name: "Femme", value: "Femme" },
-                ),
-            )
-            .addStringOption((option) =>
-              option
                 .setName("source")
                 .setDescription(
                   "Choisissez entre l'affichage des seuils basés sur l'âge ou sur le poids.",
@@ -455,6 +445,16 @@ module.exports = {
                 .addChoices(
                   { name: "Âge", value: "age" },
                   { name: "Poids", value: "bodyweight" },
+                ),
+            )
+            .addStringOption((option) =>
+              option
+                .setName("sex")
+                .setDescription("Sélectionnez votre sexe.")
+                .setRequired(false)
+                .addChoices(
+                  { name: "Homme", value: "Homme" },
+                  { name: "Femme", value: "Femme" },
                 ),
             ),
         ),
