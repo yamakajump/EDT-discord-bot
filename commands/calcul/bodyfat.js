@@ -34,7 +34,8 @@ module.exports = {
     };
 
     // Vérification que les valeurs numériques sont positives,
-    // uniquement si elles ont été fournies
+    // uniquement si elles ont été fournies.
+    // Ici, aucun message n'a encore été envoyé : interaction.reply est sûr.
     if (providedData.poids != null && providedData.poids <= 0) {
       return interaction.reply({
         content: "Le poids doit être un nombre positif.",
@@ -54,7 +55,9 @@ module.exports = {
       });
     }
 
-    // Callback qui exécute le calcul de la masse grasse
+    // Callback qui exécute le calcul de la masse grasse.
+    // Notez que dans ce callback, l'interaction (souvent passée par handleUserPhysique)
+    // peut déjà avoir répondu ou être différée. Nous vérifions donc avant d'envoyer notre message.
     const executeCalculationCallback = async (
       interactionContext,
       finalData,
@@ -75,19 +78,34 @@ module.exports = {
       }
 
       if (missingFields.length > 0) {
-        return interaction.reply({
+        // Selon le contexte, si une réponse a déjà été envoyée,
+        // on supprime la réponse existante puis on envoie dans le channel.
+        const errorMessage = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
             ", ",
           )}. Veuillez les renseigner.`,
           ephemeral: true,
-        });
+        };
+
+        if (interactionContext.replied || interactionContext.deferred) {
+          try {
+            await interactionContext.deleteReply();
+          } catch (error) {
+            console.error(
+              "Erreur lors de la suppression de la réponse :",
+              error,
+            );
+          }
+          return interactionContext.channel.send(errorMessage);
+        } else {
+          return interactionContext.reply(errorMessage);
+        }
       }
 
-      // On utilise finalData, sachant que la taille est stockée en cm.
+      // Conversion et normalisation des données
       const poids = finalData.poids;
       const tailleM = finalData.taille / 100; // conversion de cm en m
       const age = finalData.age;
-      // Normalisation de la valeur de sexe (minuscule pour éviter les problèmes de casse)
       const sexe = finalData.sexe.toLowerCase();
 
       // Calcul de l'IMC
@@ -124,7 +142,7 @@ module.exports = {
         )
         .setFooter({ text: "Calculé selon la formule de Deurenberg" });
 
-      // S'il existe déjà une réponse (souvent éphémère), on la supprime et on envoie un message public.
+      // Envoi de la réponse en fonction du contexte.
       if (interactionContext.replied || interactionContext.deferred) {
         try {
           await interactionContext.deleteReply();
@@ -136,12 +154,12 @@ module.exports = {
         }
         await interactionContext.channel.send({ embeds: [embed] });
       } else {
-        // Envoyer directement la réponse publique
         await interactionContext.reply({ embeds: [embed] });
       }
     };
 
-    // Appel à la logique de gestion du physique. Celle‑ci se charge de :
+    // Appel à la logique de gestion du physique.
+    // Celle‑ci se charge de :
     //  • Vérifier si l'utilisateur doit choisir d'enregistrer ses données
     //  • Fusionner les données fournies et celles stockées
     //  • Vérifier si un rappel de mise à jour s'impose au vu de la date de dernière modification

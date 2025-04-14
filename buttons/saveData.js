@@ -52,9 +52,6 @@ module.exports = {
       embeds: [],
     });
 
-    // Attendre 3 secondes avant de lancer la commande
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     // Relancer la commande en appelant le callback avec les données fournies
     await pending.executeCalculationCallback(
       pending.originalInteraction,
