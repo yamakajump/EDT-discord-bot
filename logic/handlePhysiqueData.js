@@ -114,7 +114,7 @@ async function handleUserPhysique(
   }
 
   // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
-  if (guerrier.enregistrer === true) {
+  if (guerrier.enregistrer == 1) {
     // On s'attend à ce que la méthode updateUserData du DAO mette à jour
     await guerrierDAO.updateUserData(userId, finalData);
   }
