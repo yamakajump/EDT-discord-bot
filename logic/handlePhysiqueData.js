@@ -79,7 +79,7 @@ async function handleUserPhysique(
 
   console.log("enregistrer : ", guerrier.enregistrer);
 
-  if (guerrier.enregistrer === false) {
+  if (guerrier.enregistrer == 1) {
     finalData = providedData;
     console.log(
       "Données fournies par l'utilisateur :",
@@ -92,7 +92,7 @@ async function handleUserPhysique(
 
 
   // 3. Si "enregistrer" est true : on fusionne données fournies et stockées
-  else if (guerrier.enregistrer === true) {
+  else if (guerrier.enregistrer == 0) {
     finalData = {
       poids:
         providedData.poids !== undefined ? providedData.poids : guerrier.poids,
