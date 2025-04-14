@@ -75,8 +75,6 @@ async function handleUserPhysique(
 
   let finalData = {};
 
-  console.log("enregistrer :", guerrier.enregistrer);
-  console.log("Données fournies :", providedData);
   // 2. Si "enregistrer" est false, on utilise uniquement les données fournies
   if (guerrier.enregistrer == 0) {
     finalData = { ...providedData };
@@ -94,7 +92,6 @@ async function handleUserPhysique(
       }
     });
   }
-  console.log("Données finales :", finalData);
 
   // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
   if (guerrier.enregistrer == 1) {
