@@ -76,15 +76,6 @@ async function handleUserPhysique(
   let finalData = {};
 
   // 2. Si "enregistrer" est false : on utilise uniquement les données fournies
-
-  console.log("enregistrer : ", guerrier.enregistrer);
-  console.log(
-    "Données fournies par l'utilisateur :",
-    providedData,
-    "Données stockées en base :",
-    guerrier,
-  );
-
   if (guerrier.enregistrer == 0) {
     finalData = providedData;
   }
@@ -109,8 +100,6 @@ async function handleUserPhysique(
           : guerrier.intensite,
       tef: providedData.tef != null ? providedData.tef : guerrier.tef,
     };
-
-    console.log("Données finales après fusion :", finalData);
   }
 
   // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
