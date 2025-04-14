@@ -91,6 +91,8 @@ async function handleUserPhysique(
         finalData[key] = providedData[key];
       }
     });
+    console.log("Données fournies :", providedData);
+    console.log("Données finales :", finalData);
   }
 
   // 4. Mise à jour de la DB si l'utilisateur a choisi de sauvegarder (enregistrer === true)
