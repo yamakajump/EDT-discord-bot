@@ -179,13 +179,10 @@ module.exports = {
         });
       }
 
-      // Pour l'image, nous conservons toujours le nom français (exerciceFR)
-      const imageExerciseName = exerciseObj.exerciceFR;
-
       // Pour l'affichage dans l'embed, nous cherchons à utiliser le nom en anglais (exerciceEN) si disponible
       // Sinon, nous revenons au nom français.
       const displayExerciseName =
-        finalData.langue === "fr"
+        finalData.langue === "FR"
           ? exerciseObj.exerciceFR
           : exerciseObj.exerciceEN || exerciseObj.exerciceFR;
 
