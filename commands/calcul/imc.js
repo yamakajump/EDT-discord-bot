@@ -32,19 +32,22 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
         content:
           "Hey ! Ta taille doit être supérieure à zéro (en cm), sinon on passera pour des nains. Réessaie !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
     // 4. Mise en place du callback de calcul
-    const executeCalculationCallback = async (interactionContext, finalData) => {
+    const executeCalculationCallback = async (
+      interactionContext,
+      finalData,
+    ) => {
       // Vérification des champs manquants dans finalData
       const missingFields = [];
       if (finalData.poids === null || finalData.poids === undefined) {
@@ -56,16 +59,11 @@ module.exports = {
       if (missingFields.length > 0) {
         const errorMessage = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
-            ", "
+            ", ",
           )}. Veuillez les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
         if (interactionContext.replied || interactionContext.deferred) {
-          try {
-            await interactionContext.deleteReply();
-          } catch (error) {
-            console.error("Erreur lors de la suppression de la réponse :", error);
-          }
           return interactionContext.channel.send(errorMessage);
         } else {
           return interactionContext.reply(errorMessage);
@@ -129,7 +127,7 @@ module.exports = {
       let imcImage;
       try {
         imcImage = await loadImage(
-          path.join(__dirname, "..", "..", "images", "imc.png")
+          path.join(__dirname, "..", "..", "images", "imc.png"),
         );
       } catch (error) {
         console.error("Erreur lors du chargement de l'image IMC :", error);
@@ -200,28 +198,30 @@ module.exports = {
         .setColor(colorEmbed)
         .setTitle(`${infoEmoji} Résultat de votre IMC`)
         .setDescription(
-          `- **IMC** : ${imc}\n- **Classification** : ${classification}`
+          `- **IMC** : ${imc}\n- **Classification** : ${classification}`,
         )
         .setImage("attachment://imc.png")
         .setFooter({ text: "Calculé selon la formule de l’IMC" });
 
       // Envoi de l'embed en fonction du contexte de la réponse
       if (interactionContext.replied || interactionContext.deferred) {
-        try {
-          await interactionContext.deleteReply();
-        } catch (error) {
-          console.error(
-            "Erreur lors de la suppression de la réponse éphémère :",
-            error
-          );
-        }
-        await interactionContext.channel.send({ embeds: [embed], files: [attachment] });
+        await interactionContext.channel.send({
+          embeds: [embed],
+          files: [attachment],
+        });
       } else {
-        await interactionContext.reply({ embeds: [embed], files: [attachment] });
+        await interactionContext.reply({
+          embeds: [embed],
+          files: [attachment],
+        });
       }
     };
 
     // 5. Exécution de la logique physique : fusion des données et calcul via handleUserPhysique
-    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };

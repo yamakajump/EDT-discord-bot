@@ -35,22 +35,23 @@ module.exports = {
     const providedData = {
       calories: interaction.options.getNumber("calories"),
       objectif: interaction.options.getString("objectif"), // 'perte', 'maintien', 'prise', 'recomp'
-      sexe: interaction.options.getString("sexe"),         // 'H' ou 'F'
-      etat: interaction.options.getString("etat"),          // 'maigre' ou 'grasse'
+      sexe: interaction.options.getString("sexe"), // 'H' ou 'F'
+      etat: interaction.options.getString("etat"), // 'maigre' ou 'grasse'
       proteines: interaction.options.getNumber("proteines"),
       glucides: interaction.options.getNumber("glucides"),
-      lipides: interaction.options.getNumber("lipides")
+      lipides: interaction.options.getNumber("lipides"),
     };
 
     // 2. Validation humoristique des valeurs saisies
     if (providedData.calories != null && providedData.calories <= 0) {
       return interaction.reply({
-        content: "Attention ! Des calories négatives, c'est comme un régime invisible… ça n'existe pas. Merci d'entrer un nombre positif !",
-        ephemeral: true,
+        content:
+          "Attention ! Des calories négatives, c'est comme un régime invisible… ça n'existe pas. Merci d'entrer un nombre positif !",
+        flags: MessageFlags.Ephemeral,
       });
     }
     // Vous pouvez ajouter d'autres validations sur d'autres données (ex : poids, taille, âge, etc.)
-    
+
     // Vérification de la cohérence des pourcentages personnalisés
     const { proteines, glucides, lipides } = providedData;
     if (
@@ -58,34 +59,33 @@ module.exports = {
       (proteines === null || glucides === null || lipides === null)
     ) {
       return interaction.reply({
-        content: "Merci de renseigner soit les trois pourcentages personnalisés (protéines, glucides, lipides) ou aucun.",
-        ephemeral: true,
+        content:
+          "Merci de renseigner soit les trois pourcentages personnalisés (protéines, glucides, lipides) ou aucun.",
+        flags: MessageFlags.Ephemeral,
       });
     }
 
     // 3. Définition du callback de calcul qui sera exécuté après la fusion des données
-    const executeCalculationCallback = async (interactionContext, finalData) => {
+    const executeCalculationCallback = async (
+      interactionContext,
+      finalData,
+    ) => {
       // Vérification que les champs requis sont présents
       const missingFields = [];
-      if (finalData.calories === null || finalData.calories === undefined) {
+      if (finalData.calories != null || finalData.calories === undefined) {
         missingFields.push("calories");
       }
-      if (finalData.objectif === null || finalData.objectif === undefined) {
+      if (finalData.objectif != null || finalData.objectif === undefined) {
         missingFields.push("objectif");
       }
 
       if (missingFields.length > 0) {
         const errorMessage = {
           content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Merci de bien vouloir les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
 
         if (interactionContext.replied || interactionContext.deferred) {
-          try {
-            await interactionContext.deleteReply();
-          } catch (error) {
-            console.error("Erreur lors de la suppression de la réponse :", error);
-          }
           return interactionContext.channel.send(errorMessage);
         } else {
           return interactionContext.reply(errorMessage);
@@ -135,11 +135,19 @@ module.exports = {
       }
 
       // Si des pourcentages personnalisés sont fournis, ils priment sur les valeurs par défaut
-      if (finalData.proteines !== null && finalData.glucides !== null && finalData.lipides !== null) {
-        if (finalData.proteines + finalData.glucides + finalData.lipides !== 100) {
+      if (
+        finalData.proteines !== null &&
+        finalData.glucides !== null &&
+        finalData.lipides !== null
+      ) {
+        if (
+          finalData.proteines + finalData.glucides + finalData.lipides !==
+          100
+        ) {
           return interactionContext.reply({
-            content: "La somme des pourcentages personnalisés doit être égale à 100%.",
-            ephemeral: true,
+            content:
+              "La somme des pourcentages personnalisés doit être égale à 100%.",
+            flags: MessageFlags.Ephemeral,
           });
         }
         proteinesPct = finalData.proteines;
@@ -153,8 +161,8 @@ module.exports = {
       // - Lipides : 9 kcal/g.
       const calories = finalData.calories;
       const proteinesGr = ((calories * proteinesPct) / 100 / 4).toFixed(2);
-      const glucidesGr  = ((calories * glucidesPct) / 100 / 4).toFixed(2);
-      const lipidesGr   = ((calories * lipidesPct) / 100 / 9).toFixed(2);
+      const glucidesGr = ((calories * glucidesPct) / 100 / 4).toFixed(2);
+      const lipidesGr = ((calories * lipidesPct) / 100 / 9).toFixed(2);
 
       // Détermination du libellé d'objectif
       const objectifTexte =
@@ -171,7 +179,7 @@ module.exports = {
         .setColor(colorEmbed)
         .setTitle(`${coinInfoEmoji} Répartition des macronutriments`)
         .setDescription(
-          `**${tropheEmoji} Objectif** : ${objectifTexte}\n**${cookieEmoji} Calories totales** : ${calories} kcal`
+          `**${tropheEmoji} Objectif** : ${objectifTexte}\n**${cookieEmoji} Calories totales** : ${calories} kcal`,
         )
         .addFields(
           {
@@ -188,26 +196,26 @@ module.exports = {
             name: "Glucides",
             value: `${glucidesGr} g (${glucidesPct}%)`,
             inline: true,
-          }
+          },
         )
         .setThumbnail(thumbnailEmbed)
         .setFooter({ text: "Répartition estimée" });
 
       // Ajout d'informations complémentaires, si renseignées
       let infoSup = "";
-      if (finalData.sexe) infoSup += `• Sexe : **${finalData.sexe === "H" ? "Homme" : "Femme"}**\n`;
-      if (finalData.etat) infoSup += `• État corporel : **${finalData.etat}**\n`;
+      if (finalData.sexe)
+        infoSup += `• Sexe : **${finalData.sexe === "H" ? "Homme" : "Femme"}**\n`;
+      if (finalData.etat)
+        infoSup += `• État corporel : **${finalData.etat}**\n`;
       if (infoSup.length > 0) {
-        embed.addFields({ name: "Informations complémentaires", value: infoSup });
+        embed.addFields({
+          name: "Informations complémentaires",
+          value: infoSup,
+        });
       }
 
       // 5. Envoi de l'embed en réponse à l'interaction
       if (interactionContext.replied || interactionContext.deferred) {
-        try {
-          await interactionContext.deleteReply();
-        } catch (error) {
-          console.error("Erreur lors de la suppression de la réponse éphémère :", error);
-        }
         await interactionContext.channel.send({ embeds: [embed] });
       } else {
         await interactionContext.reply({ embeds: [embed] });
@@ -215,6 +223,10 @@ module.exports = {
     };
 
     // 6. Exécution de la logique de gestion du physique
-    await handleUserPhysique(interaction, providedData, executeCalculationCallback);
+    await handleUserPhysique(
+      interaction,
+      providedData,
+      executeCalculationCallback,
+    );
   },
 };

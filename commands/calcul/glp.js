@@ -156,7 +156,7 @@ const executeCalculationCallback = async (interactionContext, finalData) => {
       content: `Les champs suivants sont manquants : ${missingFields.join(
         ", ",
       )}. Veuillez les renseigner.`,
-      ephemeral: true,
+      flags: MessageFlags.Ephemeral,
     };
 
     if (interactionContext.replied || interactionContext.deferred) {
@@ -229,7 +229,7 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -237,7 +237,7 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Un total négatif ou nul, c'est comme un dîner sans dessert. Veuillez saisir une valeur positive !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 

@@ -40,21 +40,21 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Un poids négatif, c'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.taille != null && providedData.taille <= 0) {
       return interaction.reply({
         content:
           "La taille négative ? Même les nains n'oseraient pas ça ! Indiquez une taille positive, merci.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content:
           "Un âge négatif, c'est un retour dans le passé ! Donnez-nous un âge positif, et on oublie la machine à remonter le temps.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -87,7 +87,7 @@ module.exports = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
             ", ",
           )}. Veuillez les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
 
         if (interactionContext.replied || interactionContext.deferred) {

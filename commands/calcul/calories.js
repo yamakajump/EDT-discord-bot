@@ -47,62 +47,62 @@ module.exports = {
     };
 
     // Vérifications humoristiques des valeurs saisies
-    if (providedData.poids == null || providedData.poids <= 0) {
+    if (providedData.poids != null || providedData.poids <= 0) {
       return interaction.reply({
         content:
           "Attention ! Un poids négatif (ou nul), ce n'est pas de la magie, c'est juste étrange. Mettez un nombre positif, s'il vous plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.taille == null || providedData.taille <= 0) {
+    if (providedData.taille != null || providedData.taille <= 0) {
       return interaction.reply({
         content:
           "La taille doit être supérieure à zéro (en cm). Merci de vérifier ta saisie !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.age == null || providedData.age <= 0) {
+    if (providedData.age != null || providedData.age <= 0) {
       return interaction.reply({
         content:
           "L'âge doit être un nombre positif. Vérifie ton âge s'il te plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.temps == null || providedData.temps < 0) {
+    if (providedData.temps != null || providedData.temps < 0) {
       return interaction.reply({
         content:
           "Le temps d'entraînement doit être positif (en minutes). Merci de vérifier ta saisie !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (
-      providedData.tef == null ||
+      providedData.tef != null ||
       providedData.tef < 10 ||
       providedData.tef > 25
     ) {
       return interaction.reply({
         content:
           "Le TEF doit être compris entre 10 et 25. Merci de vérifier ta saisie !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.jours == null || providedData.jours < 0) {
+    if (providedData.jours != null || providedData.jours < 0) {
       return interaction.reply({
         content:
           "Le nombre de jours d'entraînement par semaine doit être positif. Merci de vérifier ta saisie !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (!providedData.activite) {
       return interaction.reply({
         content: "Merci de renseigner votre niveau d'activité quotidienne.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (!providedData.intensite) {
       return interaction.reply({
         content: "Merci de renseigner l'intensité de ton entraînement.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -121,11 +121,7 @@ module.exports = {
         missingFields.push("age");
       if (finalData.temps == null || finalData.temps < 0)
         missingFields.push("temps");
-      if (
-        finalData.tef == null ||
-        finalData.tef < 10 ||
-        finalData.tef > 25
-      )
+      if (finalData.tef == null || finalData.tef < 10 || finalData.tef > 25)
         missingFields.push("tef");
       if (finalData.jours == null || finalData.jours < 0)
         missingFields.push("jours");
@@ -137,18 +133,10 @@ module.exports = {
           content: `Il manque les informations suivantes : ${missingFields.join(
             ", ",
           )}. Merci de les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
 
         if (interactionContext.replied || interactionContext.deferred) {
-          try {
-            await interactionContext.deleteReply();
-          } catch (error) {
-            console.error(
-              "Erreur lors de la suppression de la réponse :",
-              error,
-            );
-          }
           return interactionContext.channel.send(errorMessage);
         } else {
           return interactionContext.reply(errorMessage);
@@ -205,7 +193,7 @@ module.exports = {
         return interactionContext.reply({
           content:
             "L'intensité renseignée n'est pas valide. Utilise l'une des valeurs suivantes : faible, moderee, elevee ou intense.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
       const trainingCalories = ((MET * 3.5 * poids) / 200) * temps;
@@ -227,7 +215,7 @@ module.exports = {
         return interactionContext.reply({
           content:
             "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
@@ -354,14 +342,6 @@ Le but est d'ajouter un surplus calorique pour favoriser la prise de masse.`,
 
       // Envoi de la réponse selon le contexte (réponse ou channel)
       if (interactionContext.replied || interactionContext.deferred) {
-        try {
-          await interactionContext.deleteReply();
-        } catch (error) {
-          console.error(
-            "Erreur lors de la suppression de la réponse éphémère :",
-            error,
-          );
-        }
         await interactionContext.channel.send({ embeds: [embed] });
       } else {
         await interactionContext.reply({ embeds: [embed] });

@@ -233,7 +233,7 @@ module.exports = {
         if (!displayStats) {
           return interaction.reply({
             content: `Ce guerrier ne permet pas l'accès à ses statistiques.`,
-            ephemeral: true,
+            flags: MessageFlags.Ephemeral,
           });
         }
       }
@@ -266,7 +266,7 @@ module.exports = {
       if (!hasStats) {
         return interaction.reply({
           content: `Aucune statistique uploadée pour **${targetUser.username}**. Veuillez d'abord téléverser vos statistiques.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
@@ -276,7 +276,7 @@ module.exports = {
       if (!statsRecord || !statsRecord.stats) {
         return interaction.reply({
           content: `Aucun enregistrement de statistiques trouvé pour **${targetUser.username}**.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
       try {
@@ -288,7 +288,7 @@ module.exports = {
         );
         return interaction.reply({
           content: `Une erreur est survenue lors du traitement des statistiques.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }
