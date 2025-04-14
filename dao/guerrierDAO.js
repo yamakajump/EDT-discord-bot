@@ -133,6 +133,13 @@ module.exports = {
   updateUserData: async (id, data) => {
     const { poids, taille, age, sexe, activite, jours, temps, intensite, tef } =
       data;
+
+    // Si la donnée 'sexe' est présente, on conserve uniquement la première lettre en majuscule.
+    // Ainsi, "homme" deviendra "H" et "femme" deviendra "F".
+    if (sexe) {
+      sexe = sexe.trim().toUpperCase().charAt(0);
+    }
+
     await promisePool.query(
       `UPDATE guerrier 
        SET poids = ?, taille = ?, age = ?, sexe = ?, activite = ?, jours = ?, temps = ?, intensite = ?, tef = ? 
