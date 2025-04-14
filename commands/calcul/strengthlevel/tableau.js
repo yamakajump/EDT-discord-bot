@@ -88,7 +88,9 @@ module.exports = {
 
       if (missingFields.length > 0) {
         const errorMessage = {
-          content: `Les champs suivants sont manquants : ${missingFields.join(", ")}. Veuillez les renseigner.`,
+          content: `Les champs suivants sont manquants : ${missingFields.join(
+            ", ",
+          )}. Veuillez les renseigner.`,
           ephemeral: true,
         };
 
@@ -111,7 +113,7 @@ module.exports = {
       const exerciseName = finalData.exercise;
       const sexOption = finalData.sexe;
       const sourceChoice = finalData.source;
-      const langue = finalData.langue; // Optionnel, pour forcer l'affichage en anglais
+      const langue = finalData.langue; // pour l'affichage dans le tableau
 
       // Chargement du fichier JSON contenant les seuils de force
       const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
@@ -152,9 +154,13 @@ module.exports = {
         });
       }
 
-      // Pour l'image, le nom est toujours basé sur l'exerciceFR (nom français)
-      const exerciseImageName =
-        exerciseObj.exerciceFR.replace(/ /g, "_") + ".png";
+      // Pour la recherche de l'image dans le dossier, on utilise toujours le nom anglais (exerciceEN) s'il existe,
+      // sinon on se rabat sur le nom français.
+      const imageNameForEmbed =
+        exerciseObj.exerciceEN && exerciseObj.exerciceEN.trim() !== ""
+          ? exerciseObj.exerciceEN
+          : exerciseObj.exerciceFR;
+      const exerciseImageName = imageNameForEmbed.replace(/ /g, "_") + ".png";
 
       // Pour l'affichage dans l'embed, on choisit par défaut le français,
       // sauf si l'option "langue" est définie sur "en" et que le nom anglais existe.
@@ -314,14 +320,13 @@ module.exports = {
       // Génération d'un buffer PNG à partir du canvas
       const tableBuffer = canvas.toBuffer("image/png");
 
-      // Utilisation du nom français pour la recherche de l'image
+      // Récupération de l'image de l'exercice en utilisant le nom anglais (si défini) pour l'embed
       const exerciseImagePath = path.join(
         __dirname,
         "../../../images/strengthlevel",
         exerciseImageName,
       );
 
-      // Lecture de l'image de l'exercice si elle existe
       let exerciseImageBuffer;
       try {
         exerciseImageBuffer = fs.readFileSync(exerciseImagePath);
@@ -341,12 +346,10 @@ module.exports = {
         )
         .setFooter({ text: "Données issues de https://strengthlevel.com/" });
 
-      // Si l'image de l'exercice a été lue, on l'utilise comme miniature dans l'embed
       if (exerciseImageBuffer) {
         embed.setThumbnail("attachment://exercise.png");
       }
 
-      // Préparation des fichiers joints : le tableau généré et éventuellement l'image de l'exercice
       const attachments = [{ attachment: tableBuffer, name: "tableau.png" }];
       if (exerciseImageBuffer) {
         attachments.push({
@@ -355,7 +358,6 @@ module.exports = {
         });
       }
 
-      // Envoi de l'embed avec les pièces jointes en réponse à l'interaction
       if (interactionContext.replied || interactionContext.deferred) {
         try {
           await interactionContext.deleteReply();
@@ -378,8 +380,8 @@ module.exports = {
     };
 
     // 4. Exécution de la logique de gestion du physique
-    // Cette fonction va fusionner les données fournies avec celles potentiellement enregistrées en BDD,
-    // et appeler le callback (executeCalculationCallback) pour poursuivre le traitement.
+    // Cette fonction fusionne les données fournies avec celles enregistrées éventuellement en BDD,
+    // et appelle le callback (executeCalculationCallback) pour poursuivre le traitement.
     await handleUserPhysique(
       interaction,
       providedData,
