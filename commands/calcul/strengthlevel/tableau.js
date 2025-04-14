@@ -43,7 +43,7 @@ module.exports = {
       exercise: interaction.options.getString("exercise"),
       sexe: interaction.options.getString("sexe"),
       source: interaction.options.getString("source"), // "age" ou "bodyweight"
-      langue: interaction.options.getString("langue"),
+      langue: interaction.options.getString("langue") || "FR",
     };
 
     // 2. Validation humoristique des valeurs saisies

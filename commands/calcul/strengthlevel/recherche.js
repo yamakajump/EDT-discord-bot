@@ -28,7 +28,7 @@ module.exports = {
     // Récupération des options fournies par l'utilisateur (optionnelles)
     const categoryOption = interaction.options.getString("categorie");
     const bodyPartOption = interaction.options.getString("muscle");
-    const langue = interaction.options.getString("langue");
+    const langue = interaction.options.getString("langue") || "FR";
 
     // On définit la clé à utiliser pour afficher le nom de l'exercice (par défaut : français)
     const displayKey =
