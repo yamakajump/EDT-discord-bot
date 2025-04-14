@@ -31,7 +31,6 @@ module.exports = {
       taille: interaction.options.getNumber("taille"), // en cm
       age: interaction.options.getInteger("age"),
       sexe: interaction.options.getString("sexe"),
-      // Vous pouvez ajouter d'autres informations si nécessaire : activite, jours, temps, intensite, tef
     };
 
     // Callback qui exécute le calcul de la masse grasse

@@ -33,16 +33,16 @@ module.exports = {
           option
             .setName("poids")
             .setDescription("Votre poids en kg.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("taille")
             .setDescription("Votre taille en cm.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addIntegerOption((option) =>
-          option.setName("age").setDescription("Votre âge.").setRequired(true),
+          option.setName("age").setDescription("Votre âge.").setRequired(false),
         )
         .addStringOption((option) =>
           option
@@ -52,7 +52,7 @@ module.exports = {
               { name: "Homme", value: "homme" },
               { name: "Femme", value: "femme" },
             )
-            .setRequired(true),
+            .setRequired(false),
         ),
     )
     // Sous-commande : calories
@@ -64,16 +64,16 @@ module.exports = {
           option
             .setName("poids")
             .setDescription("Votre poids en kg.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("taille")
             .setDescription("Votre taille en cm.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addIntegerOption((option) =>
-          option.setName("age").setDescription("Votre âge.").setRequired(true),
+          option.setName("age").setDescription("Votre âge.").setRequired(false),
         )
         .addStringOption((option) =>
           option
@@ -83,7 +83,7 @@ module.exports = {
               { name: "Homme", value: "H" },
               { name: "Femme", value: "F" },
             )
-            .setRequired(true),
+            .setRequired(false),
         )
         .addStringOption((option) =>
           option
@@ -107,19 +107,19 @@ module.exports = {
                 value: "T",
               },
             )
-            .setRequired(true),
+            .setRequired(false),
         )
         .addIntegerOption((option) =>
           option
             .setName("jours")
             .setDescription("Combien de jours par semaine t'entraînes-tu ?")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("temps")
             .setDescription("Votre temps d'entraînement journalier en minutes.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addStringOption((option) =>
           option
@@ -143,7 +143,7 @@ module.exports = {
                 value: "intense",
               },
             )
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
@@ -151,7 +151,7 @@ module.exports = {
             .setDescription(
               "Votre TEF : 10 pour des aliments ultra-transformés, 25 pour des aliments non-transformés.",
             )
-            .setRequired(true),
+            .setRequired(false),
         )
         .addStringOption((option) =>
           option
@@ -190,13 +190,13 @@ module.exports = {
           option
             .setName("poids")
             .setDescription("Votre poids en kg.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
             .setName("taille")
             .setDescription("Votre taille en cm.")
-            .setRequired(true),
+            .setRequired(false),
         ),
     )
     // Sous-commande : macro
@@ -294,7 +294,7 @@ module.exports = {
           option
             .setName("sexe")
             .setDescription("Votre sexe.")
-            .setRequired(true)
+            .setRequired(false)
             .addChoices(
               { name: "Homme", value: "M" },
               { name: "Femme", value: "F" },
@@ -324,7 +324,7 @@ module.exports = {
           option
             .setName("bodyweight")
             .setDescription("Votre poids en kg.")
-            .setRequired(true),
+            .setRequired(false),
         )
         .addNumberOption((option) =>
           option
@@ -387,7 +387,7 @@ module.exports = {
               option
                 .setName("bodyweight")
                 .setDescription("Votre poids en kg.")
-                .setRequired(true),
+                .setRequired(false),
             )
             .addNumberOption((option) =>
               option
@@ -399,13 +399,13 @@ module.exports = {
               option
                 .setName("age")
                 .setDescription("Votre âge.")
-                .setRequired(true),
+                .setRequired(false),
             )
             .addStringOption((option) =>
               option
                 .setName("sex")
                 .setDescription("Sélectionnez votre sexe.")
-                .setRequired(true)
+                .setRequired(false)
                 .addChoices(
                   { name: "Homme", value: "Homme" },
                   { name: "Femme", value: "Femme" },
@@ -439,7 +439,7 @@ module.exports = {
               option
                 .setName("sex")
                 .setDescription("Sélectionnez votre sexe.")
-                .setRequired(true)
+                .setRequired(false)
                 .addChoices(
                   { name: "Homme", value: "Homme" },
                   { name: "Femme", value: "Femme" },
