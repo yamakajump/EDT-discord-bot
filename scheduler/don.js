@@ -14,11 +14,6 @@ const {
   ButtonStyle,
 } = require("discord.js");
 
-/**
- * Planifie l'envoi des messages à des horaires spécifiques
- *
- * @param {Client} client - L'instance du client Discord.
- */
 function scheduleMessages(client) {
   // Définition des tâches planifiées : chaque objet contient l'heure, les minutes et l'ID du salon cible.
   const jobs = [
@@ -41,9 +36,10 @@ function scheduleMessages(client) {
 
     // Planification de la tâche avec la règle définie
     schedule.scheduleJob(rule, async function () {
+      let channel; // variable pour garder le salon et l'utiliser plus tard
       try {
         // Récupération du salon via son ID
-        const channel = await client.channels.fetch(channelId);
+        channel = await client.channels.fetch(channelId);
         if (!channel) {
           console.error(`Channel ${channelId} non trouvé`);
           return;
@@ -70,10 +66,26 @@ function scheduleMessages(client) {
         // Envoi du message dans le salon configuré
         await channel.send({ embeds: [embed], components: [row] });
       } catch (error) {
-        console.error(
-          "⚠️\x1b[31m  Erreur lors de l'envoi du message programmé :",
-          error,
-        );
+        // Gestion spécifique de l'erreur "Missing Access" (code 50001)
+        if (
+          error.code === 50001 ||
+          (error.rawError && error.rawError.code === 50001)
+        ) {
+          if (channel) {
+            console.error(
+              `⚠️ Erreur : Accès refusé pour le salon "${channel.name}" (ID: ${channel.id}). Veuillez vérifier les permissions du bot sur ce salon.`,
+            );
+          } else {
+            console.error(
+              `⚠️ Erreur : Accès refusé pour le salon avec l'ID ${channelId}. Veuillez vérifier les permissions du bot sur ce salon.`,
+            );
+          }
+        } else {
+          console.error(
+            "⚠️ Erreur lors de l'envoi du message programmé :",
+            error,
+          );
+        }
       }
     });
   });
