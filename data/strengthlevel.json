@@ -87,7 +87,7 @@
   },
   {
     "exerciceEN": "Squat",
-    "exerciceFR": "Squatter",
+    "exerciceFR": "Squat",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -259,7 +259,7 @@
   },
   {
     "exerciceEN": "Shoulder Press",
-    "exerciceFR": "Presse",
+    "exerciceFR": "Développé militaire",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -345,7 +345,7 @@
   },
   {
     "exerciceEN": "Dumbbell Bench Press",
-    "exerciceFR": "Presse de développédients haltères",
+    "exerciceFR": "Développé couché avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -431,7 +431,7 @@
   },
   {
     "exerciceEN": "Pull Ups",
-    "exerciceFR": "Tracer",
+    "exerciceFR": "Tractions pronation",
     "Category": "Poids du corps",
     "Body Part": "Dos",
     "Homme": {
@@ -517,7 +517,7 @@
   },
   {
     "exerciceEN": "Dumbbell Curl",
-    "exerciceFR": "Haltère",
+    "exerciceFR": "Curl avec haltères",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -603,7 +603,7 @@
   },
   {
     "exerciceEN": "Barbell Curl",
-    "exerciceFR": "Boucle de haltère",
+    "exerciceFR": "Curl à la barre",
     "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
@@ -689,7 +689,7 @@
   },
   {
     "exerciceEN": "Push Ups",
-    "exerciceFR": "Des pompes",
+    "exerciceFR": "Pompes",
     "Category": "Poids du corps",
     "Body Part": "Pecs",
     "Homme": {
@@ -775,7 +775,7 @@
   },
   {
     "exerciceEN": "Sled Leg Press",
-    "exerciceFR": "Presse de jambe de traîneau",
+    "exerciceFR": "Presse à cuisses inclinée",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -861,7 +861,7 @@
   },
   {
     "exerciceEN": "Bent Over Row",
-    "exerciceFR": "Plié au-dessus de la rangée",
+    "exerciceFR": " Rowing buste penché",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -947,7 +947,7 @@
   },
   {
     "exerciceEN": "Dumbbell Shoulder Press",
-    "exerciceFR": "Presse d'épaule d'haltères",
+    "exerciceFR": "Développé épaules avec haltères",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -1033,7 +1033,7 @@
   },
   {
     "exerciceEN": "Incline Dumbbell Bench Press",
-    "exerciceFR": "Coup de gamme HAUDBELD INCLIN",
+    "exerciceFR": "Développé incliné avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -1119,7 +1119,7 @@
   },
   {
     "exerciceEN": "Incline Bench Press",
-    "exerciceFR": "Cound-Press Incline",
+    "exerciceFR": "Développé incliné à la barre",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -1205,7 +1205,7 @@
   },
   {
     "exerciceEN": "Lat Pulldown",
-    "exerciceFR": "Pulpol lat",
+    "exerciceFR": "Tirage vertical à la poulie haute",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -1291,7 +1291,7 @@
   },
   {
     "exerciceEN": "Dips",
-    "exerciceFR": "Creux",
+    "exerciceFR": "Dips",
     "Category": "Poids du corps",
     "Body Part": "Triceps",
     "Homme": {
@@ -1463,7 +1463,7 @@
   },
   {
     "exerciceEN": "Hex Bar Deadlift",
-    "exerciceFR": "Hex Bar soulevé de terre",
+    "exerciceFR": "Soulevé de terre avec barre hexagonale",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -1549,7 +1549,7 @@
   },
   {
     "exerciceEN": "Dumbbell Lateral Raise",
-    "exerciceFR": "Halpel-halet",
+    "exerciceFR": "Élévations latérales avec haltères",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -1635,7 +1635,7 @@
   },
   {
     "exerciceEN": "Power Clean",
-    "exerciceFR": "Power Clean",
+    "exerciceFR": "Épaulé-jeté partiel",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -1721,7 +1721,7 @@
   },
   {
     "exerciceEN": "Hip Thrust",
-    "exerciceFR": "Poussée de la hanche",
+    "exerciceFR": "Relevé de hanches",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -1807,7 +1807,7 @@
   },
   {
     "exerciceEN": "Leg Extension",
-    "exerciceFR": "Extension des jambes",
+    "exerciceFR": "Extension des jambes à la machine",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -1979,7 +1979,7 @@
   },
   {
     "exerciceEN": "Chin Ups",
-    "exerciceFR": "Menton",
+    "exerciceFR": "Tractions en supination",
     "Category": "Poids du corps",
     "Body Part": "Dos",
     "Homme": {
@@ -2065,7 +2065,7 @@
   },
   {
     "exerciceEN": "Horizontal Leg Press",
-    "exerciceFR": "Presse à jambes horizontales",
+    "exerciceFR": "Presse à cuisses horizontale",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -2151,7 +2151,7 @@
   },
   {
     "exerciceEN": "Military Press",
-    "exerciceFR": "Presse militaire",
+    "exerciceFR": "Développé militaire",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -2237,7 +2237,7 @@
   },
   {
     "exerciceEN": "Dumbbell Row",
-    "exerciceFR": "Rangée d'haltères",
+    "exerciceFR": "Rowing avec haltère",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -2323,7 +2323,7 @@
   },
   {
     "exerciceEN": "Sumo Deadlift",
-    "exerciceFR": "Sumo soulevés de terre",
+    "exerciceFR": "Soulevé de terre sumo",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -2409,7 +2409,7 @@
   },
   {
     "exerciceEN": "Chest Press",
-    "exerciceFR": "Presser de poitrine",
+    "exerciceFR": "Développé couché à la machine",
     "Category": "Machine",
     "Body Part": "Pecs",
     "Homme": {
@@ -2495,7 +2495,7 @@
   },
   {
     "exerciceEN": "Tricep Pushdown",
-    "exerciceFR": "Pushdown triceps",
+    "exerciceFR": "Extension des triceps à la poulie haute",
     "Category": "Cable",
     "Body Part": "Triceps",
     "Homme": {
@@ -2581,7 +2581,7 @@
   },
   {
     "exerciceEN": "Hammer Curl",
-    "exerciceFR": "Marteau",
+    "exerciceFR": "Curl marteau",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -2667,7 +2667,7 @@
   },
   {
     "exerciceEN": "Seated Cable Row",
-    "exerciceFR": "Rangée de câble assis",
+    "exerciceFR": "Rowing assis à la poulie",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -2753,7 +2753,7 @@
   },
   {
     "exerciceEN": "Seated Dumbbell Shoulder Press",
-    "exerciceFR": "Presse d'épaule assis assis",
+    "exerciceFR": "Développé épaules assis avec haltères",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -2839,7 +2839,7 @@
   },
   {
     "exerciceEN": "Hack Squat",
-    "exerciceFR": "Hack Squat",
+    "exerciceFR": "Presse à cuisses verticale guidée",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -2925,7 +2925,7 @@
   },
   {
     "exerciceEN": "Clean and Jerk",
-    "exerciceFR": "Nettoyer et secouer",
+    "exerciceFR": "Épaulé-jeté",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -3097,7 +3097,7 @@
   },
   {
     "exerciceEN": "Machine Chest Fly",
-    "exerciceFR": "Mouche de poitrine de la machine",
+    "exerciceFR": "Écarté à la machine",
     "Category": "Machine",
     "Body Part": "Pecs",
     "Homme": {
@@ -3183,7 +3183,7 @@
   },
   {
     "exerciceEN": "Dumbbell Bulgarian Split Squat",
-    "exerciceFR": "Haltère bulgare divisé squat",
+    "exerciceFR": "Fente bulgare avec haltères",
     "Category": "Haltere",
     "Body Part": "Jambes",
     "Homme": {
@@ -3269,7 +3269,7 @@
   },
   {
     "exerciceEN": "Seated Leg Curl",
-    "exerciceFR": "Boucle de jambe assise",
+    "exerciceFR": "Leg curl assis",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -3355,7 +3355,7 @@
   },
   {
     "exerciceEN": "EZ Bar Curl",
-    "exerciceFR": "EZ Bar Curl",
+    "exerciceFR": "Curl à la barre EZ",
     "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
@@ -3441,7 +3441,7 @@
   },
   {
     "exerciceEN": "Close Grip Bench Press",
-    "exerciceFR": "Closez-grip Press",
+    "exerciceFR": "Développé couché prise serrée",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -3527,7 +3527,7 @@
   },
   {
     "exerciceEN": "Seated Shoulder Press",
-    "exerciceFR": "Presse à épaules assis",
+    "exerciceFR": "Développé épaules assis",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -3613,7 +3613,7 @@
   },
   {
     "exerciceEN": "Machine Shoulder Press",
-    "exerciceFR": "Appuyez sur l'épaule de la machine",
+    "exerciceFR": "Développé épaules à la machine",
     "Category": "Machine",
     "Body Part": "Épaules",
     "Homme": {
@@ -3699,7 +3699,7 @@
   },
   {
     "exerciceEN": "Lying Tricep Extension",
-    "exerciceFR": "Extension au triceps couché",
+    "exerciceFR": "Extension des triceps allongé",
     "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
@@ -3785,7 +3785,7 @@
   },
   {
     "exerciceEN": "Clean",
-    "exerciceFR": "Faire le ménage",
+    "exerciceFR": "Épaulé",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -3871,7 +3871,7 @@
   },
   {
     "exerciceEN": "Barbell Shrug",
-    "exerciceFR": "Haltère haussier les épaules",
+    "exerciceFR": "Haussement d’épaules à la barre",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -3957,7 +3957,7 @@
   },
   {
     "exerciceEN": "Preacher Curl",
-    "exerciceFR": "Prédicateur curl",
+    "exerciceFR": "Curl au pupitre",
     "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
@@ -4043,7 +4043,7 @@
   },
   {
     "exerciceEN": "Push Press",
-    "exerciceFR": "Pressure",
+    "exerciceFR": "Développé avec impulsion",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -4129,7 +4129,7 @@
   },
   {
     "exerciceEN": "Goblet Squat",
-    "exerciceFR": "Squat de gobelet",
+    "exerciceFR": "Squat avec haltère tenu contre la poitrine",
     "Category": "Haltere",
     "Body Part": "Jambes",
     "Homme": {
@@ -4215,7 +4215,7 @@
   },
   {
     "exerciceEN": "Lying Leg Curl",
-    "exerciceFR": "Boucle de jambe allongée",
+    "exerciceFR": "Leg curl allongé",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -4301,7 +4301,7 @@
   },
   {
     "exerciceEN": "Dumbbell Fly",
-    "exerciceFR": "Halpel Fly",
+    "exerciceFR": "Écarté couché avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -4387,7 +4387,7 @@
   },
   {
     "exerciceEN": "T Bar Row",
-    "exerciceFR": "T bar bar",
+    "exerciceFR": "Rowing à la T-bar",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -4473,7 +4473,7 @@
   },
   {
     "exerciceEN": "Decline Bench Press",
-    "exerciceFR": "Déclin du développé couché",
+    "exerciceFR": "Développé décliné",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -4559,7 +4559,7 @@
   },
   {
     "exerciceEN": "Machine Calf Raise",
-    "exerciceFR": "Augmentation du mollet",
+    "exerciceFR": "Extension des mollets à la machine",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -4645,7 +4645,7 @@
   },
   {
     "exerciceEN": "Dumbbell Shrug",
-    "exerciceFR": "Haltère haussier les épaules",
+    "exerciceFR": "Haussement d’épaules avec haltères",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -4731,7 +4731,7 @@
   },
   {
     "exerciceEN": "Tricep Rope Pushdown",
-    "exerciceFR": "Pousse-poudre de corde triceps",
+    "exerciceFR": "Extension des triceps à la corde à la poulie haute",
     "Category": "Cable",
     "Body Part": "Triceps",
     "Homme": {
@@ -4817,7 +4817,7 @@
   },
   {
     "exerciceEN": "Dumbbell Lunge",
-    "exerciceFR": "Fente d'haltères",
+    "exerciceFR": "Fente avec haltères",
     "Category": "Haltere",
     "Body Part": "Jambes",
     "Homme": {
@@ -4903,7 +4903,7 @@
   },
   {
     "exerciceEN": "Smith Machine Bench Press",
-    "exerciceFR": "Smith Machine Bench Press",
+    "exerciceFR": "Développé couché à la Smith machine",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -4989,7 +4989,7 @@
   },
   {
     "exerciceEN": "Dumbbell Tricep Extension",
-    "exerciceFR": "Extension du triceps haltères",
+    "exerciceFR": "Extension des triceps avec haltère",
     "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
@@ -5075,7 +5075,7 @@
   },
   {
     "exerciceEN": "Clean and Press",
-    "exerciceFR": "Nettoyer et appuyer",
+    "exerciceFR": "Épaulé-jeté en force",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -5161,7 +5161,7 @@
   },
   {
     "exerciceEN": "Cable Bicep Curl",
-    "exerciceFR": "Curl du biceps",
+    "exerciceFR": "Curl biceps à la poulie",
     "Category": "Cable",
     "Body Part": "Biceps",
     "Homme": {
@@ -5247,7 +5247,7 @@
   },
   {
     "exerciceEN": "Machine Row",
-    "exerciceFR": "Rangée",
+    "exerciceFR": "Tirage horizontal à la machine",
     "Category": "Machine",
     "Body Part": "Dos",
     "Homme": {
@@ -5333,7 +5333,7 @@
   },
   {
     "exerciceEN": "Rack Pull",
-    "exerciceFR": "Traction de rack",
+    "exerciceFR": "Soulevé de terre en rack",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -5419,7 +5419,7 @@
   },
   {
     "exerciceEN": "Incline Dumbbell Curl",
-    "exerciceFR": "Incliner incliné",
+    "exerciceFR": "Curl incliné avec haltères",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -5505,7 +5505,7 @@
   },
   {
     "exerciceEN": "Bodyweight Squat",
-    "exerciceFR": "Squat de poids corporel",
+    "exerciceFR": "Squat au poids du corps",
     "Category": "Poids du corps",
     "Body Part": "Jambes",
     "Homme": {
@@ -5591,7 +5591,7 @@
   },
   {
     "exerciceEN": "Dumbbell Romanian Deadlift",
-    "exerciceFR": "Haltère de soulevé de terre roumain",
+    "exerciceFR": "Soulevé de terre roumain avec haltères",
     "Category": "Haltere",
     "Body Part": "Corps entier",
     "Homme": {
@@ -5677,7 +5677,7 @@
   },
   {
     "exerciceEN": "Pendlay Row",
-    "exerciceFR": "Rangée pendlay",
+    "exerciceFR": "Tirage Pendlay",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -5763,7 +5763,7 @@
   },
   {
     "exerciceEN": "Bulgarian Split Squat",
-    "exerciceFR": "Squat divisé bulgare",
+    "exerciceFR": "Fente bulgare",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -5849,7 +5849,7 @@
   },
   {
     "exerciceEN": "Box Squat",
-    "exerciceFR": "Squat de boîte",
+    "exerciceFR": "Squat en boîte",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -5935,7 +5935,7 @@
   },
   {
     "exerciceEN": "Smith Machine Squat",
-    "exerciceFR": "Smith Machine Squat",
+    "exerciceFR": "Squat à la Smith machine",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -6021,7 +6021,7 @@
   },
   {
     "exerciceEN": "Dumbbell Concentration Curl",
-    "exerciceFR": "Courte de concentration d'haltères",
+    "exerciceFR": "Curl de concentration avec haltère",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -6107,7 +6107,7 @@
   },
   {
     "exerciceEN": "Cable Lateral Raise",
-    "exerciceFR": "Augmentation latérale du câble",
+    "exerciceFR": "Élévations latérales à la poulie",
     "Category": "Cable",
     "Body Part": "Épaules",
     "Homme": {
@@ -6193,7 +6193,7 @@
   },
   {
     "exerciceEN": "Sit Ups",
-    "exerciceFR": "S'asseoir",
+    "exerciceFR": "Abdos",
     "Category": "Poids du corps",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -6279,7 +6279,7 @@
   },
   {
     "exerciceEN": "Seated Calf Raise",
-    "exerciceFR": "Élevage de mollets assis",
+    "exerciceFR": "Extension des mollets assis à la machine",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -6365,7 +6365,7 @@
   },
   {
     "exerciceEN": "Upright Row",
-    "exerciceFR": "Rangée verticale",
+    "exerciceFR": "Tirage vertical",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -6451,7 +6451,7 @@
   },
   {
     "exerciceEN": "Dumbbell Front Raise",
-    "exerciceFR": "Aménagement avant d'haltères",
+    "exerciceFR": "Élévations frontales avec haltères",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -6537,7 +6537,7 @@
   },
   {
     "exerciceEN": "Vertical Leg Press",
-    "exerciceFR": "Presse verticale des jambes",
+    "exerciceFR": "Presse à jambes verticale",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -6623,7 +6623,7 @@
   },
   {
     "exerciceEN": "Tricep Extension",
-    "exerciceFR": "Extension du triceps",
+    "exerciceFR": "Extension des triceps",
     "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
@@ -6709,7 +6709,7 @@
   },
   {
     "exerciceEN": "Cable Fly",
-    "exerciceFR": "Volée par câble",
+    "exerciceFR": "Écarté à la poulie",
     "Category": "Cable",
     "Body Part": "Pecs",
     "Homme": {
@@ -6795,7 +6795,7 @@
   },
   {
     "exerciceEN": "Arnold Press",
-    "exerciceFR": "Arnold Press",
+    "exerciceFR": "Développé Arnold",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -6881,7 +6881,7 @@
   },
   {
     "exerciceEN": "Hip Abduction",
-    "exerciceFR": "Enlèvement de la hanche",
+    "exerciceFR": "Abduction de la hanche",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -6967,7 +6967,7 @@
   },
   {
     "exerciceEN": "Hang Clean",
-    "exerciceFR": "Se ranger",
+    "exerciceFR": "Épaulé suspendu",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -7053,7 +7053,7 @@
   },
   {
     "exerciceEN": "Stiff Leg Deadlift",
-    "exerciceFR": "Soulevé de terre de jambe raide",
+    "exerciceFR": "Soulevé de terre jambes tendues",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -7311,7 +7311,7 @@
   },
   {
     "exerciceEN": "Face Pull",
-    "exerciceFR": "Traction du visage",
+    "exerciceFR": "Face Pull",
     "Category": "Cable",
     "Body Part": "Épaules",
     "Homme": {
@@ -7397,7 +7397,7 @@
   },
   {
     "exerciceEN": "Good Morning",
-    "exerciceFR": "Bonjour",
+    "exerciceFR": "Good Morning",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -7483,7 +7483,7 @@
   },
   {
     "exerciceEN": "Floor Press",
-    "exerciceFR": "Pressure au sol",
+    "exerciceFR": "Développé couché au sol",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -7569,7 +7569,7 @@
   },
   {
     "exerciceEN": "Wrist Curl",
-    "exerciceFR": "Poignet bouclé",
+    "exerciceFR": "Flexion des poignets",
     "Category": "Barre",
     "Body Part": "Avant-bras",
     "Homme": {
@@ -7655,7 +7655,7 @@
   },
   {
     "exerciceEN": "Dumbbell Pullover",
-    "exerciceFR": "Pillumage haltère",
+    "exerciceFR": "Pull-over avec haltère",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -7741,7 +7741,7 @@
   },
   {
     "exerciceEN": "Seated Dip Machine",
-    "exerciceFR": "Machine à trempette assise",
+    "exerciceFR": "Dips à la machine assis",
     "Category": "Machine",
     "Body Part": "Triceps",
     "Homme": {
@@ -7827,7 +7827,7 @@
   },
   {
     "exerciceEN": "Lying Dumbbell Tricep Extension",
-    "exerciceFR": "Extension du triceps haltères allongé",
+    "exerciceFR": "Extension des triceps couché avec haltères",
     "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
@@ -7913,7 +7913,7 @@
   },
   {
     "exerciceEN": "Incline Dumbbell Fly",
-    "exerciceFR": "Incliner la mouche des haltères",
+    "exerciceFR": "Écarté incliné avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -7999,7 +7999,7 @@
   },
   {
     "exerciceEN": "Barbell Lunge",
-    "exerciceFR": "Fente à haltères",
+    "exerciceFR": "Fente avec barre",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -8085,7 +8085,7 @@
   },
   {
     "exerciceEN": "Dumbbell Floor Press",
-    "exerciceFR": "Presse au sol haltère",
+    "exerciceFR": "Développé au sol avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -8171,7 +8171,7 @@
   },
   {
     "exerciceEN": "Hip Adduction",
-    "exerciceFR": "Addition de la hanche",
+    "exerciceFR": "Adduction des hanches",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -8257,7 +8257,7 @@
   },
   {
     "exerciceEN": "Dumbbell Reverse Fly",
-    "exerciceFR": "Mouche inversée d'haltères",
+    "exerciceFR": "Écarté inversé avec haltères",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -8343,7 +8343,7 @@
   },
   {
     "exerciceEN": "Machine Bicep Curl",
-    "exerciceFR": "Boucle de biceps de machine",
+    "exerciceFR": "Curl biceps à la machine",
     "Category": "Machine",
     "Body Part": "Biceps",
     "Homme": {
@@ -8429,7 +8429,7 @@
   },
   {
     "exerciceEN": "Chest Supported Dumbbell Row",
-    "exerciceFR": "Rangée d'haltères soutenue par la poitrine",
+    "exerciceFR": "Rowing incliné avec haltères sur banc",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -8515,7 +8515,7 @@
   },
   {
     "exerciceEN": "Machine Seated Crunch",
-    "exerciceFR": "Crunch à la machine",
+    "exerciceFR": "Crunch assis à la machine",
     "Category": "Machine",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -8601,7 +8601,7 @@
   },
   {
     "exerciceEN": "Cable Crunch",
-    "exerciceFR": "Craqueon du câble",
+    "exerciceFR": "Crunch à la poulie",
     "Category": "Cable",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -8687,7 +8687,7 @@
   },
   {
     "exerciceEN": "Dumbbell Squat",
-    "exerciceFR": "Haltère squat",
+    "exerciceFR": "Squat avec haltères",
     "Category": "Haltere",
     "Body Part": "Jambes",
     "Homme": {
@@ -8773,7 +8773,7 @@
   },
   {
     "exerciceEN": "Barbell Calf Raise",
-    "exerciceFR": "Élevage de mollets de haltère",
+    "exerciceFR": "Extension des mollets avec barre",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -8859,7 +8859,7 @@
   },
   {
     "exerciceEN": "Overhead Squat",
-    "exerciceFR": "Squat au-dessus",
+    "exerciceFR": "Squat avec barre au-dessus de la tête",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -8945,7 +8945,7 @@
   },
   {
     "exerciceEN": "Close Grip Lat Pulldown",
-    "exerciceFR": "Fermer le traction LAT",
+    "exerciceFR": "Tirage vertical à la poulie avec prise serrée",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -9031,7 +9031,7 @@
   },
   {
     "exerciceEN": "Machine Reverse Fly",
-    "exerciceFR": "Machine Inverse Fly",
+    "exerciceFR": "Écarté inversé à la machine",
     "Category": "Machine",
     "Body Part": "Dos",
     "Homme": {
@@ -9117,7 +9117,7 @@
   },
   {
     "exerciceEN": "Dumbbell Tricep Kickback",
-    "exerciceFR": "Haltères triceps triceps",
+    "exerciceFR": "Extension des triceps en arrière avec haltère",
     "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
@@ -9203,7 +9203,7 @@
   },
   {
     "exerciceEN": "Power Snatch",
-    "exerciceFR": "Arrachement de puissance",
+    "exerciceFR": "Arraché dynamique",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -9289,7 +9289,7 @@
   },
   {
     "exerciceEN": "Reverse Barbell Curl",
-    "exerciceFR": "Boucle de barre inversée",
+    "exerciceFR": "Curl inversé à la barre",
     "Category": "Barre",
     "Body Part": "Avant-bras",
     "Homme": {
@@ -9375,7 +9375,7 @@
   },
   {
     "exerciceEN": "Cable Overhead Tricep Extension",
-    "exerciceFR": "Extension du triceps au-dessus du câble",
+    "exerciceFR": "Extension des triceps au-dessus de la tête à la poulie",
     "Category": "Cable",
     "Body Part": "Triceps",
     "Homme": {
@@ -9461,7 +9461,7 @@
   },
   {
     "exerciceEN": "Thruster",
-    "exerciceFR": "Propulseur",
+    "exerciceFR": "Thruster",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -9547,7 +9547,7 @@
   },
   {
     "exerciceEN": "Paused Bench Press",
-    "exerciceFR": "Grabin de listes interrompues",
+    "exerciceFR": "Développé couché avec pause",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -9633,7 +9633,7 @@
   },
   {
     "exerciceEN": "Split Squat",
-    "exerciceFR": "Squat",
+    "exerciceFR": "Fente statique",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -9719,7 +9719,7 @@
   },
   {
     "exerciceEN": "Crunches",
-    "exerciceFR": "Crampons",
+    "exerciceFR": "Relevés de buste",
     "Category": "Poids du corps",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -9805,7 +9805,7 @@
   },
   {
     "exerciceEN": "Push Jerk",
-    "exerciceFR": "Se taire",
+    "exerciceFR": "Poussée-jetée",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -9891,7 +9891,7 @@
   },
   {
     "exerciceEN": "One Arm Push Ups",
-    "exerciceFR": "Push ups de bras",
+    "exerciceFR": "Pompes sur un bras",
     "Category": "Poids du corps",
     "Body Part": "Pecs",
     "Homme": {
@@ -9977,7 +9977,7 @@
   },
   {
     "exerciceEN": "Dumbbell Calf Raise",
-    "exerciceFR": "Élevage de mollets d'haltères",
+    "exerciceFR": "Élévations de mollets avec haltères",
     "Category": "Haltere",
     "Body Part": "Jambes",
     "Homme": {
@@ -10149,7 +10149,7 @@
   },
   {
     "exerciceEN": "Decline Dumbbell Bench Press",
-    "exerciceFR": "Refuser le développé couché pour haltères",
+    "exerciceFR": "Développé décliné avec haltères",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -10235,7 +10235,7 @@
   },
   {
     "exerciceEN": "Dumbbell Wrist Curl",
-    "exerciceFR": "Boucler le poignet haltère",
+    "exerciceFR": "Curl des poignets avec haltère",
     "Category": "Haltere",
     "Body Part": "Avant-bras",
     "Homme": {
@@ -10321,7 +10321,7 @@
   },
   {
     "exerciceEN": "One Arm Cable Bicep Curl",
-    "exerciceFR": "Un câble à bras bouclé",
+    "exerciceFR": "Curl biceps à la poulie unilatéral",
     "Category": "Cable",
     "Body Part": "Biceps",
     "Homme": {
@@ -10407,7 +10407,7 @@
   },
   {
     "exerciceEN": "Dumbbell Deadlift",
-    "exerciceFR": "Souleftlift d'haltères",
+    "exerciceFR": "Soulevé de terre avec haltères",
     "Category": "Haltere",
     "Body Part": "Corps entier",
     "Homme": {
@@ -10493,7 +10493,7 @@
   },
   {
     "exerciceEN": "One Arm Dumbbell Preacher Curl",
-    "exerciceFR": "Curl de prédicateur à haltères d'un bras",
+    "exerciceFR": "Curl biceps unilatéral à la machine preacher avec haltère",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -10579,7 +10579,7 @@
   },
   {
     "exerciceEN": "Machine Tricep Extension",
-    "exerciceFR": "Extension du triceps machine",
+    "exerciceFR": "Extension des triceps à la machine",
     "Category": "Machine",
     "Body Part": "Triceps",
     "Homme": {
@@ -10665,7 +10665,7 @@
   },
   {
     "exerciceEN": "Reverse Wrist Curl",
-    "exerciceFR": "Boucle de poignet inversée",
+    "exerciceFR": "Extension des poignets inversée",
     "Category": "Barre",
     "Body Part": "Avant-bras",
     "Homme": {
@@ -10751,7 +10751,7 @@
   },
   {
     "exerciceEN": "Diamond Push Ups",
-    "exerciceFR": "Push ups de diamant",
+    "exerciceFR": "Pompes diamant",
     "Category": "Poids du corps",
     "Body Part": "Pecs",
     "Homme": {
@@ -10837,7 +10837,7 @@
   },
   {
     "exerciceEN": "Reverse Grip Lat Pulldown",
-    "exerciceFR": "Pulpation de la poignée inversée LAT",
+    "exerciceFR": "Tirage vertical à la poulie prise inversée",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -10923,7 +10923,7 @@
   },
   {
     "exerciceEN": "Barbell Reverse Lunge",
-    "exerciceFR": "Barbell fente inversée",
+    "exerciceFR": "Fente arrière avec barre",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -11009,7 +11009,7 @@
   },
   {
     "exerciceEN": "Neutral Grip Pull Ups",
-    "exerciceFR": "Pull ups de poignée neutre",
+    "exerciceFR": "Tractions prise neutre",
     "Category": "Poids du corps",
     "Body Part": "Dos",
     "Homme": {
@@ -11095,7 +11095,7 @@
   },
   {
     "exerciceEN": "Single Leg Press",
-    "exerciceFR": "Presse à une seule jambe",
+    "exerciceFR": "Presse à jambes unilatérale",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -11181,7 +11181,7 @@
   },
   {
     "exerciceEN": "Reverse Grip Bench Press",
-    "exerciceFR": "Presse de développédients de prise inversée",
+    "exerciceFR": "Développé couché prise inversée",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -11267,7 +11267,7 @@
   },
   {
     "exerciceEN": "Sled Press Calf Raise",
-    "exerciceFR": "Sled Press Calf augmente",
+    "exerciceFR": "Extension des mollets à la presse incliné",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -11353,7 +11353,7 @@
   },
   {
     "exerciceEN": "Standing Leg Curl",
-    "exerciceFR": "Coucure de la jambe debout",
+    "exerciceFR": "Flexion des jambes debout",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -11439,7 +11439,7 @@
   },
   {
     "exerciceEN": "Cable Pull Through",
-    "exerciceFR": "Tire du câble à travers",
+    "exerciceFR": "Tirage à la poulie entre les jambes",
     "Category": "Cable",
     "Body Part": "Jambes",
     "Homme": {
@@ -11525,7 +11525,7 @@
   },
   {
     "exerciceEN": "Barbell Glute Bridge",
-    "exerciceFR": "Bridge Bridge Glute",
+    "exerciceFR": "Pont fessier avec barre",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -11611,7 +11611,7 @@
   },
   {
     "exerciceEN": "Seated Dumbbell Tricep Extension",
-    "exerciceFR": "Extension du triceps haltères assis",
+    "exerciceFR": "Extension des triceps assis avec haltère",
     "Category": "Haltere",
     "Body Part": "Triceps",
     "Homme": {
@@ -11697,7 +11697,7 @@
   },
   {
     "exerciceEN": "Landmine Squat",
-    "exerciceFR": "Squat de la mine",
+    "exerciceFR": "Squat avec barre landmine",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -11869,7 +11869,7 @@
   },
   {
     "exerciceEN": "Belt Squat",
-    "exerciceFR": "Squat de la ceinture",
+    "exerciceFR": "Squat avec ceinture",
     "Category": "Machine",
     "Body Part": "Jambes",
     "Homme": {
@@ -11955,7 +11955,7 @@
   },
   {
     "exerciceEN": "Machine Lateral Raise",
-    "exerciceFR": "Augmentation latérale de la machine",
+    "exerciceFR": "Élévations latérales à la machine",
     "Category": "Machine",
     "Body Part": "Épaules",
     "Homme": {
@@ -12041,7 +12041,7 @@
   },
   {
     "exerciceEN": "Neck Curl",
-    "exerciceFR": "Coudre le cou",
+    "exerciceFR": "Flexion du cou",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -12127,7 +12127,7 @@
   },
   {
     "exerciceEN": "Single Leg Squat",
-    "exerciceFR": "Squat à une jambe",
+    "exerciceFR": "Squat sur une jambe",
     "Category": "Poids du corps",
     "Body Part": "Jambes",
     "Homme": {
@@ -12213,7 +12213,7 @@
   },
   {
     "exerciceEN": "Bent Over Dumbbell Row",
-    "exerciceFR": "Plié sur la rangée d'haltères",
+    "exerciceFR": "Rowing buste penché avec haltères",
     "Category": "Haltere",
     "Body Part": "Dos",
     "Homme": {
@@ -12299,7 +12299,7 @@
   },
   {
     "exerciceEN": "Pistol Squat",
-    "exerciceFR": "Pistolet",
+    "exerciceFR": "Pistol Squat",
     "Category": "Poids du corps",
     "Body Part": "Jambes",
     "Homme": {
@@ -12385,7 +12385,7 @@
   },
   {
     "exerciceEN": "Straight Arm Pulldown",
-    "exerciceFR": "Pulpation du bras droit",
+    "exerciceFR": "Tirage bras tendus à la poulie",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -12471,7 +12471,7 @@
   },
   {
     "exerciceEN": "Deficit Deadlift",
-    "exerciceFR": "Soulevé de terre déficit",
+    "exerciceFR": "Soulevé de terre surélevé",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -12557,7 +12557,7 @@
   },
   {
     "exerciceEN": "Safety Bar Squat",
-    "exerciceFR": "Squat de la barre de sécurité",
+    "exerciceFR": "Squat avec barre de sécurité",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -12643,7 +12643,7 @@
   },
   {
     "exerciceEN": "Dumbbell Upright Row",
-    "exerciceFR": "Row vertical haltère",
+    "exerciceFR": "Rowing vertical avec haltères",
     "Category": "Haltere",
     "Body Part": "Épaules",
     "Homme": {
@@ -12729,7 +12729,7 @@
   },
   {
     "exerciceEN": "Handstand Push Ups",
-    "exerciceFR": "Push ups",
+    "exerciceFR": "Pompes en équilibre sur les mains",
     "Category": "Poids du corps",
     "Body Part": "Épaules",
     "Homme": {
@@ -12815,7 +12815,7 @@
   },
   {
     "exerciceEN": "Behind The Neck Press",
-    "exerciceFR": "Derrière la presse au cou",
+    "exerciceFR": "Développé derrière la nuque",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -12901,7 +12901,7 @@
   },
   {
     "exerciceEN": "Close Grip Dumbbell Bench Press",
-    "exerciceFR": "Close Grip Halpel Press Press",
+    "exerciceFR": "Développé couché avec haltères prise serrée",
     "Category": "Haltere",
     "Body Part": "Pecs",
     "Homme": {
@@ -12987,7 +12987,7 @@
   },
   {
     "exerciceEN": "Yates Row",
-    "exerciceFR": "Row Yates",
+    "exerciceFR": "Rowing Yates",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -13073,7 +13073,7 @@
   },
   {
     "exerciceEN": "Cable Reverse Fly",
-    "exerciceFR": "Câble à mouche inversée",
+    "exerciceFR": "Écarté inversé à la poulie",
     "Category": "Cable",
     "Body Part": "Dos",
     "Homme": {
@@ -13159,7 +13159,7 @@
   },
   {
     "exerciceEN": "Pause Squat",
-    "exerciceFR": "Faire une pause squat",
+    "exerciceFR": "Squat avec pause",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -13245,7 +13245,7 @@
   },
   {
     "exerciceEN": "Machine Back Extension",
-    "exerciceFR": "Extension de dos de la machine",
+    "exerciceFR": "Extension du dos à la machine",
     "Category": "Machine",
     "Body Part": "Dos",
     "Homme": {
@@ -13331,7 +13331,7 @@
   },
   {
     "exerciceEN": "Barbell Front Raise",
-    "exerciceFR": "Augmentation avant de la barre",
+    "exerciceFR": "Élévations frontales avec barre",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -13503,7 +13503,7 @@
   },
   {
     "exerciceEN": "Barbell Hack Squat",
-    "exerciceFR": "Hack hack squat",
+    "exerciceFR": "Squat hack avec barre",
     "Category": "Barre",
     "Body Part": "Jambes",
     "Homme": {
@@ -13589,7 +13589,7 @@
   },
   {
     "exerciceEN": "Single Leg Romanian Deadlift",
-    "exerciceFR": "Soulevé de terre roumain à une seule jambe",
+    "exerciceFR": "Soulevé de terre roumain sur une jambe",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -13761,7 +13761,7 @@
   },
   {
     "exerciceEN": "Hang Power Clean",
-    "exerciceFR": "Suspendre la puissance propre",
+    "exerciceFR": "Arraché dynamique depuis le hang",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -13847,7 +13847,7 @@
   },
   {
     "exerciceEN": "Bench Pull",
-    "exerciceFR": "Tirage du banc",
+    "exerciceFR": "Tirage banc",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -13933,7 +13933,7 @@
   },
   {
     "exerciceEN": "Dumbbell Side Bend",
-    "exerciceFR": "Couche côté haltère",
+    "exerciceFR": "Flexion latérale avec haltère",
     "Category": "Haltere",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -14019,7 +14019,7 @@
   },
   {
     "exerciceEN": "Bench Pin Press",
-    "exerciceFR": "Presse à épinglet",
+    "exerciceFR": "Développé sur banc avec barre surélevée",
     "Category": "Barre",
     "Body Part": "Pecs",
     "Homme": {
@@ -14105,7 +14105,7 @@
   },
   {
     "exerciceEN": "Log Press",
-    "exerciceFR": "Journal",
+    "exerciceFR": "Développé avec un tronc (log)",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -14191,7 +14191,7 @@
   },
   {
     "exerciceEN": "Split Jerk",
-    "exerciceFR": "Secouer",
+    "exerciceFR": "Poussée-jetée en fente",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -14277,7 +14277,7 @@
   },
   {
     "exerciceEN": "Dumbbell Snatch",
-    "exerciceFR": "Snatch haltin",
+    "exerciceFR": "Arraché avec haltère",
     "Category": "Haltere",
     "Body Part": "Corps entier",
     "Homme": {
@@ -14363,7 +14363,7 @@
   },
   {
     "exerciceEN": "Incline Hammer Curl",
-    "exerciceFR": "Incliner Hammer Curl",
+    "exerciceFR": "Curl incliné en prise marteau",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -14449,7 +14449,7 @@
   },
   {
     "exerciceEN": "Hanging Leg Raise",
-    "exerciceFR": "Élévation des jambes suspendues",
+    "exerciceFR": "Relevé de jambes suspendu",
     "Category": "Poids du corps",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -14535,7 +14535,7 @@
   },
   {
     "exerciceEN": "Bodyweight Calf Raise",
-    "exerciceFR": "Élevage de mollets de poids corporel",
+    "exerciceFR": "Extension des mollets au poids du corps",
     "Category": "Poids du corps",
     "Body Part": "Jambes",
     "Homme": {
@@ -14621,7 +14621,7 @@
   },
   {
     "exerciceEN": "Snatch Deadlift",
-    "exerciceFR": "Soulevé de terre d'arrosage",
+    "exerciceFR": "Soulevé de terre en prise large",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -14707,7 +14707,7 @@
   },
   {
     "exerciceEN": "Cable Kickback",
-    "exerciceFR": "Pirotage du câble",
+    "exerciceFR": "Kickback à la poulie",
     "Category": "Cable",
     "Body Part": "Jambes",
     "Homme": {
@@ -14793,7 +14793,7 @@
   },
   {
     "exerciceEN": "Clean High Pull",
-    "exerciceFR": "Nettoyer une traction élevée",
+    "exerciceFR": "Tirage élevé au clean",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -14879,7 +14879,7 @@
   },
   {
     "exerciceEN": "Cable Woodchopper",
-    "exerciceFR": "Puanteur de câble",
+    "exerciceFR": "Woodchopper à la poulie",
     "Category": "Cable",
     "Body Part": "Abdominaux",
     "Homme": {
@@ -14965,7 +14965,7 @@
   },
   {
     "exerciceEN": "One Arm Pull Ups",
-    "exerciceFR": "Un bras de bras",
+    "exerciceFR": "Tractions sur un bras",
     "Category": "Poids du corps",
     "Body Part": "Dos",
     "Homme": {
@@ -15051,7 +15051,7 @@
   },
   {
     "exerciceEN": "JM Press",
-    "exerciceFR": "JM Press",
+    "exerciceFR": "Développé JM",
     "Category": "Barre",
     "Body Part": "Triceps",
     "Homme": {
@@ -15137,7 +15137,7 @@
   },
   {
     "exerciceEN": "Barbell Pullover",
-    "exerciceFR": "Pull",
+    "exerciceFR": "Pullover à la barre",
     "Category": "Barre",
     "Body Part": "Dos",
     "Homme": {
@@ -15223,7 +15223,7 @@
   },
   {
     "exerciceEN": "Seated Dumbbell Curl",
-    "exerciceFR": "Bouclé haltère assis",
+    "exerciceFR": "Curl assis avec haltères",
     "Category": "Haltere",
     "Body Part": "Biceps",
     "Homme": {
@@ -15309,7 +15309,7 @@
   },
   {
     "exerciceEN": "Spider Curl",
-    "exerciceFR": "Araignée bouclé",
+    "exerciceFR": "Curl araignée",
     "Category": "Barre",
     "Body Part": "Biceps",
     "Homme": {
@@ -15395,7 +15395,7 @@
   },
   {
     "exerciceEN": "Clean Pull",
-    "exerciceFR": "Traction propre",
+    "exerciceFR": "Tirage au clean",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -15481,7 +15481,7 @@
   },
   {
     "exerciceEN": "Landmine Press",
-    "exerciceFR": "Presse de mines",
+    "exerciceFR": "Poussée avec barre landmine",
     "Category": "Barre",
     "Body Part": "Épaules",
     "Homme": {
@@ -15567,7 +15567,7 @@
   },
   {
     "exerciceEN": "Inverted Row",
-    "exerciceFR": "Rangée inversée",
+    "exerciceFR": "Rowing inversé",
     "Category": "Poids du corps",
     "Body Part": "Dos",
     "Homme": {
@@ -15653,7 +15653,7 @@
   },
   {
     "exerciceEN": "Decline Push Up",
-    "exerciceFR": "Refuser la poussée",
+    "exerciceFR": "Pompes déclinées",
     "Category": "Poids du corps",
     "Body Part": "Pecs",
     "Homme": {
@@ -15739,7 +15739,7 @@
   },
   {
     "exerciceEN": "Pause Deadlift",
-    "exerciceFR": "Pause soulevé de terre",
+    "exerciceFR": "Soulevé de terre avec pause",
     "Category": "Barre",
     "Body Part": "Corps entier",
     "Homme": {
@@ -15911,7 +15911,7 @@
   },
   {
     "exerciceEN": "Russian Twist",
-    "exerciceFR": "Twist russe",
+    "exerciceFR": " Torsion russe",
     "Category": "Poids du corps",
     "Body Part": "Abdominaux",
     "Homme": {
