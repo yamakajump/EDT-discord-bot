@@ -21,14 +21,13 @@ const { createCanvas } = require("canvas");
 
 // Importation de la logique de gestion des données physiques
 const { handleUserPhysique } = require("../../../logic/handlePhysiqueData");
+const { findSimilarExercise } = require("../../../utils/strengthlevel");
 
 const { getEmoji } = require("../../../utils/emoji");
 const headerEmoji = getEmoji("cible");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
-const colorEmbedError = style.colorEmbedError;
-const thumbnailEmbed = style.thumbnailEmbed;
 
 module.exports = {
   /**
@@ -51,21 +50,21 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Le nom de l'exercice est manquant ou vide. Même Hulk sait qu'il faut le préciser !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.sexe == null || providedData.sexe.trim() === "") {
       return interaction.reply({
         content:
           "Attention ! Vous devez préciser le sexe (H ou F). Même Batman ne peut pas deviner !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.source == null || providedData.source.trim() === "") {
       return interaction.reply({
         content:
           "Oups ! Vous devez choisir une source ('age' ou 'bodyweight'). Ce n'est pas de la magie, c'est de l'option !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -91,7 +90,7 @@ module.exports = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
             ", ",
           )}. Veuillez les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
 
         if (interactionContext.replied || interactionContext.deferred) {
@@ -113,44 +112,14 @@ module.exports = {
       const exerciseName = finalData.exercise;
       const sexOption = finalData.sexe;
       const sourceChoice = finalData.source;
-      const langue = finalData.langue; // pour l'affichage dans le tableau
+      const langue = finalData.langue;
 
-      // Chargement du fichier JSON contenant les seuils de force
-      const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
-      let exercisesData;
-      try {
-        const rawData = fs.readFileSync(dataPath, "utf8");
-        exercisesData = JSON.parse(rawData);
-      } catch (error) {
-        console.error("⚠️ Erreur lors de la lecture du fichier JSON :", error);
-        const errorEmbed = new EmbedBuilder()
-          .setColor(colorEmbedError)
-          .setTitle("Erreur")
-          .setDescription(
-            "Une erreur est survenue lors de la récupération des données d'exercices.",
-          );
-        if (interactionContext.replied || interactionContext.deferred) {
-          try {
-            await interactionContext.deleteReply();
-          } catch (err) {
-            console.error("Erreur lors de la suppression de la réponse :", err);
-          }
-          return interactionContext.channel.send({ embeds: [errorEmbed] });
-        }
-        return interactionContext.reply({
-          embeds: [errorEmbed],
-          ephemeral: true,
-        });
-      }
-
-      // Recherche de l'exercice dans le JSON en utilisant le champ "exerciceFR" (non sensible à la casse)
-      const exerciseObj = exercisesData.find(
-        (ex) => ex.exerciceFR.toLowerCase() === exerciseName.toLowerCase(),
-      );
+      // Recherche de l'exercice dans le JSON en utilisant la similarité sur "exerciceFR" et "exerciceEN"
+      const exerciseObj = findSimilarExercise(exerciseName);
       if (!exerciseObj) {
         return interactionContext.reply({
           content: `Erreur : l'exercice "${exerciseName}" est introuvable dans la base de données.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
@@ -174,7 +143,7 @@ module.exports = {
       if (!thresholds || !thresholds.bodyweight || !thresholds.age) {
         return interactionContext.reply({
           content: `Erreur : aucune donnée de seuils n'est disponible pour le sexe "${sexOption}" pour cet exercice.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 

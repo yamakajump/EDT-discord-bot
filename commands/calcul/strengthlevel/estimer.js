@@ -19,11 +19,11 @@
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
-const fs = require("fs");
-const path = require("path");
 
 // 1. Importation des dépendances et configuration du style
 const { handleUserPhysique } = require("../../../logic/handlePhysiqueData");
+const { findSimilarExercise } = require("../../../utils/strengthlevel");
+
 const { getEmoji } = require("../../../utils/emoji");
 const emojiMuscle = getEmoji("muscle");
 const emojiCookie = getEmoji("cookie");
@@ -39,7 +39,6 @@ const emojiCd = getEmoji("cd");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
-const colorEmbedError = style.colorEmbedError;
 const thumbnailEmbed = style.thumbnailEmbed;
 
 // 2. Récupération des données fournies par l'utilisateur
@@ -59,21 +58,21 @@ module.exports = {
       return interaction.reply({
         content:
           "Attention ! Un poids corporel négatif, ce n'est pas de la magie, c'est juste bizarre. Mettez un nombre positif, s'il vous plaît !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.liftWeight <= 0) {
       return interaction.reply({
         content:
           "Hmm… lever un poids négatif serait plutôt de la prestidigitation. Merci de fournir un poids soulevé positif !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (providedData.age != null && providedData.age <= 0) {
       return interaction.reply({
         content:
           "Un âge négatif ? Même dans un roman de science-fiction, ça n'existe pas ! Mettez un âge positif, s'il vous plaît.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     if (
@@ -83,7 +82,7 @@ module.exports = {
       return interaction.reply({
         content:
           "Oups ! Le nom de l'exercice est requis. Merci de nous préciser quel muscle vous voulez impressionner !",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
 
@@ -123,7 +122,7 @@ module.exports = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
             ", ",
           )}. Veuillez les renseigner.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         };
 
         if (interactionContext.replied || interactionContext.deferred) {
@@ -141,41 +140,12 @@ module.exports = {
         }
       }
 
-      // Lecture du fichier JSON des seuils pour le calcul du Strength Level
-      const dataPath = path.join(__dirname, "../../../data/strengthlevel.json");
-      let exercisesData;
-      try {
-        const rawData = fs.readFileSync(dataPath, "utf8");
-        exercisesData = JSON.parse(rawData);
-      } catch (error) {
-        console.error("Erreur lors de la lecture du fichier JSON :", error);
-        const errorEmbed = new EmbedBuilder()
-          .setColor(colorEmbedError)
-          .setTitle("Erreur")
-          .setDescription(
-            "Une erreur est survenue lors de la récupération des données d'exercices.",
-          );
-        return interactionContext.reply({
-          embeds: [errorEmbed],
-          ephemeral: true,
-        });
-      }
-
-      // Recherche de l'exercice dans le tableau
-      // On compare à la fois le champ exerciceFR et, si présent, exerciceEN de manière insensible à la casse.
-      const exerciseObj = exercisesData.find((ex) => {
-        return (
-          ex.exerciceFR.toLowerCase() ===
-            finalData.exerciseName.toLowerCase() ||
-          (ex.exerciceEN &&
-            ex.exerciceEN.toLowerCase() ===
-              finalData.exerciseName.toLowerCase())
-        );
-      });
+      // Recherche de l'exercice dans le JSON en utilisant la similarité sur "exerciceFR" et "exerciceEN"
+      const exerciseObj = findSimilarExercise(finalData.exerciseName);
       if (!exerciseObj) {
         return interactionContext.reply({
           content: `Erreur : l'exercice "${finalData.exerciseName}" est introuvable dans la base de données.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
 
@@ -191,7 +161,7 @@ module.exports = {
       if (!thresholds || !thresholds.bodyweight || !thresholds.age) {
         return interactionContext.reply({
           content: `Erreur : aucune donnée de seuils n'est disponible pour le sexe "${finalData.sexe}" pour cet exercice.`,
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
       const bodyTable = thresholds.bodyweight; // Tableau des seuils pour le poids du corps
