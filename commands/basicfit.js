@@ -36,180 +36,181 @@ module.exports = {
         ),
     )
     // Groupe de sous-commandes : stats
-    .addSubcommandGroup((group) =>
-      group
-        .setName("stats")
-        .setDescription(
-          "Affiche différentes statistiques en fonction de vos données.",
-        )
-        // Sous-commande stats : heatmap
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("heatmap")
-            .setDescription("Affiche la heatmap des visites.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : sérieConsécutive
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("serieconsecutive")
-            .setDescription("Affiche le streak des jours consécutifs.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : semaineDeSérie
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("semainedeserie")
-            .setDescription("Affiche le streak hebdomadaire.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : semaineMoyenne
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("semainemoyenne")
-            .setDescription("Affiche la moyenne hebdomadaire.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : meilleurMois
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("meilleurmois")
-            .setDescription("Affiche le meilleur mois.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : jourPréféré
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("jourprefere")
-            .setDescription("Affiche le jour favori.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : visitesParJour
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("visiteparjour")
-            .setDescription("Affiche les visites par jour.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : heureJournée
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("heurejournee")
-            .setDescription(
-              "Affiche la répartition des visites selon l'heure de la journée.",
-            )
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : pourcentageActif
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("pourcentageactif")
-            .setDescription("Affiche le pourcentage d'activité.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        )
-        // Sous-commande stats : tempsMoyenEntreVisites
-        .addSubcommand((subcommand) =>
-          subcommand
-            .setName("tempsmoyenentrevisites")
-            .setDescription("Affiche le temps moyen entre les visites.")
-            .addUserOption((option) =>
-              option
-                .setName("utilisateur")
-                .setDescription(
-                  "Sélectionnez un utilisateur (par défaut, vous-même).",
-                )
-                .setRequired(false),
-            ),
-        ),
-    )
-    // Sous-commande : serverstats
-    .addSubcommand((subcommand) =>
-      subcommand
-        .setName("serverstats")
-        .setDescription(
-          "Affiche les statistiques globales du serveur BasicFit.",
-        ),
-    )
-    // Sous-commande : compare
-    .addSubcommand((subcommand) =>
-      subcommand
-        .setName("compare")
-        .setDescription("Compare les statistiques entre deux utilisateurs.")
-        .addUserOption((option) =>
-          option
-            .setName("utilisateur1")
-            .setDescription("Premier utilisateur.")
-            .setRequired(true),
-        )
-        .addUserOption((option) =>
-          option
-            .setName("utilisateur2")
-            .setDescription("Deuxième utilisateur.")
-            .setRequired(true),
-        ),
+    .addSubcommandGroup(
+      (group) =>
+        group
+          .setName("stats")
+          .setDescription(
+            "Affiche différentes statistiques en fonction de vos données.",
+          )
+          // Sous-commande stats : heatmap
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("heatmap")
+              .setDescription("Affiche la heatmap des visites.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : sérieConsécutive
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("serieconsecutive")
+              .setDescription("Affiche le streak des jours consécutifs.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : semaineDeSérie
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("semainedeserie")
+              .setDescription("Affiche le streak hebdomadaire.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : semaineMoyenne
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("semainemoyenne")
+              .setDescription("Affiche la moyenne hebdomadaire.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : meilleurMois
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("meilleurmois")
+              .setDescription("Affiche le meilleur mois.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : jourPréféré
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("jourprefere")
+              .setDescription("Affiche le jour favori.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : visitesParJour
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("visiteparjour")
+              .setDescription("Affiche les visites par jour.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : heureJournée
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("heurejournee")
+              .setDescription(
+                "Affiche la répartition des visites selon l'heure de la journée.",
+              )
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : pourcentageActif
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("pourcentageactif")
+              .setDescription("Affiche le pourcentage d'activité.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          )
+          // Sous-commande stats : tempsMoyenEntreVisites
+          .addSubcommand((subcommand) =>
+            subcommand
+              .setName("tempsmoyenentrevisites")
+              .setDescription("Affiche le temps moyen entre les visites.")
+              .addUserOption((option) =>
+                option
+                  .setName("utilisateur")
+                  .setDescription(
+                    "Sélectionnez un utilisateur (par défaut, vous-même).",
+                  )
+                  .setRequired(false),
+              ),
+          ),
+      // )
+      // // Sous-commande : serverstats
+      // .addSubcommand((subcommand) =>
+      //   subcommand
+      //     .setName("serverstats")
+      //     .setDescription(
+      //       "Affiche les statistiques globales du serveur BasicFit.",
+      //     ),
+      // )
+      // // Sous-commande : compare
+      // .addSubcommand((subcommand) =>
+      //   subcommand
+      //     .setName("compare")
+      //     .setDescription("Compare les statistiques entre deux utilisateurs.")
+      //     .addUserOption((option) =>
+      //       option
+      //         .setName("utilisateur1")
+      //         .setDescription("Premier utilisateur.")
+      //         .setRequired(true),
+      //     )
+      //     .addUserOption((option) =>
+      //       option
+      //         .setName("utilisateur2")
+      //         .setDescription("Deuxième utilisateur.")
+      //         .setRequired(true),
+      //     ),
     ),
   async execute(interaction) {
     // Récupération du subcommand group (s'il existe) et du subcommand
