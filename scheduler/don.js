@@ -73,16 +73,16 @@ function scheduleMessages(client) {
         ) {
           if (channel) {
             console.error(
-              `⚠️ Erreur : Accès refusé pour le salon "${channel.name}" (ID: ${channel.id}). Veuillez vérifier les permissions du bot sur ce salon.`,
+              `⚠️\x1b[31m  Erreur : Accès refusé pour le salon "${channel.name}" (ID: ${channel.id}). Veuillez vérifier les permissions du bot sur ce salon.`,
             );
           } else {
             console.error(
-              `⚠️ Erreur : Accès refusé pour le salon avec l'ID ${channelId}. Veuillez vérifier les permissions du bot sur ce salon.`,
+              `⚠️\x1b[31m  Erreur : Accès refusé pour le salon avec l'ID ${channelId}. Veuillez vérifier les permissions du bot sur ce salon.`,
             );
           }
         } else {
           console.error(
-            "⚠️ Erreur lors de l'envoi du message programmé :",
+            "⚠️\x1b[31m  Erreur lors de l'envoi du message programmé :",
             error,
           );
         }
