@@ -12,7 +12,7 @@ const stringSimilarity = require("string-similarity");
 function findSimilarExercise(inputExercise) {
   // Chemin du fichier JSON contenant les données des exercices.
   // Vous pouvez adapter ce chemin en fonction de votre projet.
-  const filePath = path.join(__dirname, "../data/exercises.json");
+  const filePath = path.join(__dirname, "../data/strenghtlevel.json");
 
   // Lecture et parsing du fichier JSON
   let exercisesData;
