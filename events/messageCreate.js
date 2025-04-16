@@ -48,7 +48,7 @@ module.exports = {
           });
 
           console.log(
-            `\x1b[38;5;5m🛑  Message supprimé de ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} dans le forum : \x1b[38;5;13m${message.channel.name} \x1b[0m`,
+            `\x1b[38;5;5m🛑  Message de ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} supprimé dans le forum : \x1b[38;5;13m${message.channel.name} \x1b[0m`,
           );
 
           // Suppression de la notification après 1 minute (60000 ms)
