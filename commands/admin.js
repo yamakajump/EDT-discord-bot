@@ -13,13 +13,14 @@
  * et de créer le fichier correspondant dans le dossier "admin".
  */
 
-const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+const { SlashCommandBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
 const path = require("path");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("admin")
     .setDescription("Commandes administratives")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     // Sous-commande : styx
     .addSubcommand((subcommand) =>
       subcommand
@@ -37,6 +38,7 @@ module.exports = {
       subcommand
         .setName("save")
         .setDescription("Sauvegarde des informations dans un salon spécifié.")
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addChannelOption((option) =>
           option
             .setName("salon")
@@ -61,6 +63,7 @@ module.exports = {
       subcommand
         .setName("journal")
         .setDescription("Crée un journal pour un membre.")
+        .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
         .addUserOption((option) =>
           option
             .setName("membre")
