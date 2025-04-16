@@ -14,6 +14,10 @@ const {
   ButtonStyle,
 } = require("discord.js");
 
+const style = require("../config/style.json");
+const colorEmbed = style.colorEmbed;
+const thumbnailEmbed = style.thumbnailEmbed;
+
 function scheduleMessages(client) {
   // Définition des tâches planifiées : chaque objet contient l'heure, les minutes et l'ID du salon cible.
   const jobs = [
@@ -53,7 +57,10 @@ function scheduleMessages(client) {
               "Si vous le pouvez, n'hésitez pas à nous soutenir **via Paypal**. Un rôle <@&678660325494751242> sera décerné à tous les participants.\n" +
               "Merci d'avance ❤️",
           )
-          .setColor(0x00ae86);
+          .setColor(colorEmbed)
+          .setThumbnail(thumbnailEmbed);
+
+          console.log(`\x1b[38;5;3m🕓  Message programmé \x1b[38;5;11m(don) \x1b[38;5;3mpour le salon \x1b[38;5;11m${channel.name}\x1b[0m`);
 
         // Création d'une ActionRow contenant un bouton renvoyant vers le lien de Paypal
         const row = new ActionRowBuilder().addComponents(
