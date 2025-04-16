@@ -33,7 +33,7 @@ module.exports = {
 
     const embed = new EmbedBuilder();
     const totalMessages = 300; // Seuil de messages pour validation
-    const totalDays = 14; // Durée d'une période pour le suivi (en jours)
+    const totalDays = 7 * 8; // Durée d'une période pour le suivi (en jours)
 
     try {
       // Récupération des données du guerrier via le DAO.
