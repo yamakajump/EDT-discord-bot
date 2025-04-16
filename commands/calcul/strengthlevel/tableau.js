@@ -4,14 +4,14 @@
  * Ce module permet de générer une image (au format PNG) contenant un tableau qui récapitule les seuils
  * pour un exercice donné, en fonction du sexe de l'utilisateur et d'une source choisie ("age" ou "bodyweight").
  *
- * Fonctionnalités principales :
- *   - Récupération des options fournies par l'utilisateur (exercice, sexe, source, langue).
- *   - Lecture et parsing d'un fichier JSON contenant les données des seuils.
- *   - Sélection de l'exercice correspondant en recherchant dans le champ "exerciceFR" (recherche non sensible à la casse).
- *   - Génération d'un graphique/tableau en utilisant la bibliothèque Canvas.
- *   - Personnalisation de l'affichage via des couleurs, bordures et textes (avec utilisation d'emojis personnalisés).
- *   - Lecture éventuelle d'une image de l'exercice (si présente) pour l'ajouter en miniature dans l'embed.
- *   - Construction et envoi d'un embed Discord comportant le tableau généré en pièce jointe.
+ * La séquence est la suivante :
+ *   1. Importation des dépendances et configuration du style.
+ *   2. Récupération des données fournies par l'utilisateur.
+ *   3. Validation humoristique des valeurs saisies.
+ *   4. Mise en place du callback de calcul (executeCalculationCallback) qui :
+ *      - Vérifie que les champs requis existent dans l'objet final.
+ *      - Exécute la logique spécifique (calculs, génération d'un embed, etc.).
+ *   5. Appel à la logique de gestion du physique via handleUserPhysique.
  */
 
 const { EmbedBuilder, MessageFlags } = require("discord.js");
@@ -19,15 +19,15 @@ const fs = require("fs");
 const path = require("path");
 const { createCanvas } = require("canvas");
 
-// Importation de la logique de gestion des données physiques
+// 1. Importation des dépendances de la logique physique et du style
 const { handleUserPhysique } = require("../../../logic/handlePhysiqueData");
 const { findSimilarExercise } = require("../../../utils/strengthlevel");
-
 const { getEmoji } = require("../../../utils/emoji");
-const headerEmoji = getEmoji("cible");
 
 const style = require("../../../config/style.json");
 const colorEmbed = style.colorEmbed;
+
+const headerEmoji = getEmoji("cible");
 
 module.exports = {
   /**
@@ -37,7 +37,7 @@ module.exports = {
    * @returns {Promise<void>} Une promesse qui se résout une fois l'embed envoyé.
    */
   async execute(interaction) {
-    // 1. Récupération des données fournies par l'utilisateur
+    // 2. Récupération des données fournies par l'utilisateur
     const providedData = {
       exercise: interaction.options.getString("exercise"),
       sexe: interaction.options.getString("sexe"),
@@ -45,22 +45,22 @@ module.exports = {
       langue: interaction.options.getString("langue") || "FR",
     };
 
-    // 2. Validation humoristique des valeurs saisies
-    if (providedData.exercise == null || providedData.exercise.trim() === "") {
+    // 3. Validation humoristique des valeurs saisies
+    if (!providedData.exercise || providedData.exercise.trim() === "") {
       return interaction.reply({
         content:
           "Attention ! Le nom de l'exercice est manquant ou vide. Même Hulk sait qu'il faut le préciser !",
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.sexe == null || providedData.sexe.trim() === "") {
+    if (!providedData.sexe || providedData.sexe.trim() === "") {
       return interaction.reply({
         content:
           "Attention ! Vous devez préciser le sexe (H ou F). Même Batman ne peut pas deviner !",
         flags: MessageFlags.Ephemeral,
       });
     }
-    if (providedData.source == null || providedData.source.trim() === "") {
+    if (!providedData.source || providedData.source.trim() === "") {
       return interaction.reply({
         content:
           "Oups ! Vous devez choisir une source ('age' ou 'bodyweight'). Ce n'est pas de la magie, c'est de l'option !",
@@ -68,20 +68,20 @@ module.exports = {
       });
     }
 
-    // 3. Mise en place du callback de calcul
+    // 4. Mise en place du callback de calcul
     const executeCalculationCallback = async (
       interactionContext,
       finalData,
     ) => {
       // Vérification des champs requis dans l'objet final
       const missingFields = [];
-      if (finalData.exercise == null || finalData.exercise.trim() === "") {
+      if (!finalData.exercise || finalData.exercise.trim() === "") {
         missingFields.push("exercise");
       }
-      if (finalData.sexe == null || finalData.sexe.trim() === "") {
+      if (!finalData.sexe || finalData.sexe.trim() === "") {
         missingFields.push("sexe");
       }
-      if (finalData.source == null || finalData.source.trim() === "") {
+      if (!finalData.source || finalData.source.trim() === "") {
         missingFields.push("source");
       }
 
@@ -108,7 +108,7 @@ module.exports = {
         }
       }
 
-      // Récupération des options depuis l'objet finalData
+      // Récupération des options à partir de finalData
       const exerciseName = finalData.exercise;
       const sexOption = finalData.sexe;
       const sourceChoice = finalData.source;
@@ -123,22 +123,20 @@ module.exports = {
         });
       }
 
-      // Pour la recherche de l'image dans le dossier, on utilise toujours le nom anglais (exerciceEN) s'il existe,
-      // sinon on se rabat sur le nom français.
+      // Détermination du nom à afficher et de l'image associée à l'exercice
       const imageNameForEmbed =
         exerciseObj.exerciceEN && exerciseObj.exerciceEN.trim() !== ""
           ? exerciseObj.exerciceEN
           : exerciseObj.exerciceFR;
       const exerciseImageName = imageNameForEmbed.replace(/ /g, "_") + ".png";
 
-      // Pour l'affichage dans l'embed, on choisit par défaut le français,
-      // sauf si l'option "langue" est définie sur "en" et que le nom anglais existe.
+      // Par défaut, affichage en français, sauf si la langue est définie sur "en" et que le nom anglais existe
       let displayExerciseName = exerciseObj.exerciceFR;
       if (langue && langue.toLowerCase() === "en" && exerciseObj.exerciceEN) {
         displayExerciseName = exerciseObj.exerciceEN;
       }
 
-      // Récupération des seuils pour le sexe choisi
+      // Récupération des seuils correspondant au sexe choisi
       const thresholds = exerciseObj[sexOption];
       if (!thresholds || !thresholds.bodyweight || !thresholds.age) {
         return interactionContext.reply({
@@ -157,10 +155,9 @@ module.exports = {
         tableType = "Poids";
       }
 
-      // Préparation des en-têtes du tableau
-      const firstHeader = tableType;
+      // Préparation du tableau
       const headers = [
-        firstHeader,
+        tableType,
         "Débutant",
         "Novice",
         "Intermédiaire",
@@ -168,14 +165,10 @@ module.exports = {
         "Elite",
       ];
       const numCols = headers.length;
-      const numRows = table.length; // Nombre de lignes de la table issue du JSON
-
-      // Dimensions en pixels pour les cellules et le header
+      const numRows = table.length;
       const cellWidth = 120;
       const cellHeight = 30;
       const headerHeight = 40;
-
-      // Configuration de l'espace pour le titre et les marges
       const titleAreaHeight = 30;
       const gapBetweenTitleAndTable = 10;
       const margin = 10;
@@ -185,15 +178,15 @@ module.exports = {
       const canvasHeight =
         titleAreaHeight + gapBetweenTitleAndTable + tableHeight + margin * 2;
 
-      // Création du canvas et récupération du contexte 2D
+      // Création du canvas pour le tableau
       const canvas = createCanvas(canvasWidth, canvasHeight);
       const ctx = canvas.getContext("2d");
 
-      // Fond du canvas avec la couleur de fond Discord (#2F3135)
+      // Fond du canvas (couleur Discord par défaut)
       ctx.fillStyle = "#2F3135";
       ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-      // Affichage du titre (nom de l'exercice) centré en haut
+      // Affichage du titre centré (nom de l'exercice)
       ctx.font = "bold 20px Arial";
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
@@ -204,7 +197,7 @@ module.exports = {
         margin + titleAreaHeight / 2,
       );
 
-      // Calcul de la position du tableau dans le canvas
+      // Position du tableau
       const tableX = margin;
       const tableY = margin + titleAreaHeight + gapBetweenTitleAndTable;
 
@@ -216,7 +209,7 @@ module.exports = {
        * @param {number} y - La coordonnée y de départ.
        * @param {number} width - La largeur du rectangle.
        * @param {number} height - La hauteur du rectangle.
-       * @param {number} radius - Le rayon de l'arrondi des coins.
+       * @param {number} radius - Le rayon des coins arrondis.
        */
       function drawRoundedRect(ctx, x, y, width, height, radius) {
         ctx.beginPath();
@@ -238,7 +231,7 @@ module.exports = {
         ctx.fill();
       }
 
-      // Dessin du fond du tableau avec coins arrondis et couleur personnalisée (#151619)
+      // Dessin du fond du tableau avec coins arrondis
       const borderRadius = 10;
       ctx.fillStyle = "#151619";
       drawRoundedRect(
@@ -255,41 +248,35 @@ module.exports = {
       for (let col = 0; col < numCols; col++) {
         const x = tableX + col * cellWidth;
         const y = tableY;
-        // Fond de l'en-tête pour chaque colonne
         ctx.fillStyle = "#181A1E";
         ctx.fillRect(x, y, cellWidth, headerHeight);
-        // Bordure de la cellule
         ctx.strokeStyle = "#151619";
         ctx.strokeRect(x, y, cellWidth, headerHeight);
-        // Texte centré dans l'en-tête
         ctx.fillStyle = "#e7e7e7";
         ctx.fillText(headers[col], x + cellWidth / 2, y + headerHeight / 2);
       }
 
-      // Dessin des cellules de données du tableau
+      // Dessin des cellules de données
       ctx.font = "14px Arial";
       for (let row = 0; row < numRows; row++) {
         const rowData = table[row];
         for (let col = 0; col < numCols; col++) {
           const x = tableX + col * cellWidth;
           const y = tableY + headerHeight + row * cellHeight;
-          // Détermine la couleur de fond : première colonne différencie des autres
           ctx.fillStyle = col === 0 ? "#181A1E" : "#202226";
           ctx.fillRect(x, y, cellWidth, cellHeight);
-          // Dessine la bordure de chaque cellule
           ctx.strokeStyle = "#151619";
           ctx.strokeRect(x, y, cellWidth, cellHeight);
-          // Couleur du texte
           ctx.fillStyle = col === 0 ? "#e7e7e7" : "#a0a0a0";
           const text = rowData[col] !== undefined ? rowData[col] : "";
           ctx.fillText(String(text), x + cellWidth / 2, y + cellHeight / 2);
         }
       }
 
-      // Génération d'un buffer PNG à partir du canvas
+      // Conversion du canvas en image PNG
       const tableBuffer = canvas.toBuffer("image/png");
 
-      // Récupération de l'image de l'exercice en utilisant le nom anglais (si défini) pour l'embed
+      // Tentative de récupération de l'image de l'exercice
       const exerciseImagePath = path.join(
         __dirname,
         "../../../images/strengthlevel",
@@ -306,7 +293,7 @@ module.exports = {
         );
       }
 
-      // Préparation de l'embed Discord pour présenter le tableau des seuils
+      // Préparation de l'embed Discord
       const embed = new EmbedBuilder()
         .setColor(colorEmbed)
         .setTitle(`${headerEmoji} Tableau des seuils`)
@@ -327,15 +314,8 @@ module.exports = {
         });
       }
 
+      // Envoi de la réponse : si une réponse éphémère a déjà été envoyée, on la supprime avant d'envoyer le message dans le canal
       if (interactionContext.replied || interactionContext.deferred) {
-        try {
-          await interactionContext.deleteReply();
-        } catch (error) {
-          console.error(
-            "Erreur lors de la suppression de la réponse éphémère :",
-            error,
-          );
-        }
         return interactionContext.channel.send({
           embeds: [embed],
           files: attachments,
@@ -348,9 +328,9 @@ module.exports = {
       }
     };
 
-    // 4. Exécution de la logique de gestion du physique
-    // Cette fonction fusionne les données fournies avec celles enregistrées éventuellement en BDD,
-    // et appelle le callback (executeCalculationCallback) pour poursuivre le traitement.
+    // 5. Appel à la logique de gestion du physique
+    // handleUserPhysique fusionne les données fournies avec celles enregistrées en base,
+    // et appelle ensuite executeCalculationCallback.
     await handleUserPhysique(
       interaction,
       providedData,
