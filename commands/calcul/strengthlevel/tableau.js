@@ -45,29 +45,6 @@ module.exports = {
       langue: interaction.options.getString("langue") || "FR",
     };
 
-    // 3. Validation humoristique des valeurs saisies
-    if (!providedData.exercise || providedData.exercise.trim() === "") {
-      return interaction.reply({
-        content:
-          "Attention ! Le nom de l'exercice est manquant ou vide. Même Hulk sait qu'il faut le préciser !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (!providedData.sexe || providedData.sexe.trim() === "") {
-      return interaction.reply({
-        content:
-          "Attention ! Vous devez préciser le sexe (H ou F). Même Batman ne peut pas deviner !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-    if (!providedData.source || providedData.source.trim() === "") {
-      return interaction.reply({
-        content:
-          "Oups ! Vous devez choisir une source ('age' ou 'bodyweight'). Ce n'est pas de la magie, c'est de l'option !",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-
     // 4. Mise en place du callback de calcul
     const executeCalculationCallback = async (
       interactionContext,
