@@ -73,7 +73,7 @@ module.exports = {
         }
       } catch (error) {
         console.error(
-          `⚠️\x1b[31m  Erreur lors de la lecture du fichier ${file}:`,
+          `⚠️\\x1b[38;5;1m  Erreur lors de la lecture du fichier ${file}:`,
           error.message,
         );
       }

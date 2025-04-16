@@ -49,7 +49,7 @@ module.exports = {
           .setName(newName)
           .catch((err) =>
             console.error(
-              "⚠️\x1b[31m  Erreur lors de la mise à jour du salon :",
+              "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
               err,
             ),
           );
@@ -87,7 +87,7 @@ module.exports = {
           .send({ embeds: [embed] })
           .catch((err) =>
             console.error(
-              "⚠️\x1b[31m  Erreur lors de l'envoi du message de bienvenue :",
+              "⚠️\\x1b[38;5;1m  Erreur lors de l'envoi du message de bienvenue :",
               err,
             ),
           );
@@ -118,14 +118,14 @@ module.exports = {
                 .delete()
                 .catch((err) =>
                   console.error(
-                    "⚠️\x1b[31m  Erreur lors de la suppression du ping :",
+                    "⚠️\\x1b[38;5;1m  Erreur lors de la suppression du ping :",
                     err,
                   ),
                 );
             }, 2000);
           } catch (err) {
             console.error(
-              "⚠️\x1b[31m  Erreur lors de l'envoi du ping dans le salon de bienvenue :",
+              "⚠️\\x1b[38;5;1m  Erreur lors de l'envoi du ping dans le salon de bienvenue :",
               err,
             );
           }
@@ -147,7 +147,7 @@ module.exports = {
 
       await member.send({ embeds: [guideEmbed], components: [row] });
       console.log(
-        `\x1b[38;5;200m📖 	Guide \x1b[35menvoyé à 	\x1b[38;5;200m${member.user.tag} \x1b[35men DM.\x1b[0m`,
+        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${member.user.tag} \x1b[38;5;5men DM.\x1b[0m`,
       );
     } catch (error) {
       console.error(

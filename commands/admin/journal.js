@@ -105,7 +105,7 @@ module.exports = {
       });
     } catch (error) {
       console.error(
-        "⚠️\x1b[31m  Erreur lors de la création du journal :",
+        "⚠️\\x1b[38;5;1m;5;1m  Erreur lors de la création du journal :",
         error,
       );
       await interaction.reply({

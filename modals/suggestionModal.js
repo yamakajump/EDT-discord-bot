@@ -58,7 +58,7 @@ module.exports = {
       })
       .catch((err) => {
         console.error(
-          "⚠️\x1b[31m  Erreur lors de l'envoi de la suggestion :",
+          "⚠️\\x1b[38;5;1m  Erreur lors de l'envoi de la suggestion :",
           err,
         );
       });

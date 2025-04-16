@@ -81,11 +81,11 @@ module.exports = {
       });
     } catch (error) {
       console.error(
-        "⚠️\x1b[31m  Erreur lors du traitement du fichier JSON :",
+        "⚠️\\x1b[38;5;1m;5;1m  Erreur lors du traitement du fichier JSON :",
         error,
       );
       return interaction.reply({
-        content: `⚠️\x1b[31m  Erreur lors du traitement du fichier : ${error.message}`,
+        content: `⚠️\\x1b[38;5;1m;5;1m  Erreur lors du traitement du fichier : ${error.message}`,
         flags: MessageFlags.Ephemeral,
       });
     }

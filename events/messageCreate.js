@@ -48,7 +48,7 @@ module.exports = {
           });
 
           console.log(
-            `\x1b[35m🛑  Message supprimé dans le forum : \x1b[38;5;200m${message.channel.name} \x1b[0m`,
+            `\x1b[38;5;5m🛑  Message supprimé dans le forum : \x1b[38;5;13m${message.channel.name} \x1b[0m`,
           );
 
           // Suppression de la notification après 1 minute (60000 ms)
@@ -57,14 +57,14 @@ module.exports = {
               await warning.delete();
             } catch (err) {
               console.error(
-                "⚠️\x1b[31m  Erreur lors de la suppression du message de notification :",
+                "⚠️\\x1b[38;5;1m  Erreur lors de la suppression du message de notification :",
                 err,
               );
             }
           }, 60000);
         } catch (err) {
           console.error(
-            "⚠️\x1b[31m  Erreur lors de la suppression ou de la gestion du message :",
+            "⚠️\\x1b[38;5;1m  Erreur lors de la suppression ou de la gestion du message :",
             err,
           );
         }
@@ -79,7 +79,7 @@ module.exports = {
       );
     } catch (err) {
       console.error(
-        "⚠️\x1b[31m  Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
+        "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
         err,
       );
     }

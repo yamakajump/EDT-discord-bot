@@ -272,10 +272,10 @@ module.exports = {
     } catch (error) {
       clearInterval(intervalId);
       console.error(
-        "⚠️\x1b[31m  Erreur lors de la génération ou de l'envoi de la transcription :",
+        "⚠️\\x1b[38;5;1m  Erreur lors de la génération ou de l'envoi de la transcription :",
         error,
       );
-      await interaction.editReply("⚠️\x1b[31m  Erreur lors de la sauvegarde.");
+      await interaction.editReply("⚠️\\x1b[38;5;1m  Erreur lors de la sauvegarde.");
     }
   },
 };

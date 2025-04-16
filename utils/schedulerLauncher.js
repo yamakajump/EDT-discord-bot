@@ -69,9 +69,9 @@ module.exports = (client) => {
     // Applique une couleur au statut : vert pour "Chargé", jaune pour une erreur.
     let statutAffichage = row.Statut;
     if (row.Statut === "Chargé") {
-      statutAffichage = `\x1b[32m${row.Statut}\x1b[0m`;
+      statutAffichage = `\x1b[38;5;2m${row.Statut}\x1b[0m`;
     } else {
-      statutAffichage = `\x1b[31m${row.Statut}\x1b[0m`;
+      statutAffichage = `\\x1b[38;5;1m${row.Statut}\x1b[0m`;
     }
 
     // Affichage de la ligne du tableau

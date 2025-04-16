@@ -10,20 +10,20 @@ const path = require("path");
 
 // Affichage des variables d'environnement utilisées pour la connexion
 console.log(
-  "\x1b[34m🔍  Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m",
+  "\x1b[38;5;4m🔍  Tentative de connexion MySQL avec les paramètres suivants :\x1b[0m",
 );
 console.log(
-  "\x1b[36mMYSQL_HOST:\x1b[0m",
+  "\x1b[38;5;6mMYSQL_HOST:\x1b[0m",
   process.env.MYSQL_HOST || "localhost",
 );
-console.log("\x1b[36mMYSQL_PORT:\x1b[0m", process.env.MYSQL_PORT || 3306);
-console.log("\x1b[36mMYSQL_USER:\x1b[0m", process.env.MYSQL_USER || "root");
+console.log("\x1b[38;5;6mMYSQL_PORT:\x1b[0m", process.env.MYSQL_PORT || 3306);
+console.log("\x1b[38;5;6mMYSQL_USER:\x1b[0m", process.env.MYSQL_USER || "root");
 console.log(
-  "\x1b[36mMYSQL_PASSWORD:\x1b[0m",
+  "\x1b[38;5;6mMYSQL_PASSWORD:\x1b[0m",
   process.env.MYSQL_PASSWORD ? "******" : "password",
 );
 console.log(
-  "\x1b[36mMYSQL_DATABASE:\x1b[0m",
+  "\x1b[38;5;6mMYSQL_DATABASE:\x1b[0m",
   process.env.MYSQL_DATABASE || "edt_db",
 );
 
@@ -56,17 +56,17 @@ async function initializeDatabase() {
   const initSqlPath = path.join(__dirname, "..", "sql", "init_tables.sql");
   try {
     console.log(
-      "\x1b[34m📂  Lecture du fichier SQL d'initialisation :\x1b[0m",
+      "\x1b[38;5;4m📂  Lecture du fichier SQL d'initialisation :\x1b[0m",
       initSqlPath,
     );
     // Lecture du fichier SQL en tant que chaîne de caractères.
-    console.log("\x1b[34m📝  Contenu du fichier SQL chargé.\x1b[0m");
+    console.log("\x1b[38;5;4m📝  Contenu du fichier SQL chargé.\x1b[0m");
     // Exécution du script SQL sur la base de données.
-    console.log("\x1b[32m🗂️  Base de données initialisée avec succès.\x1b[0m");
+    console.log("\x1b[38;5;2m🗂️  Base de données initialisée avec succès.\x1b[0m");
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
     console.error(
-      "\x1b[31m🗂️   Erreur lors de l'exécution du script SQL :\x1b[0m",
+      "\\x1b[38;5;1m🗂️   Erreur lors de l'exécution du script SQL :\x1b[0m",
       err,
     );
     throw err;
