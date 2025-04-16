@@ -13,7 +13,7 @@
  * et de créer le fichier correspondant dans le dossier "admin".
  */
 
-const { SlashCommandBuilder, MessageFlags } = require("discord.js");
+const { SlashCommandBuilder, MessageFlags, PermissionFlagsBits } = require("discord.js");
 const path = require("path");
 
 module.exports = {
