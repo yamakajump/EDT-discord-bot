@@ -19,7 +19,9 @@ module.exports = {
    * @param {Client} client - Le client Discord.
    */
   execute: async (interaction, client) => {
-    const user = interaction.user.tag;
+    const user = interaction.guild
+      ? interaction.guild.members.cache.get(interaction.user.id)?.displayName || interaction.user.username
+      : interaction.user.username;
 
     // Gestion des commandes slash
     if (interaction.isCommand()) {

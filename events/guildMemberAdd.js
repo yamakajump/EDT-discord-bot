@@ -47,6 +47,11 @@ module.exports = {
         const newName = `📈 Discord : ${member.guild.memberCount} Membres`;
         countChannel
           .setName(newName)
+          .then(() => {
+            console.log(
+              `\x1b[38;5;5m📈  Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres 	\x1b[38;5;2m+1\x1b[0m`,
+            );
+          })
           .catch((err) =>
             console.error(
               "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
@@ -147,11 +152,11 @@ module.exports = {
 
       await member.send({ embeds: [guideEmbed], components: [row] });
       console.log(
-        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${member.user.tag} \x1b[38;5;5men DM.\x1b[0m`,
+        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} \x1b[38;5;5men DM.\x1b[0m`,
       );
     } catch (error) {
       console.error(
-        `⚠️ Impossible d'envoyer le guide en DM à ${member.user.tag} :`,
+        `⚠️ Impossible d'envoyer le guide en DM à ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} :`,
         error,
       );
     }
