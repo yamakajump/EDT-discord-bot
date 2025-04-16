@@ -1,24 +1,9 @@
-/**
- * Module de commande "ng"
- *
- * Cette commande slash affiche les statistiques de messages d'un utilisateur :
- * - La date du premier message enregistré.
- * - Le nombre de messages enregistrés (comparé à un total fixé).
- * - Le temps restant (en jours) sur une période donnée.
- *
- * On peut spécifier un utilisateur via l'option "utilisateur". Si aucun utilisateur n'est
- * précisé, les statistiques sont affichées pour l'utilisateur qui exécute la commande.
- *
- * Les données statistiques sont récupérées via "guerrierDAO".
- */
-
 const {
   SlashCommandBuilder,
   EmbedBuilder,
   MessageFlags,
 } = require("discord.js");
 const guerrierDAO = require("../dao/guerrierDAO");
-
 const { getEmoji } = require("../utils/emoji");
 const emojiValid = getEmoji("oui");
 const emojiInvalid = getEmoji("non");
@@ -41,22 +26,21 @@ module.exports = {
     ),
 
   async execute(interaction) {
-    // Récupération de l'utilisateur ciblé ou, par défaut, l'utilisateur de la commande
+    // Si aucun utilisateur n'est spécifié, on prend l'utilisateur qui a lancé la commande.
     const userOption = interaction.options.getUser("utilisateur");
     const user = userOption || interaction.user;
     const id = user.id;
 
     const embed = new EmbedBuilder();
-    const totalMessages = 300; // Nombre de messages requis pour valider la cible
-
-    const totalDays = 14; // Durée de la période de suivi en jours
+    const totalMessages = 300; // Seuil de messages pour validation
+    const totalDays = 14; // Durée d'une période pour le suivi (en jours)
 
     try {
-      // Récupération des données de l'utilisateur via le DAO
+      // Récupération des données du guerrier via le DAO.
       const data = await guerrierDAO.getById(id);
 
       if (!data) {
-        // Aucun message enregistré pour cet utilisateur
+        // Aucun enregistrement pour cet utilisateur.
         embed
           .setColor(colorEmbed)
           .setTitle("Statistiques de messages")
@@ -64,27 +48,26 @@ module.exports = {
           .setDescription(
             `<@${user.id}>\n` +
               (user.id === interaction.user.id
-                ? "Vous n'avez encore envoyé aucun message enregistré."
-                : "Cet utilisateur n'a encore envoyé aucun message enregistré."),
+                ? "Vous n'avez encore aucune donnée enregistrée."
+                : "Cet utilisateur n'a encore aucune donnée enregistrée."),
           );
       } else {
-        // Formatage de la date du premier message
-        const firstMsgDate = new Date(data.date);
-        const formattedDate = firstMsgDate.toLocaleDateString("fr-FR", {
+        // Utilisation de la date de création du guerrier (date_creation)
+        const creationDate = new Date(data.date_creation);
+        const formattedDate = creationDate.toLocaleDateString("fr-FR", {
           weekday: "long",
           year: "numeric",
           month: "long",
           day: "numeric",
         });
 
-        // Calcul du temps restant sur une période de "totalDays"
+        // Calcul du temps restant à partir de la date de création sur une période définie
         const now = new Date();
-        const diffTime = Math.abs(now.getTime() - firstMsgDate.getTime());
+        const diffTime = Math.abs(now.getTime() - creationDate.getTime());
         let diffDays = Math.round(totalDays - diffTime / (1000 * 3600 * 24));
         if (diffDays < 0) diffDays = 0;
-        // Choix de l'emoji selon que la période soit écoulée ou non
+
         const timeEmoji = diffDays === 0 ? emojiValid : emojiInvalid;
-        // Choix de l'emoji selon si le nombre de messages atteint le seuil requis
         const countEmoji =
           data.count >= totalMessages ? emojiValid : emojiInvalid;
 
@@ -94,22 +77,19 @@ module.exports = {
           .setThumbnail(thumbnailEmbed)
           .setDescription(
             `**Utilisateur** : <@${user.id}>\n` +
-              `**Date du premier message** : ${formattedDate}\n` +
+              `**Date de création** : ${formattedDate}\n` +
               `**Nombre de messages** : ${data.count}/${totalMessages} ${countEmoji}\n` +
               `**Temps restant** : ${diffDays} jour${diffDays > 1 ? "s" : ""} ${timeEmoji}`,
           );
       }
 
-      // Envoi de la réponse tout en autorisant la mention de l'utilisateur
+      // Envoi de la réponse en mentionnant l'utilisateur (si besoin)
       await interaction.reply({
         embeds: [embed],
         allowedMentions: { users: [user.id] },
       });
     } catch (err) {
-      console.error(
-        "⚠️\x1b[31m  Erreur lors de l'exécution de la commande ng :",
-        err,
-      );
+      console.error("⚠️  Erreur lors de l'exécution de la commande ng :", err);
       await interaction.reply({
         content:
           "Une erreur est survenue lors de la récupération des statistiques.",

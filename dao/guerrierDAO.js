@@ -16,8 +16,7 @@ module.exports = {
    */
   getById: async (id) => {
     const [rows] = await promisePool.query(
-      `SELECT id, username, count, display_stats, enregistrer, rappel_update_physique,
-              poids, taille, age, sexe, activite, jours, temps, intensite, tef, derniere_modification 
+      `SELECT id, username, count, display_stats, enregistrer, rappel_update_physique, poids, taille, age, sexe, activite, jours, temps, intensite, tef, derniere_activite, derniere_modification, date_creation
        FROM guerrier 
        WHERE id = ?`,
       [id],
