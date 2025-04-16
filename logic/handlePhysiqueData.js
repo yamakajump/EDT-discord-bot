@@ -41,7 +41,7 @@ async function handleUserPhysique(
     const embed = new EmbedBuilder()
       .setTitle("Mise à jour des données")
       .setDescription(
-        "Voulez-vous enregistrer vos données physiques afin de ne pas les ressaisir à chaque commande ?\nVos données sont confidentielles.",
+        "Voulez-vous enregistrer vos données physiques afin de ne pas les ressaisir à chaque commande ?",
       )
       .setColor(colorEmbed)
       .setThumbnail(thumbnailEmbed);
