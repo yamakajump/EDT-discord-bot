@@ -36,6 +36,11 @@ module.exports = {
     const newName = `📈 Discord : ${member.guild.memberCount} Membres`;
     channel
       .setName(newName)
+      .then(() => {
+        console.log(
+          `\x1b[35m📈  Compteur de membres mis à jour : \x1b[38;5;200m${member.guild.memberCount} membres \x1b[0m`,
+        );
+      })
       .catch((err) =>
         console.error(
           "⚠️\x1b[31m  Erreur lors de la mise à jour du salon :",

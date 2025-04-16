@@ -146,7 +146,9 @@ module.exports = {
       const row = getGuideButtons(1, member.user.id);
 
       await member.send({ embeds: [guideEmbed], components: [row] });
-      console.log(`📖 Guide envoyé à ${member.user.tag} en DM.`);
+      console.log(
+        `\x1b[38;5;200m📖 	Guide \x1b[35menvoyé à 	\x1b[38;5;200m${member.user.tag} \x1b[35men DM.\x1b[0m`,
+      );
     } catch (error) {
       console.error(
         `⚠️ Impossible d'envoyer le guide en DM à ${member.user.tag} :`,

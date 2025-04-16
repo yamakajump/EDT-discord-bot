@@ -47,6 +47,10 @@ module.exports = {
             content: `<@${message.author.id}> Seuls l'auteur du post et les personnes ayant le rôle Coach peuvent répondre dans ce forum.`,
           });
 
+          console.log(
+            `\x1b[35m🛑  Message supprimé dans le forum : \x1b[38;5;200m${message.channel.name} \x1b[0m`,
+          );
+
           // Suppression de la notification après 1 minute (60000 ms)
           setTimeout(async () => {
             try {
