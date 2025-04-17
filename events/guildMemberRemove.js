@@ -41,7 +41,7 @@ module.exports = {
       .setName(newName)
       .then(() => {
         console.log(
-          `\x1b[38;5;5m📉  ${memberName} vient de quitter. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`
+          `\x1b[38;5;13m$📉  ${memberName}\x1b[38;5;5m vient de quitter. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`
         );
       })
       .catch((err) =>
