@@ -157,11 +157,11 @@ module.exports = {
 
       await member.send({ embeds: [guideEmbed], components: [row] });
       console.log(
-        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} \x1b[38;5;5men DM.\x1b[0m`,
+        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${member} \x1b[38;5;5men DM.\x1b[0m`,
       );
     } catch (error) {
       console.error(
-        `⚠️ Impossible d'envoyer le guide en DM à ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} :`,
+        `⚠️ Impossible d'envoyer le guide en DM à ${member} :`,
         error,
       );
     }
