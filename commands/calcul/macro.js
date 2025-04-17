@@ -74,10 +74,10 @@ module.exports = {
     ) => {
       // Vérification que les champs requis sont présents
       const missingFields = [];
-      if (finalData.calories != null || finalData.calories === undefined) {
+      if (finalData.calories === null || finalData.calories === undefined) {
         missingFields.push("calories");
       }
-      if (finalData.objectif != null || finalData.objectif === undefined) {
+      if (finalData.objectif === null || finalData.objectif === undefined) {
         missingFields.push("objectif");
       }
 
