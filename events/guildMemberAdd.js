@@ -27,6 +27,11 @@ const pingWelcomeChannelIds = config.pingWelcomeChannelIds;
 module.exports = {
   name: "guildMemberAdd",
   async execute(member) {
+    // Création d'une variable pour afficher le nom du membre
+    const memberName =
+      member.guild.members.cache.get(member.id)?.displayName ||
+      member.user.username;
+
     /*
      * 1. Mise à jour du compteur de membres
      * - La configuration doit contenir l'ID du salon où le nombre de membres doit être affiché.
@@ -123,7 +128,7 @@ module.exports = {
                 .delete()
                 .then(() => {
                   console.log(
-                    `\x1b[38;5;5m🔔  Suppresion du message de ping de \x1b[38;5;13m${member} \x1b[38;5;5mdans le salon \x1b[38;5;13m${channelId}\x1b[0m`
+                    `\x1b[38;5;5m🔔  Suppresion du message de ping de \x1b[38;5;13m${memberName} \x1b[38;5;5mdans le salon \x1b[38;5;13m${channelId}\x1b[0m`,
                   );
                 })
                 .catch((err) =>
@@ -157,11 +162,11 @@ module.exports = {
 
       await member.send({ embeds: [guideEmbed], components: [row] });
       console.log(
-        `\x1b[38;5;13m📖 	Guide \x1b[38;5;5menvoyé à 	\x1b[38;5;13m${member} \x1b[38;5;5men DM.\x1b[0m`,
+        `\x1b[38;5;13m📖  Guide \x1b[38;5;5menvoyé à \x1b[38;5;13m${memberName} \x1b[38;5;5men DM.\x1b[0m`,
       );
     } catch (error) {
       console.error(
-        `⚠️ Impossible d'envoyer le guide en DM à ${member} :`,
+        `⚠️ Impossible d'envoyer le guide en DM à ${memberName} :`,
         error,
       );
     }

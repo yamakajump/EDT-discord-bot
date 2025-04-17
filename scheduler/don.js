@@ -60,7 +60,9 @@ function scheduleMessages(client) {
           .setColor(colorEmbed)
           .setThumbnail(thumbnailEmbed);
 
-          console.log(`\x1b[38;5;3m🕓  Message programmé \x1b[38;5;11m(don) \x1b[38;5;3mpour le salon \x1b[38;5;11m${channel.name}\x1b[0m`);
+        console.log(
+          `\x1b[38;5;3m🕓  Message programmé \x1b[38;5;11m(don) \x1b[38;5;3mpour le salon \x1b[38;5;11m${channel.name}\x1b[0m`,
+        );
 
         // Création d'une ActionRow contenant un bouton renvoyant vers le lien de Paypal
         const row = new ActionRowBuilder().addComponents(

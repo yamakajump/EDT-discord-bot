@@ -20,19 +20,24 @@ module.exports = {
    */
   execute: async (interaction, client) => {
     const user = interaction.guild
-      ? interaction.guild.members.cache.get(interaction.user.id)?.displayName || interaction.user.username
+      ? interaction.guild.members.cache.get(interaction.user.id)?.displayName ||
+        interaction.user.username
       : interaction.user.username;
 
     // Gestion des commandes slash
     if (interaction.isCommand()) {
       const command = client.commands.get(interaction.commandName);
       if (!command) {
-        console.error(`⚠️\\x1b[38;5;1m  Commande ${interaction.commandName} non trouvée.`);
+        console.error(
+          `⚠️\\x1b[38;5;1m  Commande ${interaction.commandName} non trouvée.`,
+        );
         return;
       }
 
       try {
-        console.log(`\x1b[38;5;4mCommande exécutée par ${user}: ${interaction.commandName}\x1b[0m`);
+        console.log(
+          `\x1b[38;5;4mCommande exécutée par ${user}: ${interaction.commandName}\x1b[0m`,
+        );
         await command.execute(interaction);
       } catch (error) {
         console.error(
@@ -58,7 +63,9 @@ module.exports = {
       if (fs.existsSync(modalHandlerPath)) {
         const modalHandler = require(modalHandlerPath);
         try {
-          console.log(`\x1b[38;5;2mModal soumis par ${user}: ${interaction.customId}\x1b[0m`);
+          console.log(
+            `\x1b[38;5;2mModal soumis par ${user}: ${interaction.customId}\x1b[0m`,
+          );
           await modalHandler.execute(interaction);
         } catch (error) {
           console.error(
@@ -67,7 +74,9 @@ module.exports = {
           );
         }
       } else {
-        console.error(`⚠️\\x1b[38;5;1m  Handler de modal ${interaction.customId} non trouvé.`);
+        console.error(
+          `⚠️\\x1b[38;5;1m  Handler de modal ${interaction.customId} non trouvé.`,
+        );
       }
     }
 
@@ -84,7 +93,9 @@ module.exports = {
       if (fs.existsSync(buttonHandlerPath)) {
         const buttonHandler = require(buttonHandlerPath);
         try {
-          console.log(`\x1b[38;5;6mBouton cliqué par ${user}: ${buttonName}\x1b[0m`);
+          console.log(
+            `\x1b[38;5;6mBouton cliqué par ${user}: ${buttonName}\x1b[0m`,
+          );
           await buttonHandler.execute(interaction, params);
         } catch (error) {
           console.error(
@@ -93,7 +104,9 @@ module.exports = {
           );
         }
       } else {
-        console.error(`⚠️\\x1b[38;5;1m  Handler de bouton ${buttonName} non trouvé.`);
+        console.error(
+          `⚠️\\x1b[38;5;1m  Handler de bouton ${buttonName} non trouvé.`,
+        );
       }
     }
   },

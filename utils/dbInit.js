@@ -62,7 +62,9 @@ async function initializeDatabase() {
     // Lecture du fichier SQL en tant que chaîne de caractères.
     console.log("\x1b[38;5;4m📝  Contenu du fichier SQL chargé.\x1b[0m");
     // Exécution du script SQL sur la base de données.
-    console.log("\x1b[38;5;2m🗂️  Base de données initialisée avec succès.\x1b[0m");
+    console.log(
+      "\x1b[38;5;2m🗂️  Base de données initialisée avec succès.\x1b[0m",
+    );
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
     console.error(

@@ -110,7 +110,9 @@ const { initializeDatabase } = require("./utils/dbInit");
     // Enregistrer (ou mettre à jour) les commandes auprès de Discord
     try {
       await rest.put(Routes.applicationCommands(clientId), { body: commands });
-      console.log("📩\x1b[38;5;2m  Commandes enregistrées avec succès. \x1b[0m");
+      console.log(
+        "📩\x1b[38;5;2m  Commandes enregistrées avec succès. \x1b[0m",
+      );
     } catch (error) {
       console.error(
         "⚠️\\x1b[38;5;1m  Erreur lors de l'enregistrement des commandes: \x1b[0m",
