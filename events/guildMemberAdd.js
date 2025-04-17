@@ -121,6 +121,11 @@ module.exports = {
             setTimeout(() => {
               pingMessage
                 .delete()
+                .then(() => {
+                  console.log(
+                    `\x1b[38;5;5m🔔  Suppresion du message de ping de \x1b[38;5;13m${member} \x1b[38;5;5mdans le salon \x1b[38;5;13m${channelId}\x1b[0m`
+                  );
+                })
                 .catch((err) =>
                   console.error(
                     "⚠️\\x1b[38;5;1m  Erreur lors de la suppression du ping :",
