@@ -14,8 +14,11 @@ const memberCountChannelId = config.memberCountChannel;
 module.exports = {
   name: "guildMemberRemove", // Nom de l'événement
   async execute(member) {
-    // 1. Chargement de la configuration depuis le fichier config/config.json
-
+    // Création d'une variable pour afficher le nom du membre
+    const memberName =
+      member.guild.members.cache.get(member.id)?.displayName ||
+      member.user.username;
+    
     // Vérifier que la clé "memberCountChannel" existe dans la configuration
     if (!memberCountChannelId) {
       return console.error(
@@ -23,7 +26,7 @@ module.exports = {
       );
     }
 
-    // 2. Récupération du salon où le nombre de membres est affiché
+    // 1. Récupération du salon où le nombre de membres est affiché
     const channel = member.guild.channels.cache.get(memberCountChannelId);
     if (!channel) {
       return console.error(
@@ -31,14 +34,14 @@ module.exports = {
       );
     }
 
-    // 3. Mise à jour du nom du salon pour refléter le nouveau nombre de membres
+    // 2. Mise à jour du nom du salon pour refléter le nouveau nombre de membres
     // Le nom du salon est mis à jour avec le compteur actuel de membres du serveur
     const newName = `📈 Discord : ${member.guild.memberCount} Membres`;
     channel
       .setName(newName)
       .then(() => {
         console.log(
-          `\x1b[38;5;5m📈  Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`,
+          `\x1b[38;5;5m📉  ${memberName} vient de quitter. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`
         );
       })
       .catch((err) =>

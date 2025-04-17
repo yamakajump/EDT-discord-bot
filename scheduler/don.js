@@ -49,6 +49,18 @@ function scheduleMessages(client) {
           return;
         }
 
+        // Vérifier si le dernier message dans le salon est bien celui du bot
+        const messages = await channel.messages.fetch({ limit: 1 });
+        if (messages.size) {
+          const lastMessage = messages.first();
+          if (lastMessage.author.id === client.user.id) {
+            console.log(
+              `\x1b[38;5;3m🕓  Le message programmé pour le salon "${channel.name}" est déjà présent, aucun nouvel envoi. \x1b[0m`,
+            );
+            return;
+          }
+        }
+
         // Création de l'embed contenant le message d'appel au soutien
         const embed = new EmbedBuilder()
           .setTitle("Soutenez-nous")
