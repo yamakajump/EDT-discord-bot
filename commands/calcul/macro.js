@@ -138,9 +138,9 @@ module.exports = {
 
       // Si des pourcentages personnalisés sont fournis, ils priment sur les valeurs par défaut
       if (
-        finalData.proteines !== null &&
-        finalData.glucides !== null &&
-        finalData.lipides !== null
+        finalData.proteines !== null || finalData.proteines === undefined &&
+        finalData.glucides !== null || finalData.glucides === undefined &&
+        finalData.lipides !== null || finalData.lipides === undefined
       ) {
         if (
           finalData.proteines + finalData.glucides + finalData.lipides !==
