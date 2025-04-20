@@ -29,7 +29,7 @@ module.exports = {
       const command = client.commands.get(interaction.commandName);
       if (!command) {
         console.error(
-          `⚠️\\x1b[38;5;1m  Commande ${interaction.commandName} non trouvée.`,
+          `⚠️\x1b[38;5;1m  Commande ${interaction.commandName} non trouvée.`,
         );
         return;
       }
@@ -41,7 +41,7 @@ module.exports = {
         await command.execute(interaction);
       } catch (error) {
         console.error(
-          `⚠️\\x1b[38;5;1m  Erreur lors de l'exécution de la commande ${interaction.commandName} par ${user}:`,
+          `⚠️\x1b[38;5;1m  Erreur lors de l'exécution de la commande ${interaction.commandName} par ${user}:`,
           error,
         );
         await interaction.reply({
@@ -69,13 +69,13 @@ module.exports = {
           await modalHandler.execute(interaction);
         } catch (error) {
           console.error(
-            `⚠️\\x1b[38;5;1m  Erreur lors du traitement du modal ${interaction.customId} par ${user}:`,
+            `⚠️\x1b[38;5;1m  Erreur lors du traitement du modal ${interaction.customId} par ${user}:`,
             error,
           );
         }
       } else {
         console.error(
-          `⚠️\\x1b[38;5;1m  Handler de modal ${interaction.customId} non trouvé.`,
+          `⚠️\x1b[38;5;1m  Handler de modal ${interaction.customId} non trouvé.`,
         );
       }
     }
@@ -99,13 +99,13 @@ module.exports = {
           await buttonHandler.execute(interaction, params);
         } catch (error) {
           console.error(
-            `⚠️\\x1b[38;5;1m  Erreur lors du traitement du bouton ${interaction.customId} par ${user}:`,
+            `⚠️\x1b[38;5;1m  Erreur lors du traitement du bouton ${interaction.customId} par ${user}:`,
             error,
           );
         }
       } else {
         console.error(
-          `⚠️\\x1b[38;5;1m  Handler de bouton ${buttonName} non trouvé.`,
+          `⚠️\x1b[38;5;1m  Handler de bouton ${buttonName} non trouvé.`,
         );
       }
     }
