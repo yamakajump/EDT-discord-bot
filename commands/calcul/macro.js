@@ -141,7 +141,7 @@ module.exports = {
         finalData.proteines !== undefined &&
         finalData.glucides !== undefined &&
         finalData.lipides !== undefined
-       ) {
+      ) {
         if (
           finalData.proteines + finalData.glucides + finalData.lipides !==
           100

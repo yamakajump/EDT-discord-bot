@@ -284,7 +284,7 @@ module.exports = {
         statsJSON = statsRecord.stats;
       } catch (error) {
         console.error(
-          "⚠️\\x1b[38;5;1m  Erreur lors du parsing du JSON des stats :",
+          "⚠️\x1b[38;5;1m  Erreur lors du parsing du JSON des stats :",
           error,
         );
         return interaction.reply({
@@ -321,7 +321,7 @@ module.exports = {
       }
     } catch (error) {
       console.error(
-        `⚠️\\x1b[38;5;1m  Erreur lors de l'exécution de la commande ${subcommand}${
+        `⚠️\x1b[38;5;1m  Erreur lors de l'exécution de la commande ${subcommand}${
           subcommandGroup ? ` du groupe ${subcommandGroup}` : ""
         }:`,
         error,

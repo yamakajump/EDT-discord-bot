@@ -95,7 +95,7 @@ module.exports = {
       await subcommandFile.execute(interaction);
     } catch (error) {
       console.error(
-        `⚠️\\x1b[38;5;1m  Erreur lors de l'exécution de la sous-commande ${subCmd}:`,
+        `⚠️\x1b[38;5;1m  Erreur lors de l'exécution de la sous-commande ${subCmd}:`,
         error,
       );
       await interaction.reply({

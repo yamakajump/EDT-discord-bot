@@ -32,7 +32,7 @@ function loadJson(filePath, defaultValue = {}) {
     return JSON.parse(rawData);
   } catch (error) {
     console.error(
-      `⚠️\\x1b[38;5;1m  Erreur lors du chargement du fichier JSON : ${filePath}`,
+      `⚠️\x1b[38;5;1m  Erreur lors du chargement du fichier JSON : ${filePath}`,
       error,
     );
     // En cas d'erreur, retourne la valeur par défaut pour éviter l'interruption du programme
@@ -62,7 +62,7 @@ function saveJson(filePath, data) {
     fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
   } catch (error) {
     console.error(
-      `⚠️\\x1b[38;5;1m  Erreur lors de la sauvegarde du fichier JSON : ${filePath}`,
+      `⚠️\x1b[38;5;1m  Erreur lors de la sauvegarde du fichier JSON : ${filePath}`,
       error,
     );
   }

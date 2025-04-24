@@ -54,12 +54,12 @@ module.exports = {
           .setName(newName)
           .then(() => {
             console.log(
-              `\x1b[38;5;13m📈  ${memberName}\x1b[38;5;5m vient de rejoindre. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;2m+1\x1b[0m`
+              `\x1b[38;5;13m📈  ${memberName}\x1b[38;5;5m vient de rejoindre. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;2m+1\x1b[0m`,
             );
           })
           .catch((err) =>
             console.error(
-              "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
+              "⚠️\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
               err,
             ),
           );
@@ -97,7 +97,7 @@ module.exports = {
           .send({ embeds: [embed] })
           .catch((err) =>
             console.error(
-              "⚠️\\x1b[38;5;1m  Erreur lors de l'envoi du message de bienvenue :",
+              "⚠️\x1b[38;5;1m  Erreur lors de l'envoi du message de bienvenue :",
               err,
             ),
           );
@@ -133,14 +133,14 @@ module.exports = {
                 })
                 .catch((err) =>
                   console.error(
-                    "⚠️\\x1b[38;5;1m  Erreur lors de la suppression du ping :",
+                    "⚠️\x1b[38;5;1m  Erreur lors de la suppression du ping :",
                     err,
                   ),
                 );
             }, 2000);
           } catch (err) {
             console.error(
-              "⚠️\\x1b[38;5;1m  Erreur lors de l'envoi du ping dans le salon de bienvenue :",
+              "⚠️\x1b[38;5;1m  Erreur lors de l'envoi du ping dans le salon de bienvenue :",
               err,
             );
           }

@@ -1,18 +1,22 @@
 {
-  "styxRole": "678031463433895986",
-  "protectedRole": "610928463590981634",
   "journalCategories": [
     "787261880208588860",
     "865963213325991956",
     "679090062461239306",
     "617767210601152522"
   ],
-  "memberCountChannel": "905466940917694555",
-  "welcomeChannel": "820968843429150720",
+
   "pingWelcomeChannelIds": ["646389555066568709"],
   "forums": ["104692498832349498", "1049686370584641606"],
-  "coachRole": "610958014219812880",
+  "memberCountChannel": "905466940917694555",
+  "welcomeChannel": "820968843429150720",
   "suggestionChannel": "611172262414123008",
+  "presentationChannel": "610934395062190096",
+
+  "styxRole": "678031463433895986",
+  "protectedRole": "610928463590981634",
   "staffRole": "611179589783519253",
-  "donateurRole": "678660325494751242"
+  "coachRole": "610958014219812880",
+  "donateurRole": "678660325494751242",
+  "nonPresenteRole": "965570737861705768"
 }

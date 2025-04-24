@@ -71,7 +71,7 @@ module.exports = (client) => {
     if (row.Statut === "Chargé") {
       statutAffichage = `\x1b[38;5;2m${row.Statut}\x1b[0m`;
     } else {
-      statutAffichage = `\\x1b[38;5;1m${row.Statut}\x1b[0m`;
+      statutAffichage = `\x1b[38;5;1m${row.Statut}\x1b[0m`;
     }
 
     // Affichage de la ligne du tableau

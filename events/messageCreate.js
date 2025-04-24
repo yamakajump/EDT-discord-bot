@@ -1,12 +1,14 @@
 /**
  * Gestionnaire de l'événement "messageCreate".
  *
- * Ce module effectue deux opérations principales :
+ * Ce module effectue trois opérations principales :
  *  1. Il contrôle les messages envoyés dans des threads (issus d'un forum) pour s'assurer que seuls
  *     l'auteur du fil ou un membre avec le rôle "Coach" peuvent y répondre.
  *     En cas de non-respect, le message est supprimé et une notification temporaire est envoyée.
  *
  *  2. Pour tous les messages (non-bot), il incrémente un compteur associé à chaque auteur via le DAO Nouveau Guerrier.
+ *
+ *  3. Il gère les messages envoyés dans le salon de présentation. Si un membre envoie un message,
  *
  * La configuration (IDs de forum, rôle "Coach", etc.) est chargée depuis le fichier de configuration (config.json).
  */
@@ -16,6 +18,8 @@ const guerrierDAO = require("../dao/guerrierDAO"); // Importation du DAO pour g�
 const config = require("../config/config.json");
 const forums = config.forums;
 const coachRole = config.coachRole;
+const presentationChannel = config.presentationChannel;
+const nonPresenteRole = config.nonPresenteRole;
 
 module.exports = {
   name: "messageCreate",
@@ -27,6 +31,24 @@ module.exports = {
   async execute(message) {
     // Ignorer les messages des bots
     if (message.author.bot) return;
+
+    // Gestion des messages dans le salon de présentation
+    if (message.channel.id === presentationChannel) {
+      try {
+        // Si le membre possède le rôle "nonPrésente", on le retire
+        if (message.member.roles.cache.has(nonPresenteRole)) {
+          await message.member.roles.remove(nonPresenteRole);
+          console.log(
+            `🙋\x1b[38;5;2mLe  rôle non-présent a été retiré à ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} suite à l'envoi d'un message dans le canal de présentation.\x1b[0m`,
+          );
+        }
+      } catch (err) {
+        console.error(
+          "⚠️\x1b[38;5;1m  Erreur lors de la suppression du rôle nonPrésente dans le salon de présentation :",
+          err,
+        );
+      }
+    }
 
     // Contrôle pour les messages envoyés dans un thread rattaché à un forum spécifique
     if (
@@ -57,14 +79,14 @@ module.exports = {
               await warning.delete();
             } catch (err) {
               console.error(
-                "⚠️\\x1b[38;5;1m  Erreur lors de la suppression du message de notification :",
+                "⚠️\x1b[38;5;1m  Erreur lors de la suppression du message de notification :",
                 err,
               );
             }
           }, 60000);
         } catch (err) {
           console.error(
-            "⚠️\\x1b[38;5;1m  Erreur lors de la suppression ou de la gestion du message :",
+            "⚠️\x1b[38;5;1m  Erreur lors de la suppression ou de la gestion du message :",
             err,
           );
         }
@@ -79,7 +101,7 @@ module.exports = {
       );
     } catch (err) {
       console.error(
-        "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
+        "⚠️\x1b[38;5;1m  Erreur lors de la mise à jour du compteur du Nouveau Guerrier :",
         err,
       );
     }

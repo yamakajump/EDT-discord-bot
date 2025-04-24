@@ -18,7 +18,7 @@ module.exports = {
     const memberName =
       member.guild.members.cache.get(member.id)?.displayName ||
       member.user.username;
-    
+
     // Vérifier que la clé "memberCountChannel" existe dans la configuration
     if (!memberCountChannelId) {
       return console.error(
@@ -41,12 +41,12 @@ module.exports = {
       .setName(newName)
       .then(() => {
         console.log(
-          `\x1b[38;5;13m📉  ${memberName}\x1b[38;5;5m vient de quitter. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`
+          `\x1b[38;5;13m📉  ${memberName}\x1b[38;5;5m vient de quitter. Compteur de membres mis à jour : \x1b[38;5;13m${member.guild.memberCount} membres \x1b[38;5;1m-1\x1b[0m`,
         );
       })
       .catch((err) =>
         console.error(
-          "⚠️\\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
+          "⚠️\x1b[38;5;1m  Erreur lors de la mise à jour du salon :",
           err,
         ),
       );

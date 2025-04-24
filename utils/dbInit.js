@@ -68,7 +68,7 @@ async function initializeDatabase() {
   } catch (err) {
     // En cas d'erreur, affichage du message d'erreur complet dans la console.
     console.error(
-      "\\x1b[38;5;1m🗂️   Erreur lors de l'exécution du script SQL :\x1b[0m",
+      "\x1b[38;5;1m🗂️   Erreur lors de l'exécution du script SQL :\x1b[0m",
       err,
     );
     throw err;
