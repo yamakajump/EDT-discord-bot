@@ -20,7 +20,7 @@ module.exports = {
       if (member && !member.roles.cache.has(nonPresenteRole)) {
         await member.roles.add(nonPresenteRole);
         console.log(
-          `🙋\x1b[38;5;3mLe  rôle non-présent a été réattribué à ${member.displayName} suite à la suppression de son message de présentation.\x1b[0m`,
+          `🙋\x1b[38;5;3m  Le rôle non-présent a été réattribué à ${member.displayName} suite à la suppression de son message de présentation.\x1b[0m`,
         );
       }
     } catch (error) {

@@ -39,7 +39,7 @@ module.exports = {
         if (message.member.roles.cache.has(nonPresenteRole)) {
           await message.member.roles.remove(nonPresenteRole);
           console.log(
-            `🙋\x1b[38;5;2mLe  rôle non-présent a été retiré à ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} suite à l'envoi d'un message dans le canal de présentation.\x1b[0m`,
+            `🙋\x1b[38;5;2m  Le rôle non-présent a été retiré à ${message.guild.members.cache.get(message.author.id)?.displayName || message.author.username} suite à l'envoi d'un message dans le canal de présentation.\x1b[0m`,
           );
         }
       } catch (err) {
