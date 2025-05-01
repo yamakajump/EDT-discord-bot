@@ -201,7 +201,7 @@ module.exports = {
         .setColor(colorEmbed);
 
       // Vérifier que l'utilisateur n'a pas renseigné les deux options de personnalisation simultanément
-      if (pourcentageInput !== undefined && ajustementInput !== undefined) {
+      if (pourcentageInput !== null && ajustementInput !== null) {
         return interaction.reply({
           content:
             "Veuillez renseigner soit un pourcentage, soit un ajustement direct des calories, pas les deux.",
@@ -210,7 +210,7 @@ module.exports = {
       }
 
       // 1. Option "ajustement" renseignée (ajustement direct des calories)
-      if (ajustementInput !== undefined) {
+      if (ajustementInput !== null) {
         const adjustedCalories = DEJ + ajustementInput;
         let title, description;
         if (ajustementInput < 0) {
@@ -241,7 +241,7 @@ Le maintien vise à conserver l'équilibre énergétique sans prise ni perte de 
         embed.setTitle(title).setDescription(description);
       }
       // 2. Option "pourcentage" renseignée (personnalisation par pourcentage)
-      else if (pourcentageInput !== undefined) {
+      else if (pourcentageInput !== null) {
         if (pourcentageInput < 100) {
           const customSeche = Math.round(DEJ * (pourcentageInput / 100));
           embed

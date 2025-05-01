@@ -74,10 +74,10 @@ module.exports = {
     ) => {
       // Vérification que les champs requis sont présents
       const missingFields = [];
-      if (finalData.calories === null || finalData.calories === undefined) {
+      if (finalData.calories === null) {
         missingFields.push("calories");
       }
-      if (finalData.objectif === null || finalData.objectif === undefined) {
+      if (finalData.objectif === null) {
         missingFields.push("objectif");
       }
 
@@ -138,9 +138,9 @@ module.exports = {
 
       // Si des pourcentages personnalisés sont fournis, ils priment sur les valeurs par défaut
       if (
-        finalData.proteines !== undefined &&
-        finalData.glucides !== undefined &&
-        finalData.lipides !== undefined
+        finalData.proteines !== null &&
+        finalData.glucides !== null &&
+        finalData.lipides !== null
       ) {
         if (
           finalData.proteines + finalData.glucides + finalData.lipides !==

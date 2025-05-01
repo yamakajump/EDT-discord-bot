@@ -93,13 +93,13 @@ module.exports = {
     ) => {
       // Vérification des champs requis dans finalData (après fusion avec les données en base, par exemple)
       const missingFields = [];
-      if (finalData.poids === null || finalData.poids === undefined) {
+      if (finalData.poids === null) {
         missingFields.push("poids");
       }
-      if (finalData.liftWeight === null || finalData.liftWeight === undefined) {
+      if (finalData.liftWeight === null) {
         missingFields.push("liftweight");
       }
-      if (finalData.age === null || finalData.age === undefined) {
+      if (finalData.age === null) {
         missingFields.push("age");
       }
       if (

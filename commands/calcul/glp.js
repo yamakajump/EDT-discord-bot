@@ -137,19 +137,19 @@ const PARAMETERS = {
 const executeCalculationCallback = async (interactionContext, finalData) => {
   // Vérification des champs manquants dans finalData
   const missingFields = [];
-  if (finalData.sexe === null || finalData.sexe === undefined) {
+  if (finalData.sexe === null) {
     missingFields.push("sexe");
   }
-  if (finalData.equipement === null || finalData.equipement === undefined) {
+  if (finalData.equipement === null) {
     missingFields.push("equipement");
   }
-  if (finalData.mouvements === null || finalData.mouvements === undefined) {
+  if (finalData.mouvements === null) {
     missingFields.push("mouvements");
   }
-  if (finalData.poids === null || finalData.poids === undefined) {
+  if (finalData.poids === null) {
     missingFields.push("bodyweight");
   }
-  if (finalData.total === null || finalData.total === undefined) {
+  if (finalData.total === null) {
     missingFields.push("total");
   }
 

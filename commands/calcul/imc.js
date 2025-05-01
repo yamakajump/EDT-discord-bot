@@ -50,10 +50,10 @@ module.exports = {
     ) => {
       // Vérification des champs manquants dans finalData
       const missingFields = [];
-      if (finalData.poids === null || finalData.poids === undefined) {
+      if (finalData.poids === null) {
         missingFields.push("poids");
       }
-      if (finalData.taille === null || finalData.taille === undefined) {
+      if (finalData.taille === null) {
         missingFields.push("taille");
       }
       if (missingFields.length > 0) {
