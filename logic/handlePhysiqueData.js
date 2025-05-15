@@ -85,8 +85,12 @@ async function handleUserPhysique(
     // On part de toutes les données stockées
     finalData = { ...guerrier };
 
-    Object.keys(providedData).forEach((key) => {
-      finalData[key] = providedData[key];
+    Object.entries(providedData).forEach(([key, value]) => {
+      if (value !== null) {
+        finalData[key] = value; // Écrase avec providedData si non null
+      } else if (!(key in finalData)) {
+        finalData[key] = null; // Ajoute le null si la clé n'existe pas dans finalData
+      }
     });
   }
 

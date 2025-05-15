@@ -130,49 +130,20 @@ module.exports = {
    * @returns {Promise<void>}
    */
   updateUserData: async (id, data) => {
-    // Clés autorisées pour l'update
-    const allowedKeys = [
-      "poids",
-      "taille",
-      "age",
-      "sexe",
-      "activite",
-      "jours",
-      "temps",
-      "intensite",
-      "tef",
-    ];
+    let { poids, taille, age, sexe, activite, jours, temps, intensite, tef } =
+      data;
 
-    // Process les données et filtre les null
-    const filteredData = Object.entries(data)
-      .filter(([key, value]) => allowedKeys.includes(key) && value !== null)
-      .reduce((acc, [key, value]) => {
-        // Traitement spécial pour 'sexe'
-        if (key === "sexe") {
-          acc[key] = value.toString().trim().toUpperCase().charAt(0);
-        } else {
-          acc[key] = value;
-        }
-        return acc;
-      }, {});
-
-    // Si aucune donnée valide à update (toutes les valeurs étaient null)
-    if (Object.keys(filteredData).length === 0) {
-      return;
+    // Si la donnée 'sexe' est présente, on conserve uniquement la première lettre en majuscule.
+    // Ainsi, "homme" deviendra "H" et "femme" deviendra "F".
+    if (sexe) {
+      sexe = sexe.trim().toUpperCase().charAt(0);
     }
-
-    // Construction dynamique de la requête SQL
-    const setClause = Object.keys(filteredData)
-      .map((key) => `${key} = ?`)
-      .join(", ");
-
-    const values = [...Object.values(filteredData), id];
 
     await promisePool.query(
       `UPDATE guerrier 
-     SET ${setClause}
-     WHERE id = ?`,
-      values,
+       SET poids = ?, taille = ?, age = ?, sexe = ?, activite = ?, jours = ?, temps = ?, intensite = ?, tef = ? 
+       WHERE id = ?`,
+      [poids, taille, age, sexe, activite, jours, temps, intensite, tef, id],
     );
   },
 
