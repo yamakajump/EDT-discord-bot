@@ -76,7 +76,7 @@ module.exports = {
       if (finalData.age === null) {
         missingFields.push("age");
       }
-      if (!finalData.sexe) {
+      if (!finalData.sexe === null) {
         missingFields.push("sexe");
       }
 
