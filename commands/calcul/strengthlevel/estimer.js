@@ -108,12 +108,12 @@ module.exports = {
       ) {
         missingFields.push("exercise");
       }
-      if (
-        !finalData.sexe ||
-        (finalData.sexe !== "H" && finalData.sexe !== "F")
-      ) {
+      if (!finalData.sexe === null) {
         missingFields.push("sexe");
       }
+
+      // changement de H et F en Homme et Femme
+      finalData.sexe = finalData.sexe === "H" ? "Homme" : "Femme";
 
       if (missingFields.length > 0) {
         const errorMessage = {
