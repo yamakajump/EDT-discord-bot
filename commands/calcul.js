@@ -49,8 +49,8 @@ module.exports = {
             .setName("sexe")
             .setDescription("Votre sexe.")
             .addChoices(
-              { name: "Homme", value: "homme" },
-              { name: "Femme", value: "femme" },
+              { name: "Homme", value: "H" },
+              { name: "Femme", value: "F" },
             )
             .setRequired(false),
         ),
@@ -423,8 +423,8 @@ module.exports = {
                 .setDescription("Sélectionnez votre sexe.")
                 .setRequired(false)
                 .addChoices(
-                  { name: "Homme", value: "Homme" },
-                  { name: "Femme", value: "Femme" },
+                  { name: "Homme", value: "H" },
+                  { name: "Femme", value: "F" },
                 ),
             )
             .addStringOption((option) =>
@@ -473,8 +473,8 @@ module.exports = {
                 .setDescription("Sélectionnez votre sexe.")
                 .setRequired(false)
                 .addChoices(
-                  { name: "Homme", value: "Homme" },
-                  { name: "Femme", value: "Femme" },
+                  { name: "Homme", value: "H" },
+                  { name: "Femme", value: "F" },
                 ),
             )
             .addStringOption((option) =>

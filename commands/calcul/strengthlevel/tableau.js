@@ -87,12 +87,7 @@ module.exports = {
 
       // Récupération des options à partir de finalData
       const exerciseName = finalData.exercise;
-      const sexOption =
-        finalData.sexe === "H"
-          ? "Homme"
-          : finalData.sexe === "F"
-            ? "Femme"
-            : finalData.sexe;
+      const sexOption = (finalData.sexe = finalData.sexe);
       const sourceChoice = finalData.source;
       const langue = finalData.langue;
 

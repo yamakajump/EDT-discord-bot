@@ -6,7 +6,7 @@
  *  - poids        : le poids de l'athlète en kg
  *  - taille       : la taille de l'athlète en cm (sera convertie en mètres)
  *  - age          : l'âge de l'athlète en années
- *  - sexe         : "homme" ou "femme"
+ *  - sexe         : "H" ou "F"
  *
  * La formule utilisée est :
  *   Pour un homme : (1.20 * IMC) + (0.23 * Age) - 10.8 - 5.4
