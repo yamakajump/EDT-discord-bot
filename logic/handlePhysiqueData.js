@@ -86,8 +86,7 @@ async function handleUserPhysique(
     finalData = { ...guerrier };
 
     Object.keys(providedData).forEach((key) => {
-      finalData[key] =
-        providedData[key] !== null ? providedData[key] : finalData[key];
+      finalData[key] = providedData[key];
     });
   }
 
