@@ -62,6 +62,9 @@ module.exports = {
         missingFields.push("source");
       }
 
+      // changement de H et F en Homme et Femme
+      finalData.sexe = finalData.sexe === "H" ? "Homme" : "Femme";
+
       if (missingFields.length > 0) {
         const errorMessage = {
           content: `Les champs suivants sont manquants : ${missingFields.join(
